@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import Home from './Pages/Home';
+import Topics from './Pages/Topics';
+import Layout from './Pages/Layouts/Layout';
 import './App.css';
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
-function App() {
+import {
+  Route,
+  Routes
+} from "react-router-dom";
+
+
+const  App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/topics/*" element={<Topics />} />
+        </Routes>
+      </Layout>
     </div>
   );
 }
