@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../../Components/Navbar/Navbar'
+import Footer from '../../Components/Footer/Footer'
 
 
 export interface LayoutProps  { 
@@ -14,6 +15,7 @@ const Layout = (props: LayoutProps) => {
                 <Navbar/>
                 <div>sides</div>
                 <div>Backdrop</div>
+                <Footer/>
             </div>
             <main>
                 { props.children }
