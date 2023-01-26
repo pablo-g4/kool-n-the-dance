@@ -1,7 +1,7 @@
-import React from 'react'
-import { SocialIcon } from 'react-social-icons'
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-
+import React from 'react';
+import { SocialIcon } from 'react-social-icons';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+const position = [51.505, -0.09]
 const Footer = () => {
     return (
         <div className='footer col-12 '>
@@ -29,9 +29,9 @@ const Footer = () => {
                 <span className='text'>koolnthedance@gmail.com</span>
                 <span className='text'>9H-21</span>
                 <div className='socialIcon'>
-                    <SocialIcon network="tiktok" bgColor="#FFFFFF" />
-                    <SocialIcon network="twitter" bgColor="#FFFFFF" />
-                    <SocialIcon network="facebook" bgColor="#FFFFFF" />
+                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
                 </div>
             </div>
             <div className="col">
@@ -47,6 +47,7 @@ const Footer = () => {
                     />
                 </MapContainer>
             </div>
+            
         </div>
     )
 }
