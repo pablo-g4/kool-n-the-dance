@@ -1,0 +1,33 @@
+.footer {
+    /* UI Properties */
+    background: #000000;
+    flex-direction: column;
+    height:500px
+}
+
+.column {
+    float: left;
+    text-align: center;
+}
+
+.footerH1 {
+    color: #ffffff;
+    margin-top: 20%;
+    margin-bottom: 15%;
+}
+
+.text {
+    color: #ffffff;
+    display: block;
+}
+
+.socialIcon {
+    margin-top: 10%;
+}
+
+
+
+.leaflet-container2{
+    height:370px !important;
+    width: 600px;
+}
