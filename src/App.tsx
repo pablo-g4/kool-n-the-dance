@@ -1,7 +1,7 @@
 import Home from './Pages/Home';
 import Topics from './Pages/Topics';
 import Layout from './Pages/Layouts/Layout';
-import Actualite from './Pages/Actualite';
+import Actualite from './Pages/Actualite/Actualite';
 import './App.css';
 
 import {
