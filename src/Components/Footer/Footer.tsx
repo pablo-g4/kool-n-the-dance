@@ -1,7 +1,8 @@
-import React from 'react'
-import { SocialIcon } from 'react-social-icons'
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-
+import React from 'react';
+import { SocialIcon } from 'react-social-icons';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+import MarkerClusterGroup from "react-leaflet-markercluster";
+const position = [51.505, -0.09]
 const Footer = () => {
     return (
         <div className='footer'>
@@ -29,24 +30,31 @@ const Footer = () => {
                 <span className='text'>koolnthedance@gmail.com</span>
                 <span className='text'>9H-21</span>
                 <div className='socialIcon'>
-                    <SocialIcon network="tiktok" bgColor="#FFFFFF" />
-                    <SocialIcon network="twitter" bgColor="#FFFFFF" />
-                    <SocialIcon network="facebook" bgColor="#FFFFFF" />
+                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
                 </div>
             </div>
-            <div style={{width: "5%"}}>
-                <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker position={[51.505, -0.09]}>
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                </MapContainer>
+            <div style={{}}>
+            <MapContainer
+      className="markercluster-map"
+      center={[51.0, 19.0]}
+      zoom={4}
+      maxZoom={18}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
+      />
+
+      <MarkerClusterGroup>
+        <Marker position={[49.8397, 24.0297]} />
+        <Marker position={[52.2297, 21.0122]} />
+        <Marker position={[51.5074, -0.0901]} />
+      </MarkerClusterGroup>
+    </MapContainer>
             </div>
+            
         </div>
     )
 }
