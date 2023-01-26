@@ -12,3 +12,10 @@
     color: #644A82;
     font-weight: bold;
 }
+.carousel-item{
+    height: 142px;
+    width: 226px;
+}
+.carousel{
+    width: 300px;
+}
