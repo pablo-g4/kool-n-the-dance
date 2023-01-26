@@ -1,14 +1,9 @@
 .footer {
     /* UI Properties */
     background: #000000;
-    flex-direction: column;
     height:100%;
-    width: 100%
-}
-
-.column {
-    float: left;
-    text-align: center;
+    width: 100%;
+    display: flex;
 }
 
 .footerH1 {
@@ -32,9 +27,9 @@
 }
 
 .map {
-    width: 60%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
+    width: 100%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
 }
 
 @media (max-width:933px) {
@@ -43,5 +38,4 @@
         padding-top: 1.5%;
         padding-bottom: 1.5%;
     }
-
 }
