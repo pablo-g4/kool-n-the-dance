@@ -1,9 +1,11 @@
 import React from 'react'
 import Footer from '../../Components/Footer/Footer'
+import Header_cours from '../../Components/Header_cours/Header_cours'
 
 const Cours = () => {
   return (
-    <div>Page cours
+    <div> 
+      <Header_cours/>
       <Footer/>
     </div>
     
