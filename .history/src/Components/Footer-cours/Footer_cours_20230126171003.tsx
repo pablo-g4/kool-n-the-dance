@@ -41,7 +41,7 @@ export class Footer_cours extends Component {
           </div>
           <div className="d-grid gap-2 col-6 mx-auto">
             <button className="footer-button-cours" type="button">
-              <p className="margin-btt">AUTRES FORFAITS SUR DEMANDE</p>
+              <p className="">AUTRES FORFAITS SUR DEMANDE_</p>
             </button>
           </div>
         </div>

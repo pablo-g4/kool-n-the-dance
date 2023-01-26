@@ -1,0 +1,23 @@
+.red-bg {
+  background-color: #fb3640;
+}
+
+.p-cours-titre {
+  font-size: 32px;
+  font-family: "Playfair Display", Bold;
+  text-align: left;
+}
+
+.box-footer-cour {
+  font-family: "Alice";
+  color: #ffffff;
+  font-size: 18px;
+  text-align: left;
+  letter-spacing: 0px;
+  margin-bottom: 0px;
+}
+
+.footer-button-cours {
+  font-size: 24px;
+  font-family: "Playfair Display";
+}

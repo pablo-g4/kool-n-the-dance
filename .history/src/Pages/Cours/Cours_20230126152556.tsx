@@ -8,6 +8,7 @@ const Cours = () => {
     <div>
       <Header_cours />
       <Footer_cours />
+      <Footer />
     </div>
   );
 };
