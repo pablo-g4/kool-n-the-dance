@@ -34,7 +34,8 @@ const Footer = () => {
                     <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
                 </div>
             </div>
-            <div className="col">
+            <div className="map col">
+                <div className='map'>
                 <MapContainer
                     center={[51.505, -0.09]}
                     zoom={15}
@@ -46,6 +47,7 @@ const Footer = () => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                 </MapContainer>
+                </div>
             </div>
             
         </div>

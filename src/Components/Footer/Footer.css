@@ -2,7 +2,7 @@
     /* UI Properties */
     background: #000000;
     flex-direction: column;
-    height:500px
+    height:400px
 }
 
 .column {
@@ -12,8 +12,8 @@
 
 .footerH1 {
     color: #ffffff;
-    margin-top: 20%;
-    margin-bottom: 15%;
+    margin-top: 15%;
+    margin-bottom: 10%;
 }
 
 .text {
@@ -22,12 +22,17 @@
 }
 
 .socialIcon {
-    margin-top: 10%;
+    margin-top: 7%;
 }
-
-
 
 .leaflet-container2{
-    height:370px !important;
-    width: 600px;
+    height: 270px !important;
+    width: 900px;
+    
 }
+
+.map {
+    width: 100%;
+    padding-top: 1.5%;
+}
+
