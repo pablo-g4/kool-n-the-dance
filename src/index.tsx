@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import './index.css';
 import './Components/Footer/Footer.css'
+import './Components/Navbar/Navbar.css'
 import App from './App';
 
 const root = ReactDOM.createRoot(
