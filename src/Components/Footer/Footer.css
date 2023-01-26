@@ -1,0 +1,30 @@
+.footer {
+    top: 5145px;
+    left: 0px;
+    width: 1920px;
+    height: 529px;
+    /* UI Properties */
+    background: #000000;
+    flex-direction: column;
+}
+
+.column {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.footerH1 {
+    color: #ffffff;
+    margin-top: 20%;
+    margin-bottom: 15%;
+}
+
+.text {
+    color: #ffffff;
+    display: block;
+}
+
+.socialIcon {
+    margin-top: 10%;
+}
