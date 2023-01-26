@@ -1,6 +1,6 @@
 .galerie{
     background-color: black;
-    height: 100vh;
+    height: 70vh;
 }
 .top{
     height: 20vh;
@@ -8,6 +8,7 @@
 }
 .titre{
     font-size: 60px;
-    font-family: 'Alice';
-
+    font-family: 'Playfair Display';
+    color: #644A82;
+    font-weight: bold;
 }
