@@ -4,7 +4,6 @@ import Footer from '../../Components/Footer/Footer'
 const Actualite = () => {
   return (
     <div>Actualité
-      <Footer/>
     </div>
     
   )

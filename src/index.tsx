@@ -6,6 +6,7 @@ import {
 import './index.css';
 import '../src/Components/Footer/Footer.css'
 import '../src/Pages/Actualite/Actualite.css'
+import './Components/Footer/Footer.css'
 import App from './App';
 
 const root = ReactDOM.createRoot(
