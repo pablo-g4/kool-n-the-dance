@@ -4,7 +4,7 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 import './index.css';
-import '../src/Components/Footer/Footer.css'
+import './Components/Footer/Footer.css'
 import App from './App';
 
 const root = ReactDOM.createRoot(
