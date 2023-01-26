@@ -4,8 +4,8 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 
 const Footer = () => {
     return (
-        <div className='footer'>
-            <div className='column'>
+        <div className='footer col-12 '>
+            <div className='column col-3'>
                 <h1 className='footerH1'>Plan du site</h1>
                 <span className='text'>
                     <a>Accueil</a>
@@ -23,7 +23,7 @@ const Footer = () => {
                     <a>Actualté</a>
                 </span>
             </div>
-            <div className='column'>
+            <div className='column col-3'>
                 <h1 className='footerH1'>Contact</h1>
                 <span className='text'>Accueil</span>
                 <span className='text'>koolnthedance@gmail.com</span>
@@ -34,17 +34,17 @@ const Footer = () => {
                     <SocialIcon network="facebook" bgColor="#FFFFFF" />
                 </div>
             </div>
-            <div style={{width: "5%"}}>
-                <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false}>
+            <div className="col">
+                <MapContainer
+                    center={[51.505, -0.09]}
+                    zoom={15}
+                    scrollWheelZoom={false}
+                    className="leaflet-container2"
+                >
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={[51.505, -0.09]}>
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
                 </MapContainer>
             </div>
         </div>
