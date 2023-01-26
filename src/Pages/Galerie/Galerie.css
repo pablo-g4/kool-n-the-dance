@@ -1,0 +1,13 @@
+.galerie{
+    background-color: black;
+    height: 100vh;
+}
+.top{
+    height: 20vh;
+    background-color: white;
+}
+.titre{
+    font-size: 60px;
+    font-family: 'Alice';
+
+}
