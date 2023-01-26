@@ -1,16 +1,12 @@
 .footer {
-    top: 5145px;
-    left: 0px;
-    width: 1920px;
-    height: 529px;
     /* UI Properties */
     background: #000000;
     flex-direction: column;
+    height:500px
 }
 
 .column {
     float: left;
-    width: 20%;
     text-align: center;
 }
 
@@ -27,4 +23,11 @@
 
 .socialIcon {
     margin-top: 10%;
+}
+
+
+
+.leaflet-container2{
+    height:370px !important;
+    width: 600px;
 }
