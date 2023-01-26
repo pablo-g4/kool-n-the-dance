@@ -34,7 +34,7 @@ const Footer = () => {
                     <SocialIcon network="facebook" bgColor="#FFFFFF" />
                 </div>
             </div>
-            <div style={{width: "5%"}}>
+            <div className="col-md-6 col-sm-12 createmap">
                 <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
