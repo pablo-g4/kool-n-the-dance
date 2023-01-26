@@ -1,4 +1,6 @@
 import React from 'react'
+import images1 from '../../images/Galerie/DAN_0568inv@2x.png'
+
 
 const Galerie = () => {
   return (
@@ -6,17 +8,18 @@ const Galerie = () => {
         <div className='top'>
             <div className="titre">Galerie</div>
         </div>
+
         <div className='galerie'>
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img class="d-block w-100" src="..." alt="First slide"/>
+                  <img class="d-block w-100" src={images1} alt="First slide"/>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="..." alt="Second slide"/>
+                  <img class="d-block w-100" src="..." alt="Second slide"/>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="..." alt="Third slide"/>
+                  <img class="d-block w-100" src="..." alt="Third slide"/>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -29,6 +32,8 @@ const Galerie = () => {
             </a>
             </div>
         </div>
+
+        
     </div>
   )
 }

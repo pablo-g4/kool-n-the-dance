@@ -1,6 +1,9 @@
 .galerie{
     background-color: black;
-    height: 70vh;
+    top: 235px;
+    left: 0px;
+    width: 1920px;
+    height: 916px;
 }
 .top{
     height: 20vh;
