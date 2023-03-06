@@ -29,9 +29,9 @@ const Footer = () => {
                 <span className='text'>koolnthedance@gmail.com</span>
                 <span className='text'>9H-21</span>
                 <div className='socialIcon'>
-                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
-                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
-                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: "5px", marginBottom: "10px"}} />
+                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: "5px", marginBottom: "10px"}} />
+                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px", marginBottom: "10px"}} />
                 </div>
             </div>
             <div className="col">
