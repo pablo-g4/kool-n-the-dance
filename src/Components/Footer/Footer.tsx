@@ -4,8 +4,8 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 const position = [51.505, -0.09]
 const Footer = () => {
     return (
-        <div className='footer col-xl-12 col-xs-12'>
-            <div className='column col-xl-3'>
+        <div className='footer d-flex'>
+            <div className='col-lg-3 col-md-12 col-sm-12'>
                 <h1 className='footerH1'>Plan du site</h1>
                 <span className='text'>
                     <a>Accueil</a>
@@ -23,7 +23,7 @@ const Footer = () => {
                     <a>Actualté</a>
                 </span>
             </div>
-            <div className='column col-xl-3 col-xs-12'>
+            <div className=' col-lg-3  col-md-12 col-sm-12'>
                 <h1 className='footerH1'>Contact</h1>
                 <span className='text'>Accueil</span>
                 <span className='text'>koolnthedance@gmail.com</span>
@@ -34,7 +34,7 @@ const Footer = () => {
                     <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
                 </div>
             </div>
-            <div className="map col-xl col-xs-12">
+            <div className="col">
                 <div className='map'>
                 <MapContainer
                     center={[51.505, -0.09]}

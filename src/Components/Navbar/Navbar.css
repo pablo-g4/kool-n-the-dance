@@ -1,0 +1,42 @@
+.navbar-brand {
+    margin-left: 8%;
+    margin-right: 25%;
+    color: #FFFFFF !important;
+    font-family: Vendetta;
+    font-size: 14px;
+}
+
+.nav-item {
+    margin-right: 15%;
+    font-family: PlayfairDisplay;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+.navbar-toggler {
+    color: #ffffff !important;
+}
+
+.navbar {
+    background-color: #644A82;
+}
+
+@font-face {
+    font-family: Vendetta;
+    src: url("../../Assets/Fonts/Vendetta.otf");
+}
+
+@font-face {
+    font-family: PlayfairDisplay;
+    src: url("../../Assets/Fonts/PlayfairDisplay-Regular.ttf");
+}
+
+@media (max-width:800px) {
+    .leaflet-container2{
+        height: 150px !important;
+        width: 400px;
+        padding-top: 20%;
+    }
+}
