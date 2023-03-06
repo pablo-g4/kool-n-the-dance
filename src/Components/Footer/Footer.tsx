@@ -1,4 +1,5 @@
 import React from 'react';
+import { Carousel } from '@mantine/carousel';
 import { SocialIcon } from 'react-social-icons';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 const position = [51.505, -0.09]
