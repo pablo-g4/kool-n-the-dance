@@ -9,3 +9,12 @@
     font-style: bold;
     font-size: 18px;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 550px) {
+    .center-article{
+        margin-left : 50px !important;
+        margin-right : 50px !important;
+        line-height: 18px;
+        border-radius: 0px !important;
+    }
+}

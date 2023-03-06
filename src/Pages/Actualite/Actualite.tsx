@@ -9,10 +9,10 @@ const Actualite = () => {
     <div>
       <h1 className='text-center my-7'> Actualités </h1>
       <div className='row'>
-        <div className='col-7'>
+        <div className='col-md-7 col-xs-11'>
           <Card />
         </div>
-        <div className='col-5'>
+        <div className='col-5 d-none d-md-block'>
           <CardRight/>
         </div>
       </div>
