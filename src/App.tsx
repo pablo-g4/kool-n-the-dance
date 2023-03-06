@@ -1,7 +1,12 @@
 import Home from './Pages/Home';
 import Topics from './Pages/Topics';
 import Layout from './Pages/Layouts/Layout';
+
+
 import './App.css';
+
+import { getAllPosts }  from './Controllers/posts';
+
 
 import {
   Route,
