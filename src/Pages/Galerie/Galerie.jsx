@@ -7,54 +7,78 @@ import Image3 from '../../images/Galerie/DAN_0809inv.png'
 import Image4 from '../../images/Galerie/DAN_1169inv.png'
 import Image5 from '../../images/Galerie/DAN_1465inv.png'
 
+import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
 
-const Galerie = () => {
+
+
+class Galerie extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currentIndex: 0,
+      items: [1,2,3,4,5]
+    };
+  }
+
+  slideTo = (i) => this.setState({ currentIndex: i });
+
+  onSlideChanged = (e) => this.setState({ currentIndex: e.item });
+
+  slideNext = () => this.setState({ currentIndex: this.state.currentIndex + 1 });
+
+  slidePrev = () => this.setState({ currentIndex: this.state.currentIndex - 1 });
+
+  renderThumbs = () =>
+    <ul>{this.state.items.map((item, i) =>
+      <li key={i} onClick={() => this.slideTo(i)}>Thumb {item}</li>)}
+    </ul>;
+
+  renderGallery() {
+    const { currentIndex, items } = this.state;
+
+    return (<AliceCarousel
+      dotsDisabled={true}
+      buttonsDisabled={true}
+      slideToIndex={currentIndex}
+      onSlideChanged={this.onSlideChanged}
+    >
+      { items.map((item, i) => <div key={i} className="yours-custom-class"><h2>{ item }</h2></div>) }
+    </AliceCarousel>);
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Navigation</h3>
+        { this.renderThumbs() }
+        <button onClick={() => this.slidePrev()}>Prev button</button>
+        <button onClick={() => this.slideNext()}>Next button</button>
+        <h3>React Alice Carousel</h3>
+        { this.renderGallery() }
+      </div>
+    );
+  }
+}
+
+/** 
+ * 
+ * const Galerie = () => {
+
+  
   return (
+    
     <div className='body'>
       <div className="titre">Galerie</div>
 
-      <div id="scene">
-        <div id="left-zone">
-          <ul class="list">
-            <li class="item">
-              <input type="radio" id="radio_The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)" name="basic_carousel" value="The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)" checked="checked"/>
-              <label class="label_strawberry" for="radio_The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)">strawberry</label>
-              <div class="content content_strawberry"><span class="picto"></span>
-                <h1>strawberry</h1>
-                <p>The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)</p>
-              </div>
-            </li>
-            <li class="item">
-              <input type="radio" id="radio_A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa." name="basic_carousel" value="A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa."/>
-              <label class="label_banana" for="radio_A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa.">banana</label>
-              <div class="content content_banana"><span class="picto"></span>
-                <h1>banana</h1>
-                <p>A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa.</p>
-              </div>
-            </li>
-            <li class="item">
-              <input type="radio" id="radio_The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus." name="basic_carousel" value="The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus."/>
-              <label class="label_apple" for="radio_The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus.">apple</label>
-              <div class="content content_apple"><span class="picto"></span>
-                <h1>apple</h1>
-                <p>The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus.</p>
-              </div>
-            </li>
-            <li class="item">
-              <input type="radio" id="radio_The orange (specifically, the sweet orange) is the fruit of the citrus species Citrus × sinensis in the family Rutaceae." name="basic_carousel" value="The orange (specifically, the sweet orange) is the fruit of the citrus species Citrus × sinensis in the family Rutaceae."/>
-              <label class="label_orange" for="radio_The orange (specifically, the sweet orange) is the fruit of the citrus species Citrus × sinensis in the family Rutaceae.">orange</label>
-              <div class="content content_orange"><span class="picto"></span>
-                <h1>orange</h1>
-                <p>The orange (specifically, the sweet orange) is the fruit of the citrus species Citrus × sinensis in the family Rutaceae.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div id="middle-border"></div>
-        <div id="right-zone"></div>
-      </div>
+
+   
+
+
     </div>    
   )
 }
+ */
+export default Galerie  
 
-export default Galerie
+
