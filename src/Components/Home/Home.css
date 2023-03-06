@@ -1,0 +1,38 @@
+.bg-image {
+    background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+    color:#fff;
+    text-align:center;
+    font-weight:bold;
+    font-size:24px;
+    padding-top:25px;
+    padding-bottom:25px;
+    height: 50px;
+    position: relative;
+    background: linear-gradient(90deg, #27b6b9 0%, #0f4061 100%);
+}
+
+.bg-image::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 40px 20px;
+    background-image:
+    radial-gradient(circle at 10px 15px, #fff 12px, transparent 13px);
+}
+
+.wave::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 10px;
+    background-size: 20px 20px;
+    background-image:
+     radial-gradient(circle at 10px -5px, transparent 12px, #fff 13px);
+  }

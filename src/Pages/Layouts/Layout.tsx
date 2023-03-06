@@ -13,13 +13,11 @@ const Layout = (props: LayoutProps) => {
         <>
             <div>
                 <Navbar/>
-                <div>sides</div>
-                <div>Backdrop</div>
             </div>
             <main>
                 { props.children }
             </main>
-            <Footer/>
+            {/* <Footer/> */}
         </>
     )
 }
