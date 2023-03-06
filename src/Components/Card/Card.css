@@ -1,3 +1,11 @@
-.article-card {
-    max-width: 540px;
+@import url('https://fonts.cdnfonts.com/css/alice-2');
+.card-police {
+    font-family: 'Alice', sans-serif;
+    ;
+}
+
+.card-text-color {
+    color: #644A82;
+    font-style: bold;
+    font-size: 18px;
 }

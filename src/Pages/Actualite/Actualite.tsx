@@ -7,9 +7,17 @@ import CardRight from '../../Components/CardRight/CardRight';
 const Actualite = () => {
   return (
     <div>
-      <h1> Actualités </h1>
-      <Card />
-      <CardRight/>
+      <h1 className='text-center my-7'> Actualités </h1>
+      <div className='row'>
+        <div className='col-7'>
+          <Card />
+        </div>
+        <div className='col-5'>
+          <CardRight/>
+        </div>
+      </div>
+      
+      
     </div>
 
   )
