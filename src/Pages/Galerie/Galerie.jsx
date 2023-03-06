@@ -17,7 +17,13 @@ class Galerie extends React.Component {
     super();
     this.state = {
       currentIndex: 0,
-      items: [1,2,3,4,5]
+      items: [
+        <img src={Image1}></img>,
+        <img src={Image2}></img>,
+        <img src={Image3}></img>,
+        <img src={Image4}></img>,
+        <img src={Image5}></img>,
+      ]
     };
   }
 
@@ -29,10 +35,6 @@ class Galerie extends React.Component {
 
   slidePrev = () => this.setState({ currentIndex: this.state.currentIndex - 1 });
 
-  renderThumbs = () =>
-    <ul>{this.state.items.map((item, i) =>
-      <li key={i} onClick={() => this.slideTo(i)}>Thumb {item}</li>)}
-    </ul>;
 
   renderGallery() {
     const { currentIndex, items } = this.state;
@@ -50,11 +52,7 @@ class Galerie extends React.Component {
   render() {
     return (
       <div>
-        <h3>Navigation</h3>
-        { this.renderThumbs() }
-        <button onClick={() => this.slidePrev()}>Prev button</button>
-        <button onClick={() => this.slideNext()}>Next button</button>
-        <h3>React Alice Carousel</h3>
+
         { this.renderGallery() }
       </div>
     );
