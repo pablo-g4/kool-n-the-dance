@@ -30,30 +30,30 @@ const Carrousel = () => {
       const handleMouseOut = () => {
         setShowText(false);
       };
+      const swiperOptions = {
+        loop:true,
+        navigation:true,
+      }
 
       SwiperCore.use([Navigation]);
       return (
         
         <div className="carousel-container Car">
-            <Swiper navigation={true}></Swiper>
+            <Swiper {...swiperOptions}>
+</Swiper> 
             <Swiper centeredSlides={true}
                 
                 slidesPerView={3}
-                spaceBetween={-720}
-                loop={true}
-                autoplay={{
-                  delay: 3000,
-                  disableOnInteraction: false
-                }}
+                spaceBetween={-700}
                 
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
               >
                   {slides}
-            
               </Swiper>
               
             </div>
       )
     }
+//  ReactDOM.render(<Carousel />, document.querySelector('.demo-carousel'));
   export default Carrousel
