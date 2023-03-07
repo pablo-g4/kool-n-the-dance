@@ -6,9 +6,9 @@ import CardRight from '../../Components/CardRight/CardRight';
 
 const Actualite = () => {
   return (
-    <div>
+    <div className='actualite-page'>
       <h1 className='text-center my-7'> Actualités </h1>
-      <div className='row'>
+      <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
           <Card />
         </div>
@@ -16,10 +16,7 @@ const Actualite = () => {
           <CardRight/>
         </div>
       </div>
-      
-      
     </div>
-
   )
 }
 
