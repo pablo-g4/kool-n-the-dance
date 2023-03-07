@@ -1,3 +1,33 @@
-.Carou{
-        
-}
+.App {
+
+  }
+  .Car{
+    
+  }
+  .swiper-button-prev::after {
+    content: '›'; /* code unicode pour la flèche gauche */
+    font-size: 100px;
+    margin-left: 450px;
+    top: 40%;
+    /*position: absolute;*/
+  }
+  
+  .swiper-button-next::after {
+    content: '\‹'; /* code unicode pour la flèche droite */
+    font-size: 100px;
+    margin-right: 450px;
+    top: 40%;
+    /*position: absolute;*/
+  }
+  .swiper-slide {
+    height: 200px;
+  }
+  
+  .slide-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  

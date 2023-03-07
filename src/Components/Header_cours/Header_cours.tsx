@@ -7,13 +7,7 @@ export class header_cours extends Component {
   render() {
         return (    
             <>
-                <div className='text'>
-                    <p>Danses</p>
-                </div>
                 
-                <div className='divimg1'>
-                    <img className='image1' src={img} />
-                </div>
             </>
 
         )
