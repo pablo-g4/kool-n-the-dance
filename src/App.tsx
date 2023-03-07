@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import { auth } from './db/firebase';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
+import Galerie from './Pages/Galerie/Galerie';
 import './App.css';
 
 import {
@@ -32,6 +33,7 @@ const  App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/topics/*" element={<Topics />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/galerie/*" element={<Galerie />} />
         </Routes>
       </Layout>
     </div>
