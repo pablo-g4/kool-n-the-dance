@@ -13,25 +13,25 @@ const Galerie = () => {
   return (
     <div className='body'>
       <div className="titre">Galerie</div>
-        <div>
-          <Carousel orientation="vertical" height={200} withIndicators maw={320} mx="auto">
+        <div className='carou'>
+          <Carousel orientation="vertical" loop="true" height={545} maw={320} mx="left"  slideSize="13.5%" initialSlide={2} >
             <Carousel.Slide>
-              <img src={carousel1}></img>
+              <img src={carousel1} height="110.2px" width="180px"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel2}></img>
+              <img src={carousel2} height="110.2px" width="180px"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel3}></img>
+              <img src={carousel3}height="110.2px" width="180px"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel4}></img>
+              <img src={carousel4} height="110.2px" width="180px"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel5}></img>
+              <img src={carousel5} height="110.2px" width="180px"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel6}></img>
+              <img src={carousel6} height="110.2px" width="180px"></img>
             </Carousel.Slide>
           </Carousel>
         </div>
