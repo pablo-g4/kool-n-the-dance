@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./Footer_cours.css";
 
-export class Footer_cours extends Component {
-  render() {
+const Footer_cours = () => {
     return (
       <>
         <div className="red-bg">
@@ -47,7 +46,6 @@ export class Footer_cours extends Component {
         </div>
       </>
     );
-  }
 }
 
 export default Footer_cours;

@@ -1,23 +1,31 @@
-import React, { Component } from 'react'
-import img from "./test.png"
-import './Header_cours.css'
+import React, { Component, useState } from "react";
+import "./Header_cours.css";
+import image from "./test.png";
 
+const Header_cours = () => {
+  const [isShown, setIsShown] = useState(false);
 
-export class header_cours extends Component {
-  render() {
-        return (    
-            <>
-                <div className='text'>
-                    <p>Danses</p>
-                </div>
-                
-                <div className='divimg1'>
-                    <img className='image1' src={img} />
-                </div>
-            </>
-
-        )
-    }
+    return (
+        <>
+          <div className="groupe">
+            <div className="card"
+              onMouseEnter={() => console.log("test")}
+            >
+              <img src={image} className="card-img-top" alt="..." />
+            </div>
+            <div className="textdanses">
+              <p>Danses</p>
+            </div>
+            <div className="card">
+              <img src={image} className="card-img-top" /> 
+            </div>
+            <div className="card">
+              <img src={image} className="card-img-top" alt="..." />
+            </div>
+          </div>
+        </>
+    );
+  
 }
 
-export default header_cours
+export default Header_cours;
