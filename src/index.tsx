@@ -10,6 +10,7 @@ import './Components/CardRight/CardRight.css'
 import './Components/Footer/Footer.css'
 import './Components/Navbar/Navbar.css'
 import App from './App';
+import '../src/Pages/Galerie/Galerie.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
