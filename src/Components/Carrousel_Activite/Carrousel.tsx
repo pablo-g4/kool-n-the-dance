@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.css';
+import 'swiper/swiper.min.css';
+
 
 
 // Import Swiper styles
@@ -16,8 +18,8 @@ const slides = [
   <SwiperSlide key={1}><img src={img}/></SwiperSlide>,
   <SwiperSlide key={2}><img src={img}/></SwiperSlide>,
   <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
-  <SwiperSlide key={4}><img src={img}/></SwiperSlide>,
-  <SwiperSlide key={5}><img src={img}/></SwiperSlide>,
+  <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
+  <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
 ];
 
 const Carrousel = () => {
@@ -37,23 +39,23 @@ const Carrousel = () => {
 
       SwiperCore.use([Navigation]);
       return (
-        
-        <div className="carousel-container Car">
-            <Swiper {...swiperOptions}>
-</Swiper> 
-            <Swiper centeredSlides={true}
-                
+       /* <div>
+        style={{marginBottom: "50px"}}
+        </div> */
+            <Swiper {...swiperOptions} 
+
+                className='swiper-container'
+                loop ={true}
                 slidesPerView={3}
-                spaceBetween={-700}
-                
+                style={{width: "1350px", height: "400px", backgroundColor: "#FFFFFF",marginTop: "30px"}}
+                spaceBetween={-500}
+                centeredSlides={true}                
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
               >
                   {slides}
               </Swiper>
               
-            </div>
       )
     }
-//  ReactDOM.render(<Carousel />, document.querySelector('.demo-carousel'));
   export default Carrousel
