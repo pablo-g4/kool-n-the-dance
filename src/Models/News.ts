@@ -16,7 +16,9 @@ export class News {
             description: news.description,
             link: news.link, 
             creation_date: news.creationDate,
-            is_active: news.isActive
+            created_by: news.createdBy, 
+            updated_by: news.updatedBy,
+            is_active: news.isActive,
         }
     }
 
