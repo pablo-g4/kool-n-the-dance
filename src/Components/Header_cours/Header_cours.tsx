@@ -3,7 +3,6 @@ import "./Header_cours.css";
 import image from "./test.png";
 
 const Header_cours = () => {
-const [isShown, setIsShown] = useState(false);
 const [isHovering, setIsHovering] = useState(false);
 const handleMouseEnter = () => {setIsHovering(true);};
 const handleMouseLeave = () => {setIsHovering(false);};
@@ -14,18 +13,27 @@ const handleMouseLeave = () => {setIsHovering(false);};
 
     return (
         <>
+          <div className="titlecours">
+          <h1><b>Cours</b></h1>
+          </div>
           <div className="groupe">
-            <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(50px, 0px)' : 'none',}}>
-              <img src={image} className="card-img-top" alt="..." />
+            <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
+              <img src={image} className="card-img-top" />
             </div>
-            <div className="textdanses" style={{transform: isHovering ? 'translate(50px, 0px)' : 'none',}}>
+            <div className="textdanses" style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
               <p>Danses</p>
             </div>
-            <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(50px, 0px)' : 'none',}}>
+            <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(-10px, 0px)' : 'none',}}>
               <img src={image} className="card-img-top" /> 
             </div>
-            <div className="card">
-              <img src={image} className="card-img-top" alt="..." onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}  style={{transform: isHovering ? 'translate(50px, 50px)' : 'none',}}/>
+            <div className="textfitness" style={{transform: isHovering ? 'translate(-10px, 0px)' : 'none',}}>
+              <p>Fitness</p>
+            </div>
+            <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}  style={{transform: isHovering ? 'translate(60px, 0px)' : 'none',}}>
+              <img src={image} className="card-img-top" />
+            </div>
+            <div className="textforfait" style={{transform: isHovering ? 'translate(60px, 0px)' : 'none',}}>
+              <p>Forfait</p>
             </div>
           </div>
         </>
