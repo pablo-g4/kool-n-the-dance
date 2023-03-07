@@ -28,12 +28,8 @@ const DropZone: FunctionComponent<{ setFiles: Dispatch<any> }> = ({
       <div className=" border-2 border-dashed rounded-x1 h-full flex flex-col">
         <p>Glisser Votre Image / Video</p>
       </div>
-      <div>
-        <button className="bg-grey-900 w-44 p-2 my-5 rounded-md focus:outline-none">
-          {" "}
-          ouvrir ici
-        </button>
-      </div>
+
+      <div></div>
     </div>
   );
 };
