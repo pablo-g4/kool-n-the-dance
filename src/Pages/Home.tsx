@@ -10,7 +10,6 @@ const Home = () => {
 
   const allPosts = async () => {
     const posts = await getAllPosts()
-    console.log('posts', posts);
   }
 
 
@@ -20,7 +19,7 @@ const Home = () => {
 
 
   useEffect(() => {
-    fetchData()
+    // fetchData()
   }, []);
 
   return (
