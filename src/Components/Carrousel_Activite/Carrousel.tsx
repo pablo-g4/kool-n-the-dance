@@ -15,11 +15,11 @@ import 'swiper/swiper.min.css';
 import 'swiper/css';
 
 const slides = [
-  <SwiperSlide key={1}><img src={img}/></SwiperSlide>,
+  <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
+  <SwiperSlide key={5}><img src={img}/></SwiperSlide>,
+  <SwiperSlide key={4}><img src={img}/></SwiperSlide>,
   <SwiperSlide key={2}><img src={img}/></SwiperSlide>,
-  <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
-  <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
-  <SwiperSlide key={3}><img src={img}/></SwiperSlide>,
+  <SwiperSlide key={1}><img src={img}/></SwiperSlide>,
 ];
 
 const Carrousel = () => {
@@ -35,25 +35,30 @@ const Carrousel = () => {
       const swiperOptions = {
         loop:true,
         navigation:true,
+        spaceBetween:-400,
+        slidesPerView:3,
       }
+      
 
       SwiperCore.use([Navigation]);
       return (
        /* <div>
         style={{marginBottom: "50px"}}
         </div> */
-            <Swiper {...swiperOptions} 
+            <Swiper {...swiperOptions}
 
                 className='swiper-container'
-                loop ={true}
-                slidesPerView={3}
-                style={{width: "1350px", height: "400px", backgroundColor: "#FFFFFF",marginTop: "30px"}}
-                spaceBetween={-500}
+               /* style={{width: "1350px", height: "700px", backgroundColor: "#FFFFFF",marginTop: "30px"}}*/
+                /*spaceBetween={300}*/
                 centeredSlides={true}                
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
               >
-                  {slides}
+              {
+                slides.map((Slide,index)=>(
+                 <SwiperSlide key={index} virtualIndex={index}><img src={img}/></SwiperSlide>
+                ))
+              }
               </Swiper>
               
       )

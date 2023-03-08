@@ -1,7 +1,3 @@
-.App {
-
-  }
-
   .swiper-button-prev::after {
     content: '›'; /* code unicode pour la flèche gauche */
     font-size: 100px;
@@ -21,19 +17,23 @@
     /*position: absolute;*/
   }
   .swiper-slide {
-    height: 200px;
-    /*padding-top: 10px;
+    /*height: 200px;
+    padding-top: 10px;
     padding-bottom: 10px;
     /*padding-left: 150px;
     padding-right: 150px;*/
+    /*margin-right: 25px;*/
+     /* height: 300px;
+      line-height: 300px;
+      text-align: center;*/
   }
   
   .slide-content {
-    height: 100%;
-    display: flex;
+    /*height: 100%;
+    /*display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
   }
   .swiper-container{
     border: 3.4px solid rgb(201, 5, 246);
