@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
-import React, { Component, useState } from 'react'
-import img from "./test.png"
+import PropTypes from 'prop-types';
+import React, { Component, useState } from 'react';
+import img from "./test.png";
 import './styleActivite.css';
 import ReactDOM from 'react-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,6 +8,8 @@ import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
+import image from './Groupe 46.svg';
+
 
 
 
@@ -35,22 +37,31 @@ const Carrousel = () => {
       const swiperOptions = {
         loop:true,
         navigation:true,
-        spaceBetween:-400,
+        spaceBetween:-130,
         slidesPerView:3,
+        centeredSlides:true,
       }
       
 
       SwiperCore.use([Navigation]);
       return (
-       /* <div>
-        style={{marginBottom: "50px"}}
-        </div> */
-            <Swiper {...swiperOptions}
+        
+        <div className='mainDiv'>
+          <div className='imgLogo'>
+          <img className='image_carrousel' src={image} alt="Logo"/> 
+          </div>
+          <div className='Carre'>
+          { <p className='mt-4'>Danses</p> }
+        </div>
+        <div className='background'>
+          {/* <img id='img' src={"./background.png"}></img> */}
+        <Swiper {...swiperOptions}
 
                 className='swiper-container'
-               /* style={{width: "1350px", height: "700px", backgroundColor: "#FFFFFF",marginTop: "30px"}}*/
-                /*spaceBetween={300}*/
-                centeredSlides={true}                
+                style={{width: "1350px",
+                height: "500px",
+                marginTop: "30px",
+                }}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
               >
@@ -60,6 +71,8 @@ const Carrousel = () => {
                 ))
               }
               </Swiper>
+              </div>
+              </div>
               
       )
     }
