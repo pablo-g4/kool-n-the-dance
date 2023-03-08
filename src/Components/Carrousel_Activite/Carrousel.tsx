@@ -8,7 +8,7 @@ import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
-import image from './Groupe 46.svg';
+import image from './Groupe 46.png';
 
 
 
