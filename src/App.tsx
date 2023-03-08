@@ -7,6 +7,8 @@ import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import ResetPassword from './Pages/ResetPassword';
 
+import Posts from './Pages/Posts/posts';
+
 import { auth } from './db/firebase';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
@@ -40,6 +42,7 @@ const  App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/galerie/*" element={<Galerie />} />
+          <Route path="/posts/*" element={<Posts />} />
         </Routes>
       </Layout>
     </div>
