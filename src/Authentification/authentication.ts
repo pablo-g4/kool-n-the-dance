@@ -21,6 +21,31 @@ import { mapAuthCodeToMessage } from "../db/firebaseErrorHandler";
 
 const googleProvider = new GoogleAuthProvider();
 
+const isLoggedIn = async (): Promise<boolean> => {
+  try {
+    await new Promise((resolve, reject) =>
+      auth.onAuthStateChanged(
+        user => {
+          if (user) {
+            console.log('isLogged...');
+            
+            // User is signed in.
+            resolve(user)
+          } else {
+            // No user is signed in.
+            reject('no user logged in')
+          }
+        },
+        // Prevent console error
+        error => reject(error)
+      )
+    )
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
 const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -86,4 +111,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  isLoggedIn
 };

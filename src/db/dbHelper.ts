@@ -1,9 +1,12 @@
 import {collection, query, orderBy, onSnapshot} from "firebase/firestore";
 import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { errorResponse } from '../Utils/utils'
+import { errorResponse } from '../Utils/utils';
+import { isLoggedIn } from "../Authentification/authentication"
 
 export const getDataFromCollection = async (collectionName: string, dataId: string) => {
+
+    console.log(await isLoggedIn())
 
     const docRef = doc(db, collectionName, dataId);
     const docSnap = await getDoc(docRef);

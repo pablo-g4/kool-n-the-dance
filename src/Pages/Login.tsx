@@ -18,42 +18,40 @@ const Login = () => {
         if (user) navigate("/dashboard");
 
     }, [user, loading]);
-    
-  return (
-    <div className="login">
-      <div className="login__container">
-        <input
-          type="text"
-          className="login__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="login__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button
-          className="login__btn"
-          onClick={() => logInWithEmailAndPassword(email, password)}
-        >
-          Login
-        </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
+
+    return (
         <div>
-          <Link to="/reset">Forgot Password</Link>
+            <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="form-control" id="email"
+                    aria-describedby="emailHelp"
+                    value={email}
+                    placeholder="Enter email"
+                />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+            <button type="submit" onClick={() => logInWithEmailAndPassword(email,password)} className="btn btn-primary">Submit</button>
+            <div>
+                <Link to="/reset">Forgot Password</Link>
+            </div>
+            <div>
+                Don't have an account? <Link to="/register">Register</Link> now.
+            </div>
         </div>
-        <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Login
