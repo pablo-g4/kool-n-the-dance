@@ -35,6 +35,7 @@
 .aSidebar_onglet:hover {
   background-color: white;
   color: #644a82;
+  text-decoration: none;
 }
 
 .aSidebar_text {
