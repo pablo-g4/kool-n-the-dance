@@ -8,6 +8,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import Planning from './Pages/Admin/Planning/Planning';
 
 
 const  App = () => {
@@ -18,6 +19,7 @@ const  App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/topics/*" element={<Topics />} />
           <Route path="/actualite" element={<Actualite />} />
+          <Route path="/admin/planning" element={<Planning />} />
         </Routes>
       </Layout>
     </div>
