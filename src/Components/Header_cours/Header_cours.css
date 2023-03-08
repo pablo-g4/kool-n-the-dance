@@ -69,20 +69,28 @@
    
  }
 
- header{
+ .vague{
+   
+   width: 100%;
+   height: 100%;
+
+  
+ }
+
+ .divvague{
+   height: auto;
+   width: auto;
+   margin-bottom: 80px;
+ }
+
+.conteneur{
    background-color: #F2D7EE;
    background-image: url("fond.svg");
    background-size: 80%;
    background-position: 140px -10px;
    height: 850px;
- 
    background-repeat: no-repeat;
-   margin-bottom: 100px;
 
 
  }
- .vague{
-   padding-top: 100px;
- }
-
 

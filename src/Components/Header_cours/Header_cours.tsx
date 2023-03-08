@@ -16,7 +16,7 @@ const handleMouseLeave = () => {setIsHovering(false);};
     return (
         <>
             <header>
-
+              <div className="conteneur">
                 <div className="titlecours">
                 <h1><b>Cours</b></h1>
                 </div>
@@ -40,7 +40,8 @@ const handleMouseLeave = () => {setIsHovering(false);};
                     <p>Forfait</p>
                   </div>
                 </div>
-                <div>
+              </div>
+              <div className="divvague">
                   <img  className = "vague" src={vaguerose} />
                 </div>
             </header>
