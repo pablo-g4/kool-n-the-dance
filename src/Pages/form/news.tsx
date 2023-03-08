@@ -15,9 +15,9 @@ function news() {
 
         <label>active ?</label><br></br>
 
-        <input type="radio" id="active" name="active" value="oui" />
+        <input type="radio" id="active" name="active" value="true" />
         <label>Oui</label><br></br>
-        <input type="radio" id="avtive" name="active" value="non" />
+        <input type="radio" id="avtive" name="active" value="false" />
         <label>Non</label><br></br>
 
         <input type="submit"></input><br></br>
