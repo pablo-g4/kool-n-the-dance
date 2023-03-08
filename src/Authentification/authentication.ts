@@ -17,7 +17,34 @@ import {
   addDoc,
 } from "firebase/firestore";
 
+import { mapAuthCodeToMessage } from "../db/firebaseErrorHandler";
+
 const googleProvider = new GoogleAuthProvider();
+
+const isLoggedIn = async (): Promise<boolean> => {
+  try {
+    await new Promise((resolve, reject) =>
+      auth.onAuthStateChanged(
+        user => {
+          if (user) {
+            console.log('isLogged...');
+            
+            // User is signed in.
+            resolve(user)
+          } else {
+            // No user is signed in.
+            reject('no user logged in')
+          }
+        },
+        // Prevent console error
+        error => reject(error)
+      )
+    )
+    return true
+  } catch (error) {
+    return false
+  }
+}
 
 const signInWithGoogle = async () => {
   try {
@@ -34,7 +61,8 @@ const signInWithGoogle = async () => {
       });
     }
   } catch (err) {
-    console.error(err);
+    console.error(err)
+    mapAuthCodeToMessage(err)
   }
 };
 
@@ -42,7 +70,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    console.error(err);
+    mapAuthCodeToMessage(err)
   }
 };
 
@@ -58,6 +86,7 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
     });
   } catch (err) {
     console.error(err);
+    mapAuthCodeToMessage(err)
   }
 };
 
@@ -67,6 +96,7 @@ const sendPasswordReset = async (email: string) => {
     alert("Password reset link sent!");
   } catch (err) {
     console.error(err);
+    mapAuthCodeToMessage(err)
   }
 };
 
@@ -81,4 +111,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  isLoggedIn
 };
