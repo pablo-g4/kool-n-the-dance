@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
+.col-3{
+  padding: 0 !important;
+}
+
 .aSidebar {
   position: relative;
   height: 100%;
