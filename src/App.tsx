@@ -3,6 +3,7 @@ import Topics from './Pages/Topics';
 import Layout from './Pages/Layouts/Layout';
 import Actualite from './Pages/Actualite/Actualite';
 import Galerie from './Pages/Galerie/Galerie';
+import News from './Pages/form/news';
 import './App.css';
 
 import {
@@ -20,6 +21,7 @@ const  App = () => {
           <Route path="/topics/*" element={<Topics />} />
           <Route path="/actualite" element={<Actualite />} />
           <Route path="/galerie/*" element={<Galerie />} />
+          <Route path="/news" element={<News />} />
         </Routes>
       </Layout>
     </div>
