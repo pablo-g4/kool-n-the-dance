@@ -1,0 +1,51 @@
+.aSidebar{
+    position: relative;
+    height: 100%;
+    width: 20%;
+    background-color: #644A82;
+
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: darkgrey;
+    box-shadow: 0px 0px 5px gray;
+}
+
+.aSidebar_logo{
+    position: relative;
+    height: 40%;
+    width: 100%;
+    text-align: right;
+}
+
+.aSidebar_onglet{
+    position: relative;
+    display: inline-block;
+    height: 5%;
+    width: 100%;
+    background-color: #644A82;
+
+
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: darkgrey;
+
+    color: white;
+    text-decoration: none;
+    text-align: right;
+}
+.aSidebar_onglet:hover{
+    background-color: white;
+    color: #644A82;
+}
+
+.aSidebar_text{
+    position: relative;
+    margin: 0;
+    padding-right: 5%;
+    vertical-align: top;
+}
+
+.currentPage{
+    background-color: white !important;
+    color: #644A82 !important;
+}
