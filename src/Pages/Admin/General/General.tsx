@@ -20,7 +20,7 @@ const General = () => {
   return (
     <>
       <div className="d-flex flex-column- ">
-        <div>
+        <div className="col-3">
           <AdminSidebar></AdminSidebar>
         </div>
         <div className=" m-5 box-body ">

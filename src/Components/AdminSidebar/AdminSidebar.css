@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+.col-3{
+  padding: 0 !important;
+}
+
 .aSidebar {
   position: relative;
   height: 100%;
-  width: 80%;
+  width: 100%;
   background-color: #644a82;
 
   border-right-width: 1px;
@@ -12,7 +18,7 @@
 
 .aSidebar_logo {
   position: relative;
-  height: 40%;
+  height: 30%;
   width: 100%;
   text-align: right;
 }
@@ -39,6 +45,7 @@
 }
 
 .aSidebar_text {
+  font-family: 'Playfair Display';
   position: relative;
   margin: 0;
   padding-right: 5%;
@@ -48,4 +55,9 @@
 .currentPage {
   background-color: white !important;
   color: #644a82 !important;
+}
+
+.LogoBlanc{
+  padding-top: 5%;
+  padding-right: 10%;
 }
