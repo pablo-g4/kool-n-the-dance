@@ -21,7 +21,7 @@ const General = () => {
     <>
       <div className="d-flex flex-column- ">
         <div className="col-3 p-0">
-          <AdminSidebar></AdminSidebar>
+          <AdminSidebar page="general"></AdminSidebar>
         </div>
         <div className=" m-5 box-body ">
           <div>
