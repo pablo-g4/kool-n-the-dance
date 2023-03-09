@@ -3,10 +3,12 @@ import addNews from "../Components/form/addNews";
 import React from 'react';
 import { Route, Routes, Outlet, useNavigate, Navigate } from "react-router-dom";
 import AddNews from '../Components/form/addNews';
+import Actualite from "./Actualite/Actualite";
 
 const News = () => {
   return (
     <Routes>
+        <Route path="/" element={ <Actualite />} />
         <Route path="/add-news"  element={ <AddNews /> } />
     </Routes>
   )

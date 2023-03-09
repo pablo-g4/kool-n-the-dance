@@ -1,44 +1,53 @@
-import React from 'react'
-import './news.css'
-import attachmentIcon from './attach-16.png'
+import { Button } from '@mantine/core';
+import React, { useState } from 'react';
+import { News } from '../../Models/News'
+import { createNews } from '../../Controllers/news';
+import { logInWithEmailAndPassword } from '../../Authentification/authentication';
 
-const addNews = () => {
+const AddNews = () => {
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    const title = event.target.elements.title.value;
+    const description = event.target.elements.description.value;
+    const attachedFile = event.target.elements.attachedFile.value;
+    const isActive = event.target.elements.isActive.value;
+
+    let newNews = new News()
+
+    newNews.title = title
+    newNews.description = description
+    newNews.attachedFile = attachedFile
+    newNews.isActive = isActive
+
+    const createdNews = await createNews(newNews)
+    console.log('createdNews', createdNews);
+
+
+  };
+
   return (
-    <div className="card">
-      <div className='article'>
-        <a className='txtTitre'>Ajouter Article</a>
+    <form onSubmit={handleSubmit} action=''>
+        <label htmlFor='title'>Titre</label>
+        <input type="text" name='title' required></input><br></br>
 
-        <form action='' method=''>
-            <label className='txtLabel' htmlFor='titreArticle'>Titre Article : </label><br></br><br></br>
-            <input id="titreArticle" type="text" name='titre' placeholder="Titre Article" required></input><br></br><br></br>
+        <label>Description</label>
+        <input type="text" name='description' required></input><br></br>
 
+        <label htmlFor='attachedFile'>Ajouter un fichier</label>
+        <input type="file" id='attachedFile' name='attachedFile'></input><br></br>
 
-            <button className='btnAjout'><img src={attachmentIcon}></img> Ajouter une pièce jointe</button>
-            <input type="file" id='file' className='file' name='ajoutFichier' accept="image/png, image/jpg, image/gif, image/jpeg"></input><br></br><br></br>
-            <br></br><br></br>
-            <label className='txtLabel labelDesc' htmlFor='desc'>Description : </label>
-            <textarea rows={6} cols={79} name='description' className='desc' required></textarea><br></br><br></br>
-            
+        <label>active ?</label><br></br>
 
+        <input type="radio" id="isActive" name="isActive" value="true" />
+        <label>Oui</label><br></br>
+        <input type="radio" id="avtive" name="isActive" value="false" />
+        <label>Non</label><br></br>
 
-            <br></br>
-            <a href=''><input type="button" value='Annuler' className='btnNoir'></input></a>
-            <input type="submit" value='Valider' className='btnRouge'></input>
-            <br></br><br></br>
-            <div className='visible'>
-              <label>Visible ?</label>
-
-              <input type="radio" id="active" name="active" value="true" />
-              <label>Oui</label>
-              <input type="radio" id="avtive" name="active" value="false" />
-              <label>Non</label>
-            </div>
-
-        </form>
-      </div>
-
-    </div>
+        <input type="submit" value="submit"></input><br></br>
+    </form>
   )
 }
 
-export default addNews
+export default AddNews

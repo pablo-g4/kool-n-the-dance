@@ -1,12 +1,10 @@
 import {collection, query, orderBy, onSnapshot} from "firebase/firestore";
-import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, setDoc , addDoc} from "firebase/firestore";
 import { db } from "./firebase";
 import { errorResponse } from '../Utils/utils';
 import { isLoggedIn } from "../Authentification/authentication"
 
 export const getDataFromCollection = async (collectionName: string, dataId: string) => {
-
-    console.log(await isLoggedIn())
 
     const docRef = doc(db, collectionName, dataId);
     const docSnap = await getDoc(docRef);
@@ -32,9 +30,13 @@ export const getAllDataFromCollection = async (collectionName: string) => {
 }
 
 export const addDocumentToCollection = async (collectionName: string, dataToCollection: {}) => {
+    
+    const addedDocumentToCollection = collection(db, collectionName);    
+    const newDocRef = await addDoc(addedDocumentToCollection, dataToCollection);
+    return newDocRef.id
+    
+}
 
-    const addedDocumentToCollection = doc(db, collectionName);
-    const newDoc = await setDoc(addedDocumentToCollection, dataToCollection);
-
-
+export const updateDocumentToCollection = async (collectionName: string, dataToCollection: {}) => {
+    console.log(collectionName, dataToCollection)
 }
