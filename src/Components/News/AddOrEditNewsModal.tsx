@@ -3,6 +3,9 @@ import { useDisclosure } from '@mantine/hooks';
 import { Modal, Group, Button } from '@mantine/core';
 import { News } from '../../Models/News'
 import { createNews } from '../../Controllers/news';
+import './news.css';
+import attachmentIcon from './attach-16.png';
+
 
 const AddOrEditNewsModal = () => {
     const [opened, { open, close }] = useDisclosure(false);
@@ -30,26 +33,39 @@ const AddOrEditNewsModal = () => {
 
     return (
         <>
-            <Modal opened={opened} onClose={close} title="Ajouter actualité" centered>
-                <form onSubmit={handleSubmit} action=''>
-                    <label htmlFor='title'>Titre</label>
-                    <input type="text" name='title' required></input><br></br>
+            <Modal opened={opened} onClose={close} size='full' className="modalActu" title="" centered>
+            <div className='article'>
+                <a className='txtTitre'>Ajouter Article</a>
 
-                    <label>Description</label>
-                    <input type="text" name='description' required></input><br></br>
 
-                    <label htmlFor='attachedFile'>Ajouter un fichier</label>
-                    <input type="file" id='attachedFile' name='attachedFile'></input><br></br>
 
-                    <label>active ?</label><br></br>
+                <form onSubmit={handleSubmit} action='' method=''>
+            <label className='txtLabel' htmlFor='titreArticle'>Titre Article : </label><br></br><br></br>
+            <input id="titreArticle" type="text" name='title' placeholder="Titre Article" required></input><br></br><br></br>
 
-                    <input type="radio" id="isActive" name="isActive" value="true" />
-                    <label>Oui</label><br></br>
-                    <input type="radio" id="avtive" name="isActive" value="false" />
-                    <label>Non</label><br></br>
 
-                    <input type="submit" value="submit"></input><br></br>
-                </form>
+            <button className='btnAjout'><img src={attachmentIcon}></img> Ajouter une pièce jointe</button>
+            <input type="file" id='file' className='file' name='attachedFile' accept="image/png, image/jpg, image/gif, image/jpeg"></input><br></br><br></br>
+            <br></br><br></br>
+            <label className='txtLabel labelDesc' htmlFor='desc'>Description : </label>
+            <textarea rows={6} cols={79} name='description' className='desc' required></textarea><br></br><br></br>
+            
+
+            <br></br>
+            <a href=''><input type="button" value='Annuler' className='btnNoir'></input></a>
+            <input type="submit" value='Valider' className='btnRouge'></input>
+            <br></br><br></br>
+            <div className='visible'>
+              <label>Visible ?</label>
+
+              <input type="radio" id="active" name="isActive" value="true" />
+              <label>Oui</label>
+              <input type="radio" id="avtive" name="isActive" value="false" />
+              <label>Non</label>
+            </div>
+
+        </form>
+        </div>
             </Modal>
 
             <Group position="center">

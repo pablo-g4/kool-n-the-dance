@@ -7,7 +7,7 @@ export const createNews = async (news: News) => {
     return createdNewsId
 }
 
-export const getAllNews = async () => {
+export const getAllNews = async ():Promise<News[]> => {
 
     const allNews = await getAllDataFromCollection(COLLECTION.NEWS)
     return allNews.map((news: any) => {
