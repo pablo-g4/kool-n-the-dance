@@ -10,6 +10,8 @@ export const createNews = async (news: News) => {
 export const getAllNews = async ():Promise<News[]> => {
 
     const allNews = await getAllDataFromCollection(COLLECTION.NEWS)
+    console.log('allNews', allNews);
+    
     return allNews.map((news: any) => {
         return News.fromDb(news)
     })
