@@ -33,17 +33,22 @@
    display: flex;
    justify-content: center;
    height: 100%;
+   gap: 10px;
    overflow-x: hidden;
+   height: auto;
  }
 
  .grow>div {
    flex-basis: 10%;
    flex-shrink: 1;
    transition: .5s;
+   width: 40%;
  }
 
  .grow>div:hover {
-   flex-basis: 20%;
+   flex-basis: 15%;
+   max-width: 100%;  
+   height: auto;
  }
 
  .grow>div:first-child:hover {
@@ -88,14 +93,29 @@
 } */
 
  .card-img-top{
-    width: 250px;
+    width: 200px;
     height: 400px;
     border-radius: 20px;
+    object-fit: cover;
+    transition-duration: 0.2s;
  }
 
+
  .card-img-top:hover{
-   /* transform: scaleX(1.5) */
+   max-width: 100%;
+   width: 100%;
+   transition-duration: 0.2s;
  }
+
+ .img__description {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  vertical-align: top;
+}
+
+
+
  .card-text{
     color : white;
     opacity: 1;

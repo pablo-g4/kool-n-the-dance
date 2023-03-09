@@ -22,7 +22,7 @@ const CardCours = ({
                 <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <img src={imgSrc} className="card-img-top" />
                 </div>
-                <div className="textdanses">
+                <div className="img__description">
                     <p>{description}</p>
                 </div>
             </div>
