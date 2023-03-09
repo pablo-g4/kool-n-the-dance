@@ -1,16 +1,13 @@
-import Home from './Pages/Home';
-import Topics from './Pages/Topics';
-import Layout from './Pages/Layouts/Layout';
-import Galerie from './Pages/Galerie/Galerie';
-import './App.css';
+import Home from "./Pages/Home";
+import Topics from "./Pages/Topics";
+import Layout from "./Pages/Layouts/Layout";
+import Galerie from "./Pages/Galerie/Galerie";
+import Actualite from "./Pages/Actualite/Actualite";
+import "./App.css";
 
-import {
-  Route,
-  Routes
-} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-
-const  App = () => {
+const App = () => {
   return (
     <div className="App">
       <Layout>
@@ -18,10 +15,11 @@ const  App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/topics/*" element={<Topics />} />
           <Route path="/galerie/*" element={<Galerie />} />
+          <Route path="/actualite" element={<Actualite />} />
         </Routes>
       </Layout>
     </div>
   );
-}
+};
 
 export default App;
