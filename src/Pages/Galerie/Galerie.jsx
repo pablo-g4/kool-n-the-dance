@@ -47,7 +47,7 @@ const Galerie = () => {
   return (
     
     <div className='body'>
-      <div className="titre">Galerie</div>
+      <div className="titre-galerie">Galerie</div>
 
         <div className='visualiseuse'>
 
