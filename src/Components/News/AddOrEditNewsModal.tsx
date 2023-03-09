@@ -25,7 +25,8 @@ const AddOrEditNewsModal = () => {
         newNews.attachedFile = attachedFile
         newNews.isActive = isActive
     
-        const createdNews = await createNews(newNews)   
+        const createdNews = await createNews(newNews)
+        close();
         console.log('createdNews', createdNews);
          
         
@@ -48,7 +49,7 @@ const AddOrEditNewsModal = () => {
             <input type="file" id='file' className='file' name='attachedFile' accept="image/png, image/jpg, image/gif, image/jpeg"></input><br></br><br></br>
             <br></br><br></br>
             <label className='txtLabel labelDesc' htmlFor='desc'>Description : </label>
-            <textarea rows={6} cols={79} name='description' className='desc' required></textarea><br></br><br></br>
+            <textarea rows={6} cols={79} name='description' className='desc' maxLength={200} required></textarea><br></br><br></br>
             
 
             <br></br>
