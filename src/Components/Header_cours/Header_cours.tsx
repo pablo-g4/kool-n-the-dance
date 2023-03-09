@@ -2,16 +2,22 @@ import React, { Component, useState } from "react";
 import "./Header_cours.css";
 import image from "./test.png";
 import vaguerose from "./VagueRose.png";
+import CardCours from "./CardCours";
 
 const Header_cours = () => {
 const [isHovering, setIsHovering] = useState(false);
-const handleMouseEnter = () => {setIsHovering(true);};
-const handleMouseLeave = () => {setIsHovering(false);};
 
-
-
-
-  
+const images = [
+  { imgSrc : image, description: 'Danses', className: ''},
+  { imgSrc : image, description: 'Fitness'},
+  { imgSrc : image, description: 'Forfait'},
+]
+const handleMouseEnter = (e: any) => {
+  setIsHovering(true);
+};
+const handleMouseLeave = () => {
+  setIsHovering(false);
+};
 
     return (
         <>
@@ -20,8 +26,13 @@ const handleMouseLeave = () => {setIsHovering(false);};
                 <div className="titlecours">
                 <h1><b>Cours</b></h1>
                 </div>
-                <div className="groupe">
-                  <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
+                <div className="grow">
+                  {
+                    images.map((image,index) => (
+                      <CardCours key={index} imgSrc={image.imgSrc} description={image.description}/>
+                    ))
+                  }
+                  {/* <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
                     <img src={image} className="card-img-top" />
                   </div>
                   <div className="textdanses" style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
@@ -38,7 +49,7 @@ const handleMouseLeave = () => {setIsHovering(false);};
                   </div>
                   <div className="textforfait" style={{transform: isHovering ? 'translate(60px, 0px)' : 'none',}}>
                     <p>Forfait</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="divvague">
