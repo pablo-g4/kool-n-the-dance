@@ -33,7 +33,7 @@ const General = () => {
               <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="d-flex  ">
-                    <label className="bold">Telphone : </label>
+                    <label className="bold">Telephone : </label>
                     <p className="light"> +33 1234567890</p>
                   </div>
                   <input className="input-size" name="tel" type="tel" />
