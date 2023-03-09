@@ -24,6 +24,7 @@
 .leaflet-container2{
     height: 270px !important;
     width: 100%;
+    z-index: 0;
 }
 
 .map {
