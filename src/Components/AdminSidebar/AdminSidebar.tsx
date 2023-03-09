@@ -1,6 +1,6 @@
 import React from "react";
 import "./AdminSidebar.css";
-import LogoBlanc from "../../LogoBlanc.png";
+import LogoBlanc from "../../images/LogoBlanc.png";
 
 const AdminSidebar = () => {
   return (
