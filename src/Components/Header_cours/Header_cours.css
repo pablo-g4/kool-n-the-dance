@@ -112,7 +112,13 @@
   font-size: 20px;
   position: absolute;
   vertical-align: top;
+  top: 145px;
+  display: flex;
+  padding-left: 75px;
+  
 }
+
+
 
 
 
@@ -148,10 +154,11 @@
    background-color: #F2D7EE;
    background-image: url("fond.svg");
    background-size: 80%;
-   background-position: 140px -10px;
-   height: 850px;
+   background-position: 150px -30px;
+   height: 645px;
    background-repeat: no-repeat;
 
+}
 
- }
+
 

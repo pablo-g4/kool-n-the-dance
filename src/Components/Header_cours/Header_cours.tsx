@@ -7,6 +7,7 @@ import CardCours from "./CardCours";
 const Header_cours = () => {
 const [isHovering, setIsHovering] = useState(false);
 
+
 const images = [
   { imgSrc : image, description: 'Danses', className: ''},
   { imgSrc : image, description: 'Fitness'},
@@ -54,7 +55,7 @@ const handleMouseLeave = () => {
               </div>
               <div className="divvague">
                   <img  className = "vague" src={vaguerose} />
-                </div>
+              </div>
             </header>
           </>
     );
