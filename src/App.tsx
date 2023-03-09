@@ -21,6 +21,7 @@ import {
   Routes
 } from "react-router-dom";
 
+import Gestionactualite from './Pages/Gestionactualite/Gestionactualite';
 
 
 
@@ -43,6 +44,7 @@ const  App = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/galerie/*" element={<Galerie />} />
           <Route path="/posts/*" element={<Posts />} />
+          <Route path="/gestionactualite/*" element={<Gestionactualite/>} />
         </Routes>
       </Layout>
     </div>
