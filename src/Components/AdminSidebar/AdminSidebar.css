@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
-.col-3{
-  padding: 0 !important;
-}
-
 .aSidebar {
   position: relative;
   height: 100%;
@@ -30,10 +26,6 @@
   width: 100%;
   background-color: #644a82;
 
-  border-right-width: 1px;
-  border-right-style: solid;
-  border-right-color: darkgrey;
-
   color: white;
   text-decoration: none;
   text-align: right;
@@ -42,6 +34,10 @@
   background-color: white;
   color: #644a82;
   text-decoration: none;
+
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: darkgrey;
 }
 
 .aSidebar_text {
@@ -55,6 +51,10 @@
 .currentPage {
   background-color: white !important;
   color: #644a82 !important;
+
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: darkgrey;
 }
 
 .LogoBlanc{
