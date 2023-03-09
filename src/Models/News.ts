@@ -2,36 +2,37 @@ export class News {
 
     public title: string = ""
     public description: string = ""
-    public link: string = ""
+    public attachedFile: string = ""
     public creationDate:number = 0
+    public updatedDate: number = 0
     public updatedBy: string = ""
     public createdBy: string = ""
     public isActive: boolean = true
 
     constructor () {} 
 
-    static toDb(news: News):any {
+    toDb():any {
         return {
-            title: news.title,
-            description: news.description,
-            link: news.link, 
-            creation_date: news.creationDate,
-            created_by: news.createdBy, 
-            updated_by: news.updatedBy,
-            is_active: news.isActive,
+            title: this.title,
+            description: this.description,
+            attached_file: this.attachedFile, 
+            creation_date: this.creationDate,
+            created_by: this.createdBy, 
+            updated_by: this.updatedBy,
+            is_active: this.isActive,
         }
     }
 
-    fromDb(objDb: any):News {
+    static fromDb(objDb: any):News {
 
         const news = new News()
 
-        this.title = objDb.title
-        this.description = objDb.description
-        this.link = objDb.link
-        this.creationDate = objDb.creation_date
-        this.updatedBy = objDb.updated_by
-        this.createdBy = objDb.created_by
+        news.title = objDb.title
+        news.description = objDb.description
+        news.attachedFile = objDb.attached_file
+        news.creationDate = objDb.creation_date
+        news.updatedBy = objDb.updated_by
+        news.createdBy = objDb.created_by
 
         return news
     }
