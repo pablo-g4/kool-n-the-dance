@@ -8,7 +8,7 @@ import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
-import logo from './Groupe 46.png';
+import logo from './Groupe 56.png';
 
 
 
@@ -24,7 +24,7 @@ const slides = [
   <SwiperSlide key={1}><img src={img} /></SwiperSlide>,
 ];
 
-const Carrousel = () => {
+const Carrousel_Red = () => {
   const [showText, setShowText] = useState(false);
 
   const handleMouseOver = () => {
@@ -46,16 +46,16 @@ const Carrousel = () => {
   SwiperCore.use([Navigation]);
   return (
     <div className='mainDiv'>
-      <div className='imgLogo'>
-        <img className='logo_carrousel' src={logo} alt="Logo" />
+      <div className='imgLogo_Red'>
+        <img className='logo_carrousel_Red' src={logo} alt="Logo" />
       </div>
-      <div className='Carre'>
-        {<p className='mt-4'>Danses</p>}
+      <div className='Carre_Red'>
+        {<p className='mt-4'>Nos Forfaits</p>}
       </div>
-      <div className='background'>
+      <div className='background_Red'>
         {/* <img id='img' src={"./background.png"}></img> */}
         <Swiper {...swiperOptions}
-          className='swiper-container'
+          className='swiper-container-Red'
           style={{
             width: "1350px",
             height: "500px",
@@ -72,7 +72,6 @@ const Carrousel = () => {
         </Swiper>
       </div>
     </div>
-
   )
 }
-export default Carrousel
+export default Carrousel_Red
