@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="93.036" height="47.071" viewBox="0 0 93.036 47.071">
+  <g id="Flèche" transform="translate(-514 -1831.964)">
+    <line id="Ligne_1" data-name="Ligne 1" x2="85" transform="translate(516.5 1855.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+    <line id="Ligne_2" data-name="Ligne 2" x2="20" y2="20" transform="translate(583.5 1835.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+    <line id="Ligne_3" data-name="Ligne 3" y1="20" x2="20" transform="translate(583.5 1855.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+  </g>
+</svg>
