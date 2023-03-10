@@ -6,31 +6,28 @@ import { getAllNews } from '../../Controllers/news'
 import { useCallback, useEffect } from 'react';
 import AddOrEditNewsModal from '../../Components/News/AddOrEditNewsModal';
 import { News } from '../../Models/News';
+import {  Group, Button } from '@mantine/core';
 
 const Actualite = () => {
 
   const[allNews, setAllNews] = useState<News[]>([])
+  const[currentNews, setCurrentNews] = useState<News>()
+  const [isOpen, setIsOpen] = useState(false);
 
-  const addNews = (news:News) => {
-
-    setAllNews([...allNews, news]);
-
+  const handleCurrentNews = (currentNews:News) => {
+    setCurrentNews(currentNews);
   }
 
   const fetchData = useCallback(async () => {
-
-        const news = await getAllNews()
-        if(news.length){
-          setAllNews(news)
-        }
-
-        
+    const news = await getAllNews()
+    if(news.length){
+      setAllNews(news)
+    }
   }, [])
 
   useEffect(() => {
     fetchData()
   }, []);
-
 
   return (
     <div className='actualite-page'>
@@ -38,8 +35,8 @@ const Actualite = () => {
       <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
           {
-            allNews.map((news)=> (
-              <Card news={news} />
+            allNews.map((news, index) => (
+              <Card news={news} setCurrentNews={setCurrentNews} key={index} />
             ))
           }
         </div>
@@ -47,7 +44,12 @@ const Actualite = () => {
           <CardRight/>
         </div>
       </div>
-      <AddOrEditNewsModal setAllNews={setAllNews} allNews={allNews} addNews={addNews} />
+        <Group position="center">
+          <Button onClick={() => setIsOpen(true)}>Ajouter actualité</Button>
+         </Group>
+      {isOpen &&
+        <AddOrEditNewsModal currentNews={currentNews} setAllNews={setAllNews} isOpen={isOpen} setIsOpen={setIsOpen} />
+      }
     </div>
   )
 }

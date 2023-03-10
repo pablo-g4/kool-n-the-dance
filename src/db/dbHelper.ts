@@ -10,7 +10,7 @@ export const getDataFromCollection = async (collectionName: string, dataId: stri
     const docSnap = await getDoc(docRef);
     
     if(docSnap.exists()) 
-     return docSnap.data()
+     return { ...docSnap.data(), id: docSnap.id }
     else 
      return errorResponse('Error on data')
 

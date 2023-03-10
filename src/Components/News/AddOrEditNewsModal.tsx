@@ -1,46 +1,54 @@
 import React, { useEffect } from 'react'
-import { useDisclosure } from '@mantine/hooks';
 import { Modal, Group, Button } from '@mantine/core';
 import { News } from '../../Models/News'
 import { createNews } from '../../Controllers/news';
 import './news.css';
 import attachmentIcon from './attach-16.png';
 
+const AddOrEditNewsModal = (
+    {
+        currentNews,
+        setAllNews, 
+        isOpen, 
+        setIsOpen
+    } : 
+    {
+        currentNews?: News,
+        setAllNews: React.Dispatch<React.SetStateAction<News[]>>, 
+        isOpen: boolean, 
+        setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    }) => {
 
-const AddOrEditNewsModal = (props:any) => {
-    const [opened, { open, close }] = useDisclosure(false);
-
-    console.log(props);
-    
-    const handleSubmit = async (event: any) => {
+        const handleSubmit = async (event: any) => {
+            event.preventDefault();
+            const title = event.target.elements.title.value;
+            const description = event.target.elements.description.value;
+            const attachedFile = event.target.elements.attachedFile.value;
+            const isActive = event.target.elements.isActive.value;
+            let newNews = new News()
+            newNews.title = title
+            newNews.description = description
+            newNews.attachedFile = attachedFile
+            newNews.isActive = isActive
         
-        event.preventDefault();
-    
-        const title = event.target.elements.title.value;
-        const description = event.target.elements.description.value;
-        const attachedFile = event.target.elements.attachedFile.value;
-        const isActive = event.target.elements.isActive.value;
-    
-        let newNews = new News()
-    
-        newNews.title = title
-        newNews.description = description
-        newNews.attachedFile = attachedFile
-        newNews.isActive = isActive
-    
-        const createdNewsId = await createNews(newNews)
-        newNews.id = createdNewsId
-        props.addNews(newNews);
-        close();
-        
+            const createdNewsId = await createNews(newNews)
+            newNews.id = createdNewsId
+            addNews(newNews);
+            setIsOpen(false);
+        };
 
-      };
+      const addNews = (news:News) => {
+        setAllNews(oldNews => [...oldNews, news]);
+      }
+    
 
-      useEffect(()=>{},[props.news])
+      const handleCloseModal = () => {
+        setIsOpen(false);
+      }
 
     return (
         <>
-            <Modal opened={opened} onClose={close} size='full' className="modalActu" title="" centered>
+            <Modal opened={isOpen} onClose={() => setIsOpen(false)} size='full' className="modalActu" title="" centered>
             <div className='article'>
                 <a className='txtTitre'>Ajouter Article</a>
 
@@ -59,7 +67,7 @@ const AddOrEditNewsModal = (props:any) => {
             
 
             <br></br>
-            <a href=''><input type="button" value='Annuler' className='btnNoir'></input></a>
+            <input type="button" value='Annuler' className='btnNoir' onClick={handleCloseModal} ></input>
             <input type="submit" value='Valider' className='btnRouge'></input>
             <br></br><br></br>
             <div className='visible'>
@@ -75,9 +83,7 @@ const AddOrEditNewsModal = (props:any) => {
         </div>
             </Modal>
 
-            <Group position="center">
-                <Button onClick={open}>Ajouter actualité</Button>
-            </Group>
+
         </>
     )
 }
