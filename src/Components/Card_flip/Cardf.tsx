@@ -16,7 +16,7 @@ function CardFlip() {
 
   return (
     <>
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" >
         
           <div className="cardCours">
           <p className="titreCours">Zumba</p>
@@ -28,16 +28,23 @@ function CardFlip() {
               principalement des danses latines mais aussi de styles variés
               comme la danse orientale, disco, hip hop...
             </p>
+            <div className = "mt-4 row justify-content-end">
+            <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick}  style={{cursor: 'pointer'}}/>
+            </div>
+           
             </div>
            
             </div>
         
-        <div >
-          <img src={imgbg} alt="Back of Card" />
+            <div className="imgCours">
+         
+          
+          <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick}  style={{cursor: 'pointer'}}/>
         </div>
         
+       
       </ReactCardFlip>
-      <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick}  style={{cursor: 'pointer'}}/>
+      
      
     </>
   );
