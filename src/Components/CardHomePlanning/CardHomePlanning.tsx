@@ -5,7 +5,7 @@ import "./CardHomeP.css";
 
 const CardHomePlanning = ({ horaire = "", titre = "", text = "" }) => {
   return (
-    <div className="bg-blanc m-4 row justify-content-center">
+    <div className="bg-blanc m-4 row justify-content-center spacingCard">
       <p className="horaire-planning col-12 mt-3">{horaire}</p>
       <div className="image-taille ">
         <img className="img-fluid" src={imgtest}></img>

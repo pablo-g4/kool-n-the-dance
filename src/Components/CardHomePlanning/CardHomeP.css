@@ -32,3 +32,14 @@
   width: 192px;
   height: 120px;
 }
+
+.spacingCard{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.spacingCol{
+  padding-left: 1% !important;
+  padding-right: 1% !important;
+  max-width: 14% !important;
+}

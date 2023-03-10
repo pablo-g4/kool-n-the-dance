@@ -7,7 +7,7 @@ import logo_top from "./Logo@2x.jpg";
 import vague from "./Tracé 101@2x.jpg";
 import rosas from "./Tracé 230@2x.jpg";
 import Card from "../Components/Card/Card";
-import CardRight from "../Components/CardRight/CardRight";
+import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning";
@@ -67,49 +67,49 @@ const Home = () => {
             Planning du jour
           </p>
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
             text="Pour enfants de 6-9 ans"
           ></CardHomePlanning>{" "}
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
             text="Pour enfants de 6-9 ans"
           ></CardHomePlanning>{" "}
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
             text="Pour enfants de 6-9 ans"
           ></CardHomePlanning>{" "}
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
             text="Pour enfants de 6-9 ans"
           ></CardHomePlanning>{" "}
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
             text="Pour enfants de 6-9 ans"
           ></CardHomePlanning>{" "}
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
             text="Pour enfants de 6-9 ans"
           ></CardHomePlanning>{" "}
         </div>
-        <div className="col">
+        <div className="col-2 spacingCol">
           <CardHomePlanning
             horaire="8h-9h"
             titre="ZUMBA"
@@ -123,13 +123,13 @@ const Home = () => {
         </div>
         <div className="d-flex flex ">
           <div className="col h-30 ">
-            <CardRight></CardRight>
+            <CardHomeActualite></CardHomeActualite>
           </div>
           <div className="col ">
-            <CardRight></CardRight>
+            <CardHomeActualite></CardHomeActualite>
           </div>
           <div className="col ">
-            <CardRight></CardRight>
+            <CardHomeActualite></CardHomeActualite>
           </div>
         </div>
         <div className="redirection  row justify-content-end">
