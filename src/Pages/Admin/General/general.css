@@ -1,0 +1,27 @@
+.input-size {
+  height: 37px;
+}
+
+.text-deco-h2 {
+  text-align: start;
+  color: #644a82;
+  font-weight: bold;
+}
+
+.box-body {
+  margin-right: 50px !important;
+  margin-left: 50px !important;
+}
+
+.separateur {
+  margin-top: 170px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.light {
+  color: #a191b3;
+  margin-left: 10px;
+}
