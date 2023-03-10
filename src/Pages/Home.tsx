@@ -15,7 +15,7 @@ import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning";
 const Home = () => {
   return (
     <>
-      <header>
+      <header className="photo_haut_de_page">
         <div className="row">
           <div className="col">
             <div className="logo_haut_de_page">
@@ -53,14 +53,11 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="photo_haut_de_page">
-          <img src={background_top_image} />
+        <div className="vague_sous_photo">
+          <img className=" rotation" src={vague} />
         </div>
       </header>
 
-      <div className="vague_sous_photo">
-        <img className=" rotation" src={vague} />
-      </div>
       <div className="row bg-violet">
         <div className="col-12 ">
           <p className="text-white text-center titre-planning">
@@ -147,8 +144,7 @@ const Home = () => {
             <p>2</p>{" "}
           </div>
           <div className="div3">
-            {" "}
-            <p>3</p>
+            <p>3</p>{" "}
           </div>
           <div className="div4">
             <p>4</p>{" "}
