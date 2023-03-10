@@ -9,3 +9,10 @@
     font-style: bold;
     font-size: 18px;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 550px) {
+    .center-article{
+        line-height: 18px;
+        border-radius: 0px !important;
+    }
+}

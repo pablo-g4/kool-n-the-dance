@@ -1,8 +1,5 @@
-/* Le Titre en violet*/
-.Title_lArticle{
-    font-family: "Playfair Display", "Bold";
-    color: #644A82;
-}
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
 /* ********************************** */
 /* La carte dans son ensemble */
@@ -29,11 +26,14 @@
 .lArticle_txt{
     position: relative;
     top: 0%;
-    width: 99.25%;
-    height: 48.5%;
+    width: 99%; /*width: 100%;*/
+    height: 49%; /*height: 50%;*/
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: white;
+    margin-left: 0.5%;
+    margin-top: 0.5%;
+  
 }
 
 /* ********************************** */
@@ -45,7 +45,7 @@
     float: left;
     left: 5%;
 
-    font-family: "Alice", "Regular";
+    font-family: "Alice", sans-serif;
     text-align: left;
     color: #644A82;
     font-size: 18px;
@@ -60,7 +60,7 @@
     float: left;
     left: 5%;
 
-    font-family: "Alice", "Regular";
+    font-family: "Alice", sans-serif;
     text-align: left;
     color:#444;
     font-size: 18px;
@@ -77,10 +77,16 @@
     right: 5%;
     bottom: 0;
 
-    font-family: "Alice", "Regular";
+    font-family: "Alice", sans-serif;
     text-align: right;
     color: #644A82;
     font-size: 18px;
 
     margin: 0%;
+}
+
+.lArticle_title{
+    font-family: "Playfair Display", sans-serif;
+    color: #644A82;
+    font-size: 40px;
 }
