@@ -125,7 +125,9 @@
 }
 
 .rotation {
+  margin-bottom: -10px;
   transform: rotate(180deg);
+  z-index: -1;
 }
 
 .redirection {

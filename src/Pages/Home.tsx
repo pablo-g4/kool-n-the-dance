@@ -56,11 +56,11 @@ const Home = () => {
         <div className="photo_haut_de_page">
           <img src={background_top_image} />
         </div>
-
-        <div className="vague_sous_photo">
-          <img className=" rotation" src={vague} />
-        </div>
       </header>
+
+      <div className="vague_sous_photo">
+        <img className=" rotation" src={vague} />
+      </div>
       <div className="row bg-violet">
         <div className="col-12 ">
           <p className="text-white text-center titre-planning">
