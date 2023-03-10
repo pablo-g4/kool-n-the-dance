@@ -3,9 +3,9 @@ import Footer from "../Components/Footer/Footer";
 import "./Home.css";
 import background_top_image from "../images/Galerie/DAN_0809inv.png";
 import "./DAN_0568inv@2x.jpg";
-import logo_top from "./Logo@2x.jpg";
+import logo_top from "./Logo@2x.png";
 import vague from "./Tracé 101@2x.jpg";
-import rosas from "./Tracé 230@2x.jpg";
+import rosas from "./Tracé 230@2x.png";
 import Card from "../Components/Card/Card";
 import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -54,10 +54,13 @@ const Home = () => {
         </div>
 
         <div className="vague_sous_photo">
-          <img className=" rotation" src={vague} />
+          <img  src={vague} />
         </div>
       </header>
 
+      <div className="vague_sous_photo">
+          <img className=" rotation" src={vague} />
+        </div>
       <div className="row bg-violet">
         <div className="col-12 ">
           <p className="text-white text-center titre-planning">
