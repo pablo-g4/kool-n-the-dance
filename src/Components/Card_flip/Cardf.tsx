@@ -16,38 +16,59 @@ function CardFlip() {
 
   return (
     <>
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" >
-        
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" containerClassName='CardContainer' >
+        <div>
           <div className="cardCours">
-          <p className="titreCours">Zumba</p>
-          <div className="imgCours">
-          <p>
-              Programme d'entraînement physique complet, alliant tous les
-              éléments de la remise en forme : cardio et préparation musculaire,
-              équilibre et flexibilité. Les chorégraphies s'inspirent
-              principalement des danses latines mais aussi de styles variés
-              comme la danse orientale, disco, hip hop...
-            </p>
-            <div className = "mt-4 row justify-content-end">
-            <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick}  style={{cursor: 'pointer'}}/>
-            </div>
-           
-            </div>
-           
-            </div>
-        
+            <p className="titreCours">Zumba</p>
             <div className="imgCours">
-         
-          
-          <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick}  style={{cursor: 'pointer'}}/>
+              <p>
+                Programme d'entraînement physique complet, alliant tous les
+                éléments de la remise en forme : cardio et préparation musculaire,
+                équilibre et flexibilité. Les chorégraphies s'inspirent
+                principalement des danses latines mais aussi de styles variés
+                comme la danse orientale, disco, hip hop...
+              </p>
+              <div className="mt-4 row justify-content-end">
+                <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick} style={{ cursor: 'pointer' }} />
+              </div>
+            </div>
+          </div>
         </div>
-        
-       
+        <div>
+          <div className="cardCours">
+            <p className="titreCours">Zumba</p>
+            <div className="imgCours">
+              <p>
+                Programme d'entraînement physique complet, alliant tous les
+                éléments de la remise en forme : cardio et préparation musculaire,
+                équilibre et flexibilité. Les chorégraphies s'inspirent
+                principalement des danses latines mais aussi de styles variés
+                comme la danse orientale, disco, hip hop...
+              </p>
+              <div className="mt-4 row justify-content-end">
+                <img className="flecheRe" src={fleche} alt="fleche" onClick={handleClick} style={{ cursor: 'pointer' }} />
+              </div>
+            </div>
+          </div>
+        </div>
       </ReactCardFlip>
-      
-     
+
+
     </>
   );
 }
+ReactCardFlip.defaultProps = {
+  cardStyles: {
+    back: {},
+    front: {},
+  },
+  cardZIndex: 'auto',
+  containerStyle: {},
+  flipDirection: 'horizontal',
+  flipSpeedBackToFront: 0.6,
+  flipSpeedFrontToBack: 0.6,
+  infinite: false,
+  isFlipped: false,
+};
 
 export default CardFlip;
