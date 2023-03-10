@@ -1,5 +1,5 @@
 export class News {
-
+    public id: string = ""
     public title: string = ""
     public description: string = ""
     public attachedFile: string = ""
@@ -10,9 +10,10 @@ export class News {
     public isActive: boolean = true
 
     constructor () {} 
-
+    
     toDb():any {
         return {
+
             title: this.title,
             description: this.description,
             attached_file: this.attachedFile, 
@@ -25,15 +26,18 @@ export class News {
 
     static fromDb(objDb: any):News {
 
+        console.log(objDb);
+        
         const news = new News()
 
+        news.id = objDb.id
         news.title = objDb.title
         news.description = objDb.description
         news.attachedFile = objDb.attached_file
         news.creationDate = objDb.creation_date
         news.updatedBy = objDb.updated_by
         news.createdBy = objDb.created_by
-
+        
         return news
     }
 }

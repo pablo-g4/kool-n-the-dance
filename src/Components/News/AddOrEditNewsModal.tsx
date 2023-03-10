@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Group, Button } from '@mantine/core';
 import { News } from '../../Models/News'
@@ -7,10 +7,13 @@ import './news.css';
 import attachmentIcon from './attach-16.png';
 
 
-const AddOrEditNewsModal = () => {
+const AddOrEditNewsModal = (props:any) => {
     const [opened, { open, close }] = useDisclosure(false);
 
+    console.log(props);
+    
     const handleSubmit = async (event: any) => {
+        
         event.preventDefault();
     
         const title = event.target.elements.title.value;
@@ -25,12 +28,15 @@ const AddOrEditNewsModal = () => {
         newNews.attachedFile = attachedFile
         newNews.isActive = isActive
     
-        const createdNews = await createNews(newNews)
+        const createdNewsId = await createNews(newNews)
+        newNews.id = createdNewsId
+        props.addNews(newNews);
         close();
-        console.log('createdNews', createdNews);
-         
         
+
       };
+
+      useEffect(()=>{},[props.news])
 
     return (
         <>

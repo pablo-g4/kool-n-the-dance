@@ -11,7 +11,11 @@ const Actualite = () => {
 
   const[allNews, setAllNews] = useState<News[]>([])
 
+  const addNews = (news:News) => {
 
+    setAllNews([...allNews, news]);
+
+  }
 
   const fetchData = useCallback(async () => {
 
@@ -20,7 +24,7 @@ const Actualite = () => {
           setAllNews(news)
         }
 
-        console.log(news)
+        
   }, [])
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const Actualite = () => {
         <div className='col-md-7 col-xs-11'>
           {
             allNews.map((news)=> (
-              <Card title={news.title} description={news.description}/>
+              <Card news={news} />
             ))
           }
         </div>
@@ -43,7 +47,7 @@ const Actualite = () => {
           <CardRight/>
         </div>
       </div>
-      <AddOrEditNewsModal/>
+      <AddOrEditNewsModal setAllNews={setAllNews} allNews={allNews} addNews={addNews} />
     </div>
   )
 }
