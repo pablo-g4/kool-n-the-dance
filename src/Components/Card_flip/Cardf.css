@@ -44,6 +44,14 @@ width: 100%;
 height: 100%;
 
 }
+.imgCours2{
+    background-image:
+        
+        url('../../images/Galerie/DAN_0809inv@2x.png'); 
+    width: 100%;
+    height: 100%;
+    
+    }
 
 .imgCours p{
     font-family: Alice;
@@ -63,6 +71,15 @@ height: 100%;
     font-size: 14px;
 }
 
+.cardCours2{
+    border-radius: 20px;
+    height: 350px;
+    width: 250px;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .flecheRe{
 width: 25%;
