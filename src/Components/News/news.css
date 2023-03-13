@@ -6,8 +6,6 @@
     border-radius: 25px;
     font-size: 25px;
     border: none;
-    margin-right: 40px;
-    margin-top: 50px;
 }
 
 .btnRouge{
@@ -18,8 +16,6 @@
     border-radius: 25px;
     font-size: 25px;
     border: none;
-    margin-left: 40px;
-    margin-top: 50px;
 }
 
 .txtLabel{
@@ -50,43 +46,26 @@
     float: left;
 }
 
-#file{
-opacity: 0;
-transform: scale(1.35);
-float: left;
-margin-left: -228px;
-margin-top: 25px;
-height: 30px;
-width: 195px;
+#file {
+    opacity: 0;
+    transform: scale(1.35);
+    float: left;
+    margin-left: -228px;
+    margin-top: 25px;
+    height: 30px;
+    width: 195px;
 }
 
 .btnAjout{
     background-color: black;
     color: white;
-    height: 40px;
+    padding: 1rem;
     width: 260px;
     border-radius: 25px;
     font-size: 18px;
     border: none;
-    float: left;
-    margin-left: 30px;
-    margin-top: 20px;
-}
-
-.modalActu{
-    padding: 30px;
-    text-align: center;
-}
-
-label{
-    margin-bottom: 0 !important;
 }
 
 .mantine-1q36a81{
     padding: 3rem;
-}
-
-.labelDesc{
-    margin-top: -45px;
-
 }
