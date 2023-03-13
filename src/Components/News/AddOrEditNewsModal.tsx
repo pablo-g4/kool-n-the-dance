@@ -1,76 +1,140 @@
-import React from 'react'
-import { useDisclosure } from '@mantine/hooks';
+import React, { useEffect, useState } from 'react'
 import { Modal, Group, Button } from '@mantine/core';
 import { News } from '../../Models/News'
-import { createNews } from '../../Controllers/news';
+import { createNews, updateNews } from '../../Controllers/news';
 import './news.css';
 import attachmentIcon from './attach-16.png';
 
+const AddOrEditNewsModal = (
+    {
+        currentNews,
+        setAllNews, 
+        isOpen, 
+        setIsOpen,
+        setCurrentNews,
+    } : 
+    {
+        currentNews?: News,
+        setAllNews: React.Dispatch<React.SetStateAction<News[]>>, 
+        isOpen: boolean, 
+        setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+        setCurrentNews?: React.Dispatch<React.SetStateAction<News | undefined>>,
+    }) => {
 
-const AddOrEditNewsModal = () => {
-    const [opened, { open, close }] = useDisclosure(false);
+        const [form, setForm] = useState<any>({
+            title: '',
+            description: '',
+            attachedFile: '',
+            isActive: true,
+        })
 
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
-    
-        const title = event.target.elements.title.value;
-        const description = event.target.elements.description.value;
-        const attachedFile = event.target.elements.attachedFile.value;
-        const isActive = event.target.elements.isActive.value;
-    
-        let newNews = new News()
-    
-        newNews.title = title
-        newNews.description = description
-        newNews.attachedFile = attachedFile
-        newNews.isActive = isActive
-    
-        const createdNews = await createNews(newNews)   
-        console.log('createdNews', createdNews);
-         
+        const handleSubmit = async (event: any) => {
+            event.preventDefault();
+
+            
+            
+            const {
+                title, 
+                description, 
+                attachedFile,
+                isActive, 
+            } = form
+
+
+            let newNews = new News()
+            newNews.title = title
+            newNews.description = description
+            newNews.attachedFile = attachedFile
+            newNews.isActive = isActive
+
+            if(!currentNews) {
+                await addNews(newNews)
+            }
+            else {
+                await updateCurrentNews(newNews)
+            }
+            if(currentNews && setCurrentNews) setCurrentNews(undefined)
+            setIsOpen(false);
+        };
+
+        const  handleInput = (event: any) => {
+            const key = event.target.name
+            const value = event.target.value
+            setForm( (previousFormValues: any) => ( {...previousFormValues,  [key]: value }) );
+        }
+
+
         
-      };
+
+      const addNews = async (news:News): Promise<void> => {   
+        const createdNewsId = await createNews(news)
+        news.id = createdNewsId   
+        setAllNews(oldNews => [...oldNews, news]);
+      }
+
+      const updateCurrentNews = async (news: News): Promise<void> => {
+        if(currentNews && currentNews.id) {
+            news.id = currentNews?.id            
+            await updateNews(news)
+            setAllNews((oldNewsState) => oldNewsState.map(newsItem => { return newsItem.id === news.id ? news : newsItem }))
+        }
+      }
+
+
+      const handleCloseModal = (): void => {
+        setIsOpen(false);
+      }
+
+      useEffect(() => {
+        if(currentNews) {
+            console.log(new Date(currentNews.updatedDate));
+            
+            setForm(currentNews)
+        }
+      },[currentNews])
 
     return (
         <>
-            <Modal opened={opened} onClose={close} size='full' className="modalActu" title="" centered>
-            <div className='article'>
-                <a className='txtTitre'>Ajouter Article</a>
+            <Modal opened={isOpen} onClose={() => setIsOpen(false)} size='full' title="Ajouter/modifier un article" centered>
+                <div>
+                    <div className="row">
+                        <form onSubmit={handleSubmit} action='' method=''>
+                            <div className="row mb-3">
+                                <div className='col mb-3 d-flex flex-column'>
+                                    <label className='form-label' htmlFor='titreArticle'>Titre Article : </label>
+                                    <input className='mt-2' onChange={handleInput} value={form.title} id="titreArticle" type="text" name='title' placeholder="Titre Article" required />
+                                </div>
+                                <div className='col'>
+                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFile">
+                                        <span>
+                                            <img src={attachmentIcon} />
+                                            Ajouter une pièce jointe
+                                        </span>
+                                        {
+                                         form.attachedFile && (<abbr>{form.attachedFile}</abbr>)
+                                        }
+                                        <input className='mt-2' hidden onChange={handleInput} type="file" id='attachedFile' name='attachedFile' accept="image/png, image/jpg, image/gif, image/jpeg" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div className='mb-3 d-flex flex-column'>
+                                <label className='form-label' htmlFor='description'> Description : </label>
+                                <textarea onChange={handleInput} value={form.description} rows={6} cols={79} name='description' maxLength={200} required />
+                            </div>
 
+                            <div className='mb-3 text-center d-flex flex-column'>
+                                <label className="form-check-label" htmlFor="isActive"> Visible ?</label>
+                                <input type="checkbox" id="require" name="isActive" checked={form.isActive} onChange={() => setForm((previousFormValues: any) => ({ ...previousFormValues, isActive: !form.isActive }))} />
+                            </div>
 
-
-                <form onSubmit={handleSubmit} action='' method=''>
-            <label className='txtLabel' htmlFor='titreArticle'>Titre Article : </label><br></br><br></br>
-            <input id="titreArticle" type="text" name='title' placeholder="Titre Article" required></input><br></br><br></br>
-
-
-            <button className='btnAjout'><img src={attachmentIcon}></img> Ajouter une pièce jointe</button>
-            <input type="file" id='file' className='file' name='attachedFile' accept="image/png, image/jpg, image/gif, image/jpeg"></input><br></br><br></br>
-            <br></br><br></br>
-            <label className='txtLabel labelDesc' htmlFor='desc'>Description : </label>
-            <textarea rows={6} cols={79} name='description' className='desc' required></textarea><br></br><br></br>
-            
-
-            <br></br>
-            <a href=''><input type="button" value='Annuler' className='btnNoir'></input></a>
-            <input type="submit" value='Valider' className='btnRouge'></input>
-            <br></br><br></br>
-            <div className='visible'>
-              <label>Visible ?</label>
-
-              <input type="radio" id="active" name="isActive" value="true" />
-              <label>Oui</label>
-              <input type="radio" id="avtive" name="isActive" value="false" />
-              <label>Non</label>
-            </div>
-
-        </form>
-        </div>
+                            <div className='mb-3 text-center d-flex flex-row justify-content-around'>
+                                <input type="button" value='Annuler' className='btnNoir' onClick={handleCloseModal} />
+                                <input type="submit" value='Valider' className='btnRouge' />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </Modal>
-
-            <Group position="center">
-                <Button onClick={open}>Ajouter actualité</Button>
-            </Group>
         </>
     )
 }
