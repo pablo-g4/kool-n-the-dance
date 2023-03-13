@@ -1,4 +1,5 @@
 
+
  .card{
     border: none;
     transition-duration: 500ms;
@@ -8,10 +9,6 @@
     justify-content: center;
  }
  
- /* .card:hover{
-  transform: scaleX(1.5)
- } */
-
  .groupe {
    display: flex;
    margin-bottom: 50px;
