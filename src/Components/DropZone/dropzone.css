@@ -1,0 +1,21 @@
+.border-point {
+  border-style: dotted;
+  height: 239px;
+  background-color: #f8ebf6;
+  border-color: #644a82;
+  border-radius: 20px;
+}
+
+.text-deco {
+  color: #644a82;
+}
+
+.button-import {
+  height: 50px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #f8ebf6;
+  background-color: red;
+}

@@ -1,9 +1,8 @@
 .footer {
     /* UI Properties */
     background: #000000;
-    height:100%;
     width: 100%;
-    display: flex;
+    flex-wrap: wrap;
 }
 
 .footerH1 {
@@ -19,11 +18,13 @@
 
 .socialIcon {
     margin-top: 7%;
+    margin-bottom: 2%;
 }
 
 .leaflet-container2{
     height: 270px !important;
     width: 100%;
+    z-index: 0;
 }
 
 .map {
@@ -31,12 +32,3 @@
     padding-top: 2.5%;
     padding-bottom: 2.5%;
 }
-
-@media (max-width:933px) {
-    .map {
-        width: 100%;
-        padding-top: 1.5%;
-        padding-bottom: 1.5%;
-    }
-}
-
