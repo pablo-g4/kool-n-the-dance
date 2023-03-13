@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Footer from '../../Components/Footer/Footer';
 import Card from '../../Components/Card/Card';
 import CardRight from '../../Components/CardRight/CardRight';
 import { getAllNews } from '../../Controllers/news'

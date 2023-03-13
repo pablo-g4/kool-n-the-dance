@@ -5,7 +5,7 @@ import Image from './../../image/IMG-20220612-WA0098.png';
 import "./Card.css";
 import { News } from '../../Models/News';
 import AddOrEditNewsModal from '../News/AddOrEditNewsModal';
-
+import { formatDateDDMMYY } from '../../Utils/utils'
 
 
 const position = [51.505, -0.09]
@@ -41,7 +41,7 @@ const Card = (
             <div className="mb-3 article-card ml-5 rounded-card-actualite shadow card-police mx-auto center-article">
                 <div className="d-flex flex-row">
                     <div className=''>
-                        <img className='card-image' src={Image} alt="photo_article" />
+                        <img className='card-image' src={news.attachedFileUrl} alt="photo_article" />
                     </div>
                     <div className="pr-2 d-flex flex-row flex-fill flex-column">
                         <div className='d-sm-block d-md-flex flex-fill d-flex justify-content-between'>
@@ -60,7 +60,7 @@ const Card = (
                             </div>
                         </div>
                         <div className='d-flex justify-content-end'>
-                            <p className="card-text text-muted">12/01/2017</p>
+                            <p className="card-text text-muted">{ formatDateDDMMYY(news.creationDate) }</p>
                         </div>
                     </div>
                 </div>

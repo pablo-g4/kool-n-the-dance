@@ -18,7 +18,7 @@ const AddNews = () => {
 
     newNews.title = title
     newNews.description = description
-    newNews.attachedFile = attachedFile
+    newNews.attachedFileUrl = attachedFile
     newNews.isActive = isActive
 
     const createdNews = await createNews(newNews)
