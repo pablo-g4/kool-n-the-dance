@@ -19,7 +19,7 @@ img.card-image {
     height: 200px;
 }
 
-.card-text {
+.card-text-description {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;

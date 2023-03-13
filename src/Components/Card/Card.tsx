@@ -47,7 +47,7 @@ const Card = (
                         <div className='d-sm-block d-md-flex flex-fill d-flex justify-content-between'>
                             <div className="card-body">
                                 <h5 className="fs-7 card-text-color">{news.title}</h5>
-                                <p className="card-text">"{news.description}"</p>
+                                <p className="card-text-description">"{news.description}"</p>
                             </div>
                             <div>
                                 {
