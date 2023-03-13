@@ -37,16 +37,15 @@ const Actualite = () => {
     setIsDeleteConfirmationModalOpen(true)
   }
 
-  const deleteCurrentNews = () => {
+  const deleteCurrentNews = async (idToDelete: string) => {
     setAllNews((oldNewsState) => oldNewsState.filter(newsItem => newsItem.id !== currentNews?.id ))
+    await deleteNews(currentNews?.id)
     setCurrentNews(undefined)
     closeDeleteConfirmationModal()
   }
 
   useEffect(() => {
     fetchData()
-    // console.log('i fire once....');
-    
   }, []);
 
   return (

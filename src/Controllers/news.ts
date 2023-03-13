@@ -1,5 +1,5 @@
 import { COLLECTION } from '../db/collection'
-import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection } from '../db/dbHelper'
+import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection } from '../db/dbHelper'
 import { News } from '../Models/News'
 
 export const createNews = async (news: News): Promise<string> => {    
@@ -16,7 +16,7 @@ export const updateNews = async (news: News): Promise<void> => {
 }
 
 export const deleteNews = async (newsId: string): Promise<void> => {
-    
+    await deleteDocumentFromCollection(COLLECTION.NEWS, newsId)
 }
 
 export const getAllNews = async (): Promise<News[]> => {
