@@ -38,8 +38,8 @@ const Actualite = () => {
   }
 
   const deleteCurrentNews = async (idToDelete: string) => {
-    setAllNews((oldNewsState) => oldNewsState.filter(newsItem => newsItem.id !== currentNews?.id ))
-    await deleteNews(currentNews?.id)
+    setAllNews((oldNewsState) => oldNewsState.filter(newsItem => newsItem.id !== idToDelete ))
+    await deleteNews(idToDelete)
     setCurrentNews(undefined)
     closeDeleteConfirmationModal()
   }
@@ -70,7 +70,7 @@ const Actualite = () => {
       }
       {
         isDeleteConfirmationModalOpen && 
-        <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteCurrentNews={deleteCurrentNews} />
+        <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteCurrentNews={deleteCurrentNews} elementToDelete={currentNews}/>
       }
     </div>
   )

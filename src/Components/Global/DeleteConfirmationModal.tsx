@@ -1,7 +1,10 @@
 import React from 'react'
 import { Modal, Group, Button } from '@mantine/core';
+import { News } from '../../Models/News';
 
-const DeleteConfirmationModal = ({ isOpen, closeModal, deleteCurrentNews } : { isOpen: boolean, closeModal: React.Dispatch<React.SetStateAction<boolean>>, deleteCurrentNews: React.EffectCallback }) => {
+const DeleteConfirmationModal = ({ elementToDelete, isOpen, closeModal, deleteCurrentNews } : 
+  { elementToDelete:any ,isOpen: boolean, closeModal: React.Dispatch<React.SetStateAction<boolean>>, 
+    deleteCurrentNews: any }) => {
 
   return (
     <Modal opened={isOpen} onClose={() => closeModal(false)} size='full' title="Confirmation de suppression" centered>
@@ -9,7 +12,7 @@ const DeleteConfirmationModal = ({ isOpen, closeModal, deleteCurrentNews } : { i
               <label htmlFor="delete">Pour confirmer la suppression</label>
               <input type="text" disabled name='delete' placeholder='delete' />
           </div>
-        <button type="button" className="btn btn-danger" onClick={() => deleteCurrentNews()}>Supprimer</button>
+        <button type="button" className="btn btn-danger" onClick={() => deleteCurrentNews(elementToDelete.id)}>Supprimer</button>
     </Modal>
   )
 }
