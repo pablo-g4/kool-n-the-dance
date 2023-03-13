@@ -26,17 +26,16 @@ export class News {
 
     static fromDb(objDb: any):News {
 
-        console.log(objDb);
-        
         const news = new News()
 
         news.id = objDb.id
         news.title = objDb.title
         news.description = objDb.description
         news.attachedFile = objDb.attached_file
-        news.creationDate = objDb.creation_date
         news.updatedBy = objDb.updated_by
         news.createdBy = objDb.created_by
+        news.isActive = objDb.is_active
+        news.updatedDate = objDb.updated_date
         
         return news
     }
