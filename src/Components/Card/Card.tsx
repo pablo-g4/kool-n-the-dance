@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocialIcon } from 'react-social-icons';
+import { SocialIcon,  } from 'react-social-icons';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import Image from './../../image/IMG-20220612-WA0098.png';
 import "./Card.css";
@@ -9,47 +9,62 @@ import AddOrEditNewsModal from '../News/AddOrEditNewsModal';
 
 
 const position = [51.505, -0.09]
+
 const Card = (
     {
         news, 
-        setCurrentNews, 
-        isOpen, 
-        setIsOpen,
+        setIsOpen, 
+        setCurrentNews,
+        displayDeleteConfirmationModal
     } :
     {
         news: News, 
-        setCurrentNews: React.Dispatch<React.SetStateAction<News>>,
-        isOpen: boolean, 
-        setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
+        setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>,
+        setCurrentNews?: React.Dispatch<React.SetStateAction<News | undefined>>,
+        displayDeleteConfirmationModal?:  React.EffectCallback,
     }) => {
 
-    const editNews = () =>{
-        console.log('tttt',news);
-        setCurrentNews(news);
-    }
+
+        const openEditModal = () => {
+            setCurrentNews && setCurrentNews(news)
+            setIsOpen && setIsOpen(true)
+        }
+
+        const openDeleteConfirmationmodal = () => {
+            setCurrentNews && setCurrentNews(news)
+            displayDeleteConfirmationModal && displayDeleteConfirmationModal()
+        }
+
 
     return (
         <>
             <div className="card mb-3 article-card ml-5 rounded-card-actualite shadow card-police mx-auto center-article">
-                <div className="row g-0">
-                    <div className='d-sm-block d-md-flex'>
-                        <div className="col-md-4 col-xs-11 mr-4" >
-                            <img className='w-100 h-100' src={Image} alt="photo_article" />
-                        </div>
-                        <div className="col-md-7 col-xs-11 d-sm-block d-md-flex ">
+                <div className="d-flex flex-row">
+                    <div className=''>
+                        <img className='card-image' src={Image} alt="photo_article" />
+                    </div>
+                    <div className="pr-2 d-flex flex-row flex-fill flex-column">
+                        <div className='d-sm-block d-md-flex flex-fill d-flex justify-content-between'>
                             <div className="card-body">
-                                <button type='button' onClick={editNews} ></button>
                                 <h5 className="fs-7 card-text-color">{news.title}</h5>
                                 <p className="card-text">"{news.description}"</p>
-                                <p className="card-text float-right text-muted h6">12/01/2017</p>
                             </div>
+                            <div>
+                                {
+                                    setIsOpen && <span onClick={() => openEditModal()} >Edit</span>
+                                }
+                                {
+                                    displayDeleteConfirmationModal && <span onClick={openDeleteConfirmationmodal} >Delete</span>
+                                }
+                                
+                            </div>
+                        </div>
+                        <div className='d-flex justify-content-end'>
+                            <p className="card-text text-muted">12/01/2017</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            {isOpen &&
-                <AddOrEditNewsModal currentNews={news} setCurrentNews={setCurrentNews} isOpen={isOpen} setIsOpen={setIsOpen} />
-            }        
+            </div>     
       </>
     )
 }
