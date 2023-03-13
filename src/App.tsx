@@ -13,13 +13,7 @@ import ResetPassword from './Pages/ResetPassword';
 import News from './Pages/News';
 import Planning from "./Pages/Admin/Planning/Planning";
 import Actualite from './Pages/Actualite/Actualite';
-// import { auth } from './db/firebase';
-
-// import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-// import { useAuthState } from "react-firebase-hooks/auth";
-// // import Galerie from './Pages/Galerie/Galerie';
-// import { Link, useNavigate } from "react-router-dom";
-
+import Cours from './Pages/Cours/Cours';
 import './App.css';
 
 import General from "./Pages/Admin/General/General";
@@ -37,6 +31,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/topics/*" element={<Topics />} />
+          <Route path="/actualite" element={<Actualite />} />
+          <Route path="/cours" element={<Cours />} />
+
           {/* <Route path="/actualite" element={<Actualite />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/galerie/*" element={<Galerie />} />

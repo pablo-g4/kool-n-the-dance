@@ -25,6 +25,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-leaflet": "^4.2.0",
     "react-leaflet-markercluster": "^3.0.0-rc1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "react-social-icons": "^5.15.0",

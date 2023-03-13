@@ -1,13 +1,11 @@
 import React from 'react';
-import { Carousel } from '@mantine/carousel';
 import { SocialIcon } from 'react-social-icons';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 const position = [51.505, -0.09]
-
 const Footer = () => {
     return (
-        <div className='footer d-flex'>
-            <div className='text-center col-lg-3 col-md-12 col-sm-12'>
+        <div className='footer col-xl-12 col-xs-12'>
+            <div className='column col-xl-3'>
                 <h1 className='footerH1'>Plan du site</h1>
                 <span className='text'>
                     <a>Accueil</a>
@@ -25,18 +23,22 @@ const Footer = () => {
                     <a>Actualté</a>
                 </span>
             </div>
-            <div className='col-lg-3 text-center col-md-12 col-sm-12'>
+            <div className='column col-xl-3 col-xs-12'>
                 <h1 className='footerH1'>Contact</h1>
                 <span className='text'>Accueil</span>
                 <span className='text'>koolnthedance@gmail.com</span>
                 <span className='text'>9H-21</span>
                 <div className='socialIcon'>
-                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
-                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
-                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
+                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
+                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: "5px"}} />
                 </div>
             </div>
-            <div className="col">
+<<<<<<< HEAD
+            <div className="col-md-6 col-sm-12 createmap">
+                <MapContainer center={[51.505, -0.09]} zoom={15} scrollWheelZoom={false}>
+=======
+            <div className="map col-xl col-xs-12">
                 <div className='map'>
                 <MapContainer
                     center={[51.505, -0.09]}
@@ -44,6 +46,7 @@ const Footer = () => {
                     scrollWheelZoom={false}
                     className="leaflet-container2"
                 >
+>>>>>>> main
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -53,9 +56,7 @@ const Footer = () => {
             </div>
             
         </div>
-
-  
-  );
-};
+    )
+}
 
 export default Footer;
