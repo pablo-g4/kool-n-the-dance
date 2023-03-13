@@ -15,6 +15,18 @@
     color: #ffffff !important;
 }
 
+.nav-link:hover {
+    color: #ffffff !important;
+}
+.nav-redirect {
+    color: #ffffff !important;
+}
+
+.nav-redirect:hover {
+    color: #ffffff !important;
+}
+
+
 .navbar-toggler {
     color: #ffffff !important;
 }
@@ -39,4 +51,8 @@
         width: 400px;
         padding-top: 20%;
     }
+}
+
+a:hover{
+    text-decoration: none;
 }

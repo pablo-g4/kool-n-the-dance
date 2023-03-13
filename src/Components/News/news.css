@@ -1,0 +1,71 @@
+.btnNoir{
+    background-color: black;
+    color: white;
+    height: 45px;
+    width: 250px;
+    border-radius: 25px;
+    font-size: 25px;
+    border: none;
+}
+
+.btnRouge{
+    background-color: rgb(234, 52, 52);
+    color: white;
+    height: 45px;
+    width: 250px;
+    border-radius: 25px;
+    font-size: 25px;
+    border: none;
+}
+
+.txtLabel{
+    font-weight: bold;
+    float: left;
+    padding-top: 20px;
+}
+
+.txtTitre{
+    font-weight: bold;
+    font-size: 40px;
+}
+
+
+.desc{
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    float: left;
+    margin-top: 0px;
+    margin-right: -70px;
+}
+
+#titreArticle{
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 35px;
+    float: left;
+}
+
+#file {
+    opacity: 0;
+    transform: scale(1.35);
+    float: left;
+    margin-left: -228px;
+    margin-top: 25px;
+    height: 30px;
+    width: 195px;
+}
+
+.btnAjout{
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    width: 260px;
+    border-radius: 25px;
+    font-size: 18px;
+    border: none;
+}
+
+.mantine-1q36a81{
+    padding: 3rem;
+}

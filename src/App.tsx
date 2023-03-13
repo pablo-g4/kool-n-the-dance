@@ -1,17 +1,30 @@
+
+import { useState, useEffect } from 'react';
 import Home from './Pages/Home';
 import Topics from './Pages/Topics';
 import Layout from './Pages/Layouts/Layout';
+// import Actualite from './Pages/Actualite/Actualite';
+import Galerie from './Pages/Galerie/Galerie';
+// import News from './Pages/form/news';
+
+import Login from './Pages/Login';
+import Dashboard from './Pages/Dashboard';
+import ResetPassword from './Pages/ResetPassword';
+import News from './Pages/News';
+import Planning from "./Pages/Admin/Planning/Planning";
 import Actualite from './Pages/Actualite/Actualite';
 import Cours from './Pages/Cours/Cours';
 import './App.css';
 
-import {
-  Route,
-  Routes
-} from "react-router-dom";
+import General from "./Pages/Admin/General/General";
+import { Route, Routes } from "react-router-dom";
 
 
-const  App = () => {
+import PrivateRoutes from './Utils/PrivateRoutes';
+
+const App = () => {
+
+  // const [user, setUser] = useState(undefined)
   return (
     <div className="App">
       <Layout>
@@ -21,10 +34,21 @@ const  App = () => {
           <Route path="/actualite" element={<Actualite />} />
           <Route path="/cours" element={<Cours />} />
 
+          {/* <Route path="/actualite" element={<Actualite />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/galerie/*" element={<Galerie />} />
+          <Route element={<PrivateRoutes />} >
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/news/*" element={<News />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/admin" element={<General />} />
+            <Route path="/actualite" element={<Actualite />} />
+            <Route path="/admin/planning" element={<Planning />} />
+          </Route>
         </Routes>
       </Layout>
     </div>
   );
-}
+};
 
 export default App;

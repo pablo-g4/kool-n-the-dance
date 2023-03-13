@@ -1,0 +1,34 @@
+.body {  
+  background: rgb(0, 0, 0);
+  height: 800px;
+}
+
+.titre-galerie {
+  font-size: 60px;
+  font-family: 'Playfair Display';
+  color: #644A82;
+  font-weight: bold;
+  background-color: white;
+}
+
+
+body {
+  font-family: 'Playfair Display';
+}
+
+.carou{
+    width: 180px;
+    border: 5px solid var(--unnamed-color-f2d7ee);
+    border: 5px solid #F2D7EE;
+    border-radius: 10px;
+    opacity: 1;
+    margin-top: 80px;
+    margin-right: 100px;
+    float: right;
+}
+
+.visualiseuse{
+  float: left;
+
+}
+
