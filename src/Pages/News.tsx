@@ -1,7 +1,7 @@
 import addNews from "../Components/form/addNews";
 import { Route, Routes, Outlet, useNavigate, Navigate } from "react-router-dom";
 import AddNews from '../Components/form/addNews';
-import Actualite from "./Actualite/Actualite";
+import Actualite from "./News/News";
 
 const News = () => {
 

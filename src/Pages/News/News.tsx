@@ -9,7 +9,7 @@ import {  Group, Button } from '@mantine/core';
 import DeleteConfirmationModal from '../../Components/Global/DeleteConfirmationModal';
 import { deleteNews } from '../../Controllers/news';
 
-const Actualite = () => {
+const NewsPage = () => {
 
   const [allNews, setAllNews] = useState<News[]>([])
   const [currentNews, setCurrentNews] = useState<News | undefined>(undefined)
@@ -53,26 +53,15 @@ const Actualite = () => {
       <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
           {
-            allNews.map((news, index) => <Card news={news} setCurrentNews={setCurrentNews} setIsOpen={setIsAddOrEditModalOpen} displayDeleteConfirmationModal={openDeleteConfirmationModal} key={index} />)
+            allNews.map((news, index) => <Card news={news} setCurrentNews={setCurrentNews} key={index} />)
           }
         </div>
         <div className='col-5 d-none d-md-block'>
           <CardRight />
         </div>
       </div>
-      <Group position="center">
-        <Button onClick={() => setIsAddOrEditModalOpen(true)}>Ajouter actualité</Button>
-      </Group>
-      {
-        isAddOrEditModalOpen &&
-        <AddOrEditNewsModal currentNews={currentNews} setAllNews={setAllNews} isOpen={isAddOrEditModalOpen} setIsOpen={closeAddOrEditModal} />
-      }
-      {
-        isDeleteConfirmationModalOpen && 
-        <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteCurrentNews={deleteCurrentNews} elementToDelete={currentNews}/>
-      }
     </div>
   )
 }
 
-export default Actualite
+export default NewsPage
