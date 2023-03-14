@@ -4,6 +4,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import Image from './../../image/IMG-20220612-WA0098.png';
 import "./Card.css";
 import { News } from '../../Models/News';
+import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 import AddOrEditNewsModal from '../News/AddOrEditNewsModal';
 import { formatDateDDMMYY } from '../../Utils/utils'
 
@@ -50,16 +51,16 @@ const Card = (
                             </div>
                             <div>
                                 {
-                                    setIsOpen && <span onClick={() => openEditModal()} >Edit</span>
+                                    setIsOpen && <AiFillEdit className="icon" size={25} onClick={() => openEditModal()} />
                                 }
                                 {
-                                    displayDeleteConfirmationModal && <span onClick={openDeleteConfirmationmodal} >Delete</span>
+                                    displayDeleteConfirmationModal && <AiOutlineClose className="icon" size={25} onClick={openDeleteConfirmationmodal} />
                                 }
                                 
                             </div>
                         </div>
                         <div className='d-flex justify-content-end'>
-                            <p className="card-text text-muted">{ formatDateDDMMYY(news.creationDate) }</p>
+                            <p className="card-text-color">{ formatDateDDMMYY(news.creationDate) }</p>
                         </div>
                     </div>
                 </div>

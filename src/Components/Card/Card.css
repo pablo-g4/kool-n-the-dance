@@ -1,7 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/alice-2');
 .card-police {
     font-family: 'Alice', sans-serif;
-    ;
 }
 
 .card-text-color {
@@ -26,6 +25,16 @@ img.card-image {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.icon {
+    margin: 0.5rem;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: grey;
+}
+
 
 /* @media screen and (min-device-width : 320px) and (max-device-width : 550px) {
     .center-article{
