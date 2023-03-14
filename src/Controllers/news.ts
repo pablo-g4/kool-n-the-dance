@@ -1,5 +1,5 @@
 import { COLLECTION } from '../db/collection'
-import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection } from '../db/dbHelper'
+import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection, listFiles } from '../db/dbHelper'
 import { News } from '../Models/News'
 
 export const createNews = async (news: News): Promise<string> => {    
@@ -27,4 +27,9 @@ export const getAllNews = async (): Promise<News[]> => {
         return News.fromDb(news)
     })
     
+}
+
+
+export const getAllFiles = async () => {
+    await listFiles()
 }

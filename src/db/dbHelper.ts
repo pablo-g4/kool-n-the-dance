@@ -1,8 +1,9 @@
 import {collection, query, orderBy, onSnapshot} from "firebase/firestore";
 import { doc, getDoc, getDocs, setDoc , updateDoc , addDoc, deleteDoc} from "firebase/firestore";
-import { db } from "./firebase";
+import { db, storage } from "./firebase";
 import { errorResponse } from '../Utils/utils';
 import { COLLECTION } from "./collection";
+import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage";
 
 export const getDataFromCollection = async (collectionName: string, dataId: string) => {
 
@@ -53,4 +54,36 @@ export const deleteDocumentFromCollection = async (collectionName: COLLECTION, d
     const docRefToDelete = doc(db, collectionName, dataToDeleteId)
     await deleteDoc(docRefToDelete)
 
+}
+
+export const listFiles = async () => {
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    const storageRef = getStorage();
+    // Create a storage reference from our storage service
+    const listRef = ref(storageRef, 'images');
+
+    listAll(listRef)
+        .then((res) => {
+            res.prefixes.forEach((folderRef) => {
+                console.log('folderRef', folderRef);
+                // All the prefixes under listRef.
+                // You may call listAll() recursively on them.
+            });
+            res.items.forEach((itemRef) => {
+                console.log('item ref', itemRef);
+                
+                // All the items under listRef.
+            });
+        }).catch((error) => {
+            // Uh-oh, an error occurred!
+        });
+}
+
+export const uploadFileToStorage = async (file: any) => {
+
+    if(!file) return
+    const storageRef = ref(storage, `/images/${file.name}`);
+    const uploadedFile = uploadBytesResumable(storageRef, file);
+    const downLoadUrl = await getDownloadURL(uploadedFile.snapshot.ref)
+    return downLoadUrl
 }

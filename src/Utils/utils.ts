@@ -4,3 +4,8 @@ export const errorResponse = (messageText: string) => {
         message: messageText
     }
 }
+
+
+export const formatDateDDMMYY = (unixTimeStamp: number) => {    
+    return new Date(unixTimeStamp * 1000).toLocaleDateString("fr-FR")
+}

@@ -4,6 +4,7 @@ import { News } from '../../Models/News'
 import { createNews, updateNews } from '../../Controllers/news';
 import './news.css';
 import attachmentIcon from './attach-16.png';
+import { uploadFile } from '../../Controllers/file';
 
 const AddOrEditNewsModal = (
     {
@@ -24,15 +25,15 @@ const AddOrEditNewsModal = (
         const [form, setForm] = useState<any>({
             title: '',
             description: '',
-            attachedFile: '',
+            attachedFileUrl: '',
             isActive: true,
         })
+
+        const [uploadFileForm, setUploadFileForm] = useState()
 
         const handleSubmit = async (event: any) => {
             event.preventDefault();
 
-            
-            
             const {
                 title, 
                 description, 
@@ -44,8 +45,14 @@ const AddOrEditNewsModal = (
             let newNews = new News()
             newNews.title = title
             newNews.description = description
-            newNews.attachedFile = attachedFile
+            newNews.attachedFileUrl = attachedFile
             newNews.isActive = isActive
+
+            let downloadUrl          
+            if(uploadFile) {
+                downloadUrl = await uploadFile(uploadFileForm)
+                if(downloadUrl) newNews.attachedFileUrl = downloadUrl
+            } 
 
             if(!currentNews) {
                 await addNews(newNews)
@@ -80,6 +87,11 @@ const AddOrEditNewsModal = (
         }
       }
 
+      const onFileChange = (e: any ) => {
+        e.preventDefault();        
+        setUploadFileForm((previousFormValues: any) => ( e.target.files[0]))
+    }
+
 
       const handleCloseModal = (): void => {
         setIsOpen(false);
@@ -105,15 +117,15 @@ const AddOrEditNewsModal = (
                                     <input className='mt-2' onChange={handleInput} value={form.title} id="titreArticle" type="text" name='title' placeholder="Titre Article" required />
                                 </div>
                                 <div className='col'>
-                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFile">
+                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFileUrl">
                                         <span>
                                             <img src={attachmentIcon} />
                                             Ajouter une pièce jointe
                                         </span>
                                         {
-                                         form.attachedFile && (<abbr>{form.attachedFile}</abbr>)
+                                         form.attachedFile && (<abbr>{form.attachedFileUrl}</abbr>)
                                         }
-                                        <input className='mt-2' hidden onChange={handleInput} type="file" id='attachedFile' name='attachedFile' accept="image/png, image/jpg, image/gif, image/jpeg" />
+                                        <input className='mt-2' hidden onChange={onFileChange} type="file" id='attachedFileUrl' name='attachedFileUrl' accept="image/png, image/jpg, image/gif, image/jpeg" />
                                     </label>
                                 </div>
                             </div>
