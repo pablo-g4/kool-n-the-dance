@@ -24,7 +24,6 @@ const Card = (
         displayDeleteConfirmationModal?:  React.EffectCallback,
     }) => {
 
-
         const openEditModal = () => {
             setCurrentNews && setCurrentNews(news)
             setIsOpen && setIsOpen(true)

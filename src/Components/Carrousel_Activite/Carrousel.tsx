@@ -10,9 +10,6 @@ import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
 import logo from './Groupe 46.png';
 
-
-
-
 // Import Swiper styles
 import 'swiper/css';
 

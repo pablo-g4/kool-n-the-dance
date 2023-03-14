@@ -49,8 +49,9 @@ const AddOrEditNewsModal = (
             newNews.isActive = isActive
 
             let downloadUrl          
-            if(uploadFile) {
+            if(uploadFileForm) {
                 downloadUrl = await uploadFile(uploadFileForm)
+                console.log(uploadFileForm)
                 if(downloadUrl) newNews.attachedFileUrl = downloadUrl
             } 
 
@@ -69,8 +70,6 @@ const AddOrEditNewsModal = (
             const value = event.target.value
             setForm( (previousFormValues: any) => ( {...previousFormValues,  [key]: value }) );
         }
-
-
         
 
       const addNews = async (news:News): Promise<void> => {   
