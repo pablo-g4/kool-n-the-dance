@@ -15,7 +15,7 @@
 }
 
 .text-galerie {
-  margin-left: 55rem;
+  margin-left: 52rem;
   margin-top: 1.5rem;
 }
 
@@ -31,13 +31,13 @@ body {
     border-radius: 10px;
     opacity: 1;
     margin-top: 2%;
-    margin-right: 10rem;
+    margin-right: 15rem;
     float: right;
 }
 
 .visualiseuse{
   float: left;
-  margin-left: 35rem;
+  margin-left: 32rem;
   margin-top: 2%;  
   border: 5px solid #F2D7EE;
 }
