@@ -1,14 +1,22 @@
 .body {  
   background: rgb(0, 0, 0);
-  height: 800px;
+  height: 1000px;
 }
 
 .titre-galerie {
   font-size: 60px;
+  height: 10rem;
   font-family: 'Playfair Display';
+  text-align: center;
+  display: flex;
   color: #644A82;
   font-weight: bold;
   background-color: white;
+}
+
+.text-galerie {
+  margin-left: 55rem;
+  margin-top: 1.5rem;
 }
 
 
@@ -22,13 +30,15 @@ body {
     border: 5px solid #F2D7EE;
     border-radius: 10px;
     opacity: 1;
-    margin-top: 80px;
-    margin-right: 100px;
+    margin-top: 2%;
+    margin-right: 10rem;
     float: right;
 }
 
 .visualiseuse{
   float: left;
-
+  margin-left: 35rem;
+  margin-top: 2%;  
+  border: 5px solid #F2D7EE;
 }
 

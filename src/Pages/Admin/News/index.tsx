@@ -50,28 +50,28 @@ const AdminNews = () => {
 
   return (
     <>
-      <AdminSidebar page={"news"} />
-      <div className='actualite-page'>
-        <a className='titre-actualite text-center my-7'> Actualités </a>
-        <div className='row-v2'>
-          <div className='col-md-7 col-xs-11'>
-            {
-              allNews.map((news, index) => <Card news={news} setCurrentNews={setCurrentNews} setIsOpen={setIsAddOrEditModalOpen} displayDeleteConfirmationModal={openDeleteConfirmationModal} key={index} />)
-            }
-          </div>
+    <AdminSidebar page={"news"} />
+    <div className='actualite-page'>
+      <a className='titre-actualite text-center my-7'> Actualités </a>
+      <div className='row-v2'>
+        <div className='col-md-7 col-xs-11'>
+          {
+            allNews.map((news, index) => <Card news={news} setCurrentNews={setCurrentNews} setIsOpen={setIsAddOrEditModalOpen} displayDeleteConfirmationModal={openDeleteConfirmationModal} key={index} />)
+          }
         </div>
-        <Group position="center">
-          <Button onClick={() => setIsAddOrEditModalOpen(true)}>Ajouter actualité</Button>
-        </Group>
-        {
-          isAddOrEditModalOpen &&
-          <AddOrEditNewsModal currentNews={currentNews} setAllNews={setAllNews} isOpen={isAddOrEditModalOpen} setIsOpen={closeAddOrEditModal} />
-        }
-        {
-          isDeleteConfirmationModalOpen && 
-          <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteCurrentNews={deleteCurrentNews} elementToDelete={currentNews}/>
-        }
       </div>
+      <Group position="center">
+        <Button onClick={() => setIsAddOrEditModalOpen(true)}>Ajouter actualité</Button>
+      </Group>
+      {
+        isAddOrEditModalOpen &&
+        <AddOrEditNewsModal currentNews={currentNews} setAllNews={setAllNews} isOpen={isAddOrEditModalOpen} setIsOpen={closeAddOrEditModal} />
+      }
+      {
+        isDeleteConfirmationModalOpen && 
+        <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteCurrentNews={deleteCurrentNews} elementToDelete={currentNews}/>
+      }
+    </div>
     </>
   )
 }

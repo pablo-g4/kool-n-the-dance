@@ -47,30 +47,31 @@ const Galerie = () => {
   return (
     
     <div className='body'>
-      <div className="titre-galerie">Galerie</div>
-
+      <div className="titre-galerie">
+        <p className='text-galerie'>
+          Galerie
+        </p>   
+      </div>
         <div className='visualiseuse'>
-
           {filteredImages.map((src, index) => (
-          <img
-            src={ src }
-            onClick={ () => openImageViewer(index) }
-            key={ index }
-            style={{ margin: '2px', width: '800px' }}
-            alt=""
-          />
-        ))}
+            <img
+              src={ src }
+              onClick={ () => openImageViewer(index) }
+              key={ index }
+              style={{ margin: '2px', width: '800px' }}
+              alt=""
+            />
+          ))}
 
-        {isViewerOpen && (
-          <ImageViewer
-            src={ images }
-            currentIndex={ activeImageIndex }
-            disableScroll={ false }
-            closeOnClickOutside={ true }
-            onClose={ closeImageViewer }
-          />
-        )} 
-
+          {isViewerOpen && (
+            <ImageViewer
+              src={ images }
+              currentIndex={ activeImageIndex }
+              disableScroll={ false }
+              closeOnClickOutside={ true }
+              onClose={ closeImageViewer }
+            />
+          )} 
         </div>
 
         <div className='carou'>
