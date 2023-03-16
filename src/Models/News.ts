@@ -3,6 +3,7 @@ export class News {
     public title: string = ""
     public description: string = ""
     public attachedFileUrl: string = ""
+    public imageUrl: string = ""
     public creationDate:number = Math.round(+new Date()/1000);
     public updatedDate: number = Math.round(+new Date()/1000);
     public updatedBy: string = ""
@@ -16,6 +17,7 @@ export class News {
             title: this.title,
             description: this.description,
             attached_file_url: this.attachedFileUrl || "", 
+            image_url: this.imageUrl || "",
             created_by: this.createdBy, 
             updated_by: this.updatedBy,
             is_active: this.isActive,
@@ -30,6 +32,7 @@ export class News {
         news.title = objDb.title
         news.description = objDb.description
         news.attachedFileUrl = objDb.attached_file_url
+        news.imageUrl = objDb.image_url
         news.updatedBy = objDb.updated_by
         news.createdBy = objDb.created_by
         news.isActive = objDb.is_active

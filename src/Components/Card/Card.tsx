@@ -37,13 +37,18 @@ const Card = (
             <div className="card-custom mb-3 article-card ml-5 rounded-card-actualite shadow card-police ">
                 <div className="d-flex flex-row">
                     <div className='card-image-div'>
-                        <img className='card-image' src={news.attachedFileUrl ? news.attachedFileUrl : defaultPic} alt="photo_article" />
+                        <img className='card-image' src={news.imageUrl ? news.imageUrl : defaultPic} alt="photo_article" />
                     </div>
                     <div className="pr-2 d-flex flex-row flex-fill flex-column">
                         <div className='d-sm-block d-md-flex flex-fill d-flex justify-content-between'>
                             <div className="card-body">
                                 <h5 className="fs-7 card-text-color">{news.title}</h5>
                                 <p className="card-text-description">"{news.description}"</p>
+                                {news.attachedFileUrl &&
+                                <a href={news.attachedFileUrl} download>
+                                    <p className='piece-jointe'> Télécharger la pièce jointe </p>
+                                </a>
+    }
                             </div>
                             <div>
                                 {

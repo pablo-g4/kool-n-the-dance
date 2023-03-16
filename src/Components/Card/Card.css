@@ -9,6 +9,12 @@
     font-size: 18px;
 }
 
+.piece-jointe {
+    color: blue;
+    font-family: 'Alice', sans-serif;
+    text-decoration: underline;
+}
+
 img.card-image div {
     height: 100%;
 }
