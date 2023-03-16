@@ -28,8 +28,7 @@ const Galerie = () => {
   ];
 
   const filteredImages = [images[activeImageIndex]]
-  console.log('filteredImages', filteredImages);
-
+  
   const openImageViewer = useCallback((index) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
@@ -44,8 +43,8 @@ const Galerie = () => {
     console.log(index);
     setActiveImageIndex(index)
   }
+
   return (
-    
     <div className='body'>
       <div className="titre-galerie">
         <p className='text-galerie'>
@@ -74,7 +73,7 @@ const Galerie = () => {
           )} 
         </div>
 
-        <div className='carou'>
+        <div className='carou' >
           <Carousel orientation="vertical" loop="true" height={545} onSlideChange={ (index) => handleSlideChange(index)} maw={320} dragFree slideSize="13.5%" initialSlide={2} >
             <Carousel.Slide>
               <img src={carousel1} height="110.2px" width="180px" ></img>
