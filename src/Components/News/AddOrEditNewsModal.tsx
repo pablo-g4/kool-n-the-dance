@@ -106,21 +106,24 @@ const AddOrEditNewsModal = (
 
     return (
         <>
-            <Modal opened={isOpen} onClose={() => setIsOpen(false)} size='full' title="Ajouter/modifier un article" centered>
+            <Modal opened={isOpen}  withCloseButton={false} onClose={() => setIsOpen(false)} size='full' centered>
+                <h1 className='title-modal'> Ajouter/modifier un article </h1>
                 <div>
                     <div className="row">
                         <form onSubmit={handleSubmit} action='' method=''>
-                            <div className="row mb-3">
+                            <div className="header-div row mb-3">
                                 <div className='col mb-3 d-flex flex-column'>
                                     <label className='form-label' htmlFor='titreArticle'>Titre Article : </label>
                                     <input className='mt-2' onChange={handleInput} value={form.title} id="titreArticle" type="text" name='title' placeholder="Titre Article" required />
                                 </div>
                                 <div className='col'>
                                     <label className='btnAjout d-flex flex-column' htmlFor="attachedFileUrl">
-                                        <span>
-                                            <img src={attachmentIcon} />
-                                            Ajouter une pièce jointe
-                                        </span>
+                                        <div>
+                                            <img src={attachmentIcon} style={{marginRight: "2%"}} />
+                                            <span>
+                                                Ajouter une pièce jointe
+                                            </span>
+                                        </div>
                                         {
                                          form.attachedFile && (<abbr>{form.attachedFileUrl}</abbr>)
                                         }
@@ -138,7 +141,7 @@ const AddOrEditNewsModal = (
                                 <input type="checkbox" id="require" name="isActive" checked={form.isActive} onChange={() => setForm((previousFormValues: any) => ({ ...previousFormValues, isActive: !form.isActive }))} />
                             </div>
 
-                            <div className='mb-3 text-center d-flex flex-row justify-content-around'>
+                            <div className='buttons-div mb-3 text-center d-flex flex-row justify-content-around'>
                                 <input type="button" value='Annuler' className='btnNoir' onClick={handleCloseModal} />
                                 <input type="submit" value='Valider' className='btnRouge' />
                             </div>
