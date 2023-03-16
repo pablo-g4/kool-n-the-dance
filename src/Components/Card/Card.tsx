@@ -1,11 +1,7 @@
 import React from 'react';
-import { SocialIcon,  } from 'react-social-icons';
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
-import Image from './../../image/IMG-20220612-WA0098.png';
 import "./Card.css";
 import { News } from '../../Models/News';
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
-import AddOrEditNewsModal from '../News/AddOrEditNewsModal';
 import { formatDateDDMMYY } from '../../Utils/utils'
 import  defaultPic from '../../Assets/Images/courmacuck.jpg'
 
