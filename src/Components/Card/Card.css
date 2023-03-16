@@ -26,7 +26,7 @@ img.card-image {
     overflow: hidden;
 }
 
-.card {
+.card-custom {
     width: 1080px;
     height: 190px;    
 }
