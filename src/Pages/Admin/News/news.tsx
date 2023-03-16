@@ -4,11 +4,10 @@ import { getAllNews } from '../../../Controllers/news'
 import { useCallback, useEffect } from 'react';
 import AddOrEditNewsModal from '../../../Components/News/AddOrEditNewsModal';
 import { News } from '../../../Models/News';
-import {  Group, Button } from '@mantine/core';
+import { Button } from '@mantine/core';
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import { deleteNews } from '../../../Controllers/news';
 import { BsPlusLg } from 'react-icons/bs'
-import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 import "./news.css";
 
 
@@ -53,7 +52,7 @@ const AdminNews = () => {
   return (
     <>
     <div className='actualite-page'>
-      <a className='titre-actualite text-center my-7'> Actualités </a>
+      <a className='titre-actualite-admin text-center my-7'> Gestion Actualité </a>
       <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
             <Button className='button-add' onClick={() => setIsAddOrEditModalOpen(true)}>
