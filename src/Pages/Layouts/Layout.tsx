@@ -1,26 +1,23 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar'
 import Footer from '../../Components/Footer/Footer'
 
 
-export interface LayoutProps  { 
-    children: React.ReactNode
- }
- 
-
-const Layout = (props: LayoutProps) => {
+const Layout = (props: any) => {
+    
     return (
         <>
             <div>
-                <Navbar/>
+                <Navbar />
             </div>
             <main>
-                { props.children }
+                {props.children ? props.children : <Outlet />}
             </main>
             <div>
-            <Footer/>
+                <Footer />
             </div>
-            
+
         </>
     )
 }

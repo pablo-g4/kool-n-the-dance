@@ -20,9 +20,6 @@ const General = () => {
   return (
     <>
       <div className="d-flex flex-column- ">
-        <div className="col-3 p-0">
-          <AdminSidebar page="general"></AdminSidebar>
-        </div>
         <div className=" m-5 box-body ">
           <div>
             <DropZone setFiles={setFile} />
