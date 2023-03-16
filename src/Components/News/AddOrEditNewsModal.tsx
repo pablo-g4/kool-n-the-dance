@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Group, Button } from '@mantine/core';
+import { Modal, Group, Text } from '@mantine/core';
 import { News } from '../../Models/News'
 import { createNews, updateNews } from '../../Controllers/news';
+import { Dropzone, IMAGE_MIME_TYPE, DropzoneProps } from '@mantine/dropzone';
+import { GrUploadOption } from 'react-icons/gr';
+import { AiOutlineClose } from 'react-icons/ai';
+import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md';
 import './news.css';
 import attachmentIcon from './attach-16.png';
 import { uploadFile } from '../../Controllers/file';
@@ -111,27 +115,58 @@ const AddOrEditNewsModal = (
                 <div>
                     <div className="row">
                         <form onSubmit={handleSubmit} action='' method=''>
-                            <div className="header-div row mb-3">
+                            <div className="header-div row mb-2">
                                 <div className='col mb-3 d-flex flex-column'>
                                     <label className='form-label' htmlFor='titreArticle'>Titre Article : </label>
                                     <input className='mt-2' onChange={handleInput} value={form.title} id="titreArticle" type="text" name='title' placeholder="Titre Article" required />
+                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFileUrl">
+                                <div>
+                                    <img src={attachmentIcon} style={{marginRight: "2%"}} />
+                                    <span>
+                                        Ajouter une pièce jointe
+                                    </span>
+                                </div>
+                                {
+                                    form.attachedFile && (<abbr>{form.attachedFileUrl}</abbr>)
+                                }
+                                <input className='mt-2' hidden onChange={onFileChange} type="file" id='attachedFileUrl' name='attachedFileUrl' accept="image/png, image/jpg, image/gif, image/jpeg" />
+                            </label>
                                 </div>
                                 <div className='col'>
-                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFileUrl">
+                                <Dropzone 
+                                    onDrop={(files) => console.log('accepted files', files)}
+                                    onReject={(files) => console.log('rejected files', files)}
+                                    maxSize={3 * 1024 ** 2}
+                                    accept={IMAGE_MIME_TYPE}
+                                >
+                                    <Group position="center" spacing="xl" style={{ pointerEvents: 'none' }}  className="dropzone">
                                         <div>
-                                            <img src={attachmentIcon} style={{marginRight: "2%"}} />
-                                            <span>
-                                                Ajouter une pièce jointe
-                                            </span>
+                                            <Text size="s" inline>
+                                                Glisser ou importer des images articles.
+                                            </Text>
                                         </div>
-                                        {
-                                         form.attachedFile && (<abbr>{form.attachedFileUrl}</abbr>)
-                                        }
-                                        <input className='mt-2' hidden onChange={onFileChange} type="file" id='attachedFileUrl' name='attachedFileUrl' accept="image/png, image/jpg, image/gif, image/jpeg" />
-                                    </label>
+                                        <Dropzone.Accept>
+                                            <GrUploadOption
+                                                size="3.2rem"
+                                                color="hsl(357, 96%, 60%)"
+                                            />
+                                        </Dropzone.Accept>
+                                        <Dropzone.Reject>
+                                            <AiOutlineClose
+                                                size="3.2rem"
+                                            />
+                                        </Dropzone.Reject>
+                                        <Dropzone.Idle>
+                                            <GrUploadOption
+                                                size="3.2rem"
+                                                className='upload-icon'
+                                            />
+                                        </Dropzone.Idle>
+                                    </Group>
+                                </Dropzone>
                                 </div>
                             </div>
-                            <div className='mb-3 d-flex flex-column'>
+                            <div className='mb-2 d-flex flex-column'>
                                 <label className='form-label' htmlFor='description'> Description : </label>
                                 <textarea onChange={handleInput} value={form.description} rows={6} cols={79} name='description' maxLength={200} required />
                             </div>

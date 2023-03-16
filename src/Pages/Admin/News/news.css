@@ -7,6 +7,14 @@
     margin-left: 3rem;
 }
 
+.upload-icon {
+    transform: rotate(180deg);
+}
+
+.dropzone {
+    width: 290px;
+    height: 150px; 
+}
 
 .button-add {
     display: flex;
