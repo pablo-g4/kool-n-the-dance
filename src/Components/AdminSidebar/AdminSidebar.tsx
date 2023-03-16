@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import "./AdminSidebar.css";
-import LogoBlanc from "../../images/LogoBlanc.png";
+import React, { useState } from "react"
+import "./AdminSidebar.css"
+import LogoBlanc from "../../images/LogoBlanc.png"
+import { Link } from "react-router-dom";
 
 const AdminSidebar = ({ page = "" }) => {
-  const [LaPage, setLaPage] = useState("");
+  const [currentPage, setCurrentPage] = useState("");
 
   return (
     //Ajouter le className 'currentPage' à l'onglet correspondant à la page active
@@ -15,34 +16,34 @@ const AdminSidebar = ({ page = "" }) => {
       <div className="aSidebar_logo">
         <img className="LogoBlanc" src={LogoBlanc}></img>
       </div>
-      <a
+      <Link
         className={
           page == "general" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         }
-        href="#"
+        to="/admin"
       >
         <p className="aSidebar_text">Gestion Général</p>
-      </a>
-      <a className="aSidebar_onglet" href="#">
+      </Link>
+      <Link className="aSidebar_onglet" to="/admin/cours">
         <p className="aSidebar_text">Gestion Cours</p>
-      </a>
-      <a
+      </Link>
+      <Link
         className={
           page == "planning" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         }
-        href="#"
+        to="/admin/planning"
       >
         <p className="aSidebar_text">Gestion Planning</p>
-      </a>
-      <a className="aSidebar_onglet" href="#">
+      </Link>
+      <Link className="aSidebar_onglet" to="/admin/galerie">
         <p className="aSidebar_text">Gestion Galerie</p>
-      </a>
-      <a className="aSidebar_onglet" href="#">
+      </Link>
+      <Link className="aSidebar_onglet" to="/admin/news">
         <p className="aSidebar_text">Gestion Actualité</p>
-      </a>
-      <a className="aSidebar_onglet" href="#">
+      </Link>
+      <Link className="aSidebar_onglet" to="/admin/forfait">
         <p className="aSidebar_text">Gestion Forfait</p>
-      </a>
+      </Link>
     </div>
   );
 };

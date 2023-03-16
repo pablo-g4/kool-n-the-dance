@@ -50,7 +50,6 @@ const AdminNews = () => {
 
   return (
     <>
-    <AdminSidebar page={"news"} />
     <div className='actualite-page'>
       <a className='titre-actualite text-center my-7'> Actualités </a>
       <div className='row-v2'>

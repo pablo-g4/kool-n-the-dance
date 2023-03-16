@@ -7,10 +7,6 @@ import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
 const Planning = () => {
   return (
     <>
-      <div className="d-flex flex-column- ">
-        <div className="col-3 p-0">
-          <AdminSidebar page="planning"></AdminSidebar>
-        </div>
         <div className="centrage">
           <div className="text-haut " style={{}}>
             Editez votre planning sur
@@ -20,7 +16,6 @@ const Planning = () => {
             Google Agenda <FontAwesomeIcon icon={faArrowRight} />{" "}
           </button>
         </div>
-      </div>
     </>
   );
 };

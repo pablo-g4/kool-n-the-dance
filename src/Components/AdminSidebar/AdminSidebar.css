@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
 .aSidebar {
-  position: relative;
-  height: 100%;
-  width: 100%;
+  position: sticky;
+  top:0;
+  height: 100vh;
+  width: 20%;
   background-color: #644a82;
-
   border-right-width: 1px;
   border-right-style: solid;
   border-right-color: darkgrey;
