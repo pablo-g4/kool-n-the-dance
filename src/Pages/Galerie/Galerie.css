@@ -25,20 +25,25 @@ body {
 }
 
 .carou{
-    width: 180px;
+    /* width: 180px; */
     border: 5px solid var(--unnamed-color-f2d7ee);
     border: 5px solid #F2D7EE;
     border-radius: 10px;
     opacity: 1;
-    margin-top: 2%;
-    margin-right: 15rem;
+    /* margin-top: -38%;
+    margin-right: 15rem; */
     float: right;
 }
 
 .visualiseuse{
   float: left;
-  margin-left: 32rem;
-  margin-top: 2%;  
   border: 5px solid #F2D7EE;
+}
+
+.main-carou{
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
