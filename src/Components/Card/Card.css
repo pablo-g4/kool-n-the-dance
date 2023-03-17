@@ -1,7 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/alice-2');
 .card-police {
     font-family: 'Alice', sans-serif;
-    ;
 }
 
 .card-text-color {
@@ -9,3 +8,48 @@
     font-style: bold;
     font-size: 18px;
 }
+
+.piece-jointe {
+    color: blue;
+    font-family: 'Alice', sans-serif;
+    text-decoration: underline;
+}
+
+img.card-image div {
+    height: 100%;
+}
+
+img.card-image {
+    width: 300px;
+    height: 190px;
+    object-fit: contain;
+}
+
+.card-text-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-custom {
+    width: 1080px;
+    height: 190px;    
+}
+
+.icon {
+    margin: 0.5rem;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: grey;
+}
+
+
+/* @media screen and (min-device-width : 320px) and (max-device-width : 550px) {
+    .center-article{
+        line-height: 18px;
+        border-radius: 0px !important;
+    }
+} */

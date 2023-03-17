@@ -1,30 +1,72 @@
 import React from 'react';
-import { SocialIcon } from 'react-social-icons';
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
-import Image from './../../image/IMG-20220612-WA0098.png';
 import "./Card.css";
+import { News } from '../../Models/News';
+import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
+import { formatDateDDMMYY } from '../../Utils/utils'
+import  defaultPic from '../../Assets/Images/courmacuck.jpg'
+
 
 const position = [51.505, -0.09]
-const Card = () => {
-    return (
 
-        <><>
-        <div className="card mb-3 article-card ml-5 rounded-card-actualite shadow card-police ">
-            <div className="row g-0">
-                <div className="col-4 mr-4 " >
-                    <img className='w-100 h-100' src={Image} alt="photo_article" />
-                </div>
-                <div className="col-7 d-block ">
-                    <div className="card-body">
-                        <h5 className="fs-7 card-text-color">TITRE ARTICLE</h5>
-                        <p className="card-text">" Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000 %. "</p>
-                        <p className="card-text float-right text-muted h6">12/01/2017</p>
+const Card = (
+    {
+        news, 
+        setIsOpen, 
+        setCurrentNews,
+        displayDeleteConfirmationModal
+    } :
+    {
+        news: News, 
+        setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>,
+        setCurrentNews?: React.Dispatch<React.SetStateAction<News | undefined>>,
+        displayDeleteConfirmationModal?:  React.EffectCallback,
+    }) => {
+
+        const openEditModal = () => {
+            setCurrentNews && setCurrentNews(news)
+            setIsOpen && setIsOpen(true)
+        }
+
+        const openDeleteConfirmationmodal = () => {
+            setCurrentNews && setCurrentNews(news)
+            displayDeleteConfirmationModal && displayDeleteConfirmationModal()
+        }
+
+    return (
+        <>
+            <div className="card-custom mb-3 article-card ml-5 rounded-card-actualite shadow card-police ">
+                <div className="d-flex flex-row">
+                    <div className='card-image-div'>
+                        <img className='card-image' src={news.imageUrl ? news.imageUrl : defaultPic} alt="photo_article" />
+                    </div>
+                    <div className="pr-2 d-flex flex-row flex-fill flex-column">
+                        <div className='d-sm-block d-md-flex flex-fill d-flex justify-content-between'>
+                            <div className="card-body">
+                                <h5 className="fs-7 card-text-color">{news.title}</h5>
+                                <p className="card-text-description">"{news.description}"</p>
+                                {news.attachedFileUrl &&
+                                <a href={news.attachedFileUrl} download>
+                                    <p className='piece-jointe'> Télécharger la pièce jointe </p>
+                                </a>
+    }
+                            </div>
+                            <div>
+                                {
+                                    setIsOpen && <AiFillEdit className="icon" size={25} onClick={() => openEditModal()} />
+                                }
+                                {
+                                    displayDeleteConfirmationModal && <AiOutlineClose className="icon" size={25} onClick={openDeleteConfirmationmodal} />
+                                }
+                                
+                            </div>
+                        </div>
+                        <div className='d-flex justify-content-end'>
+                            <p className="card-text-color">{ formatDateDDMMYY(news.creationDate) }</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        </></>
-
+            </div>     
+      </>
     )
 }
 

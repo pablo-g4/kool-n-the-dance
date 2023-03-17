@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import './index.css';
 import '../src/Components/Footer/Footer.css'
-import '../src/Pages/Actualite/Actualite.css'
+import '../src/Pages/News/News.css'
 import './Components/CardRight/CardRight.css'
 import './Components/Footer/Footer.css'
 import './Components/Navbar/Navbar.css'
@@ -13,8 +13,10 @@ import App from './App';
 import '../src/Pages/Galerie/Galerie.css'
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -22,5 +24,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-
