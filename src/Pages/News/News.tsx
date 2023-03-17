@@ -49,7 +49,7 @@ const NewsPage = () => {
 
   return (
     <div className='actualite-page'>
-      <a className='titre-actualite text-center my-7'> Actualités </a>
+      <a className='titre-news text-center my-7'> Actualités </a>
       <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
           {
