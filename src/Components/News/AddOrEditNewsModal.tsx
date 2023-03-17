@@ -55,6 +55,7 @@ const AddOrEditNewsModal = (
         newNews.title = title
         newNews.description = description
         newNews.attachedFileUrl = attachedFile
+        newNews.imageUrl = uploadImageForm
         newNews.isActive = isActive
 
         if (uploadFileForm) {
@@ -63,7 +64,7 @@ const AddOrEditNewsModal = (
             if (downloadUrl) newNews.attachedFileUrl = downloadUrl
         }
 
-        if (uploadImageForm) {
+        if (uploadImageForm || !currentNews?.imageUrl) {
             newNews.imageUrl = uploadImageForm
         }
 
@@ -110,7 +111,6 @@ const AddOrEditNewsModal = (
         setIsUploadAttachedFile(true);
     }
 
-
     const handleCloseModal = (): void => {
         setIsOpen(false);
     }
@@ -146,7 +146,7 @@ const AddOrEditNewsModal = (
                                     </label>
                                 </div>
                                 <div className='col'>
-                                    {!isUpload &&
+                                    {!isUpload && !currentNews?.imageUrl &&
                                         <Dropzone
                                             onDrop={(file) => onImageChange(file)}
                                             onReject={(files) => console.log('rejected files', files)}
@@ -179,8 +179,22 @@ const AddOrEditNewsModal = (
                                             </Group>
                                         </Dropzone>
                                     }
-                                    {uploadImageForm &&
-                                        <img style={{ marginLeft: "2rem", objectFit: "contain", maxHeight: "150px", maxWidth: "300px" }} src={uploadImageForm}></img>
+                                    {(uploadImageForm || currentNews?.imageUrl) &&
+                                        <img 
+                                            className='img-preview'
+                                            style={{ 
+                                                marginLeft: "2rem", 
+                                                objectFit: "contain", 
+                                                maxHeight: "150px", 
+                                                maxWidth: "300px" 
+                                            }} 
+                                            src={uploadImageForm}
+                                            onClick={() => {
+                                                setIsUploading(false);
+                                                setUploadImageForm("");
+                                            }}
+                                        >
+                                        </img>
                                     }
                                 </div>
                             </div>
