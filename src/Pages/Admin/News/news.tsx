@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import Card from '../../../Components/Card/Card';
-import CardRight from '../../../Components/CardRight/CardRight';
 import { getAllNews } from '../../../Controllers/news'
 import { useCallback, useEffect } from 'react';
 import AddOrEditNewsModal from '../../../Components/News/AddOrEditNewsModal';
 import { News } from '../../../Models/News';
-import {  Group, Button } from '@mantine/core';
+import { Button } from '@mantine/core';
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import { deleteNews } from '../../../Controllers/news';
-import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
+import { BsPlusLg } from 'react-icons/bs'
+import "./news.css";
+
 
 const AdminNews = () => {
 
@@ -51,17 +52,20 @@ const AdminNews = () => {
   return (
     <>
     <div className='actualite-page'>
-      <a className='titre-actualite text-center my-7'> Actualités </a>
+      <a className='titre-actualite-admin text-center my-7'> Gestion Actualité </a>
       <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
+            <Button className='button-add' onClick={() => setIsAddOrEditModalOpen(true)}>
+              <BsPlusLg />
+              <span className='label-button'>
+                Ajouter actualité
+              </span>
+            </Button>
           {
             allNews.map((news, index) => <Card news={news} setCurrentNews={setCurrentNews} setIsOpen={setIsAddOrEditModalOpen} displayDeleteConfirmationModal={openDeleteConfirmationModal} key={index} />)
           }
         </div>
       </div>
-      <Group position="center">
-        <Button onClick={() => setIsAddOrEditModalOpen(true)}>Ajouter actualité</Button>
-      </Group>
       {
         isAddOrEditModalOpen &&
         <AddOrEditNewsModal currentNews={currentNews} setAllNews={setAllNews} isOpen={isAddOrEditModalOpen} setIsOpen={closeAddOrEditModal} />
@@ -76,3 +80,6 @@ const AdminNews = () => {
 }
 
 export default AdminNews
+
+
+

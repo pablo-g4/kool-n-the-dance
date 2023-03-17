@@ -74,10 +74,10 @@ export const listFiles = async () => {
         });
 }
 
-export const uploadFileToStorage = async (file: any) => {
+export const uploadFileToStorage = async (file: any, folderName: string) => {
 
     if(!file) return
-    const storageRef = ref(storage, `/images/${file.name}`);
+    const storageRef = ref(storage, `/${folderName}/${file.name}`);
     const uploadedFile = uploadBytesResumable(storageRef, file);
     const downLoadUrl = await getDownloadURL(uploadedFile.snapshot.ref)
     return downLoadUrl

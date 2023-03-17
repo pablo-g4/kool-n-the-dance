@@ -9,13 +9,19 @@
     font-size: 18px;
 }
 
+.piece-jointe {
+    color: blue;
+    font-family: 'Alice', sans-serif;
+    text-decoration: underline;
+}
+
 img.card-image div {
     height: 100%;
 }
 
 img.card-image {
     width: 300px;
-    height: 200px;
+    height: 190px;
     object-fit: contain;
 }
 
@@ -24,6 +30,11 @@ img.card-image {
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.card-custom {
+    width: 1080px;
+    height: 190px;    
 }
 
 .icon {

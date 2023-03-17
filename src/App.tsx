@@ -16,8 +16,9 @@ import './App.css'
 import General from "./Pages/Admin/General/General"
 
 
-import NewsPage from './Pages/News/News'
-import AdminNews from './Pages/Admin/News'
+import PrivateRoutes from './Utils/PrivateRoutes';
+import NewsPage from './Pages/News/News';
+import AdminNews from './Pages/Admin/News/news';
 
 const App = () => {
 
