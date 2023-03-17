@@ -180,7 +180,21 @@ const AddOrEditNewsModal = (
                                         </Dropzone>
                                     }
                                     {uploadImageForm &&
-                                        <img style={{ marginLeft: "2rem", objectFit: "contain", maxHeight: "150px", maxWidth: "300px" }} src={uploadImageForm}></img>
+                                        <img 
+                                            className='img-preview'
+                                            style={{ 
+                                                marginLeft: "2rem", 
+                                                objectFit: "contain", 
+                                                maxHeight: "150px", 
+                                                maxWidth: "300px" 
+                                            }} 
+                                            src={uploadImageForm}
+                                            onClick={() => {
+                                                setIsUploading(false);
+                                                setUploadImageForm("");
+                                            }}
+                                        >
+                                        </img>
                                     }
                                 </div>
                             </div>
