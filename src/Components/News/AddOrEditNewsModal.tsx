@@ -64,7 +64,7 @@ const AddOrEditNewsModal = (
             if (downloadUrl) newNews.attachedFileUrl = downloadUrl
         }
 
-        if (uploadImageForm || !currentNews?.imageUrl) {
+        if (uploadImageForm && !currentNews?.imageUrl) {
             newNews.imageUrl = uploadImageForm
         }
 
@@ -118,6 +118,9 @@ const AddOrEditNewsModal = (
     useEffect(() => {
         if (currentNews) {
             setForm(currentNews)
+            console.log(currentNews);
+            setUploadImageForm(currentNews.imageUrl)
+            
         }
     }, [currentNews])
 
@@ -188,6 +191,7 @@ const AddOrEditNewsModal = (
                                                 maxHeight: "150px", 
                                                 maxWidth: "300px" 
                                             }} 
+                                            alt="lopab"
                                             src={uploadImageForm}
                                             onClick={() => {
                                                 setIsUploading(false);
