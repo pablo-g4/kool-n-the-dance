@@ -118,7 +118,6 @@ const AddOrEditNewsModal = (
     useEffect(() => {
         if (currentNews) {
             setForm(currentNews)
-            console.log(currentNews);
             setUploadImageForm(currentNews.imageUrl)
             
         }
