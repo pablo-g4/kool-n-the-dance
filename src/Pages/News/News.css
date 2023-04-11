@@ -1,6 +1,6 @@
-.titre-actualite {
+.titre-news {
     font-family: "Playfair Display";
-    color: #644A82;
+    color: #644A82 !important;
     font: "Alice";
     font-size: 60px;
     font-weight: bold;

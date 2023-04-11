@@ -11,6 +11,17 @@
     transform: rotate(180deg);
 }
 
+.img-preview {
+    margin-left: "2rem"; 
+    object-fit: "contain"; 
+    max-height: "150px"; 
+    max-width: "300px";
+}
+
+.img-preview:hover {
+    cursor: pointer;
+}
+
 .dropzone {
     width: 290px;
     height: 150px; 
