@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import Footer from '../../Components/Footer/Footer'
 import { Carousel } from '@mantine/carousel';
-import carousel1  from '../../Assets/Images/carousel/dance1.jpg';
-import carousel2  from '../../Assets/Images/carousel/dance2.jpg';
-import carousel3 from '../../Assets/Images/carousel/dance3.jpg';
-import carousel4  from '../../Assets/Images/carousel/dance4.jpg';
-import carousel5  from '../../Assets/Images/carousel/carousel5.png';
-import carousel6  from '../../Assets/Images/carousel/carousel6.png';
+import carousel1  from '../../Assets/Images/carousel/carousel6.jpeg';
+import carousel2  from '../../Assets/Images/carousel/carousel5.jpeg';
+import carousel3 from '../../Assets/Images/carousel/carousel4.jpeg';
+import carousel4  from '../../Assets/Images/carousel/carousel3.jpeg';
+import carousel5  from '../../Assets/Images/carousel/carousel1.jpeg';
+import carousel6  from '../../Assets/Images/carousel/carousel2.jpeg';
 import { render } from 'react-dom';
 import ImageViewer from 'react-simple-image-viewer';
 
@@ -51,7 +51,8 @@ const Galerie = () => {
           Galerie
         </p>   
       </div>
-        <div className='visualiseuse'>
+      <div className='container main-carou'>
+      <div className='visualiseuse'>
           {filteredImages.map((src, index) => (
             <img
               src={ src }
@@ -95,6 +96,8 @@ const Galerie = () => {
             </Carousel.Slide>
           </Carousel>
         </div>
+
+      </div>
      </div>    
   )
 }

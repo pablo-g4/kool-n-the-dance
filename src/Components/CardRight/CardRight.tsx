@@ -14,7 +14,7 @@ const CardRight = () => {
                         cours on a la pêche. Tout est là pour donner envie d'y
                         aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%."
                     </p>
-                    <h6 className="lArticle_date">12/01/2023</h6>
+                    <h6 className="lArticle_date">17/03/2023</h6>
                 </div>
             </article>
         </>    
