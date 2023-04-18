@@ -56,10 +56,28 @@
 }
 
 
+@media only screen and (min-width : 321px) and (max-width : 600px) {
+    .hide-img{
+        display:none;
+    }
+
+    .text-header{
+        font-size: 15px!important;
+    }
+}
 /*
 .haut_de_page {
 }
 */
+.card_cours{
+    background-image: url("../images/Galerie/DAN_0809inv.png");
+    height: 400px;
+}
+
+.opacity-full{
+    opacity: 1;
+}
+
 
 .photo_haut_de_page {
     /* display: flex;
@@ -69,12 +87,27 @@
     background-image: url("../images/Galerie/DAN_0809inv.png");
 }
 
+
+
+.card-cours-title{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-playfair-display)!important;
+letter-spacing: var(--unnamed-character-spacing-0)!important;
+color: var(--unnamed-color-ffffff)!important;
+text-align: left!important;
+font: normal normal bold 32px/43px Playfair Display;
+letter-spacing: 0px;
+color: #FFFFFF;
+position: absolute;
+top: 0px;
+left: 15px;
+}
+
 .logo_haut_de_page {
     display: flex;
-    width: 31rem;
-    height: 31rem;
+    width: 24rem;
+    height: 24rem;
     position: relative;
-    margin-left: 220px;
+   
     background-color: transparent;
 }
 
@@ -87,23 +120,63 @@
     background-color: transparent;
     position: relative;
     */
+    margin-top: 30px;
     opacity: 0.73;
     background-image: url(./Tracé\ 230@2x.png);
-    background-size: 63%;
+    background-size: 50% 100%;
     background-repeat: no-repeat;
-    margin-top: 60px;
-    height: 500px;
-    width: 500px;
     background-position: center;
-    z-index: -1;
 }
 
+.hidden-data{
+    visibility: hidden;
+}
+
+.link-card{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    font-size: 40px;
+}
+
+.background-data{
+    background-color:rgba(100, 74, 130, 0.7);
+}
+
+.none-displayed-card{
+    display:none;
+}
+
+.pb-7{
+    padding-bottom: 100px;
+}
+  
+ .wave{
+    max-width: max-content;
+    background-image: linear-gradient(rgb(100, 74, 130), 10%, rgba(255, 255, 255, 1));
+      
+ }
+
+ .txt-bouton{
+    color: #644A82;
+    padding: 15px 32px;
+    text-align: center;
+ }
+
+ .border-cours{
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+border: 5px solid var(--unnamed-color-644a82);
+background: #FFFFFF 0% 0% no-repeat padding-box;
+box-shadow: 0px 3px 6px #00000029;
+border: 5px solid #644A82;
+border-radius: 46px;
+opacity: 1;
+ }
 .text_haut {
     font-weight: 300;
     font-size: 25px;
     color: black;
-    padding: 10px;
-    margin-left: 25px;
+  
     display: flex;
     margin-top: 120px;
     font-family: "Alice", sans-serif;
@@ -119,13 +192,15 @@
     /* border-radius: 7%;
     transform: translateY(700px);
     transform: translateX(300px); */
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 0px 10px 0px 10px;
     font-family: "Alice", sans-serif;
     height: 60px;
+    width:40%;
     background-color: #644a82;
     color: white;
     opacity: 1 !important;
     z-index: -1;
+    width: 37%;
 }
 
 .button_fitness {
@@ -142,6 +217,7 @@
     margin-bottom: 10px;
     opacity: 1 !important;
     z-index: -1;
+    width: 37%;
 }
 
 .vague_sous_photo {
@@ -168,7 +244,7 @@
 }
 
 .bg-violet {
-    background-color: #644a82;
+    background-color: rgb(100, 74, 130);
     padding-left: 1%;
 }
 
