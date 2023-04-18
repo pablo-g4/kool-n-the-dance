@@ -10,25 +10,25 @@ const Footer = () => {
             <div className='text-center col-lg-3 col-md-12 col-sm-12'>
                 <h1 className='footerH1'>Plan du site</h1>
                 <span className='text'>
-                    <a>Accueil</a>
+                    <a href='/' className='text-white'>Accueil</a>
                 </span>
                 <span className='text'>
-                    <a>Planning</a>
+                    <a href='/planning' className='text-white'>Planning</a>
                 </span>
                 <span className='text'>
-                    <a>Cours</a>
+                    <a href='/cours' className='text-white'>Cours</a>
                 </span>
                 <span className='text'>
-                    <a>Galerie</a>
+                    <a  href='/galerie' className='text-white'>Galerie</a>
                 </span>
                 <span className='text'>
-                    <a>Actualté</a>
+                    <a href='/actualite' className='text-white'>Actualté</a>
                 </span>
             </div>
             <div className='col-lg-3 text-center col-md-12 col-sm-12'>
                 <h1 className='footerH1'>Contact</h1>
-                <span className='text'>Accueil</span>
-                <span className='text'>koolnthedance@gmail.com</span>
+                <a href='/' className='text-white'>Accueil</a>
+                <a href="mailto:koolnthedance@gmail.com" className='text-white'>koolnthedance@gmail.com</a>
                 <span className='text'>9H-21</span>
                 <div className='socialIcon'>
                     <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
