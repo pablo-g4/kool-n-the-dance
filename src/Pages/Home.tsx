@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from "../Components/Footer/Footer";
 import "./Home.css";
 import background_top_image from "../images/Galerie/DAN_0809inv.png";
 import "./DAN_0568inv@2x.jpg";
 import logo_top from "./Logo@2x.png";
 import vague from "./Tracé 101@2x.jpg";
-import rosas from "./Tracé 230@2x.png";
+import rosas from "../images/Galerie/DAN_0568inv.png";
 import Card from "../Components/Card/Card";
 import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning";
 import CardHomeCours from "../Components/cardHomeCours/cardHomeCours"
+import { Carousel } from '@mantine/carousel';
+import CardTemoignage from '../Components/cardTemoignage/cardTemoignagne';
 const Home = () => {
 
   function displayCardData(test : number) {
@@ -23,21 +25,24 @@ const Home = () => {
     if(test != null) 
       document.getElementById('data_cours_'+test)!.style.visibility = 'hidden';
   }
+  const isMobile = document.documentElement.clientWidth < 600  ;
 
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent);
-  
+  useEffect(() => {
+    // Met à jour le titre du document via l’API du navigateur
+    document.getElementById('fitness')!.style.display = 'none';
+    document.getElementById('forfait')!.style.display = 'none';
+  });
+
 
 
   function displayCard(test : string) {
       switch(test){
-        case 'forfait':
+        case 'forfait':          
           document.getElementById('fitness')!.style.display = 'none';
           document.getElementById('forfait')!.style.display = 'block';
           document.getElementById('danse')!.style.display = 'none';
         break;
         case 'danse':
-          
           document.getElementById('fitness')!.style.display = 'none';
           document.getElementById('forfait')!.style.display = 'none';
           document.getElementById('danse')!.style.display = 'block';
@@ -48,7 +53,38 @@ const Home = () => {
           document.getElementById('danse')!.style.display = 'none';
         break;
       }
+      changeButton(test)
     
+  }
+
+  function changeButton(type: string){
+    switch(type){
+      case 'forfait':
+        
+        document.getElementById('btn-fitness')!.classList.remove('btn-selected');
+        document.getElementById('btn-forfait')!.classList.add('btn-selected') ;
+        document.getElementById('btn-danse')!.classList.remove('btn-selected') ;
+        document.getElementById('btn-fitness')!.classList.add('btn-unselected');
+        document.getElementById('btn-forfait')!.classList.remove('btn-unselected') ;
+        document.getElementById('btn-danse')!.classList.add('btn-unselected') ;
+      break;
+      case 'danse':
+        document.getElementById('btn-fitness')!.classList.remove('btn-selected');
+        document.getElementById('btn-forfait')!.classList.add('btn-unselected') ;
+        document.getElementById('btn-danse')!.classList.remove('btn-unselected') ;
+        document.getElementById('btn-fitness')!.classList.add('btn-unselected');
+        document.getElementById('btn-forfait')!.classList.remove('btn-selected') ;
+        document.getElementById('btn-danse')!.classList.add('btn-selected') ;
+      break;
+      case 'fitness':
+        document.getElementById('btn-fitness')!.classList.remove('btn-unselected');
+        document.getElementById('btn-forfait')!.classList.add('btn-unselected') ;
+        document.getElementById('btn-danse')!.classList.remove('btn-selected') ;
+        document.getElementById('btn-fitness')!.classList.add('btn-selected');
+        document.getElementById('btn-forfait')!.classList.remove('btn-selected') ;
+        document.getElementById('btn-danse')!.classList.add('btn-unselected') ;
+      break;
+    }
   }
   
   return (
@@ -63,8 +99,8 @@ const Home = () => {
           <div className="col-sm-12 col-lg-7 mx-0">
             <div className="row pb-7 ">
               <div className="rosas h-75">
-                <div className="col-sm-7 col-xl-12 mx-auto">
-                  <p className="text_haut col-lg-6 col-sm-12 mx-auto text-center">
+                <div className="col-sm-7 col-xl-12 mx-auto d-block">
+                  <p className="text_haut col-lg-9  col-sm-12  mx-auto d-block text-center">
                     J'ai une thérapie, elle s'appelle "Danse et Fitness !"
                   </p>
                 </div>
@@ -101,44 +137,61 @@ const Home = () => {
       </svg>
       <div className="row mx-0">
         <div className="col-12 text-center">
-          <button className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton" onClick={() => displayCard('danse')}>Danse</button> 
-          <button className="bg-white col-lg-3 col-4 h-100 align-bottom txt-bouton" onClick={() => displayCard('fitness')}>Fitness et bien-être</button>
-          <button className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton" onClick={() => displayCard('forfait')}>Forfait</button>
+          <button id="btn-danse" className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-selected" onClick={() => displayCard('danse')}>Danse</button> 
+          <button id="btn-fitness" className="bg-white col-lg-3 col-4 h-100 align-bottom txt-bouton btn-unselected" onClick={() => displayCard('fitness')}>Fitness et bien-être</button>
+          <button id="btn-forfait" className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-unselected" onClick={() => displayCard('forfait')}>Forfait</button>
         </div>
         <div className="col-12 h-100" id="danse">
-          <div className="col-8 border-cours  mx-auto h-100">
+          <div className="col-10 border-cours  col-lg-8 col-md-8   mx-auto h-100">
             <div className="row mt-4 mx-5w">
-                <CardHomeCours></CardHomeCours>
-              
-                <CardHomeCours  ></CardHomeCours>
-              
-        
-              
-                <CardHomeCours></CardHomeCours>
+            <Carousel  mx="auto" withIndicators height={380}  className="carousel-home "     slidesToScroll={ isMobile ? 3 : 1}   slideSize={isMobile ? "100%" : "33.333333%"}
+            slideGap="md"   loop
+            align="start">
+              <Carousel.Slide className="mx-4"><CardHomeCours ></CardHomeCours></Carousel.Slide>
+              <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+              <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+                
+            </Carousel>
                 
               </div>
             </div>
           </div>
-          <div style={{display:'block'}} className="col-12 h-100 none-displayed-card" id="fitness">
-          <div className="col-8 border-cours  mx-auto h-100">
-            <div className="row mt-4 mx-5">
-            <CardHomeCours></CardHomeCours>
-              <CardHomeCours></CardHomeCours>
-              <CardHomeCours></CardHomeCours>
+          <div className="col-12 h-100 " id="fitness">
+            <div className="col-10 border-cours  col-lg-8 col-md-8   mx-auto h-100">
+              <div className="row mt-4 mx-5w">
+              <Carousel  mx="auto" withIndicators height={380}  className="carousel-home"     slidesToScroll={ isMobile ? 3 : 1}   slideSize={isMobile ? "100%" : "33.333333%"}
+              slideGap="md"   loop
+              align="start">
+                <Carousel.Slide className="mx-4"><CardHomeCours ></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+                  
+              </Carousel>
+                  
+                </div>
               </div>
-            </div>
           </div>
-          <div className="col-12 h-100 none-displayed-card" id="forfait">
-          <div className="col-8 border-cours  mx-auto h-100">
-            <div className="row mt-4 mx-5 ">
-              <CardHomeCours></CardHomeCours>
-              <CardHomeCours></CardHomeCours>
-              <CardHomeCours></CardHomeCours>
+          <div className="col-12 h-100 " id="forfait">
+            <div className="col-10 border-cours  col-lg-8 col-md-8   mx-auto h-100">
+              <div className="row mt-4 mx-5w">
+              <Carousel  mx="auto" withIndicators height={380}  className="carousel-home"     slidesToScroll={ isMobile ? 3 : 1}   slideSize={isMobile ? "100%" : "33.333333%"}
+              slideGap="md"   loop
+              align="start">
+                <Carousel.Slide className="mx-4"><CardHomeCours ></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+                  
+              </Carousel>
+                  
+                </div>
               </div>
-            </div>
           </div>
+          
         </div>
-
+        <p className="  float-right my-2">
+          <a href='' className="link-accueil ">Voir toute les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+         
+        </p>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path fill="#644A82" fill-opacity="1" d="M0,256L34.3,240C68.6,224,137,192,206,202.7C274.3,213,343,267,411,245.3C480,224,549,128,617,90.7C685.7,53,754,75,823,101.3C891.4,128,960,160,1029,181.3C1097.1,203,1166,213,1234,218.7C1302.9,224,1371,224,1406,224L1440,224L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
       </svg> 
@@ -167,7 +220,7 @@ const Home = () => {
     
       <div>
         <div className="row justify-content-center mt-4 mb-4  ">
-          <h1 className="">Actualité</h1>
+          <h1 className="title-home">Actualité</h1>
         </div>
         <div className="row ">
           <div className="col-md-4 col-sm-12">
@@ -180,10 +233,48 @@ const Home = () => {
             <CardHomeActualite></CardHomeActualite>
           </div>
         </div>
-        <div className="  float-right">
-          <a href=''>Voir toute l'actualité  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+        <p className="  float-right my-2">
+          <a href='' className="link-accueil ">Voir toute l'actualité  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
          
+        </p>
+      </div>
+      <br/>
+      <div className='my-5'>
+        <h1 className=" text-center title-home">Temoignage</h1>
+        <div className="m-auto d-block ">
+          <div className='row'>
+            <div className="col-md-5 col-sm-12 w-75">
+              <CardTemoignage></CardTemoignage>
+            </div>
+            <div className="col-md-5 col-sm-12 w-75">
+              <CardTemoignage></CardTemoignage>
+            </div>
+            <div className="col-md-5 col-sm-12 w-75">
+              <CardTemoignage></CardTemoignage>
+            </div>
+            <div className="col-md-5 col-sm-12 w-75">
+              <CardTemoignage></CardTemoignage>
+            </div>
+          </div>
         </div>
+      </div>
+      <div className='my-5'>
+        <h1 className=" text-center title-home">Galerie</h1>
+        <div className='row'>
+          <div className='col-lg-4 col-12 my-2'>
+            <img src={rosas}  width={"100%"}/>
+          </div>
+          <div className='col-lg-4 col-12 my-2' >
+            <img src={rosas} width={"100%"}/>
+          </div>
+          <div className='col-lg-4 col-12 my-2'>
+            <img src={rosas} width={"100%"}/>
+          </div>
+        </div>
+        <p className="  float-right my-2">
+          <a href='' className="link-accueil ">Voir la galerie  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+         
+        </p>
       </div>
     </>
   );

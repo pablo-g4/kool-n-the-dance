@@ -1,5 +1,8 @@
 import React from "react";
 import fleche from "../../images/Galerie/Fleche.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
+
 import "./cardHomeCours.css"
 const CardCours = ({show}: {
   show?: boolean

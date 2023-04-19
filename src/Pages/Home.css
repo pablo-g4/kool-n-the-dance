@@ -55,8 +55,43 @@
     /*min-height: 10%;*/
 }
 
+.btn-selected{
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    opacity: 1;
+    border-top:rgb(100, 74, 130) 10px solid;
+    border-left: none;
+    border-right:none; 
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-40)/var(--unnamed-line-spacing-53) var(--unnamed-font-family-playfair-display);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    font: normal normal bold 40px/53px Playfair Display;
+    border-bottom: none;
+}
 
-@media only screen and (min-width : 321px) and (max-width : 600px) {
+.btn-unselected{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-40)/var(--unnamed-line-spacing-53) var(--unnamed-font-family-playfair-display);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-644a82);
+    text-align: center;
+    font: normal normal bold 40px/53px Playfair Display;
+    letter-spacing: 0px;
+    color: #644A82;
+    opacity: 0.5;
+}
+
+.link-accueil{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-playfair-display);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-644a82);
+
+font: normal normal bold 28px Playfair Display;
+letter-spacing: 0px;
+color: #644A82;
+opacity: 1;
+}
+
+
+@media (min-width : 321px) and (max-width : 600px) {
     .hide-img{
         display:none;
     }
@@ -64,11 +99,39 @@
     .text-header{
         font-size: 15px!important;
     }
+    .carousel-home{
+        width:280px!important;
+    }
+    .btn-selected{
+        font-size: 20px!important;
+    }
+    .btn-unselected{
+        font-size: 20px!important;
+    }
+    .text_haut{
+        font-size: 20px!important;
+        width:70%;
+    }
+}
+
+.carousel-home{
+    width: 1100px;
 }
 /*
 .haut_de_page {
 }
 */
+
+.title-home{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-60)/var(--unnamed-line-spacing-80) var(--unnamed-font-family-playfair-display);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-644a82);
+text-align: center;
+font: normal normal bold 60px/80px Playfair Display;
+letter-spacing: 0px;
+color: #644A82;
+opacity: 1;
+}
 .card_cours{
     background-image: url("../images/Galerie/DAN_0809inv.png");
     height: 400px;
@@ -121,9 +184,9 @@ left: 15px;
     position: relative;
     */
     margin-top: 30px;
-    opacity: 0.73;
+    opacity: 1;
     background-image: url(./Tracé\ 230@2x.png);
-    background-size: 50% 100%;
+    background-size: 60% 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
