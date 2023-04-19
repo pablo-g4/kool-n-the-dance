@@ -7,13 +7,13 @@ const Navbar = () => {
         <div>
             <Link to="/">
                 <nav className="navbar navbar-expand-lg navbar-light">
-                        <a className="navbar-brand" href="#">KOOL 'N' THE DANCE</a>
+                    <a className="navbar-brand" href="#">KOOL 'N' THE DANCE</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
+                    <div className="collapse navbar-collapse text-center" id="navbarSupportedContent">
+                        <div className="navbar-nav2 ">
                             <li className="nav-item">
                                 <Link to="/planning" className='none'>
                                     <a className="nav-link nav-redirect" >Planning <span className="sr-only">(current)</span></a>
@@ -34,17 +34,16 @@ const Navbar = () => {
                                     <a className="nav-link nav-redirect" >Actualité</a>
                                 </Link>
                             </li>
-                            <li>
-                                <a> <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{ marginLeft: "150px", marginRight: "25px", height: 30, width: 30, marginTop: "2%" }} /> </a>
-                            </li>
-                            <li>
-                                <a> <SocialIcon network="twitter" bgColor="#FFFFFF" style={{ marginRight: "25px", height: 30, width: 30, marginTop: "3%" }} /> </a>
-                            </li>
-                            <li>
-                                <a> <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ marginRight: "25px", height: 30, width: 30, marginTop: "3%" }} /> </a>
-                            </li>
-                        </ul>
+                        </div>
+                        
                     </div>
+                    <div className='navicon navbar-collapse collapse navbar-collapse text-center' id="navbarSupportedContent">
+                            <a> <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{ marginRight: "10px", height: 30, width: 30, marginTop: "4%" }} /> </a>
+
+                            <a> <SocialIcon network="twitter" bgColor="#FFFFFF" style={{ marginRight: "10px", height: 30, width: 30, marginTop: "4%" }} /> </a>
+
+                            <a> <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ height: 30, width: 30, marginTop: "4%" }} /> </a>
+                        </div>
                 </nav>
             </Link>
         </div>

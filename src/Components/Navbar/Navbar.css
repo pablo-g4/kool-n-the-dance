@@ -7,7 +7,6 @@
 }
 
 .nav-item {
-    margin-right: 15%;
     font-family: PlayfairDisplay;
 }
 
@@ -55,4 +54,15 @@
 
 a:hover{
     text-decoration: none;
+}
+
+.navicon{
+    display: flex;
+    justify-content: center;
+}
+.navbar-nav2{
+    display: flex;
+    list-style: none;
+    text-align: center;
+    justify-content: center;
 }
