@@ -147,7 +147,8 @@ opacity: 1;
   position: relative; */
     background-size: cover;
     background-position: center;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image:
+    linear-gradient(to bottom, rgba(100, 74, 130, 1),rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../images/Galerie/DAN_0809inv.png");
 }
 
 
