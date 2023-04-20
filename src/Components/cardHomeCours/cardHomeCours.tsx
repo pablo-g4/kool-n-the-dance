@@ -1,24 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import fleche from "../../images/Galerie/Fleche.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
 
 import "./cardHomeCours.css"
-const CardCours = ({show}: {
-  show?: boolean
-}) => {
+const CardCours = ({  titre = "", text = "", src = "../../images/Galerie/DAN_0809inv@2x.png" }) => {
+  useEffect(() => {
+    document.getElementById('fitness')!.style.backgroundImage = "url('"+{src}+"')";
+  })
+
   return (
     <div>
       <div >
         <div className="cardCours">
-          <p className="titreCours">Zumba</p>
-          <div className="imgCours ">
+          <p className="titreCours">{titre}</p>
+          <div className="imgCours " id="imgCours">
             <p>
-              Programme d'entraînement physique complet, alliant tous les
-              éléments de la remise en forme : cardio et préparation musculaire,
-              équilibre et flexibilité. Les chorégraphies s'inspirent
-              principalement des danses latines mais aussi de styles variés
-              comme la danse orientale, disco, hip hop...
+              {text}
             </p>
           </div>
           {/* <img className="flecheRe" src={fleche} alt="fleche" /> */}

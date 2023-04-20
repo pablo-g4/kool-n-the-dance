@@ -11,14 +11,14 @@ const CardTemoignage = ({ img = "", nom = "", text = "" }) => {
         <div>
             <div className="d-flex my-5">
                 <div className="col-6">
-                    <img src={imgtest} className="rounded  w-50 m-auto d-block" />
+                    <img src={img} className="rounded  w-50 m-auto d-block" />
                 </div>
              
                 <div className="d-block">
                     <div className="d-flex">
                         <div className="col-6">
                             <span className="nom">
-                                test nathan
+                                {nom}
                             </span>
                         </div>
                      
@@ -30,7 +30,7 @@ const CardTemoignage = ({ img = "", nom = "", text = "" }) => {
                         </span>
                     </div>
                     <p className="col-12">
-                        ceci est un test on va checker comment ça aaaaaaaaaaaaaaaaaaaaaaaaaa zzzzzzzzzzzzzzzzzzzzzzzz ioiiiiiiiiii aaaaaaaaaoooooooo
+                        {text}
                     </p>
                 </div>
             </div>
