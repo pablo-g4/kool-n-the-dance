@@ -143,14 +143,14 @@ const Home = () => {
           <button id="btn-forfait" className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-unselected" onClick={() => displayCard('forfait')}>Forfait</button>
         </div>
         <div className="col-12 h-100" id="danse">
-          <div className="col-10 border-cours  col-lg-8 col-md-8   mx-auto h-100">
+          <div className="col-10 border-cours  col-lg-8 col-md-11   mx-auto h-100">
             <div className="row mt-4 mx-5w">
             <Carousel  mx="auto" withIndicators height={380}  className="carousel-home "     slidesToScroll={ isMobile ? 3 : 1}   slideSize={isMobile ? "100%" : "33.333333%"}
             slideGap="md"   loop
             align="start">
-              <Carousel.Slide className="mx-4"><CardHomeCours ></CardHomeCours></Carousel.Slide>
-              <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
-              <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+              <Carousel.Slide className=""><CardHomeCours ></CardHomeCours></Carousel.Slide>
+              <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
+              <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
                 
             </Carousel>
                 
@@ -163,9 +163,9 @@ const Home = () => {
               <Carousel  mx="auto" withIndicators height={380}  className="carousel-home"     slidesToScroll={ isMobile ? 3 : 1}   slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md"   loop
               align="start">
-                <Carousel.Slide className="mx-4"><CardHomeCours text="aaaaaaaa" titre="oooooooooo" src="" ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className="mx-4"><CardHomeCours text="aaaaaaaa" titre="oooooooooo" ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className="mx-4"><CardHomeCours text="aaaaaaaa" titre="oooooooooo" ></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className=""><CardHomeCours text="aaaaaaaa" titre="oooooooooo" src="" ></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className=""><CardHomeCours text="aaaaaaaa" titre="oooooooooo" ></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className=""><CardHomeCours text="aaaaaaaa" titre="oooooooooo" ></CardHomeCours></Carousel.Slide>
                   
               </Carousel>
                   
@@ -178,9 +178,9 @@ const Home = () => {
               <Carousel  mx="auto" withIndicators height={380}  className="carousel-home"     slidesToScroll={ isMobile ? 3 : 1}   slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md"   loop
               align="start">
-                <Carousel.Slide className="mx-4"><CardHomeCours ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className="mx-4"><CardHomeCours></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className=""><CardHomeCours ></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
+                <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
                   
               </Carousel>
                   
