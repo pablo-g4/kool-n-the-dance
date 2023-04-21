@@ -93,17 +93,17 @@ const AdminGallery = () => {
                     </Dropzone>
                 }
             </div>
-            <div className='d-flex flex-row images-container'>
+            <div className='d-flex container row'>
                 {(images && value) ? images.map((image, index) =>
                     image.isActive && image.fileUrl && (
-                        <div className='col-4'>
+                        <div className='col-md-3 col-xs-12 '>
                             <div className='image-icons-container'>
                                 <AiOutlineStar/>
                                 <BsSquare/>
                             </div>
                             <img
                                 key={index}
-                                className='img-gallery'
+                                className='img-fluid'
                                 src={image.fileUrl}
                             />
                         </div>
