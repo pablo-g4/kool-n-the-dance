@@ -52,7 +52,7 @@ const AdminNews = () => {
   return (
     <>
     <div className='actualite-page'>
-      <a className='titre-actualite-admin text-center my-7'> Gestion Actualité </a>
+      <h1 className='titre-actualite-admin text-center my-7'> Gestion Actualité </h1>
       <div className='row-v2'>
         <div className='col-md-7 col-xs-11'>
             <Button className='button-add' onClick={() => setIsAddOrEditModalOpen(true)}>
@@ -72,7 +72,7 @@ const AdminNews = () => {
       }
       {
         isDeleteConfirmationModalOpen && 
-        <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteCurrentNews={deleteCurrentNews} elementToDelete={currentNews}/>
+        <DeleteConfirmationModal isOpen={isDeleteConfirmationModalOpen} closeModal={closeDeleteConfirmationModal} deleteItem={deleteCurrentNews} elementToDelete={currentNews}/>
       }
     </div>
     </>
