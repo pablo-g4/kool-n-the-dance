@@ -1,13 +1,16 @@
-import React from 'react'
-import AdminSidebar from "../../Components/AdminSidebar/AdminSidebar"
 import { Outlet } from 'react-router-dom'
+import AdminSidebar from "../../Components/AdminSidebar/AdminSidebar"
 
 const AdminLayout = (props: any) => {
     return (
         <>
-            <div className="d-flex flex-column- ">
+            <div className="d-flex">
                     <AdminSidebar page="planning" />
-                <main>
+                <main 
+                    style={{
+                        width: "100%"
+                    }}
+                >
                     {props.children ? props.children : <Outlet />}
                 </main>
             </div>

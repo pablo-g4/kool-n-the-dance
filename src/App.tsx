@@ -19,6 +19,7 @@ import General from "./Pages/Admin/General/General"
 import PrivateRoutes from './Utils/PrivateRoutes';
 import NewsPage from './Pages/News/News';
 import AdminNews from './Pages/Admin/News/news';
+import AdminGallery from './Pages/Admin/Gallery/Gallery'
 
 const App = () => {
 
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="/admin/reset-password" element={<ResetPassword />} />
               <Route path="/admin/News" element={<AdminNews />} />
               <Route path="/admin/planning" element={<Planning />} />
+              <Route path="/admin/galerie" element={<AdminGallery />} />
           </Route>
         </Routes>
     </div>

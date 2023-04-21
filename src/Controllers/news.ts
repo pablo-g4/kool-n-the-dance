@@ -22,8 +22,3 @@ export const getAllNews = async (): Promise<News[]> => {
     })
     
 }
-
-
-export const getAllFiles = async () => {
-    await listFiles()
-}

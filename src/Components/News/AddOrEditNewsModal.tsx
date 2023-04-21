@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Modal, Group, Text } from '@mantine/core';
 import { News } from '../../Models/News'
 import { createNews, updateNews } from '../../Controllers/news';
-import { Dropzone, IMAGE_MIME_TYPE, DropzoneProps } from '@mantine/dropzone';
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { GrUploadOption } from 'react-icons/gr';
 import { AiOutlineClose } from 'react-icons/ai';
 import './news.css';
@@ -59,7 +59,6 @@ const AddOrEditNewsModal = (
 
         if (uploadFileForm) {
             const downloadUrl = await uploadFile(uploadFileForm, "files")
-            console.log(uploadFileForm)
             if (downloadUrl) newNews.attachedFileUrl = downloadUrl
         }
 
@@ -109,7 +108,6 @@ const AddOrEditNewsModal = (
         setUploadFileForm((previousFormValues: any) => (e.target.files[0]))
         setIsUploadAttachedFile(true);
     }
-
 
     const handleCloseModal = (): void => {
         setIsOpen(false);

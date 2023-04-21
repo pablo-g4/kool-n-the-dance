@@ -1,0 +1,93 @@
+.title {
+    font-family: "Playfair Display";
+    color: #644A82 !important;
+    font: "Alice";
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.page {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.button-add-galerie {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    width: 300px;
+    height: 50px;
+    border-radius: 40px;
+    text-align: center;
+    font-size: 26px;
+    font-family: "Alice";
+    padding-top: 0.3rem;
+}
+
+.button-add-galerie:hover {
+    cursor: pointer;
+    background-color: #000000d3 !important;
+}
+
+.button-dropzone-galerie {
+    display: flex;
+    background-color: hsl(357, 96%, 60%) !important;
+    border-color:hsl(357, 96%, 60%);
+    color: #FFFFFF;
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+    margin-left: 10.5rem;
+    width: 320px;
+    height: 50px;
+    border-radius: 40px;
+    font-size: 24px;
+    font-family: "Alice";
+}
+
+.button-dropzone-galerie:hover {
+    background-color: hsl(357, 100%, 64%) !important; 
+}
+
+.upload-icon-galerie {
+    transform: rotate(180deg);
+    margin-top:  0.35rem;
+    margin-left: 0.5rem;
+    color: #FFFFFF !important;
+}
+
+.dropzone-galerie-container {
+    margin-left: 0.5rem;
+    margin-top: 2rem;
+    background-color: #F2D7EE80;
+    color: #644A82;
+    font-family: Playfair Display;
+    font-size: 30px;
+    border-radius: 20px;
+    border: 5px  solid #644A82;
+    border-style: dashed;
+}
+
+.dropzone-galerie {
+    height: 230px;
+    text-align: center;
+}
+
+.dropzone-button-text-galerie {
+    margin-left: 1rem;
+    margin-top:  0.5rem;
+    font-size: 18px;
+}
+
+.img-gallery {
+    height: 230px;
+    width: 350px;
+    margin: 0.5rem;
+    object-fit: contain;
+}
+
+.image-icons-container {
+    margin-left: 5rem;
+}
+
+.images-container {
+    margin-top: 1.5rem;
+}

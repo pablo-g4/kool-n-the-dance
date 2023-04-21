@@ -1,5 +1,6 @@
 export enum COLLECTION {
     USERS = 'users',
     POSTS = 'posts',
-    NEWS = 'news'
+    NEWS = 'news',
+    FILES = 'files'
 } 

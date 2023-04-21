@@ -14,13 +14,13 @@ const Card = (
         setIsOpen,
         setCurrentNews,
         displayDeleteConfirmationModal
-    }:
-        {
-            news: News,
-            setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>,
-            setCurrentNews?: React.Dispatch<React.SetStateAction<News | undefined>>,
-            displayDeleteConfirmationModal?: React.EffectCallback,
-        }) => {
+    } :
+    {
+        news: News,
+        setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>,
+        setCurrentNews?: React.Dispatch<React.SetStateAction<News | undefined>>,
+        displayDeleteConfirmationModal?: React.EffectCallback,
+    }) => {
 
     const openEditModal = () => {
         setCurrentNews && setCurrentNews(news)
