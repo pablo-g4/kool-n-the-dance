@@ -6,21 +6,53 @@ import { GrUploadOption } from 'react-icons/gr';
 import CustomSwitch from '../../../Components/Switch/CustomSwitch';
 import "./Gallery.css";
 import { getAllFiles } from '../../../Controllers/files';
-import { createFile } from '../../../Controllers/files';
+import { createFile, updateFile } from '../../../Controllers/files';
 import { AiOutlineStar } from 'react-icons/ai';
 import { AiFillStar } from 'react-icons/ai';
 import { BsSquare } from 'react-icons/bs';
 import { BsCheckSquareFill } from 'react-icons/bs';
+import ImageViewer from '../../../Components/ImageViewer/ImageViewer';
+
 
 
 const AdminGallery = () => {
 
     const [value, setValue] = useState(true);
     const [images, setImages] = useState([]);
+    const [archiveFiles, setArchiveFiles] = useState([]);
 
     const onImageChange = async (files) => {
-        const uploadedImageUrl = await createFile(files[0], "gallery");
-        setImages(oldArray => [...oldArray, { fileUrl: uploadedImageUrl, isActive: true }])
+        const file = await createFile(files[0], "gallery");
+        setImages(oldArray => [...oldArray, file])
+    }
+
+    const getArchivedFiles = () => {
+        return images.filter((image) => {
+            return image.isActive === false
+        })
+    }
+
+    const handleArchiving = async (files) => {
+        let newFiles = []
+        setArchiveFiles(archiveFiles.forEach((file) => {
+            file.isActive = false;
+            newFiles.push(file);
+            return file;
+        }))
+        console.log(archiveFiles)
+        await Promise.all([archiveFiles.forEach(async (file) => {
+            await updateFile(file);    
+        })])
+        newFiles.map((newFile) => {
+            images.forEach((image) => {
+                if (newFile.id === image.id) {
+                    return newFile;
+                }
+                return image;
+            })
+        })
+        setArchiveFiles([]);
+        console.log(newFiles)
     }
 
     useEffect(() => {
@@ -30,10 +62,6 @@ const AdminGallery = () => {
         }
         fetchData()
     }, [])
-
-    useEffect(() => {
-        console.log(images)
-    }, [images])
 
     return (
         <div className='page'>
@@ -48,7 +76,14 @@ const AdminGallery = () => {
                     />
                 </div>
                 <div className='d-flex align-items-center' >
-                    <a className='button-add-galerie'>Archiver la section</a>
+                    <a 
+                        className='button-add-galerie'
+                        onClick={() => {
+                            handleArchiving(archiveFiles)
+                        }}
+                    >
+                        Archiver la sélection
+                    </a>
                 </div>
             </div>
             <div>
@@ -93,33 +128,30 @@ const AdminGallery = () => {
                     </Dropzone>
                 }
             </div>
-            <div className='d-flex container row'>
-                {(images && value) ? images.map((image, index) =>
+            <div className='d-flex row images-container'>
+                {images && value ? images.map((image, index) =>
                     image.isActive && image.fileUrl && (
-                        <div className='col-md-3 col-xs-12 '>
-                            <div className='image-icons-container'>
-                                <AiOutlineStar/>
-                                <BsSquare/>
-                            </div>
-                            <img
+                        <div className='col-md-3 col-xs-12 img-fluid'>
+                            <ImageViewer
                                 key={index}
-                                className='img-fluid'
-                                src={image.fileUrl}
+                                file={image}
+                                archiveFiles={archiveFiles}
+                                setArchiveFiles={setArchiveFiles}
                             />
                         </div>
-
-                    )) :
-                    images.map((image, index) =>
-                        !image.isActive && image.fileUrl && (
-                            <div>
-                                <img
-                                    key={index}
-                                    className='img-gallery'
-                                    src={image.fileUrl}
-                                />
-                            </div>
-
-                        ))}
+                    ))
+                : getArchivedFiles().map((image, index) =>
+                !image.isActive && image.fileUrl && (
+                    <div className='col-md-3 col-xs-12 img-fluid'>
+                        <ImageViewer
+                            key={index}
+                            file={image}
+                            archiveFiles={archiveFiles}
+                            setArchiveFiles={setArchiveFiles}
+                        />
+                    </div>
+                ))
+                }
             </div>
         </div>
     )

@@ -79,13 +79,10 @@
 
 .img-gallery {
     height: 230px;
-    width: 350px;
+    width: 200px;
     margin: 0.5rem;
     object-fit: contain;
-}
-
-.image-icons-container {
-    margin-left: 5rem;
+    box-shadow: 2px 2px 2px 2px #eedfff;
 }
 
 .images-container {

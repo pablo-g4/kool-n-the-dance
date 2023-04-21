@@ -9,14 +9,14 @@ export const createFile = async (files: any, folderName: string) => {
         newFile.fileUrl = uploadedFileUrl;
     }
     const createdNewsId = await addDocumentToCollection(COLLECTION.FILES, newFile.toDb())
-    return newFile.fileUrl
+    return newFile
 }
 
-export const updateNews = async (files: any): Promise<void> => {  
+export const updateFile = async (files: any): Promise<void> => {  
     await updateDocumentToCollection(COLLECTION.FILES, files.id, files.toDb())
 }
 
-export const deleteNews = async (filesId: string): Promise<void> => {
+export const deleteFile = async (filesId: string): Promise<void> => {
     await deleteDocumentFromCollection(COLLECTION.FILES, filesId)
 }
 
