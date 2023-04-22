@@ -22,6 +22,11 @@ export class Forfait {
             title: this.title,
             description: this.description,
             is_basic: this.isBasic,
+            price: this.price,
+            customer_type: this.customerType,
+            category: this.category,
+            image_url: this.imageUrl,
+            associated_courses: this.associatedCourses,
             created_by: this.createdBy, 
             updated_by: this.updatedBy,
             is_active: this.isActive,
@@ -39,6 +44,8 @@ export class Forfait {
         forfait.updatedDate = objDb.updated_date
         forfait.creationDate = objDb.creation_date
         forfait.isActive = objDb.is_active
+        forfait.price = objDb.price ?? 0
+        forfait.customerType = objDb.customer_type
         
         return forfait
     }

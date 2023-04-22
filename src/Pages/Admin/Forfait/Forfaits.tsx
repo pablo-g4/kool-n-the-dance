@@ -6,6 +6,7 @@ import { Forfait } from '../../../Models/Forfait'
 import { AiOutlineClose } from 'react-icons/ai'
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import AddOrEditCustomForfaitModal from '../../../Components/Forfaits/AddOrEditCustomForfaitModal'
+import CardHomeCours from "../../../Components/cardHomeCours/cardHomeCours"
 
 const Forfaits = () => {
 
@@ -92,6 +93,7 @@ const Forfaits = () => {
                         <AddOrEditCustomForfaitModal isOpen={addOrEditCustomForfaitModalIsOpen} setIsOpen={setAddOrEditCustomForfaitModalIsOpen} submitForm={createCustomForfait} />
                     )
                 }    
+                {/* <CardHomeCours text="aaaaaaaa" titre="oooooooooo" src="https://firebasestorage.googleapis.com/v0/b/kool-n-the-dance-stag.appspot.com/o/images%2F001271322_896x598_c.jpg?alt=media&token=20920459-ac3f-4f4e-9758-9465360d9260" ></CardHomeCours> */}
             </div>
         </div>
     )
