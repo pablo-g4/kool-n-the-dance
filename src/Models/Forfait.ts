@@ -46,6 +46,9 @@ export class Forfait {
         forfait.isActive = objDb.is_active
         forfait.price = objDb.price ?? 0
         forfait.customerType = objDb.customer_type
+        forfait.category = objDb.category
+        forfait.imageUrl = objDb.image_url
+        forfait.associatedCourses = objDb.associated_courses
         
         return forfait
     }

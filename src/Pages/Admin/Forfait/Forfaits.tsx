@@ -7,6 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import AddOrEditCustomForfaitModal from '../../../Components/Forfaits/AddOrEditCustomForfaitModal'
 import CardHomeCours from "../../../Components/cardHomeCours/cardHomeCours"
+import _ from 'lodash'
 
 const Forfaits = () => {
 
@@ -33,6 +34,14 @@ const Forfaits = () => {
           } 
     }
 
+    const getBasicForfaits = () => {
+        return _.filter(allForfaits, 'isBasic')
+    }
+
+    const getCustomForfaits = () => {
+        return _.filter(allForfaits, ['isBasic',false])
+    }
+
     const updateListOfForfaits = (forfaitToBeUpdated: Forfait) => {
         const newListOfForfaits = allForfaits.map((forfaitItem) => {   
             if(!forfaitItem.id) return forfaitToBeUpdated     
@@ -49,6 +58,7 @@ const Forfaits = () => {
         const newForfaits = allForfaits.filter((_, indexItem) => indexItem !== index);
         setAllForfaits(newForfaits)
     }
+    
 
     
     useEffect(() => {
@@ -69,7 +79,7 @@ const Forfaits = () => {
 
             <div className='row g-4'>
                 {
-                    allForfaits?.map((forfaitItem, index) => (
+                    getBasicForfaits()?.map((forfaitItem, index) => (
                         <div key={index} className='col-lg-6 col-md-12 col-sm-12 p-2'>
                             <AddOrEditForfaitsForm updateListOfForfaits={updateListOfForfaits} forfait={forfaitItem} >
                                 <a type='button' onClick={() => deleteCurrentForfait(forfaitItem.id, index)}> 
@@ -82,7 +92,7 @@ const Forfaits = () => {
             </div>
 
             <div className="mt-4 d-flex flex-row justify-content-between">
-                <h2>Forfaits Personalisés</h2>
+                <h2>Forfaits Personnalisés</h2>
                 <button style={{
                     borderRadius: '10px',
                     backgroundColor: 'red',
@@ -93,8 +103,18 @@ const Forfaits = () => {
                         <AddOrEditCustomForfaitModal isOpen={addOrEditCustomForfaitModalIsOpen} setIsOpen={setAddOrEditCustomForfaitModalIsOpen} submitForm={createCustomForfait} />
                     )
                 }    
+
                 {/* <CardHomeCours text="aaaaaaaa" titre="oooooooooo" src="https://firebasestorage.googleapis.com/v0/b/kool-n-the-dance-stag.appspot.com/o/images%2F001271322_896x598_c.jpg?alt=media&token=20920459-ac3f-4f4e-9758-9465360d9260" ></CardHomeCours> */}
             </div>
+            {
+                    getCustomForfaits() && (
+                        getCustomForfaits().map((customForfait, index) => (
+                            <div>
+                                id : {customForfait.id} : {index}
+                            </div>
+                        ))
+                    )
+                }
         </div>
     )
 }
