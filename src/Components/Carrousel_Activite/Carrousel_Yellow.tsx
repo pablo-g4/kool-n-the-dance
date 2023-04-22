@@ -9,71 +9,95 @@ import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
 import logo from './Groupe 59.png';
-
-
-
-
-// Import Swiper styles
+import { Carousel } from '@mantine/carousel';
+import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
 import 'swiper/css';
 
-const slides = [
-  <SwiperSlide key={3}><img src={img} /></SwiperSlide>,
-  <SwiperSlide key={5}><img src={img} /></SwiperSlide>,
-  <SwiperSlide key={4}><img src={img} /></SwiperSlide>,
-  <SwiperSlide key={2}><img src={img} /></SwiperSlide>,
-  <SwiperSlide key={1}><img src={img} /></SwiperSlide>,
-];
+const isMobile = document.documentElement.clientWidth < 600;
+
 
 const Carrousel_Yellow = () => {
-  const [showText, setShowText] = useState(false);
-
-  const handleMouseOver = () => {
-    setShowText(true);
-  };
-
-  const handleMouseOut = () => {
-    setShowText(false);
-  };
-  const swiperOptions = {
-    loop: true,
-    navigation: true,
-    spaceBetween: -90,
-    slidesPerView: 3,
-    centeredSlides: true,
-  }
-
 
   SwiperCore.use([Navigation]);
   return (
-    
-    <div className='mainDiv'>
-      <div className='imgLogo_Yellow'>
-        <img className='logo_carrousel_Yellow' src={logo} alt="Logo" />
+    <>
+      <div className='mainDiv pt-5'>
+        <div className='title-div'>
+          <img src={logo} className="img-div-logo" alt="Logo" />
+          <div className='Carre_Yellow text-center'>
+            <p className='mt-4'>Fitness et Bien-Être</p>
+          </div>
+        </div>
       </div>
-      <div className='Carre_Yellow'>
-        {<p className='mt-4'>Fitness et Bien-Être</p>}
+      <div className="col-12 h-100 background-yellow" id="danse">
+        <div className="col-10 border-cours-yellow carousel-div-main col-lg-8 col-md-11 mx-auto h-100">
+            <Carousel mx="auto" withIndicators height={380} className="carousel-home"  slideSize={isMobile ? "100%" : "33.333333%"}
+              slideGap="md" loop
+              align="start">
+              <Carousel.Slide>
+                <div className="cardCoursYellow">
+                  <p className="titreCours">Hey</p>
+                  <div className="imgCours " id="imgCours">
+                    <p>
+                      Titre
+                    </p>
+                  </div>
+                </div>
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <div className="cardCoursYellow">
+                  <p className="titreCours">Hey</p>
+                  <div className="imgCours " id="imgCours">
+                    <p>
+                      Titre
+                    </p>
+                  </div>
+                </div>
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <div className="cardCoursYellow">
+                  <p className="titreCours">Hey</p>
+                  <div className="imgCours " id="imgCours">
+                    <p>
+                      Titre
+                    </p>
+                  </div>
+                </div>
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <div className="cardCoursYellow">
+                  <p className="titreCours">Hey</p>
+                  <div className="imgCours " id="imgCours">
+                    <p>
+                      Titre
+                    </p>
+                  </div>
+                </div>
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <div className="cardCoursYellow">
+                  <p className="titreCours">Hey</p>
+                  <div className="imgCours " id="imgCours">
+                    <p>
+                      Titre
+                    </p>
+                  </div>
+                </div>
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <div className="cardCoursYellow">
+                  <p className="titreCours">Hey</p>
+                  <div className="imgCours " id="imgCours">
+                    <p>
+                      Titre
+                    </p>
+                  </div>
+                </div>
+              </Carousel.Slide>
+            </Carousel>
+        </div>
       </div>
-      <div className='background_Yellow'>
-        {/* <img id='img' src={"./background.png"}></img> */}
-        <Swiper {...swiperOptions}
-          className='swiper-container-Yellow'
-          style={{
-            width: "1350px",
-            height: "500px",
-            marginTop: "30px",
-          }}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {
-            slides.map((Slide, index) => (
-              <SwiperSlide key={index} virtualIndex={index}><img className="caroussel_image" src={img} /></SwiperSlide>
-            ))
-          }
-        </Swiper>
-    </div>
-    </div>
-
+    </>
   )
 }
 export default Carrousel_Yellow

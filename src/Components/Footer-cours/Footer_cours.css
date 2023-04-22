@@ -18,13 +18,13 @@
 }
 
 .footer-button-cours {
-  font-size: 24px;
   font-family: "Playfair Display";
   color: #fb3640;
   background-color: #ffffff;
   border-radius: 10px;
   margin-top: 30px;
   margin-bottom: 30px;
+  font-weight: bold;
 }
 
 .margin-btt {

@@ -2,9 +2,9 @@ import React, { Component, useState } from "react";
 import "./Header_cours.css"
 
 const CardCours = ({
-    imgSrc, 
+    imgSrc,
     description,
-} : {
+}: {
     imgSrc: string,
     description: string
 }) => {
@@ -12,22 +12,19 @@ const CardCours = ({
 
     const handleMouseEnter = (e: any) => {
         setIsHovering(true);
-      };
-      const handleMouseLeave = () => {
+    };
+    const handleMouseLeave = () => {
         setIsHovering(false);
-      };
+    };
 
     return (
-        <div className="cropedDiv">
-            <div>
-                <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    <img src={imgSrc} className="card-img-top" />
-                </div>
-                <div className="img__description">
-                    <p>{description}</p>
-                </div>
-            </div>
+        <div className="cropedDiv" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <img src={imgSrc} className="card-img-top"/>
+            {/* <div className="img__description">
+                <p>{description}</p>
+            </div> */}
         </div>
+
     )
 }
 

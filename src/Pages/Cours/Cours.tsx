@@ -10,10 +10,11 @@ import Carrousel_Red from "../../Components/Carrousel_Activite/Carrousel_Red";
 const Cours = () => {
   return (
     <div>
-      <Header_cours />
-      <Carrousel_Activite></Carrousel_Activite>
-      <Carrousel_Yellow></Carrousel_Yellow>
-      <Carrousel_Red></Carrousel_Red>
+      <Header_cours/>
+      <Carrousel_Activite/>
+
+      <Carrousel_Yellow/>
+      <Carrousel_Red/> 
       <Footer_cours />
     </div>
   );
