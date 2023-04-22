@@ -1,8 +1,4 @@
 import React, { useEffect } from "react";
-import fleche from "../../images/Galerie/Fleche.png"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
-
 import "./cardHomeCours.css"
 const CardCours = ({  titre = "", text = "", src = "../../images/Galerie/DAN_0809inv@2x.png" }) => {
   useEffect(() => {
@@ -19,7 +15,6 @@ const CardCours = ({  titre = "", text = "", src = "../../images/Galerie/DAN_080
               {text}
             </p>
           </div>
-          {/* <img className="flecheRe" src={fleche} alt="fleche" /> */}
         </div>
       </div>
     </div>

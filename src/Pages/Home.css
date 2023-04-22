@@ -1,4 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/alice-2");
+
 .parent {
     display: grid;
     grid-template-columns: repeat(2, 0.7fr) 2fr 1fr;
@@ -55,20 +56,20 @@
     /*min-height: 10%;*/
 }
 
-.btn-selected{
+.btn-selected {
     background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     opacity: 1;
-    border-top:rgb(100, 74, 130) 10px solid;
+    border-top: rgb(100, 74, 130) 10px solid;
     border-left: none;
-    border-right:none; 
+    border-right: none;
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-40)/var(--unnamed-line-spacing-53) var(--unnamed-font-family-playfair-display);
     letter-spacing: var(--unnamed-character-spacing-0);
     font: normal normal bold 40px/53px Playfair Display;
     border-bottom: none;
 }
 
-.btn-unselected{
+.btn-unselected {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-40)/var(--unnamed-line-spacing-53) var(--unnamed-font-family-playfair-display);
     letter-spacing: var(--unnamed-character-spacing-0);
     color: var(--unnamed-color-644a82);
@@ -79,40 +80,44 @@
     opacity: 0.5;
 }
 
-.link-accueil{
+.link-accueil {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-playfair-display);
-letter-spacing: var(--unnamed-character-spacing-0);
-color: var(--unnamed-color-644a82);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-644a82);
 
-font: normal normal bold 28px Playfair Display;
-letter-spacing: 0px;
-color: #644A82;
-opacity: 1;
+    font: normal normal bold 28px Playfair Display;
+    letter-spacing: 0px;
+    color: #644A82;
+    opacity: 1;
 }
 
 
 @media (min-width : 321px) and (max-width : 600px) {
-    .hide-img{
-        display:none;
+    .hide-img {
+        display: none;
     }
 
-    .text-header{
-        font-size: 15px!important;
+    .text-header {
+        font-size: 15px !important;
     }
-    .carousel-home{
-        width:250px!important;
+
+    .carousel-home {
+        width: 250px !important;
     }
-    .btn-selected{
-        font-size: 15px!important;
-        padding: 0px!important;
+
+    .btn-selected {
+        font-size: 15px !important;
+        padding: 0px !important;
     }
-    .btn-unselected{
-        font-size: 15px!important;
-        padding: 0px!important;
+
+    .btn-unselected {
+        font-size: 15px !important;
+        padding: 0px !important;
     }
-    .text_haut{
-        font-size: 20px!important;
-        width:70%;
+
+    .text_haut {
+        font-size: 20px !important;
+        width: 70%;
     }
 }
 
@@ -122,48 +127,47 @@ opacity: 1;
 }
 */
 
-.title-home{
+.title-home {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-60)/var(--unnamed-line-spacing-80) var(--unnamed-font-family-playfair-display);
-letter-spacing: var(--unnamed-character-spacing-0);
-color: var(--unnamed-color-644a82);
-text-align: center;
-font: normal normal bold 60px/80px Playfair Display;
-letter-spacing: 0px;
-color: #644A82;
-opacity: 1;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-644a82);
+    text-align: center;
+    font: normal normal bold 60px/80px Playfair Display;
+    letter-spacing: 0px;
+    color: #644A82;
+    opacity: 1;
 }
-.card_cours{
+
+.card_cours {
     background-image: url("../images/Galerie/DAN_0809inv@2x.png");
     height: 400px;
 }
 
-.opacity-full{
+.opacity-full {
     opacity: 1;
 }
 
 
 .photo_haut_de_page {
-    /* display: flex;
-  position: relative; */
     background-size: cover;
     background-position: center;
     background-image:
-    linear-gradient(to bottom, rgba(100, 74, 130, 1),rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../Assets/Images/carousel/carousel3.jpeg");
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../Assets/Images/carousel/carousel3.jpeg");
 }
 
 
 
-.card-cours-title{
-    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-playfair-display)!important;
-letter-spacing: var(--unnamed-character-spacing-0)!important;
-color: var(--unnamed-color-ffffff)!important;
-text-align: left!important;
-font: normal normal bold 32px/43px Playfair Display;
-letter-spacing: 0px;
-color: #FFFFFF;
-position: absolute;
-top: 0px;
-left: 15px;
+.card-cours-title {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-32)/var(--unnamed-line-spacing-43) var(--unnamed-font-family-playfair-display) !important;
+    letter-spacing: var(--unnamed-character-spacing-0) !important;
+    color: var(--unnamed-color-ffffff) !important;
+    text-align: left !important;
+    font: normal normal bold 32px/43px Playfair Display;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    position: absolute;
+    top: 0px;
+    left: 15px;
 }
 
 .logo_haut_de_page {
@@ -171,7 +175,7 @@ left: 15px;
     width: 24rem;
     height: 24rem;
     position: relative;
-   
+
     background-color: transparent;
 }
 
@@ -192,55 +196,74 @@ left: 15px;
     background-position: center;
 }
 
-.hidden-data{
+.hidden-data {
     visibility: hidden;
 }
 
-.link-card{
+.link-card {
     position: absolute;
     bottom: 0;
     right: 20px;
     font-size: 40px;
 }
 
-.background-data{
-    background-color:rgba(100, 74, 130, 0.7);
+.background-data {
+    background-color: rgba(100, 74, 130, 0.7);
 }
 
-.none-displayed-card{
-    display:none;
+.none-displayed-card {
+    display: none;
 }
 
-.pb-7{
+.pb-7 {
     padding-bottom: 100px;
 }
-  
- .wave{
+
+.wave {
     max-width: max-content;
     background-image: linear-gradient(rgb(100, 74, 130), 10%, rgba(255, 255, 255, 1));
-      
- }
 
- .txt-bouton{
+}
+
+.txt-bouton {
     color: #644A82;
     padding: 15px 32px;
     text-align: center;
- }
+}
 
- .border-cours{
+.border-cours {
     background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-border: 5px solid var(--unnamed-color-644a82);
-background: #FFFFFF 0% 0% no-repeat padding-box;
-box-shadow: 0px 3px 6px #00000029;
-border: 5px solid #644A82;
-border-radius: 46px;
-opacity: 1;
- }
+    border: 5px solid var(--unnamed-color-644a82);
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 5px solid #644A82;
+    border-radius: 46px;
+    opacity: 1;
+}
+
+.border-cours-yellow {
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    border: 5px solid var(--unnamed-color-644a82);
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 5px solid #f7b801;
+    border-radius: 46px;
+    opacity: 1;
+}
+.border-cours-red {
+    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+    border: 5px solid var(--unnamed-color-644a82);
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 5px solid #fb3640;
+    border-radius: 46px;
+    opacity: 1;
+}
 .text_haut {
     font-weight: 300;
     font-size: 25px;
     color: black;
-  
+
     display: flex;
     margin-top: 120px;
     font-family: "Alice", sans-serif;
@@ -259,7 +282,7 @@ opacity: 1;
     border-radius: 0px 10px 0px 10px;
     font-family: "Alice", sans-serif;
     height: 60px;
-    width:40%;
+    width: 40%;
     background-color: #644a82;
     color: white;
     opacity: 1 !important;

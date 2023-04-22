@@ -35,7 +35,7 @@ const Card = (
     return (
         <>
 
-            <div className="card-custom mb-3 article-card  rounded-card-actualite shadow card-police ">
+            <div className=" mb-3 article-card  rounded-card-actualite shadow card-police ">
                 <div className="d-flex flex-row ">
                     <div className='col-4'>
                         <img className='img-fluid' src={news.imageUrl ? news.imageUrl : defaultPic} alt="photo_article" />

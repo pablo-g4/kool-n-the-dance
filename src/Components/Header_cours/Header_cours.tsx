@@ -24,7 +24,7 @@ const handleMouseLeave = () => {
         <>
             <header>
               <div className="conteneur">
-                <div className="titlecours">
+                <div className="text-center titlecours">
                 <h1><b>Cours</b></h1>
                 </div>
                 <div className="grow">
@@ -33,24 +33,6 @@ const handleMouseLeave = () => {
                       <CardCours key={index} imgSrc={image.imgSrc} description={image.description}/>
                     ))
                   }
-                  {/* <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
-                    <img src={image} className="card-img-top" />
-                  </div>
-                  <div className="textdanses" style={{transform: isHovering ? 'translate(-70px, 0px)' : 'none',}}>
-                    <p>Danses</p>
-                  </div>
-                  <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{transform: isHovering ? 'translate(-10px, 0px)' : 'none',}}>
-                    <img src={image} className="card-img-top" /> 
-                  </div>
-                  <div className="textfitness" style={{transform: isHovering ? 'translate(-10px, 0px)' : 'none',}}>
-                    <p>Fitness</p>
-                  </div>
-                  <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}  style={{transform: isHovering ? 'translate(60px, 0px)' : 'none',}}>
-                    <img src={image} className="card-img-top" />
-                  </div>
-                  <div className="textforfait" style={{transform: isHovering ? 'translate(60px, 0px)' : 'none',}}>
-                    <p>Forfait</p>
-                  </div> */}
                 </div>
               </div>
               <div className="divvague">
