@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { useState, useEffect, useCallback } from 'react'
 import '../../../Components/Forfaits/addOrEditForfaits.css'
 import AddOrEditForfaitsForm from '../../../Components/Forfaits/AddOrEditForfaitsForm'
@@ -7,12 +8,15 @@ import { AiOutlineClose } from 'react-icons/ai'
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import AddOrEditCustomForfaitModal from '../../../Components/Forfaits/AddOrEditCustomForfaitModal'
 import CardHomeCours from "../../../Components/cardHomeCours/cardHomeCours"
-import _ from 'lodash'
+import '../../../Components/Carrousel_Activite/styleActivite.css';
+import CustomSwitch from '../../../Components/Switch/CustomSwitch';
 
 const Forfaits = () => {
 
     const [allForfaits , setAllForfaits] = useState<Forfait[]>([])
+    const [switchValue, setSwitchValue] = useState(true);
     const [addOrEditCustomForfaitModalIsOpen, setAddOrEditCustomForfaitModalIsOpen] = useState<boolean>(false)
+    const [currentCustomForfait, setCurrentCustomForfait] = useState<Forfait | undefined>(undefined)
 
     const fetchData = useCallback(async () => {
         const forfaits = await getAllForfaits()
@@ -29,8 +33,13 @@ const Forfaits = () => {
     const createCustomForfait = async (customForfait: Forfait) => {
         if (customForfait.id) {
             await updateForfait(customForfait)
+            const updatedListOfForfaits = allForfaits.map((customForfaitItem) => {
+                return customForfait.id === customForfaitItem.id ? customForfait : customForfaitItem
+            })
+            setAllForfaits(updatedListOfForfaits)
           } else {
             customForfait.id = await createForfait(customForfait)
+            setAllForfaits([...allForfaits, customForfait])
           } 
     }
 
@@ -42,12 +51,40 @@ const Forfaits = () => {
         return _.filter(allForfaits, ['isBasic',false])
     }
 
+    const getActiveCustomForfait = (isCustomForfaitActive: boolean = false) => {
+        const customForfaits = getCustomForfaits()
+        return _.filter(customForfaits, ['isActive', isCustomForfaitActive])
+    }
+
+
+    const openEditCustomModal = (customForfait: Forfait) => {
+        setCurrentCustomForfait(customForfait)
+        setAddOrEditCustomForfaitModalIsOpen(true)
+    }
+
+    const deleteCustomForfait = async (customForfait: Forfait) => {
+        await deleteForfait(customForfait.id)
+        const updatedListOfForfaits = _.filter(allForfaits, forfaitItem => forfaitItem.id !== customForfait.id)
+        setAllForfaits(updatedListOfForfaits)
+    }
+
+    const closeAddOrEditCustomForfaitModal = () => {
+        setCurrentCustomForfait(undefined)
+        setAddOrEditCustomForfaitModalIsOpen(false)
+    }
+
     const updateListOfForfaits = (forfaitToBeUpdated: Forfait) => {
         const newListOfForfaits = allForfaits.map((forfaitItem) => {   
             if(!forfaitItem.id) return forfaitToBeUpdated     
             return forfaitItem
         })
+        console.log('updating state', newListOfForfaits);
+        
         setAllForfaits(newListOfForfaits)
+    }
+
+    const handleSwitch = () => {
+        setSwitchValue(!switchValue)
     }
 
     const deleteCurrentForfait = async (forfaitToDeleteId: string, index: number) => {
@@ -92,7 +129,7 @@ const Forfaits = () => {
             </div>
 
             <div className="mt-4 d-flex flex-row justify-content-between">
-                <h2>Forfaits Personnalisés</h2>
+                <h2>Forfaits personnalisés</h2>
                 <button style={{
                     borderRadius: '10px',
                     backgroundColor: 'red',
@@ -100,21 +137,49 @@ const Forfaits = () => {
                 }} onClick={() => setAddOrEditCustomForfaitModalIsOpen(true)} className='text-white'>+ Ajouter un forfait basique</button>
                 {
                     addOrEditCustomForfaitModalIsOpen && (
-                        <AddOrEditCustomForfaitModal isOpen={addOrEditCustomForfaitModalIsOpen} setIsOpen={setAddOrEditCustomForfaitModalIsOpen} submitForm={createCustomForfait} />
+                        <AddOrEditCustomForfaitModal isOpen={addOrEditCustomForfaitModalIsOpen} closeAddOrEditCustomForfaitModal={closeAddOrEditCustomForfaitModal} setIsOpen={setAddOrEditCustomForfaitModalIsOpen} submitForm={createCustomForfait} currentCustomForfait={currentCustomForfait} />
                     )
-                }    
-
-                {/* <CardHomeCours text="aaaaaaaa" titre="oooooooooo" src="https://firebasestorage.googleapis.com/v0/b/kool-n-the-dance-stag.appspot.com/o/images%2F001271322_896x598_c.jpg?alt=media&token=20920459-ac3f-4f4e-9758-9465360d9260" ></CardHomeCours> */}
+                } 
             </div>
-            {
-                    getCustomForfaits() && (
-                        getCustomForfaits().map((customForfait, index) => (
-                            <div>
-                                id : {customForfait.id} : {index}
-                            </div>
-                        ))
-                    )
-                }
+            <div className='d-flex flex-column'>
+                <CustomSwitch
+                    value={switchValue}
+                    setValue={handleSwitch}
+                    firstLabel='En ligne'
+                    secondLabel='Archives'
+                />
+                <div className='row' style={{
+                    gap: '20px',
+                    height: '500px',
+                    padding: '10px'
+                }}>
+                    {
+                        getActiveCustomForfait(switchValue) && (
+                            getActiveCustomForfait(switchValue).map((customForfait, index) => (
+                                <div key={index} className="col-lg-3 cardCoursRed">
+                                    <div className="d-flex text-white">
+                                        <span className="mr-auto p-2 titreCours ">
+                                            {customForfait.title}
+
+                                        </span>
+                                        <span onClick={() => openEditCustomModal(customForfait)} className="p-2">Modifier</span>
+                                        <span onClick={() => deleteCustomForfait(customForfait)} className="p-2">X</span>
+                                    </div>
+                                    <div className="imgCours" id="imgCours">
+                                        <p className='text-white d-flex flex-column text-center justify-content-center'>
+                                            {
+                                                customForfait.associatedCourses && customForfait.associatedCourses.map((course, coursesIndex) => (
+                                                    <span key={coursesIndex}>{course}</span>
+                                                ))
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        )
+                    }
+                </div>
+            </div>
         </div>
     )
 }

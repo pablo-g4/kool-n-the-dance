@@ -45,7 +45,7 @@ const AdminSidebar = ({ page = "" }) => {
         to="/admin/news">
         <p className="aSidebar_text">Gestion Actualité</p>
       </Link>
-      <Link className= {
+      <Link className={
         page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         } to="/admin/forfait">
         <p className="aSidebar_text">Gestion Forfait</p>
