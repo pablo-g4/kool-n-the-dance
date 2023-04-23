@@ -17,9 +17,13 @@ import ImageViewer from '../../../Components/ImageViewer/ImageViewer';
 
 const AdminGallery = () => {
 
-    const [value, setValue] = useState(true);
-    const [images, setImages] = useState([]);
-    const [archiveFiles, setArchiveFiles] = useState([]);
+    const [switchValue, setSwitchValue] = useState(true)
+    const [images, setImages] = useState([])
+    const [archiveFiles, setArchiveFiles] = useState([])
+
+    const handleSwitch = () => {
+        setSwitchValue(!switchValue)
+    }
 
     const onImageChange = async (files) => {
         const file = await createFile(files[0], "gallery");
@@ -69,8 +73,8 @@ const AdminGallery = () => {
             <div className='d-flex flex-row justify-content-between m-2'>
                 <div>
                     <CustomSwitch
-                        value={value}
-                        setValue={setValue}
+                        value={switchValue}
+                        setValue={handleSwitch}
                         firstLabel='En ligne'
                         secondLabel='Archives'
                     />
@@ -87,7 +91,7 @@ const AdminGallery = () => {
                 </div>
             </div>
             <div>
-                {value &&
+                {switchValue &&
                     <Dropzone
                         onDrop={(file) => onImageChange(file)}
                         onReject={(files) => console.log('rejected files', files)}
@@ -129,7 +133,7 @@ const AdminGallery = () => {
                 }
             </div>
             <div className='d-flex row images-container'>
-                {images && value ? images.map((image, index) =>
+                {images && switchValue ? images.map((image, index) =>
                     image.isActive && image.fileUrl && (
                         <div className='col-md-3 col-xs-12 img-fluid'>
                             <ImageViewer
