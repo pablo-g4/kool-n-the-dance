@@ -1,0 +1,33 @@
+.switch-off {
+    height: 65px;
+    width: 200px;
+    background-color: #644A82;
+    color: #FFFFFF;
+    border-color: #644A82;
+    text-align: center;
+    padding-top: 3.5%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.switch-on {
+    height: 65px;
+    width: 200px;
+    background-color: #FFFFFF;
+    color: #644A82;
+    border: 4px solid;
+    border-color: #644A82;
+    text-align: center;
+    padding-top: 3%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.switch-on:hover {
+    cursor: pointer;
+}
+
+.switch-off:hover {
+    cursor: pointer;
+}
+

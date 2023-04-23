@@ -71,9 +71,6 @@
     margin:50px;
 }
 
-
-
-
 @media screen and (min-device-width : 320px) and (max-device-width : 550px) {
     .actualite-page{
         margin:0px;

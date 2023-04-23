@@ -4,6 +4,7 @@ import { db, storage } from "./firebase";
 import { errorResponse } from '../Utils/utils';
 import { COLLECTION } from "./collection";
 import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage";
+import { log } from "console";
 
 export const getDataFromCollection = async (collectionName: string, dataId: string) => {
     const docRef = doc(db, collectionName, dataId);
@@ -51,34 +52,29 @@ export const deleteDocumentFromCollection = async (collectionName: COLLECTION, d
 
 }
 
-export const listFiles = async () => {
+export const listFiles = async (foldername: string) => {
     // Get a reference to the storage service, which is used to create references in your storage bucket
     const storageRef = getStorage();
     // Create a storage reference from our storage service
-    const listRef = ref(storageRef, 'images');
+    const listRef = ref(storageRef, foldername);
 
-    listAll(listRef)
-        .then((res) => {
-            res.prefixes.forEach((folderRef) => {
-                console.log('folderRef', folderRef);
-                // All the prefixes under listRef.
-                // You may call listAll() recursively on them.
-            });
-            res.items.forEach((itemRef) => {
-                console.log('item ref', itemRef);
-                
-                // All the items under listRef.
-            });
-        }).catch((error) => {
-            // Uh-oh, an error occurred!
-        });
+    let imagesUrl: any[] = []
+
+    const listAllFilesFromFolder = await listAll(listRef)
+
+    await Promise.all(listAllFilesFromFolder.items.map(async (itemRef) => {
+        let imageUrl = await getDownloadURL(itemRef)
+        imagesUrl.push(imageUrl)
+    }))
+    return imagesUrl
 }
 
 export const uploadFileToStorage = async (file: any, folderName: string) => {
-
-    if(!file) return
+    
+    if (!file) {
+        return
+    } 
     const storageRef = ref(storage, `/${folderName}/${file.name}`);
-    const uploadedFile = uploadBytesResumable(storageRef, file);
-    const downLoadUrl = await getDownloadURL(uploadedFile.snapshot.ref)
-    return downLoadUrl
+    await uploadBytesResumable(storageRef, file);
+    return await getDownloadURL(storageRef)
 }
