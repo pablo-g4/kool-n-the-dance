@@ -1,0 +1,165 @@
+.cardCours {
+    color: white;
+    background-color: #644A82;
+    border-radius: 20px;
+    height: 350px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardCours .titreCours {
+    text-align: left;
+    font-size: 24px;
+    padding: 20px 15px 0 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1));
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.imgCours p {
+    font-family: Alice;
+    font-size: 14px;
+    opacity: 0;
+    padding: 15px;
+
+}
+
+.cardCours:hover .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0.75), rgba(100, 74, 130, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCours:hover .imgCours p {
+    opacity: 1;
+    font-size: 14px;
+}
+
+.flecheRe {
+    width: 25%;
+    height: auto;
+    padding: 5px 15px 20px 0;
+    align-self: end;
+    margin-top: auto;
+}
+
+
+
+.cardCours2 {
+    color: white;
+    background-color: #644A82;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardCours2 .titreCours {
+    text-align: left;
+    font-size: 24px;
+    padding: 20px 15px 0 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.cardCours2 .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0.2), rgba(100, 74, 130, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCours2:hover .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0.75), rgba(100, 74, 130, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCours2:hover .imgCours p {
+    opacity: 1;
+    font-size: 14px;
+}
+
+.cardCoursYellow {
+    color: black;
+    background-color: #f7b801;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardCoursYellow .titreCours {
+    text-align: left;
+    font-size: 24px;
+    padding: 20px 15px 0 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.cardCoursYellow .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(247, 184, 1, 1), rgba(247, 184, 1, 0.2), rgba(247, 184, 1, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCoursYellow:hover .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(247, 184, 1, 1), rgba(247, 184, 1, 0.75), rgba(247, 184, 1, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCoursYellow:hover .imgCours p {
+    opacity: 1;
+    font-size: 14px;
+}
+
+
+
+.cardCoursRed {
+    color: black;
+    background-color: #fb3640;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardCoursRed .titreCours {
+    text-align: left;
+    font-size: 24px;
+    padding: 20px 15px 0 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.cardCoursRed .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.2), rgba(251, 54, 64, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCoursRed:hover .imgCours {
+    background-image:
+        linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.75), rgba(251, 54, 64, 1)),
+        url('../../images/Galerie/DAN_0809inv@2x.png');
+}
+
+.cardCoursRed:hover .imgCours p {
+    opacity: 1;
+    font-size: 14px;
+}

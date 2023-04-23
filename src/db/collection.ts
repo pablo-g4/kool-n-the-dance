@@ -3,4 +3,5 @@ export enum COLLECTION {
     POSTS = 'posts',
     NEWS = 'news',
     FILES = 'files'
+    FORFAITS = 'forfaits'
 } 

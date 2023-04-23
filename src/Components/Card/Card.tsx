@@ -35,31 +35,26 @@ const Card = (
     return (
         <>
 
-            <div className="card-custom mb-3 article-card ml-5 rounded-card-actualite shadow card-police ">
-                <div className="d-flex flex-row">
-                    <div className='card-image-div'>
-                        <img className='card-image' src={news.imageUrl ? news.imageUrl : defaultPic} alt="photo_article" />
+            <div className=" mb-3 article-card  rounded-card-actualite shadow card-police ">
+                <div className="d-flex flex-row ">
+                    <div className='col-4'>
+                        <img className='img-fluid' src={news.imageUrl ? news.imageUrl : defaultPic} alt="photo_article" />
                     </div>
-                    <div className="pr-2 d-flex flex-row flex-fill flex-column">
-                        <div className='d-sm-block d-md-flex flex-fill d-flex justify-content-between'>
-                            <div className="card-body">
-                                <h5 className="fs-7 card-text-color">{news.title}</h5>
-                                <p className="card-text-description">"{news.description}"</p>
-                                {news.attachedFileUrl &&
-                                    <a href={news.attachedFileUrl} download>
-                                        <p className='piece-jointe'> Télécharger la pièce jointe </p>
-                                    </a>
-                                }
-                            </div>
-                            <div>
-                                {
-                                    setIsOpen && <AiFillEdit className="icon" size={25} onClick={() => openEditModal()} />
-                                }
-                                {
-                                    displayDeleteConfirmationModal && <AiOutlineClose className="icon" size={25} onClick={openDeleteConfirmationmodal} />
-                                }
-
-                            </div>
+                    <div className="col-8">
+                        <h5 className="fs-7 card-text-color">{news.title}</h5>
+                        <p className="card-text-description">"{news.description}"</p>
+                        {news.attachedFileUrl &&
+                            <a href={news.attachedFileUrl} download>
+                                <p className='piece-jointe'> Télécharger la pièce jointe </p>
+                            </a>
+                        }
+                        <div>
+                            {
+                                setIsOpen && <AiFillEdit className="icon" size={25} onClick={() => openEditModal()} />
+                            }
+                            {
+                                displayDeleteConfirmationModal && <AiOutlineClose className="icon" size={25} onClick={openDeleteConfirmationmodal} />
+                            }
                         </div>
                         <div className='d-flex justify-content-end'>
                             <p className="card-text-color">{formatDateDDMMYY(news.creationDate)}</p>

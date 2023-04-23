@@ -18,7 +18,7 @@ const AdminSidebar = ({ page = "" }) => {
       </div>
       <Link
         className={
-          page == "general" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+          page == "/admin" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         }
         to="/admin"
       >
@@ -29,19 +29,25 @@ const AdminSidebar = ({ page = "" }) => {
       </Link>
       <Link
         className={
-          page == "planning" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+          page == "/admin/planning" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         }
         to="/admin/planning"
       >
         <p className="aSidebar_text">Gestion Planning</p>
       </Link>
-      <Link className="aSidebar_onglet" to="/admin/galerie">
+      <Link className={
+        page === "/admin/galerie" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+      } to="/admin/galerie">
         <p className="aSidebar_text">Gestion Galerie</p>
       </Link>
-      <Link className="aSidebar_onglet" to="/admin/news">
+      <Link 
+        className={ page === "/admin/news" ? "currentPage aSidebar_onglet" : "aSidebar_onglet" }
+        to="/admin/news">
         <p className="aSidebar_text">Gestion Actualité</p>
       </Link>
-      <Link className="aSidebar_onglet" to="/admin/forfait">
+      <Link className= {
+        page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+        } to="/admin/forfait">
         <p className="aSidebar_text">Gestion Forfait</p>
       </Link>
     </div>
