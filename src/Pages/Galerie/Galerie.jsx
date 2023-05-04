@@ -60,6 +60,7 @@ const Galerie = () => {
               key={ index }
               style={{ margin: '2px', width: '800px' }}
               alt=""
+              class="img-galerie"
             />
           ))}
 
@@ -74,30 +75,31 @@ const Galerie = () => {
           )} 
         </div>
 
-        <div className='carou' >
-          <Carousel orientation="vertical" loop="true" height={545} onSlideChange={ (index) => handleSlideChange(index)} maw={320} dragFree slideSize="13.5%" initialSlide={2} >
+        <div className='carou' style={{margin: "auto"}}  >
+          <Carousel orientation="vertical" loop="true" height={545} className='realCarou' onSlideChange={ (index) => handleSlideChange(index)} maw={320} dragFree slideSize="13.5%" initialSlide={2} >
             <Carousel.Slide>
-              <img src={carousel1} height="110.2px" width="180px" ></img>
+              <img src={carousel1} height="110.2px" width="180px" class="img-galerie" ></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel2} height="110.2px" width="180px"></img>
+              <img src={carousel2} height="110.2px" width="180px" class="img-galerie"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel3}height="110.2px" width="180px"></img>
+              <img src={carousel3}height="110.2px" width="180px" class="img-galerie"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel4} height="110.2px" width="180px"></img>
+              <img src={carousel4} height="110.2px" width="180px" class="img-galerie"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel5} height="110.2px" width="180px"></img>
+              <img src={carousel5} height="110.2px" width="180px" class="img-galerie"></img>
             </Carousel.Slide>
             <Carousel.Slide>
-              <img src={carousel6} height="110.2px" width="180px" ></img>
+              <img src={carousel6} height="110.2px" width="180px" class="img-galerie" ></img>
             </Carousel.Slide>
           </Carousel>
         </div>
 
       </div>
+      <span className='m-bottom'></span>
      </div>    
   )
 }
