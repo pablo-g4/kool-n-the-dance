@@ -158,7 +158,7 @@ const Forfaits = () => {
                             getActiveCustomForfait(switchValue).map((customForfait, index) => (
                                 <div key={index} className="col-lg-3 cardCoursRed">
                                     <div className="d-flex text-white">
-                                        <span className="mr-auto p-2 titreCours ">
+                                        <span className="mr-auto p-2 titreCours">
                                             {customForfait.title}
 
                                         </span>

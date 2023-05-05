@@ -19,9 +19,10 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
     event.preventDefault()
 
     let newForfait = new Forfait()
+    const descriptionArray = form.description.split('\n')
 
-    newForfait.title = form.title
-    newForfait.description = form.description
+    newForfait.title = form.title    
+    newForfait.description = descriptionArray
     newForfait.isBasic = form.isBasic
     newForfait.isActive = form.isActive
 
@@ -40,7 +41,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
   const handleInput = (event: any) => {
     event.preventDefault()
     const key = event.target.name
-    const value = event.target.value    
+    const value = event.target.value
     setForm((prev: any) => ({...prev,  [key]: value }))
   }
 
@@ -48,7 +49,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
     setForm({
       id: forfait?.id,
       title: forfait?.title,
-      description: forfait?.description,
+      description: forfait?.description.join('\n'),
       isBasic: forfait?.isBasic,
       isActive: forfait?.isActive
     })

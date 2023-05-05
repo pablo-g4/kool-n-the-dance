@@ -9,13 +9,13 @@ const Footer_cours = ({ forfaits } : { forfaits?: Forfait[]}) => {
         <div className="row ">
           {
             forfaits?.length && forfaits?.map((forfait) => (
-              <div className="col-md-4 col-xs-12">
+              <div className="mx-4 col-md-4 col-xs-12 text-white">
               <p className="p-cours-titre">{forfait.title}</p>
               <div>
                 <p style={{
-                  whiteSpace: 'pre-line'
+                  whiteSpace: 'pre-line',
                 }
-                }>{forfait.description.split(/\r?\n|\r|\n/g)}</p>
+                }>{forfait?.description?.join('\n')}</p>
               </div>
             </div>
             ))
