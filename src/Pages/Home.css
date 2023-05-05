@@ -1,5 +1,9 @@
 @import url("https://fonts.cdnfonts.com/css/alice-2");
 
+html,body  
+{  
+    overflow-x: hidden;  
+}  
 .parent {
     display: grid;
     grid-template-columns: repeat(2, 0.7fr) 2fr 1fr;
@@ -118,14 +122,33 @@
     .text_haut {
         font-size: 20px !important;
         width: 70%;
+        
     }
 }
+
+
 
 
 /*
 .haut_de_page {
 }
 */
+
+.header-container {
+    text-align: center;
+    display: flex;
+}
+
+.header {
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image:
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../Assets/Images/carousel/carousel3.jpeg");
+        
+    
+}
 
 .title-home {
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-60)/var(--unnamed-line-spacing-80) var(--unnamed-font-family-playfair-display);
@@ -171,29 +194,30 @@
 }
 
 .logo_haut_de_page {
-    display: flex;
-    width: 24rem;
-    height: 24rem;
-    position: relative;
-
+    width: 25rem;
+    height: 25rem;
+    position: absolute;
+    left: 15%;
+    top: -55%;
     background-color: transparent;
 }
 
-.rosas {
-    /* display: flex;
-    top: 100px;
-    left: 50px;
-    width: 250px;
-    height: 450px;
-    background-color: transparent;
+.rosas-container {
+    margin-top: 5%;
+    margin-left: 40%;
+    vertical-align: middle;
     position: relative;
-    */
-    margin-top: 30px;
-    opacity: 1;
-    background-image: url(./Tracé\ 230@2x.png);
-    background-size: 60% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
+    display: inline-block;
+}
+@media (max-width:800px) {
+    .rosas-container {
+        margin-left: 0%;
+    }
+}
+.rosas {
+    width: 70%;
+    opacity: 0.55; 
+
 }
 
 .hidden-data {
@@ -220,9 +244,17 @@
 }
 
 .wave {
-    max-width: max-content;
-    background-image: linear-gradient(rgb(100, 74, 130), 10%, rgba(255, 255, 255, 1));
+    width: 100%;
+    background-color: linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1));
+}
 
+.reverse-wave {
+    transform : rotate(180deg);
+    
+}
+
+.wave-container {
+    margin-bottom: 6%;
 }
 
 .txt-bouton {
@@ -260,10 +292,14 @@
     opacity: 1;
 }
 .text_haut {
-    font-weight: 300;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 500;
     font-size: 25px;
     color: black;
-
+    width: 60%;
     display: flex;
     margin-top: 120px;
     font-family: "Alice", sans-serif;
@@ -272,22 +308,31 @@
 }
 
 .text_bas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-family: "Alice", sans-serif;
 }
 
 .button_danser {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     /* border-radius: 7%;
     transform: translateY(700px);
     transform: translateX(300px); */
-    border-radius: 0px 10px 0px 10px;
+    border-radius: 10px 10px 10px 10px;
+    border: #644a82;
     font-family: "Alice", sans-serif;
     height: 60px;
-    width: 40%;
+    width: 42%;
     background-color: #644a82;
     color: white;
     opacity: 1 !important;
-    z-index: -1;
-    width: 37%;
+    z-index: 1;
+    
 }
 
 .button_fitness {
@@ -295,16 +340,21 @@
     transform: translateY(700px);
     transform: translateX(300px);
   */
+  position: absolute;
+    top: 82%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin-top: 13px;
     border-radius: 10px 10px 10px 10px;
     height: 60px;
     font-family: "Alice", sans-serif;
     background-color: #f7b801;
+    border: #f7b801;
     color: white;
     margin-bottom: 10px;
     opacity: 1 !important;
-    z-index: -1;
-    width: 37%;
+    z-index: 1;
+    width: 42%;
 }
 
 .vague_sous_photo {
