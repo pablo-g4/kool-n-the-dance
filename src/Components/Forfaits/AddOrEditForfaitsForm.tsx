@@ -19,13 +19,14 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
     event.preventDefault()
 
     let newForfait = new Forfait()
+    const descriptionArray = form.description.split('\n')
 
-    newForfait.title = form.title
-    newForfait.description = form.description
+    newForfait.title = form.title    
+    newForfait.description = descriptionArray
     newForfait.isBasic = form.isBasic
     newForfait.isActive = form.isActive
 
-    if (form.id) {
+    if (form.id !== 'new') {
       newForfait.id = form.id
       await updateForfait(newForfait)
     } else {
@@ -40,7 +41,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
   const handleInput = (event: any) => {
     event.preventDefault()
     const key = event.target.name
-    const value = event.target.value    
+    const value = event.target.value
     setForm((prev: any) => ({...prev,  [key]: value }))
   }
 
@@ -48,7 +49,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
     setForm({
       id: forfait?.id,
       title: forfait?.title,
-      description: forfait?.description,
+      description: forfait?.description.join('\n'),
       isBasic: forfait?.isBasic,
       isActive: forfait?.isActive
     })
@@ -76,7 +77,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
         <div className='mt-2 d-flex justify-content-end'>
           <button onSubmit={handleSubmit} className='bg-dark text-white'>
             {
-              form.id ? 'Modifier' : 'Nouveau'
+              form.id !== 'new' ? 'Modifier' : 'Nouveau'
             }
           </button>
         </div>

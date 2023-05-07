@@ -2,7 +2,7 @@ export class Forfait {
     
     public id: string = ""
     public title: string = ""
-    public description: string = ""
+    public description: string[] = []
     public isBasic: boolean = true
     public price: number = 0
     public customerType: string = ''
