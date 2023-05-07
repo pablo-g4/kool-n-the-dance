@@ -14,6 +14,9 @@ import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning";
 import CardHomeCours from "../Components/cardHomeCours/cardHomeCours"
 import { Carousel } from '@mantine/carousel';
 import CardTemoignage from '../Components/cardTemoignage/cardTemoignagne';
+import Trace from "../Assets/Images/Tracé 101.png";
+import Rosas from "../Assets/Images/Tracé 230.png";
+import Php from "../Assets/Images/carousel/carousel3.jpeg"
 import { Link } from "react-router-dom";
 const Home = () => {
 
@@ -90,52 +93,48 @@ const Home = () => {
 
   return (
     <>
-      <header className="photo_haut_de_page mb-8 ">
-        <div className="row mb-8 mx-0">
-          <div className="col-md-4 m-auto hide-img ">
-            <div className="logo_haut_de_page mx-auto">
-              <img className="center" src={logo_top} />
+      <div className='header-container'>
+        <header className="header mb-8 ">
+          <div className="row mb-8 mx-0">
+            <div className="col-md-4 m-auto hide-img ">
+              <div className="logo_haut_de_page mx-auto ">
+                <img className="logo_haut_de_page" src={logo_top} />
+              </div>
             </div>
-          </div>
-          <div className="col-sm-12 col-lg-7 mx-0">
-            <div className="row pb-7 ">
-              <div className="rosas h-75">
-                <div className="col-sm-7 col-xl-12 mx-auto d-block">
-                  <p className="text_haut col-lg-9  col-sm-12  mx-auto d-block text-center">
-                    J'ai une thérapie, elle s'appelle "Danse et Fitness !"
-                  </p>
+            <div className="col-sm-12 col-lg-7 mx-0">
+              <div className="row pb-7 ">
+                <div className="rosas-container h-75">
+                  <img className='rosas' src={Rosas}/>
+                  <div>
+                    <p className="text_haut col-lg-9  col-sm-12  mx-auto d-block text-center">
+                      J'ai une thérapie, elle s'appelle "Danse et Fitness !"
+                    </p>
+                    <p className="text_bas col-12 text-center">Je veux...</p>
+                  </div>
+                    
+                    <button
+                      type="button"
+                      className="button_danser d-block mx-auto opacity-full col-12"
+                    >
+                      DANSER
+                    </button>
+                    <button
+                      type="button"
+                      className="button_fitness  d-block mx-auto opacity-full"
+                    >
+                      FAIRE DU FITNESS
+                    </button>
                 </div>
-                <div className="col-12 mx-auto">
-                  <p className="text_bas col-12 text-center">Je veux...</p>
-                </div>
-
-                <div className="col-12">
-                  <button
-                    type="button"
-                    className="button_danser d-block mx-auto opacity-full"
-                  >
-                    DANSER
-                  </button>
-                </div>
-                <div className="col-12 ">
-                  <button
-                    type="button"
-                    className="button_fitness  d-block mx-auto opacity-full"
-                  >
-                    FAIRE DU FITNESS
-                  </button>
-                </div>
+                
               </div>
             </div>
           </div>
+        </header>
+      </div>
 
-        </div>
-
-
-      </header>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="wave " >
-        <path fill="#644A82" fill-opacity="1" d="M0,224L40,234.7C80,245,160,267,240,277.3C320,288,400,288,480,272C560,256,640,224,720,181.3C800,139,880,85,960,69.3C1040,53,1120,75,1200,117.3C1280,160,1360,224,1400,256L1440,288L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
-      </svg>
+      <div className='wave-container'>
+        <img className="wave" src={Trace}></img>
+      </div>
       <div className="row mx-0">
         <div className="col-12 text-center">
           <button id="btn-danse" className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-selected" onClick={() => displayCard('danse')}>Danse</button>
@@ -194,9 +193,9 @@ const Home = () => {
           <a href='' className="link-accueil ">Voir toute les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
         </Link>
       </p>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#644A82" fill-opacity="1" d="M0,256L34.3,240C68.6,224,137,192,206,202.7C274.3,213,343,267,411,245.3C480,224,549,128,617,90.7C685.7,53,754,75,823,101.3C891.4,128,960,160,1029,181.3C1097.1,203,1166,213,1234,218.7C1302.9,224,1371,224,1406,224L1440,224L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
-      </svg>
+      <div>
+        <img className="reverse-wave" src={Trace}></img>
+      </div>
       <div className="row bg-violet mt-">
         <div className="col-12 ">
           <p className="text-white text-center titre-planning">
