@@ -26,7 +26,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
     newForfait.isBasic = form.isBasic
     newForfait.isActive = form.isActive
 
-    if (form.id) {
+    if (form.id !== 'new') {
       newForfait.id = form.id
       await updateForfait(newForfait)
     } else {
@@ -77,7 +77,7 @@ const AddOrEditForfaitsForm = ({ updateListOfForfaits, forfait, children } : { u
         <div className='mt-2 d-flex justify-content-end'>
           <button onSubmit={handleSubmit} className='bg-dark text-white'>
             {
-              form.id ? 'Modifier' : 'Nouveau'
+              form.id !== 'new' ? 'Modifier' : 'Nouveau'
             }
           </button>
         </div>

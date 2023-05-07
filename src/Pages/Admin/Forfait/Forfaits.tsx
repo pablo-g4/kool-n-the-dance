@@ -27,6 +27,7 @@ const Forfaits = () => {
 
     const createForfaitBasic = () => {
         const newForfait = new Forfait()
+        newForfait.id = 'new'
         setAllForfaits([...allForfaits, newForfait])
     }
 
@@ -75,10 +76,14 @@ const Forfaits = () => {
 
     const updateListOfForfaits = (forfaitToBeUpdated: Forfait) => {
         const newListOfForfaits = allForfaits.map((forfaitItem) => {   
-            if(!forfaitItem.id) return forfaitToBeUpdated     
+            if(forfaitItem.id === 'new') {
+                console.log('forfait being updated', forfaitToBeUpdated);
+                
+                return forfaitToBeUpdated  
+            }    
             return forfaitItem
         })
-        console.log('updating state', newListOfForfaits);
+        console.log('newListOfForfaits', newListOfForfaits);
         
         setAllForfaits(newListOfForfaits)
     }
@@ -88,12 +93,10 @@ const Forfaits = () => {
     }
 
     const deleteCurrentForfait = async (forfaitToDeleteId: string, index: number) => {
-        if(forfaitToDeleteId) {
+        if(forfaitToDeleteId && forfaitToDeleteId !== 'new') {
             await deleteForfait(forfaitToDeleteId)
-        }
-
-        const newForfaits = allForfaits.filter((_, indexItem) => indexItem !== index);
-        setAllForfaits(newForfaits)
+        }    
+        setAllForfaits(_.filter(allForfaits, (forfait) => (forfait.id !== forfaitToDeleteId)))
     }
     
 
@@ -111,7 +114,7 @@ const Forfaits = () => {
                     borderRadius: '10px',
                     backgroundColor: 'red',
                     border: 'none'
-                }} onClick={createForfaitBasic} className='text-white'>+ Ajouter un forfait basique</button>
+                }} onClick={createForfaitBasic} type="button"  className='text-white' disabled={!!_.filter(allForfaits,['id', 'new']).length}>+ Ajouter un forfait basique</button>
             </div>
 
             <div className='row g-4'>
