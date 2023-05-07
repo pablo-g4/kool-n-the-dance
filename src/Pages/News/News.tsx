@@ -3,10 +3,7 @@ import Card from '../../Components/Card/Card';
 import CardRight from '../../Components/CardRight/CardRight';
 import { getAllNews } from '../../Controllers/news'
 import { useCallback, useEffect } from 'react';
-import AddOrEditNewsModal from '../../Components/News/AddOrEditNewsModal';
 import { News } from '../../Models/News';
-import {  Group, Button } from '@mantine/core';
-import DeleteConfirmationModal from '../../Components/Global/DeleteConfirmationModal';
 import { deleteNews } from '../../Controllers/news';
 
 const NewsPage = () => {
