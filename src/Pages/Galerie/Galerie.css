@@ -15,11 +15,27 @@
 }
 
 .text-galerie {
-  margin-left: 52rem;
-  margin-top: 1.5rem;
+  margin:auto;
 }
 
-
+.img-galerie{
+  
+}
+@media only screen and (max-width: 600px) {
+  .img-galerie{
+    width: 100%!important;
+  }
+  .m-bottom{
+    margin-top: 40px;
+  }
+  .body{
+    margin-bottom: 40px;
+   
+  }
+  .main-carou{
+    background-color: black;
+  }
+}
 body {
   font-family: 'Playfair Display';
 }
