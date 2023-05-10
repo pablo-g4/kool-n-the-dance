@@ -11,8 +11,6 @@ export class Forfait {
     public associatedCourses: string[] = []
     public creationDate:number = Math.round(+new Date()/1000)
     public updatedDate: number = Math.round(+new Date()/1000)
-    public updatedBy: string = ""
-    public createdBy: string = ""
     public isActive: boolean = true
 
     constructor () {} 
@@ -27,8 +25,6 @@ export class Forfait {
             category: this.category,
             image_url: this.imageUrl,
             associated_courses: this.associatedCourses,
-            created_by: this.createdBy, 
-            updated_by: this.updatedBy,
             is_active: this.isActive,
         }
     }
@@ -42,7 +38,6 @@ export class Forfait {
         forfait.isBasic = objDb.is_basic 
         forfait.creationDate = objDb.creation_date
         forfait.updatedDate = objDb.updated_date
-        forfait.creationDate = objDb.creation_date
         forfait.isActive = objDb.is_active
         forfait.price = objDb.price ?? 0
         forfait.customerType = objDb.customer_type
