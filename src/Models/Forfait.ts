@@ -1,3 +1,13 @@
+export enum COURSES_TYPE {
+    ZUMBA = 'Zumba',
+    KUDURO_FIT = 'Kuduro Fit',
+    STRONG_NATION = 'Strong Nation',
+    HIIT = 'Hiit',
+    PORT_DE_BRAS = 'Port de bras',
+    RENFORCEMENT = 'Renforcement'
+}
+
+
 export class Forfait {
     
     public id: string = ""
@@ -8,7 +18,7 @@ export class Forfait {
     public customerType: string = ''
     public category: string = ''
     public imageUrl: string = ''
-    public associatedCourses: string[] = []
+    public associatedCourses: COURSES_TYPE[] = []
     public creationDate:number = Math.round(+new Date()/1000)
     public updatedDate: number = Math.round(+new Date()/1000)
     public isActive: boolean = true

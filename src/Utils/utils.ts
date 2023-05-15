@@ -13,3 +13,7 @@ export const formatDateDDMMYY = (unixTimeStamp: number) => {
 export const getUnixTimeStamp = (dateAsUnixTimeStamp: Date) => {
     return dateAsUnixTimeStamp.getTime()
 }
+
+export const formatUnixTimeStampToDate = (unixTimeStamp : number) => {
+    return new Date(unixTimeStamp)
+}
