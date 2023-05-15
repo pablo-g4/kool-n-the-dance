@@ -12,15 +12,14 @@ const Login = () => {
   const navigate = useNavigate();
     useEffect(() => {
         if (loading) {
-            // maybe trigger a loading screen
-            return;
+            return
         }
-        if (user) navigate("/dashboard");
+        if (user) navigate("/admin")
 
     }, [user, loading]);
 
     return (
-        <div>
+        <div className="m-4">
             <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
@@ -44,12 +43,6 @@ const Login = () => {
                 />
             </div>
             <button type="submit" onClick={() => logInWithEmailAndPassword(email,password)} className="btn btn-primary">Submit</button>
-            <div>
-                <Link to="/reset">Forgot Password</Link>
-            </div>
-            <div>
-                Don't have an account? <Link to="/register">Register</Link> now.
-            </div>
         </div>
     );
 }

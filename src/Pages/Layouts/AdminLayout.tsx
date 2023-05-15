@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AdminSidebar from "../../Components/AdminSidebar/AdminSidebar"
 import {
-    Outlet, Routes,
-    Route,
-    useSearchParams,
-    BrowserRouter,
-    useLocation
+    Outlet,
+    useLocation,
+    useNavigate
 } from 'react-router-dom'
+
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from '../../db/firebase';
 
 const AdminLayout = (props: any) => {
 
+    const [user, loading, error] = useAuthState(auth)
+
     const location = useLocation()
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loading) {
+            return
+        }
+        if (!user) navigate("/login")
+    }, [user, loading])
 
     return (
         <>
