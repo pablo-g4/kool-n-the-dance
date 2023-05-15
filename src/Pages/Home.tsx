@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import Footer from "../Components/Footer/Footer";
-import "./Home.css";
-import background_top_image from "../images/Galerie/DAN_0809inv.png";
-import "./DAN_0568inv@2x.jpg";
-import logo_top from "./Logo@2x.png";
-import vague from "./Tracé 101@2x.jpg";
-import rosas from "../images/Galerie/DAN_0568inv.png";
-import Card from "../Components/Card/Card";
-import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
-import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning";
+import React, { useEffect, useState, useCallback } from 'react'
+import Footer from "../Components/Footer/Footer"
+import "./Home.css"
+import background_top_image from "../images/Galerie/DAN_0809inv.png"
+import "./DAN_0568inv@2x.jpg"
+import logo_top from "./Logo@2x.png"
+import vague from "./Tracé 101@2x.jpg"
+import rosas from "../images/Galerie/DAN_0568inv.png"
+import Card from "../Components/Card/Card"
+import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
+import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning"
 import CardHomeCours from "../Components/cardHomeCours/cardHomeCours"
-import { Carousel } from '@mantine/carousel';
-import CardTemoignage from '../Components/cardTemoignage/cardTemoignagne';
-import Trace from "../Assets/Images/Tracé 101.png";
-import Rosas from "../Assets/Images/Tracé 230.png";
+import { Carousel } from '@mantine/carousel'
+import CardTemoignage from '../Components/cardTemoignage/cardTemoignagne'
+import Trace from "../Assets/Images/Tracé 101.png"
+import Rosas from "../Assets/Images/Tracé 230.png"
 import Php from "../Assets/Images/carousel/carousel3.jpeg"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { Planning } from '../Models/Planning'
+import { getAllPlanning } from '../Controllers/planning'
+import _ from 'lodash'
+
 const Home = () => {
+
+  const today = new Date()
+
+  const [planningForTheDay, setPlanningForTheDay] = useState<Planning[]>([])
 
   function displayCardData(test: number) {
     if (test != null)
       document.getElementById('data_cours_' + test)!.style.visibility = 'visible';
+  }
+
+  const filteredPlanningForTheDay = () => {
+    return _.filter(planningForTheDay, (planning) => today.getDay() === new Date(planning.startDate).getDay() && today.getMonth() === new Date(planning.startDate).getMonth() && today.getFullYear() === new Date(planning.startDate).getFullYear())
   }
 
   function hideCardData(test: number) {
@@ -35,7 +47,17 @@ const Home = () => {
     // Met à jour le titre du document via l’API du navigateur
     document.getElementById('fitness')!.style.display = 'none';
     document.getElementById('forfait')!.style.display = 'none';
-  });
+  })
+
+  useEffect(() => {
+
+    const fetchPlanning = async () => {
+      let allPlanning = await getAllPlanning()
+      setPlanningForTheDay(allPlanning)
+    }
+
+    fetchPlanning()
+  },[])
 
 
 
@@ -150,7 +172,6 @@ const Home = () => {
                 <Carousel.Slide className=""><CardHomeCours ></CardHomeCours></Carousel.Slide>
                 <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
                 <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
-
               </Carousel>
 
             </div>
@@ -202,23 +223,21 @@ const Home = () => {
             Planning du jour
           </p>
         </div>
+        {
+          filteredPlanningForTheDay().length &&
+          filteredPlanningForTheDay().map(planning => (
+
+            <div className="col-lg-2 col-6 spacingCol">
+              <CardHomePlanning
+                horaire={ `${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
+                titre={planning.title}
+                text="Pour enfants de 6-9 ans"
+                src=""
+              ></CardHomePlanning>
+            </div>
+          ))
+        }
         {/* Prendre le planning ajd et boucler sur les activiter du jour   */}
-        <div className="col-lg-2 col-6 spacingCol">
-          <CardHomePlanning
-            horaire="8h-9h"
-            titre="ZUMBA"
-            text="Pour enfants de 6-9 ans"
-            src=""
-          ></CardHomePlanning>
-        </div>
-        <div className="col-lg-2 col-6 spacingCol">
-          <CardHomePlanning
-            horaire="8h-9h"
-            titre="ZUMBA"
-            text="Pour enfants de 6-9 ans"
-            src=""
-          ></CardHomePlanning>{" "}
-        </div>
       </div>
 
 

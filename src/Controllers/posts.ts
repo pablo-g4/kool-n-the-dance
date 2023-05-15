@@ -1,10 +1,8 @@
-import { getAllDataFromCollection, addDocumentToCollection } from '../db/dbHelper'
+import { getAllDataFromCollection, addDocumentToCollection, getAllDataFromCollectionEvenDisable } from '../db/dbHelper'
 import { COLLECTION } from '../db/collection'
 
 export const getAllPosts = async () => {
     const posts = await getAllDataFromCollection(COLLECTION.POSTS)
-    console.log(posts);
-    
     return posts
 }
 

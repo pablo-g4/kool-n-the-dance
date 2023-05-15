@@ -1,22 +1,23 @@
-import PropTypes from 'prop-types';
-import React, { Component, useState } from 'react';
-import img from "./test.png";
-import './styleActivite.css';
-import ReactDOM from 'react-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation } from 'swiper';
-import 'swiper/swiper.min.css';
-import 'swiper/swiper-bundle.css';
-import 'swiper/swiper.min.css';
-import logo from './Groupe 56.png';
-import { Carousel } from '@mantine/carousel';
+import React, { Component, useState } from 'react'
+import img from "./test.png"
+import './styleActivite.css'
+import ReactDOM from 'react-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Navigation } from 'swiper'
+import 'swiper/swiper.min.css'
+import 'swiper/swiper-bundle.css'
+import 'swiper/swiper.min.css'
+import logo from './Groupe 56.png'
+import { Carousel } from '@mantine/carousel'
 import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
-import 'swiper/css';
+import { Forfait } from '../../Models/Forfait'
+import _ from 'lodash'
+import 'swiper/css'
 
 const isMobile = document.documentElement.clientWidth < 600;
 
 
-const Carrousel_Yellow = () => {
+const Carrousel_Yellow = ({ forfaits } : { forfaits?: Forfait[]}) => {
 
   SwiperCore.use([Navigation]);
   return (
@@ -34,66 +35,23 @@ const Carrousel_Yellow = () => {
             <Carousel mx="auto" withIndicators height={380} className="carousel-home"  slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md" loop
               align="start">
-              <Carousel.Slide>
-                <div className="cardCoursRed">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursRed">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursRed">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursRed">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursRed">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursRed">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
+                {
+                  forfaits?.length && (
+                    _.map(forfaits, (forfait) => (
+                      <Carousel.Slide>
+                      <div className="cardCoursRed">
+                        <p className="titreCours">{forfait.title}</p>
+                        <div className="imgCours " id="imgCours">
+                          <p>
+                            {forfait.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Carousel.Slide>
+                    ))
+                  )
+                }
+
             </Carousel>
         </div>
       </div>

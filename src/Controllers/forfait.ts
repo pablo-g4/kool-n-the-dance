@@ -1,6 +1,7 @@
 import { COLLECTION } from "../db/collection"
-import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection, listFiles } from '../db/dbHelper'
+import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection, listFiles, getAllDataFromCollectionEvenDisable } from '../db/dbHelper'
 import { Forfait } from '../Models/Forfait'
+import _ from "lodash"
 
 export const createForfait = async (forfait: Forfait) => {
     const createForfaitId = await addDocumentToCollection(COLLECTION.FORFAITS, forfait.toDb())
@@ -20,4 +21,9 @@ export const getAllForfaits = async (): Promise<Forfait[]> => {
     return allForfaits.map((forfait: any) => {
         return Forfait.fromDb(forfait)
     })
+}
+
+export const getAllForfaitsEvenDisabled = async (): Promise<Forfait[]> => {
+    const allForfaits = await getAllDataFromCollectionEvenDisable(COLLECTION.FORFAITS)
+    return _.map(allForfaits, (forfait) => (Forfait.fromDb(forfait)))
 }

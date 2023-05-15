@@ -8,13 +8,13 @@ import { AiOutlineClose } from 'react-icons/ai'
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import AddOrEditCustomForfaitModal from '../../../Components/Forfaits/AddOrEditCustomForfaitModal'
 import CardHomeCours from "../../../Components/cardHomeCours/cardHomeCours"
-import '../../../Components/Carrousel_Activite/styleActivite.css';
-import CustomSwitch from '../../../Components/Switch/CustomSwitch';
+import '../../../Components/Carrousel_Activite/styleActivite.css'
+import CustomSwitch from '../../../Components/Switch/CustomSwitch'
 
 const Forfaits = () => {
 
     const [allForfaits , setAllForfaits] = useState<Forfait[]>([])
-    const [switchValue, setSwitchValue] = useState(true);
+    const [switchValue, setSwitchValue] = useState(true)
     const [addOrEditCustomForfaitModalIsOpen, setAddOrEditCustomForfaitModalIsOpen] = useState<boolean>(false)
     const [currentCustomForfait, setCurrentCustomForfait] = useState<Forfait | undefined>(undefined)
 
@@ -83,8 +83,6 @@ const Forfaits = () => {
             }    
             return forfaitItem
         })
-        console.log('newListOfForfaits', newListOfForfaits);
-        
         setAllForfaits(newListOfForfaits)
     }
 

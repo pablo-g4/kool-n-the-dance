@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Group, Switch, Select, Checkbox, Text , Image} from '@mantine/core'
-import { Dropzone, IMAGE_MIME_TYPE, DropzoneProps } from '@mantine/dropzone'
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 import { uploadFile } from '../../Controllers/file'
 import { GrUploadOption } from 'react-icons/gr'
 import { AiOutlineClose } from 'react-icons/ai'

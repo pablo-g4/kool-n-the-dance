@@ -1,4 +1,4 @@
-import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection, listFiles } from '../db/dbHelper'
+import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection, listFiles, getAllDataFromCollectionEvenDisable } from '../db/dbHelper'
 
 export const getAllGalleryImages = async () => {
     const listFilesFromGallery =  await listFiles('images')
