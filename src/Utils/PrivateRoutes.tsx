@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const PrivateRoutes = () => {
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth)
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate();
