@@ -1,3 +1,13 @@
+export enum COURSES_TYPE {
+    ZUMBA = 'Zumba',
+    KUDURO_FIT = 'Kuduro Fit',
+    STRONG_NATION = 'Strong Nation',
+    HIIT = 'Hiit',
+    PORT_DE_BRAS = 'Port de bras',
+    RENFORCEMENT = 'Renforcement'
+}
+
+
 export class Forfait {
     
     public id: string = ""
@@ -8,11 +18,9 @@ export class Forfait {
     public customerType: string = ''
     public category: string = ''
     public imageUrl: string = ''
-    public associatedCourses: string[] = []
+    public associatedCourses: COURSES_TYPE[] = []
     public creationDate:number = Math.round(+new Date()/1000)
     public updatedDate: number = Math.round(+new Date()/1000)
-    public updatedBy: string = ""
-    public createdBy: string = ""
     public isActive: boolean = true
 
     constructor () {} 
@@ -27,8 +35,6 @@ export class Forfait {
             category: this.category,
             image_url: this.imageUrl,
             associated_courses: this.associatedCourses,
-            created_by: this.createdBy, 
-            updated_by: this.updatedBy,
             is_active: this.isActive,
         }
     }
@@ -42,7 +48,6 @@ export class Forfait {
         forfait.isBasic = objDb.is_basic 
         forfait.creationDate = objDb.creation_date
         forfait.updatedDate = objDb.updated_date
-        forfait.creationDate = objDb.creation_date
         forfait.isActive = objDb.is_active
         forfait.price = objDb.price ?? 0
         forfait.customerType = objDb.customer_type
