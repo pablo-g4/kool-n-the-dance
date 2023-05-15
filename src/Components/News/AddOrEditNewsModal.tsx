@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Modal, Group, Text } from '@mantine/core';
+import { Modal, Group, Text } from '@mantine/core'
 import { News } from '../../Models/News'
-import { createNews, updateNews } from '../../Controllers/news';
-import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
-import { GrUploadOption } from 'react-icons/gr';
-import { AiOutlineClose } from 'react-icons/ai';
-import './news.css';
-import attachmentIcon from './attach-16.png';
-import { uploadFile } from '../../Controllers/file';
+import { createNews, updateNews } from '../../Controllers/news'
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
+import { GrUploadOption } from 'react-icons/gr'
+import { AiOutlineClose } from 'react-icons/ai'
+import './news.css'
+import attachmentIcon from './attach-16.png'
+import { uploadFile } from '../../Controllers/file'
 
 const AddOrEditNewsModal = (
     {
@@ -86,7 +86,7 @@ const AddOrEditNewsModal = (
     const addNews = async (news: News): Promise<void> => {
         const createdNewsId = await createNews(news)
         news.id = createdNewsId
-        setAllNews(oldNews => [...oldNews, news]);
+        setAllNews(oldNews => [news, ...oldNews]);
     }
 
     const updateCurrentNews = async (news: News): Promise<void> => {

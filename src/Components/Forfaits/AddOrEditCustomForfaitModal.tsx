@@ -6,6 +6,7 @@ import { GrUploadOption } from 'react-icons/gr'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Forfait } from '../../Models/Forfait'
 import _ from 'lodash'
+import { COURSES_TYPE } from '../../Models/Forfait'
 
 const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCustomForfait, closeAddOrEditCustomForfaitModal } : { isOpen : boolean , setIsOpen: React.Dispatch<React.SetStateAction<boolean>> , submitForm: any, currentCustomForfait ?: Forfait, closeAddOrEditCustomForfaitModal?: any}) => {
 
@@ -26,6 +27,7 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
+
     const newCustomForfait = new Forfait()
     newCustomForfait.title = form.title
     newCustomForfait.price = form.price
@@ -34,6 +36,7 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
     newCustomForfait.imageUrl = form.imageUrl
     newCustomForfait.isBasic = form.isBasic
     newCustomForfait.associatedCourses = form.associatedCourses
+
     if(form.id) {
       newCustomForfait.id = form.id
       newCustomForfait.isActive = form.isActive
@@ -149,12 +152,11 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                       value={form.associatedCourses}
                     >
                       <Group mt="xs" noWrap>
-                        <Checkbox value='Zumba' label='Zumba' />
-                        <Checkbox value='Kuduro Fit' label="Kuduro Fit" />
-                        <Checkbox value='Strong Nation' label='Strong Nation' />
-                        <Checkbox value='Hiit' label='Hiit' />
-                        <Checkbox value='Port de bras' label='Port de bras' />
-                        <Checkbox value='Renforcement' label='Renforcement' />
+                        {
+                          COURSES_TYPE && _.map(COURSES_TYPE, (COURSE) => (
+                            <Checkbox value={COURSE} label={COURSE} />
+                          ))
+                        }
                       </Group>
                     </Checkbox.Group>
                   </div>

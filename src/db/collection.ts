@@ -3,5 +3,6 @@ export enum COLLECTION {
     POSTS = 'posts',
     NEWS = 'news',
     FILES = 'files',
-    FORFAITS = 'forfaits'
+    FORFAITS = 'forfaits',
+    PLANNING = 'planning'
 } 

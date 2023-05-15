@@ -55,7 +55,6 @@ const Footer = () => {
                             </Popup>
                         </Marker>
                     </MapContainer>
-
                 </div>
             </div>
 

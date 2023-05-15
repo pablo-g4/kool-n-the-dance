@@ -8,6 +8,7 @@ import { Button } from '@mantine/core';
 import DeleteConfirmationModal from '../../../Components/Global/DeleteConfirmationModal';
 import { deleteNews } from '../../../Controllers/news';
 import { BsPlusLg } from 'react-icons/bs'
+import _ from 'lodash';
 import "./news.css";
 
 
@@ -19,7 +20,7 @@ const AdminNews = () => {
   const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
-    const news = await getAllNews()
+    let news = await getAllNews()
     if(news.length){
       setAllNews(news)
     }
