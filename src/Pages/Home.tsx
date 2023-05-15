@@ -264,7 +264,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className='my-5'>
+      <div className='my-5 mx-2 pb-5'>
         <h1 className=" text-center title-home">Galerie</h1>
         <div className='row'>
           {/* Prendre une div ci dessous et boucler la div sur les images recup en bdd ( 3 si possible ) */}

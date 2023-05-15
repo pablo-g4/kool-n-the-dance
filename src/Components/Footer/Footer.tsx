@@ -1,8 +1,7 @@
 import React from 'react';
 import { Carousel } from '@mantine/carousel';
 import { SocialIcon } from 'react-social-icons';
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
-const position = [51.505, -0.09]
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Footer = () => {
     return (
@@ -19,7 +18,7 @@ const Footer = () => {
                     <a href='/cours' className='text-white'>Cours</a>
                 </span>
                 <span className='text'>
-                    <a  href='/galerie' className='text-white'>Galerie</a>
+                    <a href='/galerie' className='text-white'>Galerie</a>
                 </span>
                 <span className='text'>
                     <a href='/actualite' className='text-white'>Actualté</a>
@@ -27,35 +26,43 @@ const Footer = () => {
             </div>
             <div className='col-lg-3 text-center col-md-12 col-sm-12'>
                 <h1 className='footerH1'>Contact</h1>
-                <a href='/' className='text-white'>Accueil</a>
                 <a href="mailto:koolnthedance@gmail.com" className='text-white'>koolnthedance@gmail.com</a>
-                <span className='text'>9H-21</span>
-                <div className='socialIcon'>
-                    <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
-                    <SocialIcon network="twitter" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
-                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{marginRight: '2%'}} />
-                </div>
+                <p className='text'>9H-21</p>
+                <a href='https://www.facebook.com/people/Kool-N-the-dance/100063903799414/' target='blank' className='socialIcon'>
+                    <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ marginRight: '2%' }} />
+                </a>
             </div>
             <div className="col">
                 <div className='map'>
-                <MapContainer
-                    center={[51.505, -0.09]}
-                    zoom={15}
-                    scrollWheelZoom={false}
-                    className="leaflet-container2"
-                >
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                </MapContainer>
+                    <MapContainer
+                        center={[48.9982, 1.4983]} // Change the center to the first location
+                        zoom={13}
+                        scrollWheelZoom={false}
+                        className="leaflet-container2"
+                    >
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[48.9982, 1.4983]}>
+                            <Popup>
+                                20 chemin du virolet 27200 vernon
+                            </Popup>
+                        </Marker>
+                        <Marker position={[48.9936, 1.4633]}>
+                            <Popup>
+                                Complexe sportif léo lagrange rue barrière 27950 saint marcel
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+
                 </div>
             </div>
-            
+
         </div>
 
-  
-  );
+
+    );
 };
 
 export default Footer;

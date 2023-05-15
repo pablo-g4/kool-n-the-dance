@@ -35,15 +35,11 @@ const Navbar = () => {
                                 </Link>
                             </li>
                         </div>
-                        
+
                     </div>
                     <div className='navicon navbar-collapse collapse navbar-collapse text-center' id="navbarSupportedContent">
-                            <a> <SocialIcon network="tiktok" bgColor="#FFFFFF" style={{ marginRight: "10px", height: 30, width: 30, marginTop: "4%" }} /> </a>
-
-                            <a> <SocialIcon network="twitter" bgColor="#FFFFFF" style={{ marginRight: "10px", height: 30, width: 30, marginTop: "4%" }} /> </a>
-
-                            <a> <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ height: 30, width: 30, marginTop: "4%" }} /> </a>
-                        </div>
+                        <a href='https://www.facebook.com/people/Kool-N-the-dance/100063903799414/' target='blank'> <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ height: 30, width: 30, marginTop: "4%" }} /> </a>
+                    </div>
                 </nav>
             </Link>
         </div>
