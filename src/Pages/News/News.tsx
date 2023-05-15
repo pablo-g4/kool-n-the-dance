@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import Card from '../../Components/Card/Card';
-import CardRight from '../../Components/CardRight/CardRight';
+import Card from '../../Components/Card/Card'
+import CardRight from '../../Components/CardRight/CardRight'
 import { getAllNews } from '../../Controllers/news'
-import { useCallback, useEffect } from 'react';
-import AddOrEditNewsModal from '../../Components/News/AddOrEditNewsModal';
-import { News } from '../../Models/News';
-import {  Group, Button } from '@mantine/core';
-import DeleteConfirmationModal from '../../Components/Global/DeleteConfirmationModal';
-import { deleteNews } from '../../Controllers/news';
+import { useCallback, useEffect } from 'react'
+import AddOrEditNewsModal from '../../Components/News/AddOrEditNewsModal'
+import { News } from '../../Models/News'
+import {  Group, Button } from '@mantine/core'
+import DeleteConfirmationModal from '../../Components/Global/DeleteConfirmationModal'
+import { deleteNews } from '../../Controllers/news'
+import _ from 'lodash'
 
 const NewsPage = () => {
 
@@ -17,8 +18,9 @@ const NewsPage = () => {
   const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] = useState(false);
 
   const fetchData = useCallback(async () => {
-    const news = await getAllNews()
+    let news = await getAllNews()
     if(news.length){
+      news = _.orderBy(news, 'creationDate', 'desc')
       setAllNews(news)
     }
   }, [])
@@ -42,10 +44,10 @@ const NewsPage = () => {
     setCurrentNews(undefined)
     closeDeleteConfirmationModal()
   }
-
+  
   useEffect(() => {
     fetchData()
-  }, []);
+  }, [])
 
   return (
     <div className='actualite-page'>
@@ -57,7 +59,11 @@ const NewsPage = () => {
           }
         </div>
         <div className='col-5 d-none d-md-block'>
-          <CardRight />
+          {
+            allNews && (
+              <CardRight news={allNews[0]}  />
+            )
+          }
         </div>
       </div>
     </div>

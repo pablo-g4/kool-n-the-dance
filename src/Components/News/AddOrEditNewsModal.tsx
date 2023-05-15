@@ -86,7 +86,7 @@ const AddOrEditNewsModal = (
     const addNews = async (news: News): Promise<void> => {
         const createdNewsId = await createNews(news)
         news.id = createdNewsId
-        setAllNews(oldNews => [...oldNews, news]);
+        setAllNews(oldNews => [news, ...oldNews]);
     }
 
     const updateCurrentNews = async (news: News): Promise<void> => {
