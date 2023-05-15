@@ -9,7 +9,7 @@ import Login from './Pages/Login'
 import Dashboard from './Pages/Dashboard'
 import ResetPassword from './Pages/ResetPassword'
 
-import Cours from './Pages/Cours/Cours'
+import { CoursPage } from './Pages/Cours/CoursPage'
 import './App.css'
 
 import General from "./Pages/Admin/General/General"
@@ -17,9 +17,10 @@ import General from "./Pages/Admin/General/General"
 import NewsPage from './Pages/News/News'
 import AdminNews from './Pages/Admin/News/news'
 import AdminLayout from './Pages/Layouts/AdminLayout'
-import AdminGallery from './Pages/Admin/Gallery/Gallery'
-import AdminForfait from './Pages/Admin/Forfait/Forfaits'
-import AdminPlanning from "./Pages/Admin/Planning/Planning"
+import AdminGalleryPage from './Pages/Admin/Gallery/Gallery'
+import AdminForfaitPage from './Pages/Admin/Forfait/Forfaits'
+import AdminPlanningPage from "./Pages/Admin/Planning/Planning"
+import AdminCoursPage from './Pages/Admin/Cours/AdminCoursPage'
 
 const App = () => {
 
@@ -31,7 +32,7 @@ const App = () => {
             <Route path="/topics/*" element={<Topics />} />
             <Route path="/planning/*" element={<PlanningPage />} />
             <Route path="/actualite" element={<NewsPage />} />
-            <Route path="/cours" element={<Cours />} />
+            <Route path="/cours" element={<CoursPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/galerie/*" element={<Galerie />} />
           </Route>
@@ -40,9 +41,10 @@ const App = () => {
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/reset-password" element={<ResetPassword />} />
               <Route path="/admin/News" element={<AdminNews />} />
-              <Route path="/admin/planning" element={<AdminPlanning />} />
-              <Route path="/admin/galerie" element={<AdminGallery />} />
-              <Route path="/admin/forfait" element={<AdminForfait />} />
+              <Route path="/admin/planning" element={<AdminPlanningPage />} />
+              <Route path="/admin/cours/*" element={<AdminCoursPage />} />
+              <Route path="/admin/galerie" element={<AdminGalleryPage />} />
+              <Route path="/admin/forfait" element={<AdminForfaitPage />} />
           </Route>
         </Routes>
     </div>

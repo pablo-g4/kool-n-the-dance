@@ -1,5 +1,5 @@
 import { Planning } from "../Models/Planning"
-import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection } from "../db/dbHelper"
+import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection, getAllDataFromCollectionEvenDisable } from "../db/dbHelper"
 import { COLLECTION } from "../db/collection"
 import _ from "lodash"
 
@@ -7,6 +7,13 @@ export const getAllPlanning = async (): Promise<Planning[]> => {
     const allPlanningHours = await getAllDataFromCollection(COLLECTION.PLANNING)
     return _.map(allPlanningHours, (planningHour) => (Planning.fromDb(planningHour)))
 }
+
+
+export const getAllPlanningEvenDisabled = async (): Promise<Planning[]> => {
+    const allPlanningHours = await getAllDataFromCollectionEvenDisable(COLLECTION.PLANNING)
+    return _.map(allPlanningHours, (planningHour) => (Planning.fromDb(planningHour)))
+}
+
 
 export const createPlanning = async(planning: Planning) => {
     const newPlanningHour = await addDocumentToCollection(COLLECTION.PLANNING, planning.toDb())

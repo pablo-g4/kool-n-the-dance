@@ -10,13 +10,15 @@ import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
 import logo from './Groupe 59.png';
 import { Carousel } from '@mantine/carousel';
-import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
+import _ from 'lodash';
 import 'swiper/css';
+import { Cours } from '../../Models/Cours';
 
 const isMobile = document.documentElement.clientWidth < 600;
 
 
-const Carrousel_Yellow = () => {
+
+const Carrousel_Yellow = ({ allCours } : { allCours?: Cours[]}) => {
 
   SwiperCore.use([Navigation]);
   return (
@@ -34,66 +36,23 @@ const Carrousel_Yellow = () => {
             <Carousel mx="auto" withIndicators height={380} className="carousel-home"  slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md" loop
               align="start">
-              <Carousel.Slide>
-                <div className="cardCoursYellow">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursYellow">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursYellow">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursYellow">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursYellow">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCoursYellow">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
+                {
+                  allCours && (
+                    _.map(allCours, (cours) => (
+                      <Carousel.Slide>
+                      <div className="cardCoursYellow">
+                        <p className="titreCours">{cours.title}</p>
+                        <div className="imgCours " id="imgCours">
+                          <p>
+                            {cours.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Carousel.Slide>
+                    ))
+                  )
+                }
+
             </Carousel>
         </div>
       </div>

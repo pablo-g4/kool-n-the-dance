@@ -1,6 +1,7 @@
 import { COLLECTION } from '../db/collection'
-import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection } from '../db/dbHelper'
+import { getAllDataFromCollection, addDocumentToCollection, updateDocumentToCollection, deleteDocumentFromCollection,getAllDataFromCollectionEvenDisable } from '../db/dbHelper'
 import { News } from '../Models/News'
+import _ from 'lodash'
 
 export const createNews = async (news: News): Promise<string> => {    
     const createdNewsId = await addDocumentToCollection(COLLECTION.NEWS, news.toDb())
@@ -20,5 +21,9 @@ export const getAllNews = async (): Promise<News[]> => {
     return allNews.map((news: any) => {
         return News.fromDb(news)
     })
-    
+}
+
+export const getAllNewsEvenDisabled = async (): Promise<News[]> => {
+    const allNews = await getAllDataFromCollectionEvenDisable(COLLECTION.NEWS)
+    return _.map(allNews,(news) => (News.fromDb(news)))
 }

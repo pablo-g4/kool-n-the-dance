@@ -4,7 +4,7 @@ import { db, storage } from "./firebase";
 import { errorResponse } from '../Utils/utils';
 import { COLLECTION } from "./collection";
 import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage";
-import { log } from "console";
+import _ from "lodash";
 
 export const getDataFromCollection = async (collectionName: string, dataId: string) => {
     const docRef = doc(db, collectionName, dataId);
@@ -23,13 +23,23 @@ export const getAllDataFromCollection = async (collectionName: string) => {
       allDataFromCollection.push({ ...doc.data(), id: doc.id })
     });
 
-    return allDataFromCollection
+    return _.filter(allDataFromCollection, 'is_active')
+}
 
+export const getAllDataFromCollectionEvenDisable = async (collectionName: string) => {
+    let allDataFromCollection: any = []
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    
+    querySnapshot.forEach((doc) => {
+      allDataFromCollection.push({ ...doc.data(), id: doc.id })
+    });
+
+    return allDataFromCollection
 }
 
 export const addDocumentToCollection = async (collectionName: string, dataToCollection: any): Promise<string> => {
-    dataToCollection.creation_date = Math.round(+new Date()/1000);
-    dataToCollection.updated_date = Math.round(+new Date()/1000);
+    dataToCollection.creation_date = Math.round(+new Date()/1000)
+    dataToCollection.updated_date = Math.round(+new Date()/1000)
 
     const addedDocumentToCollection = collection(db, collectionName);    
     const newDocRef = await addDoc(addedDocumentToCollection, dataToCollection);
@@ -38,8 +48,8 @@ export const addDocumentToCollection = async (collectionName: string, dataToColl
 }
 
 export const updateDocumentToCollection = async (collectionName: string, dataToUpdateId: string, dataToUpdate: any) => {
+    dataToUpdate.updated_date = Math.round(+new Date()/1000)  
 
-    dataToUpdate.updated_date = Math.round(+new Date()/1000);    
     const docRefToUpdate = doc(db, collectionName, dataToUpdateId)
     await updateDoc(docRefToUpdate, dataToUpdate)
 

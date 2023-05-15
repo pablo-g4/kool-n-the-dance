@@ -1,22 +1,18 @@
-import PropTypes from 'prop-types';
-import React, { Component, useState } from 'react';
-import img from "./test.png";
+import React, { useEffect , useState } from 'react';
 import './styleActivite.css';
-import ReactDOM from 'react-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.css';
 import 'swiper/swiper.min.css';
 import logo from './Groupe 46.png';
 import { Carousel } from '@mantine/carousel';
-import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
 import 'swiper/css';
-
+import { Cours } from '../../Models/Cours';
+import _ from 'lodash';
 const isMobile = document.documentElement.clientWidth < 600;
 
 
-const Carrousel = () => {
+const Carrousel = ({ allCours } : { allCours?: Cours[] }) => {
 
   SwiperCore.use([Navigation]);
   return (
@@ -34,66 +30,20 @@ const Carrousel = () => {
             <Carousel mx="auto" withIndicators height={380} className="carousel-home"  slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md" loop
               align="start">
-              <Carousel.Slide>
-                <div className="cardCours2">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
+            {
+              allCours && _.map(allCours, (cours) => (
+                <Carousel.Slide>
+                  <div className="cardCours2">
+                    <p className="titreCours">{cours.title}</p>
+                    <div className="imgCours " id="imgCours">
+                      <p>
+                        {cours.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCours2">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCours2">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCours2">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCours2">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <div className="cardCours2">
-                  <p className="titreCours">Hey</p>
-                  <div className="imgCours " id="imgCours">
-                    <p>
-                      Titre
-                    </p>
-                  </div>
-                </div>
-              </Carousel.Slide>
+                </Carousel.Slide>
+              ))
+            }
             </Carousel>
         </div>
       </div>
