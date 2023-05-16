@@ -10,7 +10,7 @@ import DeleteConfirmationModal from '../../Components/Global/DeleteConfirmationM
 import { deleteNews } from '../../Controllers/news'
 import _ from 'lodash'
 
-const NewsPage = () => {
+export const NewsPage = () => {
 
   const [allNews, setAllNews] = useState<News[]>([])
   const [currentNews, setCurrentNews] = useState<News | undefined>(undefined)
@@ -24,26 +24,6 @@ const NewsPage = () => {
       setAllNews(news)
     }
   }, [])
-
-  const closeAddOrEditModal = () => {
-    setIsAddOrEditModalOpen(false)
-    setCurrentNews(undefined)
-  }
-
-  const closeDeleteConfirmationModal = () => {
-    setIsDeleteConfirmationModalOpen(false)
-  }
-
-  const openDeleteConfirmationModal = () => {
-    setIsDeleteConfirmationModalOpen(true)
-  }
-
-  const deleteCurrentNews = async (idToDelete: string) => {
-    setAllNews((oldNewsState) => oldNewsState.filter(newsItem => newsItem.id !== idToDelete ))
-    await deleteNews(idToDelete)
-    setCurrentNews(undefined)
-    closeDeleteConfirmationModal()
-  }
   
   useEffect(() => {
     fetchData()
@@ -69,5 +49,3 @@ const NewsPage = () => {
     </div>
   )
 }
-
-export default NewsPage

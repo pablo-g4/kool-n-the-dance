@@ -7,7 +7,7 @@ import { CardCours } from '../../../Components/Cours/CardCours'
 import { AddOrEditCours } from '../../../Components/Cours/AddOrEditCours'
 import { createCours, getAllCours, updateCours } from '../../../Controllers/cours'
 
-const AdminCoursPage = () => {
+export const CoursPage = () => {
 
     const [switchValue, setSwitchValue] = useState(true)
     const [allCours, setAllCours] = useState<Cours[]>([])
@@ -120,5 +120,3 @@ const AdminCoursPage = () => {
         </div>
     )
 }
-
-export default AdminCoursPage

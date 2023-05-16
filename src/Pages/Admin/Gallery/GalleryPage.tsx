@@ -1,54 +1,49 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
-import { Group } from '@mantine/core';
-import { AiOutlineClose } from 'react-icons/ai';
-import { GrUploadOption } from 'react-icons/gr';
-import CustomSwitch from '../../../Components/Switch/CustomSwitch';
-import "./Gallery.css";
-import { getAllFiles } from '../../../Controllers/files';
-import { createFile, updateFile } from '../../../Controllers/files';
-import { AiOutlineStar } from 'react-icons/ai';
-import { AiFillStar } from 'react-icons/ai';
-import { BsSquare } from 'react-icons/bs';
-import { BsCheckSquareFill } from 'react-icons/bs';
-import ImageViewer from '../../../Components/ImageViewer/ImageViewer';
+import React, { useEffect, useState, useCallback } from 'react'
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
+import { Group } from '@mantine/core'
+import { AiOutlineClose } from 'react-icons/ai'
+import { GrUploadOption } from 'react-icons/gr'
+import CustomSwitch from '../../../Components/Switch/CustomSwitch'
+import { getAllFiles } from '../../../Controllers/files'
+import { createFile, updateFile } from '../../../Controllers/files'
+import ImageViewer from '../../../Components/ImageViewer/ImageViewer'
+import "./Gallery.css"
 
 
-
-const AdminGallery = () => {
+export const GalleryPage = () => {
 
     const [switchValue, setSwitchValue] = useState(true)
-    const [images, setImages] = useState([])
-    const [archiveFiles, setArchiveFiles] = useState([])
+    const [images, setImages] = useState<any>([])
+    const [archiveFiles, setArchiveFiles] = useState<any>([])
 
     const handleSwitch = () => {
         setSwitchValue(!switchValue)
     }
 
-    const onImageChange = async (files) => {
+    const onImageChange = async (files: any) => {
         const file = await createFile(files[0], "gallery");
-        setImages(oldArray => [...oldArray, file])
+        setImages((oldArray:any) => [...oldArray, file])
     }
 
     const getArchivedFiles = () => {
-        return images.filter((image) => {
+        return images.filter((image: any) => {
             return image.isActive === false
         })
     }
 
-    const handleArchiving = async (files) => {
-        let newFiles = []
-        setArchiveFiles(archiveFiles.forEach((file) => {
-            file.isActive = false;
-            newFiles.push(file);
-            return file;
+    const handleArchiving = async (files: any) => {
+        let newFiles: any = []
+        setArchiveFiles(archiveFiles.forEach((file:any) => {
+            file.isActive = false
+            newFiles.push(file)
+            return file
         }))
         console.log(archiveFiles)
-        await Promise.all([archiveFiles.forEach(async (file) => {
+        await Promise.all([archiveFiles.forEach(async (file: any) => {
             await updateFile(file);    
         })])
-        newFiles.map((newFile) => {
-            images.forEach((image) => {
+        newFiles.map((newFile:any) => {
+            images.forEach((image:any) => {
                 if (newFile.id === image.id) {
                     return newFile;
                 }
@@ -101,7 +96,7 @@ const AdminGallery = () => {
                     >
                         <Group position="center" spacing="xl" style={{ pointerEvents: 'none' }} className='dropzone-galerie'>
                             <div>
-                                <span size="s" className='dropzone-text-galerie'>
+                                <span className='dropzone-text-galerie'>
                                     Glisser ici pour ajouter une/des image(s)/vidéo(s) ou
                                 </span>
                                 <button className='button-dropzone-galerie'>
@@ -133,7 +128,7 @@ const AdminGallery = () => {
                 }
             </div>
             <div className='d-flex row images-container'>
-                {images && switchValue ? images.map((image, index) =>
+                {images && switchValue ? images.map((image:any, index: number) =>
                     image.isActive && image.fileUrl && (
                         <div className='col-md-3 col-xs-12 img-fluid'>
                             <ImageViewer
@@ -144,7 +139,7 @@ const AdminGallery = () => {
                             />
                         </div>
                     ))
-                : getArchivedFiles().map((image, index) =>
+                : getArchivedFiles().map((image: any, index: number) =>
                 !image.isActive && image.fileUrl && (
                     <div className='col-md-3 col-xs-12 img-fluid'>
                         <ImageViewer
@@ -160,8 +155,3 @@ const AdminGallery = () => {
         </div>
     )
 }
-
-export default AdminGallery
-
-
-

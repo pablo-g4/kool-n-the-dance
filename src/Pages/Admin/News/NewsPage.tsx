@@ -12,7 +12,7 @@ import _ from 'lodash';
 import "./news.css";
 
 
-const AdminNews = () => {
+export const NewsPage = () => {
 
   const [allNews, setAllNews] = useState<News[]>([])
   const [currentNews, setCurrentNews] = useState<News | undefined>(undefined)
@@ -79,8 +79,3 @@ const AdminNews = () => {
     </>
   )
 }
-
-export default AdminNews
-
-
-

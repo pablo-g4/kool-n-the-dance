@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import Footer from "../Components/Footer/Footer"
 import "./Home.css"
-import background_top_image from "../images/Galerie/DAN_0809inv.png"
 import "./DAN_0568inv@2x.jpg"
-import logo_top from "./Logo@2x.png"
-import vague from "./Tracé 101@2x.jpg"
+import logo_top from "../Assets/Images/Logo@2x.png"
 import rosas from "../images/Galerie/DAN_0568inv.png"
-import Card from "../Components/Card/Card"
 import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
@@ -16,7 +12,6 @@ import { Carousel } from '@mantine/carousel'
 import CardTemoignage from '../Components/cardTemoignage/cardTemoignagne'
 import Trace from "../Assets/Images/Tracé 101.png"
 import Rosas from "../Assets/Images/Tracé 230.png"
-import Php from "../Assets/Images/carousel/carousel3.jpeg"
 import { Link } from "react-router-dom"
 import { Planning } from '../Models/Planning'
 import { getAllPlanning } from '../Controllers/planning'
