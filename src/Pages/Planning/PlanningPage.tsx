@@ -9,7 +9,7 @@ import "react-big-calendar/lib/Week"
 import "react-big-calendar/lib/TimeGrid"
 import 'moment/locale/fr'
 
-const PlanningPage = () => {
+export const PlanningPage = () => {
 
     const [allPlanning, setAllPlanning] = useState<Planning[]>([])
 
@@ -91,5 +91,3 @@ const PlanningPage = () => {
       </>
   )
 }
-
-export default PlanningPage

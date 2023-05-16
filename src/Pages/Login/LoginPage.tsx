@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../db/firebase";
-import { logInWithEmailAndPassword, signInWithGoogle } from "../Authentification/authentication";
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { auth } from "../../db/firebase"
+import { logInWithEmailAndPassword } from "../../Authentification/authentication"
+import { useAuthState } from "react-firebase-hooks/auth"
 
-import { useAuthState } from "react-firebase-hooks/auth";
-import "./Login.css";
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
-  const navigate = useNavigate();
+export const LoginPage = () => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [user, loading, error] = useAuthState(auth)
+
+  const navigate = useNavigate()
+
     useEffect(() => {
         if (loading) {
             return
         }
         if (user) navigate("/admin")
 
-    }, [user, loading]);
+    }, [user, loading])
 
     return (
         <div className="m-4">
@@ -46,5 +48,3 @@ const Login = () => {
         </div>
     );
 }
-
-export default Login

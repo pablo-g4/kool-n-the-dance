@@ -30,8 +30,8 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/actualite" className='none'>
-                                    <a className="nav-link nav-redirect" >Actualité</a>
+                                <Link to="/news" className='none'>
+                                    <a className="nav-link nav-redirect" >Actualités</a>
                                 </Link>
                             </li>
                         </div>

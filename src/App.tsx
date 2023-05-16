@@ -1,26 +1,23 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
-import Topics from './Pages/Topics'
 import Layout from './Pages/Layouts/Layout'
-import Galerie from './Pages/Galerie/Galerie'
-import PlanningPage from './Pages/Planning/Planning'
+import { GaleriePage } from './Pages/Galerie/GaleriePage'
+import { PlanningPage } from './Pages/Planning/PlanningPage'
 
-import Login from './Pages/Login'
-import Dashboard from './Pages/Dashboard'
-import ResetPassword from './Pages/ResetPassword'
-
+import { LoginPage } from './Pages/Login/LoginPage'
+import { ResetPasswordPage as AdminResetPasswordPage } from './Pages/Admin/ResetPassword/ResetPasswordPage'
+import { NewsPage } from './Pages/News/NewsPage'
 import { CoursPage } from './Pages/Cours/CoursPage'
 import './App.css'
 
-import General from "./Pages/Admin/General/General"
+import {GeneralPage} from "./Pages/Admin/General/GeneralPage"
 
-import NewsPage from './Pages/News/News'
-import AdminNews from './Pages/Admin/News/news'
+import { NewsPage as AdminNewsPage } from './Pages/Admin/News/NewsPage'
 import AdminLayout from './Pages/Layouts/AdminLayout'
-import AdminGalleryPage from './Pages/Admin/Gallery/Gallery'
-import AdminForfaitPage from './Pages/Admin/Forfait/Forfaits'
-import AdminPlanningPage from "./Pages/Admin/Planning/Planning"
-import AdminCoursPage from './Pages/Admin/Cours/AdminCoursPage'
+import { GalleryPage as AdminGalleryPage} from './Pages/Admin/Gallery/GalleryPage'
+import { ForfaitPage as AdminForfaitPage} from './Pages/Admin/Forfait/ForfaitPage'
+import { PlanningPage as AdminPlanningPage} from "./Pages/Admin/Planning/PlanningPage"
+import { CoursPage as AdminCoursPage } from './Pages/Admin/Cours/CoursPage'
 
 const App = () => {
 
@@ -29,18 +26,16 @@ const App = () => {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" index element={<Home />} />
-            <Route path="/topics/*" element={<Topics />} />
             <Route path="/planning/*" element={<PlanningPage />} />
-            <Route path="/actualite" element={<NewsPage />} />
-            <Route path="/cours" element={<CoursPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/galerie/*" element={<Galerie />} />
+            <Route path="/news/*" element={<NewsPage />} />
+            <Route path="/cours/*" element={<CoursPage />} />
+            <Route path="/login/*" element={<LoginPage />} />
+            <Route path="/galerie/*" element={<GaleriePage />} />
           </Route>
           <Route element={<AdminLayout />} >
-              <Route path="/admin/" element={<General />} />
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-              <Route path="/admin/reset-password" element={<ResetPassword />} />
-              <Route path="/admin/News" element={<AdminNews />} />
+              <Route path="/admin/" element={<GeneralPage />} />
+              <Route path="/admin/reset-password" element={<AdminResetPasswordPage />} />
+              <Route path="/admin/news" element={<AdminNewsPage />} />
               <Route path="/admin/planning" element={<AdminPlanningPage />} />
               <Route path="/admin/cours/*" element={<AdminCoursPage />} />
               <Route path="/admin/galerie" element={<AdminGalleryPage />} />

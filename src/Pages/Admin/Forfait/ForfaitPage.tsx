@@ -11,7 +11,7 @@ import CardHomeCours from "../../../Components/cardHomeCours/cardHomeCours"
 import '../../../Components/Carrousel_Activite/styleActivite.css'
 import CustomSwitch from '../../../Components/Switch/CustomSwitch'
 
-const Forfaits = () => {
+export const ForfaitPage = () => {
 
     const [allForfaits , setAllForfaits] = useState<Forfait[]>([])
     const [switchValue, setSwitchValue] = useState(true)
@@ -184,5 +184,3 @@ const Forfaits = () => {
         </div>
     )
 }
-
-export default Forfaits
