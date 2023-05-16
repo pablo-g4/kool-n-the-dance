@@ -1,23 +1,26 @@
-import React, { Component } from "react";
-import { Forfait } from "../../Models/Forfait";
-import "./Footer_cours.css";
+import React, { Component } from "react"
+import { Forfait } from "../../Models/Forfait"
+import _ from "lodash"
+import "./Footer_cours.css"
 
 const Footer_cours = ({ forfaits } : { forfaits?: Forfait[]}) => {
   return (
     <>
-      <div className="red-bg pt-5">
-        <div className="row ">
+      <div className="red-bg p-4">
+        <div className="row">
           {
-            forfaits?.length && forfaits?.map((forfait) => (
-              <div className="mx-4 col-md-4 col-xs-12 text-white">
-              <p className="p-cours-titre">{forfait.title}</p>
-              <div>
-                <p style={{
-                  whiteSpace: 'pre-line',
-                }
-                }>{forfait?.description?.join('\n')}</p>
+            forfaits?.length && _.map(forfaits,(forfait) => (
+              <div className="col-4 col-xs-12 text-white">
+                <p className="p-cours-titre">{forfait.title}</p>
+                <div>
+                  <p
+                    className="px-2"
+                   style={{
+                    whiteSpace: 'pre-line',
+                  }
+                  }>{forfait?.description?.join('\n')}</p>
+                </div>
               </div>
-            </div>
             ))
           }
         </div>

@@ -64,7 +64,7 @@ export const PlanningPage = () => {
             formats={formats}
             timeslots={1}
             step={60}
-            style={{ height: "80vh", padding: '4px' }}
+            style={{ height: "80vh", padding: '10px' }}
             min={
                 new Date(
                     today.getFullYear(),
