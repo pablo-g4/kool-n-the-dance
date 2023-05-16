@@ -10,7 +10,7 @@ import { NewsPage } from './Pages/News/NewsPage'
 import { CoursPage } from './Pages/Cours/CoursPage'
 import './App.css'
 
-import {GeneralPage} from "./Pages/Admin/General/GeneralPage"
+import { GeneralPage } from "./Pages/Admin/General/GeneralPage"
 
 import { NewsPage as AdminNewsPage } from './Pages/Admin/News/NewsPage'
 import AdminLayout from './Pages/Layouts/AdminLayout'
