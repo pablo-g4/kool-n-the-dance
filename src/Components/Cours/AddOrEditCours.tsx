@@ -92,7 +92,7 @@ const handleCourseType = (currentCourseType: any) => setForm({...form, courseTyp
                   <Group position="center" spacing="xl" style={{ pointerEvents: 'none' }} className="dropzone">
                     <div>
                       <Text size="s" inline>
-                        Glisser ou importer des images articles.
+                        Glisser ou importer une image de fond
                       </Text>
                     </div>
                     <Dropzone.Accept>

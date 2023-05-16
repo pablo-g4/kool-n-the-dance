@@ -59,6 +59,8 @@ export const CoursPage = () => {
     useEffect(() => {
         const fetchAllCours = async () => {
             const allCours = await getAllCours()
+            console.log(allCours)
+
             setAllCours(allCours)
         }
         fetchAllCours()

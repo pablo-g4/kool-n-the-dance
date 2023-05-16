@@ -13,7 +13,7 @@ import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
 import { Forfait } from '../../Models/Forfait'
 import _ from 'lodash'
 import 'swiper/css'
-
+import CarouselSlide from './CarrouselSlideForfait'
 const isMobile = document.documentElement.clientWidth < 600;
 
 
@@ -35,22 +35,10 @@ const Carrousel_Yellow = ({ forfaits } : { forfaits?: Forfait[]}) => {
             <Carousel mx="auto" withIndicators height={380} className="carousel-home"  slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md" loop
               align="start">
-                {
-                  forfaits?.length && (
-                    _.map(forfaits, (forfait) => (
-                      <Carousel.Slide>
-                      <div className="cardCoursRed">
-                        <p className="titreCours">{forfait.title}</p>
-                        <div className="imgCours " id="imgCours">
-                          <p>
-                            {forfait.description}
-                          </p>
-                        </div>
-                      </div>
-                    </Carousel.Slide>
-                    ))
-                  )
-                }
+                {forfaits?.length &&
+              _.map(forfaits, (cours, index) => (
+                <CarouselSlide key={index} cours={cours} />
+              ))}
 
             </Carousel>
         </div>

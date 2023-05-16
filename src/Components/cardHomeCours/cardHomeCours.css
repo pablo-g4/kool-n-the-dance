@@ -163,3 +163,50 @@
     opacity: 1;
     font-size: 14px;
 }
+
+
+
+
+
+
+.imgCours2 p {
+    font-family: Alice;
+    font-size: 14px;
+    opacity: 0;
+    padding: 15px;
+}
+.imgCours2 p:hover {
+    font-family: Alice;
+    font-size: 14px;
+    opacity: 1;
+    padding: 15px;
+}
+.imgCours2{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.cardCoursRed2 {
+    color: black;
+    background-color: #fb3640;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardCoursRed2 .titreCours {
+    text-align: left;
+    font-size: 24px;
+    padding: 20px 15px 0 15px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.cardCoursRed2:hover .imgCours p {
+    opacity: 1;
+    font-size: 14px;
+}

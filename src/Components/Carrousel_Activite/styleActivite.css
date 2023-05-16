@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
   /*CSS DU CARROUSEL VIOLET*/
-
+  .mb-4{
+    margin-bottom: 1.5rem!important;
+  }
   .swiper-button-prev::after {
     content: '‹'; /* code unicode pour la flèche gauche */
     font-size: 100px;
