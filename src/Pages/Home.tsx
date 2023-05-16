@@ -16,6 +16,7 @@ import { Link } from "react-router-dom"
 import { Planning } from '../Models/Planning'
 import { getAllPlanning } from '../Controllers/planning'
 import _ from 'lodash'
+import { formatDateDDMMYY } from '../Utils/utils'
 
 const Home = () => {
 
@@ -206,7 +207,7 @@ const Home = () => {
       </div>
       <p className="  float-right my-2">
         <Link to="/cours" className='none'>
-          <a href='' className="link-accueil ">Voir toute les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+          <a href='' className="link-accueil ">Voir tout les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
         </Link>
       </p>
       <div>
@@ -219,26 +220,28 @@ const Home = () => {
           </p>
         </div>
         {
-          filteredPlanningForTheDay().length &&
+          filteredPlanningForTheDay().length ?
           filteredPlanningForTheDay().map(planning => (
-
             <div className="col-lg-2 col-6 spacingCol">
               <CardHomePlanning
-                horaire={ `${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
+                horaire={`${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
                 titre={planning.title}
                 text="Pour enfants de 6-9 ans"
                 src=""
               ></CardHomePlanning>
             </div>
-          ))
+          )) : (
+            <div className='col-12 text-center my-4'>
+                <h3 className="text-white">Aucun planning disponible pour le { new Date().toLocaleDateString("fr-FR")}</h3>
+            </div>
+          )
         }
-        {/* Prendre le planning ajd et boucler sur les activiter du jour   */}
       </div>
 
 
       <div>
-        <div className="row justify-content-center mt-4 mb-4  ">
-          <h1 className="title-home">Actualité</h1>
+        <div className="row justify-content-center mt-4 mb-4 ">
+          <h1 className="title-home">Actualités</h1>
         </div>
         <div className="row ">
           {/* Prendre une div ci dessous boucler sur les 3 dernieres actualitér */}
@@ -253,14 +256,14 @@ const Home = () => {
           </div>
         </div>
         <p className="  float-right my-2">
-          <Link to="/actualite" className='none'>
-            <a href='' className="link-accueil ">Voir toute l'actualité  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+          <Link to="/news" className='none'>
+            <a href='' className="link-accueil ">Voir toutes les actualités <FontAwesomeIcon icon={faArrowCircleRight} /></a>
           </Link>
         </p>
       </div>
       <br />
       <div className='my-5'>
-        <h1 className=" text-center title-home">Temoignage</h1>
+        <h1 className=" text-center title-home">Temoignages</h1>
         <div className="m-auto d-block ">
           <div className='row'>
             <div className="col-md-5 col-sm-12 w-75">
