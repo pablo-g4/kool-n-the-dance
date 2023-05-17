@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import "./Home.css"
 import "./DAN_0568inv@2x.jpg"
-import logo_top from "../Assets/Images/Logo@2x.png"
-import rosas from "../images/Galerie/DAN_0568inv.png"
-import CardHomeActualite from "../Components/CardHomeActualite/CardHomeActualite"
+import logo_top from '../Assets/Images/Logo@2x.png'
+import rosas from '../images/Galerie/DAN_0568inv.png'
+import CardHomeActualite from '../Components/CardHomeActualite/CardHomeActualite'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
 import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning"
@@ -15,14 +15,24 @@ import Rosas from "../Assets/Images/Tracé 230.png"
 import { Link } from "react-router-dom"
 import { Planning } from '../Models/Planning'
 import { getAllPlanning } from '../Controllers/planning'
+import { getAllNews } from '../Controllers/news'
 import _ from 'lodash'
 import { formatDateDDMMYY } from '../Utils/utils'
+import { News } from '../Models/News'
+import { Cours, COURSES_TYPES } from '../Models/Cours'
+import { getAllCours } from '../Controllers/cours'
+import { Forfait } from '../Models/Forfait'
+import { getAllForfaits } from '../Controllers/forfait'
+
 
 const Home = () => {
 
   const today = new Date()
 
   const [planningForTheDay, setPlanningForTheDay] = useState<Planning[]>([])
+  const [allNews, setAllNews] = useState<News[]>([])
+  const [allCourses, setAllCours] = useState<Cours[]>([])
+  const [allForfaits, setAllForfaits] = useState<Forfait[]>([])
 
   function displayCardData(test: number) {
     if (test != null)
@@ -39,23 +49,45 @@ const Home = () => {
   }
   const isMobile = document.documentElement.clientWidth < 600;
 
+
   useEffect(() => {
     // Met à jour le titre du document via l’API du navigateur
     document.getElementById('fitness')!.style.display = 'none';
     document.getElementById('forfait')!.style.display = 'none';
   })
 
+  const fetchAndSetNews = async () => {
+    let news = await getAllNews()
+    news = _.orderBy(news, 'creationDate', 'desc')
+    setAllNews([..._.take(news, 3)])
+  }
+
+  const fetchAndSetCours = async () => {
+    let cours = await getAllCours()
+    setAllCours(cours)
+  }
+
+  const fetchAndSetPlanning = async () => {
+    let planning = await getAllPlanning()
+    setPlanningForTheDay(planning)
+  }
+
+  const fetchAndSetForfaits = async () => {
+    const forfaits = await getAllForfaits()
+    setAllForfaits(forfaits)
+  }
+
   useEffect(() => {
-
-    const fetchPlanning = async () => {
-      let allPlanning = await getAllPlanning()
-      setPlanningForTheDay(allPlanning)
-    }
-
-    fetchPlanning()
+    fetchAndSetNews()
+    fetchAndSetPlanning()
+    fetchAndSetCours()
+    fetchAndSetForfaits()
   },[])
 
 
+  const getDansesCours = () =>  _.filter(allCourses, ['courseType', COURSES_TYPES.DANSES])
+
+  const getFitnessCours = () =>  _.filter(allCourses, ['courseType', COURSES_TYPES.FITNESS])
 
   function displayCard(test: string) {
     switch (test) {
@@ -165,11 +197,14 @@ const Home = () => {
               <Carousel mx="auto" withIndicators height={380} className="carousel-home " slidesToScroll={isMobile ? 3 : 1} slideSize={isMobile ? "100%" : "33.333333%"}
                 slideGap="md" loop
                 align="start">
-                <Carousel.Slide className=""><CardHomeCours ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
+                  {
+                    getDansesCours().length && _.map(getDansesCours(), (coursDanse, index) => (
+                      <Carousel.Slide key={index} className="">
+                        <CardHomeCours text={coursDanse.description} titre={coursDanse.title} src={coursDanse.imageUrl} ></CardHomeCours>
+                      </Carousel.Slide>
+                    ))
+                  }
               </Carousel>
-
             </div>
           </div>
         </div>
@@ -179,12 +214,14 @@ const Home = () => {
               <Carousel mx="auto" withIndicators height={380} className="carousel-home" slidesToScroll={isMobile ? 3 : 1} slideSize={isMobile ? "100%" : "33.333333%"}
                 slideGap="md" loop
                 align="start">
-                <Carousel.Slide className=""><CardHomeCours text="aaaaaaaa" titre="oooooooooo" src="" ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className=""><CardHomeCours text="aaaaaaaa" titre="oooooooooo" ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className=""><CardHomeCours text="aaaaaaaa" titre="oooooooooo" ></CardHomeCours></Carousel.Slide>
-
+                  {
+                    getFitnessCours().length && _.map(getFitnessCours(), (coursFitness, index) => (
+                      <Carousel.Slide key={index} className="">
+                        <CardHomeCours text={coursFitness.description} titre={coursFitness.title} src={coursFitness.imageUrl} ></CardHomeCours>
+                      </Carousel.Slide>
+                    ))
+                  }
               </Carousel>
-
             </div>
           </div>
         </div>
@@ -194,12 +231,16 @@ const Home = () => {
               <Carousel mx="auto" withIndicators height={380} className="carousel-home" slidesToScroll={isMobile ? 3 : 1} slideSize={isMobile ? "100%" : "33.333333%"}
                 slideGap="md" loop
                 align="start">
-                <Carousel.Slide className=""><CardHomeCours ></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
-                <Carousel.Slide className=""><CardHomeCours></CardHomeCours></Carousel.Slide>
-
+                      <Carousel.Slide className="">
+                        <CardHomeCours text="{coursFitness.description}" titre="{coursFitness.title}" src="{coursFitness.imageUrl}" ></CardHomeCours>
+                      </Carousel.Slide>
+                      <Carousel.Slide className="">
+                        <CardHomeCours text="{coursFitness.description}" titre="{coursFitness.title}" src="{coursFitness.imageUrl}" ></CardHomeCours>
+                      </Carousel.Slide>
+                      <Carousel.Slide className="">
+                        <CardHomeCours text="{coursFitness.description}" titre="{coursFitness.title}" src="{coursFitness.imageUrl}" ></CardHomeCours>
+                      </Carousel.Slide>
               </Carousel>
-
             </div>
           </div>
         </div>
@@ -221,13 +262,14 @@ const Home = () => {
         </div>
         {
           filteredPlanningForTheDay().length ?
-          filteredPlanningForTheDay().map(planning => (
-            <div className="col-lg-2 col-6 spacingCol">
+          filteredPlanningForTheDay().map((planning, index )=> (
+            <div key={index} className="col-lg-2 col-6 spacingCol">
               <CardHomePlanning
                 horaire={`${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
                 titre={planning.title}
                 text="Pour enfants de 6-9 ans"
                 src=""
+                key={index}
               ></CardHomePlanning>
             </div>
           )) : (
@@ -244,16 +286,13 @@ const Home = () => {
           <h1 className="title-home">Actualités</h1>
         </div>
         <div className="row ">
-          {/* Prendre une div ci dessous boucler sur les 3 dernieres actualitér */}
-          <div className="col-md-4 col-sm-12">
-            <CardHomeActualite></CardHomeActualite>
-          </div>
-          <div className="col-md-4 col-sm-12">
-            <CardHomeActualite></CardHomeActualite>
-          </div>
-          <div className="col-md-4 col-sm-11 ">
-            <CardHomeActualite></CardHomeActualite>
-          </div>
+          {
+            allNews.length && _.map(allNews, (news, index) => (
+              <div key={index} className="col-md-4 col-sm-12">
+                <CardHomeActualite  news={news}></CardHomeActualite>
+              </div>
+            ))
+          }
         </div>
         <p className="  float-right my-2">
           <Link to="/news" className='none'>
@@ -263,20 +302,20 @@ const Home = () => {
       </div>
       <br />
       <div className='my-5'>
-        <h1 className=" text-center title-home">Temoignages</h1>
+        <h1 className=" text-center title-home">Témoignages</h1>
         <div className="m-auto d-block ">
           <div className='row'>
             <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="" text=""></CardTemoignage>
+              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
             </div>
             <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="" text=""></CardTemoignage>
+              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
             </div>
             <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="" text=""></CardTemoignage>
+              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
             </div>
             <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="" text=""></CardTemoignage>
+              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
             </div>
           </div>
         </div>

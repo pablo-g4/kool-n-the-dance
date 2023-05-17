@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from "react"
+import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import imgtest from "../../images/Galerie/DAN_0568inv.png";
+import imgtest from "../../images/Galerie/DAN_0568inv.png"
 import "./cardTemoignage.css"
 
 const CardTemoignage = ({ img = "", nom = "", text = "" }) => {
@@ -11,7 +11,7 @@ const CardTemoignage = ({ img = "", nom = "", text = "" }) => {
         <div>
             <div className="d-flex my-5">
                 <div className="col-6">
-                    <img src={img} className="rounded  w-50 m-auto d-block" />
+                    <img src={imgtest} className="rounded  w-50 m-auto d-block" />
                 </div>
              
                 <div className="d-block">
