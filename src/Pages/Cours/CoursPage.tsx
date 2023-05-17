@@ -18,8 +18,6 @@ export const CoursPage = () => {
   const fetchData = async () => {
     const allForfaits = await getAllForfaits()
     const allCours = await getAllCours()
-    console.log('allForfaits', allForfaits);
-    
     setForfaits(allForfaits)
     setCours(allCours)
   }
@@ -56,7 +54,7 @@ export const CoursPage = () => {
 
       {
         _.filter(forfaits, ['isBasic', false]).length ? (
-          <Footer_cours forfaits={_.filter(forfaits, 'isBasic')}/>
+          <Footer_cours forfaits={_.filter(forfaits, 'isBasic')} />
         ) : ('Pas de forfaits disponibles')
       }
     </div>
