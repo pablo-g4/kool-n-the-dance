@@ -9,8 +9,6 @@ import rosas from '../../Assets/Images/DAN_0568inv.png'
 import Danse from "../../Assets/Images/Cours/Danses.jpg"
 import Fitness from "../../Assets/Images/Cours/Fitness.jpeg"
 import Forfait2 from "../../Assets/Images/Cours/Forfaits.jpeg"
-// import vaguerose from "./VagueRose.png"
-// import CardCours from "./CardCours"
 
 import CardHomeActualite from '../../Components/CardHomeActualite/CardHomeActualite'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -331,16 +329,16 @@ export const HomePage = () => {
         <div className="m-auto d-block ">
           <div className='row'>
             <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img="" nom="Maria Mercier (élève)" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
+              <CardTemoignage img={Fitness} nom="Maria Mercier (élève)" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
             </div>
             <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img="" nom="Baumier Elise (élève)" text="Super prof! Dynamique, toujours de bonne humeur et soucieuse de ses élèves!"></CardTemoignage>
+              <CardTemoignage img={Forfait2} nom="Baumier Elise (élève)" text="Super prof! Dynamique, toujours de bonne humeur et soucieuse de ses élèves!"></CardTemoignage>
             </div>
             <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img="" nom="Merckling Pascalle (élève)" text="Dynamique, bienveillante et très  à l'écoute  de ses élèves.  Elle ne compte pas son temps pour assurer des cours de qualité.  Tout ça  dans une excellente ambiance. On en redemande. Cours d excellente qualité  à  la portée  de tous  avec des prix attractifs et un grand respect des règles  en vigueur par rapport au Covid."></CardTemoignage>
+              <CardTemoignage img={Danse} nom="Merckling Pascalle (élève)" text="Dynamique, bienveillante et très  à l'écoute  de ses élèves.  Elle ne compte pas son temps pour assurer des cours de qualité.  Tout ça  dans une excellente ambiance. On en redemande. Cours d excellente qualité  à  la portée  de tous  avec des prix attractifs et un grand respect des règles  en vigueur par rapport au Covid."></CardTemoignage>
             </div>
             <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img="" nom="Amielle" text="J'ai adoré dès le premier cours! Ambiance et prof géniale qui donne envie de venir en cours de sport! Je recommande +++!"></CardTemoignage>
+              <CardTemoignage img={Forfait2} nom="Amielle" text="J'ai adoré dès le premier cours! Ambiance et prof géniale qui donne envie de venir en cours de sport! Je recommande +++!"></CardTemoignage>
             </div>
           </div>
         </div>

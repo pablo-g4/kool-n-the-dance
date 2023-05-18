@@ -11,7 +11,7 @@ const CardTemoignage = ({ img = "", nom = "", text = "" }) => {
         <div>
             <div className="d-flex my-5">
                 <div className="col-6">
-                    <img src={imgtest} className="rounded  w-50 m-auto d-block" />
+                    <img src={img} className="rounded  w-50 m-auto d-block" />
                 </div>
              
                 <div className="d-block">

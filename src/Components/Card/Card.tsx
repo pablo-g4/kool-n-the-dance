@@ -3,7 +3,7 @@ import "./Card.css";
 import { News } from '../../Models/News';
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 import { formatDateDDMMYY } from '../../Utils/utils'
-import defaultPic from '../../Assets/Images/courmacuck.jpg'
+import defaultPic from '../../Assets/Images/nofiles.jpg'
 
 
 const position = [51.505, -0.09]

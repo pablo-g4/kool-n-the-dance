@@ -1,6 +1,6 @@
 import Image from './../../image/lArticle_img.png'
 import { News } from '../../Models/News'
-import defaultPic from '../../Assets/Images/courmacuck.jpg'
+import defaultPic from '../../Assets/Images/nofiles.jpg'
 import { formatDateDDMMYY } from '../../Utils/utils'
 
 const CardRight = ({ news } : { news: News}) => {
