@@ -13,9 +13,10 @@ import CarouselSlide from "./CarrouselSlideDanses";
 const isMobile = document.documentElement.clientWidth < 600;
 
 export const CarrouselActivite = ({ allCours }: { allCours?: Cours[] }) => {
-  const [hover, setHover] = useState(false);
 
-  SwiperCore.use([Navigation]);
+
+  SwiperCore.use([Navigation])
+  
   return (
     <>
       <div className="mainDiv">
@@ -38,10 +39,10 @@ export const CarrouselActivite = ({ allCours }: { allCours?: Cours[] }) => {
             loop
             align="start"
           >
-            {allCours &&
-          _.map(allCours, (cours, index) => (
-            <CarouselSlide key={index} cours={cours} />
-          ))}
+            {allCours?.length &&
+              _.map(allCours, (cours, index) => (
+                <CarouselSlide key={index} cours={cours} />
+              ))}
           </Carousel>
         </div>
       </div>

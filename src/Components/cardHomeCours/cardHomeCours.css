@@ -33,12 +33,6 @@
 
 }
 
-.cardCours:hover .imgCours {
-    background-image:
-        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0.75), rgba(100, 74, 130, 1)),
-        url('../../Assets/Images/Galerie/DAN_0809inv@2x.png');
-}
-
 .cardCours:hover .imgCours p {
     opacity: 1;
     font-size: 14px;
@@ -163,11 +157,6 @@
     opacity: 1;
     font-size: 14px;
 }
-
-
-
-
-
 
 .imgCours2 p {
     font-family: Alice;

@@ -12,7 +12,6 @@ import { Forfait } from "../../../Models/Forfait";
 import { AiOutlineClose } from "react-icons/ai";
 import DeleteConfirmationModal from "../../../Components/Global/DeleteConfirmationModal";
 import AddOrEditCustomForfaitModal from "../../../Components/Forfaits/AddOrEditCustomForfaitModal";
-import CardHomeCours from "../../../Components/cardHomeCours/cardHomeCours";
 import "../../../Components/Carrousel_Activite/styleActivite.css";
 import CustomSwitch from "../../../Components/Switch/CustomSwitch";
 
