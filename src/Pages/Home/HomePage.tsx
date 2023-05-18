@@ -6,6 +6,11 @@ import "../../Assets/Images/DAN_0568inv@2x.jpg"
 import logo_top from '../../Assets/Images/Logo@2x.png'
 import rosas from '../../Assets/Images/DAN_0568inv.png'
 
+import Danse from "../../Assets/Images/Cours/Danses.jpg"
+import Fitness from "../../Assets/Images/Cours/Fitness.jpeg"
+import Forfait2 from "../../Assets/Images/Cours/Forfaits.jpeg"
+// import vaguerose from "./VagueRose.png"
+// import CardCours from "./CardCours"
 
 import CardHomeActualite from '../../Components/CardHomeActualite/CardHomeActualite'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -346,13 +351,13 @@ export const HomePage = () => {
         <div className='row'>
           {/* Prendre une div ci dessous et boucler la div sur les images recup en bdd ( 3 si possible ) */}
           <div className='col-lg-4 col-12 my-2'>
-            <img src={rosas} width={"100%"} />
+            <img src={Danse} width={"100%"} height={"100%"}/>
           </div>
           <div className='col-lg-4 col-12 my-2' >
-            <img src={rosas} width={"100%"} />
+            <img src={Fitness} width={"100%"} height={"100%"} />
           </div>
           <div className='col-lg-4 col-12 my-2'>
-            <img src={rosas} width={"100%"} />
+            <img src={Forfait2} width={"100%"} height={"100%"} />
           </div>
         </div>
         <p className="  float-right my-2">
