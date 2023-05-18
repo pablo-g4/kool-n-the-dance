@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
 import CardHomePlanning from "../../Components/CardHomePlanning/CardHomePlanning"
 import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
+// import CardCours from '../../Components/cardHomeCours/cardHomeCours'
 import { Carousel } from '@mantine/carousel'
 import CardTemoignage from '../../Components/cardTemoignage/cardTemoignagne'
 
@@ -33,7 +34,9 @@ import { Cours, COURSES_TYPES } from '../../Models/Cours'
 import { getAllCours } from '../../Controllers/cours'
 import { Forfait } from '../../Models/Forfait'
 import { getAllForfaits, getAllBasicForfait } from '../../Controllers/forfait'
-
+import CarouselSlide from '../../Components/Carrousel_Activite/CarrouselSlideDanses'
+import CarouselSlideFitness from '../../Components/Carrousel_Activite/CarrouselSlideBienEtre'
+import { CarouselSlideForfait } from '../../Components/Carrousel_Activite/CarouselSlideForfait'
 
 export const HomePage = () => {
 
@@ -45,19 +48,10 @@ export const HomePage = () => {
   const [allForfaits, setAllForfaits] = useState<Forfait[]>([])
   const [currentTab, setCurrentTab] = useState('danse')
 
-  function displayCardData(test: number) {
-    if (test != null)
-      document.getElementById('data_cours_' + test)!.style.visibility = 'visible';
-  }
-
   const filteredPlanningForTheDay = () => {
     return _.filter(planningForTheDay, (planning) => today.getDay() === new Date(planning.startDate).getDay() && today.getMonth() === new Date(planning.startDate).getMonth() && today.getFullYear() === new Date(planning.startDate).getFullYear())
   }
 
-  function hideCardData(test: number) {
-    if (test != null)
-      document.getElementById('data_cours_' + test)!.style.visibility = 'hidden';
-  }
   const isMobile = document.documentElement.clientWidth < 600;
 
   const getCurrentTabElementsLenght = () => {
@@ -104,7 +98,6 @@ export const HomePage = () => {
     fetchAndSetForfaits()
   }, [])
 
-
   const getDansesCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.DANSES])
 
   const getFitnessCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.FITNESS])
@@ -117,7 +110,6 @@ export const HomePage = () => {
   const changeButton = (tab: string) => {
     switch (tab) {
       case 'forfait':
-
         document.getElementById('btn-fitness')!.classList.remove('btn-selected');
         document.getElementById('btn-forfait')!.classList.add('btn-selected');
         document.getElementById('btn-danse')!.classList.remove('btn-selected');
@@ -223,6 +215,7 @@ export const HomePage = () => {
             }}
             withControls={getCurrentTabElementsLenght()}
             loop={getCurrentTabElementsLenght()}
+            draggable={isMobile ? true :getCurrentTabElementsLenght()}
             height={350}
             slidesToScroll={1}
             slideSize={isMobile ? "100%" : "33.333333%"}
@@ -230,33 +223,25 @@ export const HomePage = () => {
             align="start">
             {
               currentTab === 'danse' && (
-                getDansesCours().length ? _.map(getDansesCours(), (danse) => (
-                  <Carousel.Slide id='fitness'>
-                    <CardHomeCours text={danse.description} titre={danse.title} src='{coursFitness.imageUrl} '></CardHomeCours>
-                  </Carousel.Slide>
+                getDansesCours().length ? _.map(getDansesCours(), (danse, index) => (
+                  <CarouselSlide key={index} cours={danse} />
                 )) : <p>Pas de cous actuellement</p>
               )
             }
             {
               currentTab === 'fitness' && (
-                getFitnessCours().length ? _.map(getFitnessCours(), (fitness) => (
-                  <Carousel.Slide id='fitness'>
-                    <CardHomeCours text={fitness.description} titre={fitness.title} src='{coursFitness.imageUrl} '></CardHomeCours>
-                  </Carousel.Slide>
-                ))
-                  :
-                  <p>Pas de cours de fitness actuellement</p>
+                getFitnessCours().length ? _.map(getFitnessCours(), (fitness,index) => (
+                  <CarouselSlideFitness cours={fitness} key={index} />
+                )) : <p>Pas de cours de Fitness actuellement</p>
               )
             }
             {
               currentTab === 'forfait' && (
-                allForfaits.length ? _.map(allForfaits, (forfait) => (
-                  <Carousel.Slide id='fitness'>
-                    <CardHomeCours text={forfait.description.toString()} titre={forfait.title} src={forfait.imageUrl}></CardHomeCours>
+                allForfaits.length ? _.map(allForfaits, (forfait, index) => (
+                  <Carousel.Slide key={index}  id='fitness'>
+                    <CardHomeCours text={forfait.description.toString()}  titre={forfait.title} src={forfait.imageUrl} type="forfait"></CardHomeCours>
                   </Carousel.Slide>
-                ))
-                  :
-                  <div>Pas de cours de forfait actuellement</div>
+                )) : <div>Pas de forfait actuellement</div>
               )
             }
 
