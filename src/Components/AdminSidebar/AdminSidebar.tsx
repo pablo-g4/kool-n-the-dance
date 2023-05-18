@@ -1,17 +1,12 @@
 import React, { useState } from "react"
 import "./AdminSidebar.css"
-import LogoBlanc from "../../images/LogoBlanc.png"
+import LogoBlanc from "../../Assets/Images/LogoBlanc.png"
 import { Link } from "react-router-dom";
 
 const AdminSidebar = ({ page = "" }) => {
   const [currentPage, setCurrentPage] = useState("");
 
   return (
-    //Ajouter le className 'currentPage' à l'onglet correspondant à la page active
-    //
-    //Essayer de faire les flêches sur l'onglet actif
-    //
-    //D'après la maquettes enlevé Navbar (top) et footer
     <div className="aSidebar">
       <div className="aSidebar_logo">
         <img className="LogoBlanc" src={LogoBlanc}></img>
@@ -40,14 +35,14 @@ const AdminSidebar = ({ page = "" }) => {
       } to="/admin/galerie">
         <p className="aSidebar_text">Gestion Galerie</p>
       </Link>
-      <Link 
-        className={ page === "/admin/news" ? "currentPage aSidebar_onglet" : "aSidebar_onglet" }
+      <Link
+        className={page === "/admin/news" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"}
         to="/admin/news">
         <p className="aSidebar_text">Gestion Actualité</p>
       </Link>
       <Link className={
         page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
-        } to="/admin/forfait">
+      } to="/admin/forfait">
         <p className="aSidebar_text">Gestion Forfait</p>
       </Link>
     </div>

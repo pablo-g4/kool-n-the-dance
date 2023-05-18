@@ -1,12 +1,12 @@
-import React, { Component, useState } from "react";
-import "./Header_cours.css"
+import React, { useState } from "react";
+import "./HeaderCours.css"
 
 const CardCours = ({
     imgSrc,
-    description,
+    title,
 }: {
     imgSrc: string,
-    description: string
+    title: string
 }) => {
     const [isHovering, setIsHovering] = useState(false);
 
@@ -19,10 +19,10 @@ const CardCours = ({
 
     return (
         <div className="cropedDiv" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div className="img__description w-100 mt-2">
+                <p>{title}</p>
+            </div>
             <img src={imgSrc} className="card-img-top"/>
-            {/* <div className="img__description">
-                <p>{description}</p>
-            </div> */}
         </div>
 
     )

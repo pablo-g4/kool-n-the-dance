@@ -1,4 +1,5 @@
-import Image from './../../image/lArticle_img.png'
+
+import Image from '../../Assets/Images/lArticle_img.png'
 import "./CardHomeActualite.css"
 import { News } from '../../Models/News'
 

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import Home from './Pages/Home'
+import { HomePage } from './Pages/Home/HomePage'
 import Layout from './Pages/Layouts/Layout'
 import { GaleriePage } from './Pages/Galerie/GaleriePage'
 import { PlanningPage } from './Pages/Planning/PlanningPage'
@@ -25,7 +25,7 @@ const App = () => {
     <div className="App">
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" index element={<Home />} />
+            <Route path="/" index element={<HomePage />} />
             <Route path="/planning/*" element={<PlanningPage />} />
             <Route path="/news/*" element={<NewsPage />} />
             <Route path="/cours/*" element={<CoursPage />} />
@@ -46,4 +46,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App

@@ -27,3 +27,13 @@ export const getAllForfaitsEvenDisabled = async (): Promise<Forfait[]> => {
     const allForfaits = await getAllDataFromCollectionEvenDisable(COLLECTION.FORFAITS)
     return _.map(allForfaits, (forfait) => (Forfait.fromDb(forfait)))
 }
+
+export const getAllCustomForfait = async (): Promise<Forfait[]> => {
+    let allForfaits = await getAllForfaits()
+    return _.filter(allForfaits, ['isBasic', false])
+}
+
+export const getAllBasicForfait = async (): Promise<Forfait[]> => {
+    let allForfaits = await getAllForfaits()
+    return _.filter(allForfaits, 'isBasic')
+}

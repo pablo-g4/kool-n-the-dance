@@ -1,10 +1,10 @@
 import _ from "lodash"
 import React, { useEffect, useState } from "react"
-import Header_cours from "../../Components/Header_cours/Header_cours"
+import { HeaderCours } from "../../Components/HeaderCours/HeaderCours"
 import Footer_cours from "../../Components/Footer-cours/Footer_cours"
-import Carrousel_Activite from "../../Components/Carrousel_Activite/Carrousel"
-import Carrousel_Yellow from "../../Components/Carrousel_Activite/Carrousel_Yellow"
-import Carrousel_Red from "../../Components/Carrousel_Activite/Carrousel_Red"
+import { CarrouselActivite } from "../../Components/Carrousel_Activite/CarrouselActivite"
+import { CarrouselYellow } from "../../Components/Carrousel_Activite/CarrouselYellow"
+import { CarrouselRed } from "../../Components/Carrousel_Activite/CarrouselRed"
 import { getAllForfaits } from "../../Controllers/forfait"
 import { Forfait } from "../../Models/Forfait"
 import { Cours, COURSES_TYPES } from "../../Models/Cours"
@@ -34,21 +34,21 @@ export const CoursPage = () => {
 
   return (
     <div>
-      <Header_cours/>
+      <HeaderCours/>
       {
         getCoursDanse().length && (
-          <Carrousel_Activite allCours={getCoursDanse()}/>
+          <CarrouselActivite allCours={getCoursDanse()}/>
         )
       }
       {
         getCoursFitness().length && (
-          <Carrousel_Yellow allCours={getCoursFitness()}/>
+          <CarrouselYellow allCours={getCoursFitness()}/>
         )
       }
 
       {
         getCustomForfaits().length && (
-          <Carrousel_Red forfaits={getCustomForfaits()}/> 
+          <CarrouselRed forfaits={getCustomForfaits()}/> 
         )
       }
 

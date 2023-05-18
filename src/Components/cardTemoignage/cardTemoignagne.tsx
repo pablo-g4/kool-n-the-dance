@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import imgtest from "../../images/Galerie/DAN_0568inv.png"
+import imgtest from '../../Assets/Images/DAN_0568inv.png'
 import "./cardTemoignage.css"
 
 const CardTemoignage = ({ img = "", nom = "", text = "" }) => {
