@@ -57,7 +57,7 @@ const Card = (
                             }
                         </div>
                         <div className='d-flex justify-content-end'>
-                            <p className="card-text-color">{formatDateDDMMYY(news.creationDate)}</p>
+                            <p className="card-text-color">{formatDateDDMMYY(news.creationDate*1000)}</p>
                         </div>
                     </div>
                 </div>

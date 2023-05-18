@@ -20,7 +20,7 @@ const CardRight = ({ news } : { news: News}) => {
                                         news?.description
                                     }
                                 </p>
-                                <h6 className="lArticle_date">{formatDateDDMMYY(news.creationDate ?? 0)}</h6>
+                                <h6 className="lArticle_date">{formatDateDDMMYY(news.creationDate*1000 ?? 0)}</h6>
                             </div>
                         </article>
                     </div>
