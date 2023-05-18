@@ -9,7 +9,6 @@ import 'swiper/swiper-bundle.css'
 import 'swiper/swiper.min.css'
 import logo from './Groupe 56.png'
 import { Carousel } from '@mantine/carousel'
-import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
 import { Forfait } from '../../Models/Forfait'
 import _ from 'lodash'
 import 'swiper/css'
@@ -17,7 +16,7 @@ import CarouselSlide from './CarrouselSlideForfait'
 const isMobile = document.documentElement.clientWidth < 600;
 
 
-const Carrousel_Yellow = ({ forfaits } : { forfaits?: Forfait[]}) => {
+export const CarrouselRed = ({ forfaits } : { forfaits?: Forfait[]}) => {
 
   SwiperCore.use([Navigation]);
   return (
@@ -46,4 +45,3 @@ const Carrousel_Yellow = ({ forfaits } : { forfaits?: Forfait[]}) => {
     </>
   )
 }
-export default Carrousel_Yellow

@@ -11,7 +11,9 @@ const CardCours = ({  titre = "", text = "", src = "../../images/Galerie/DAN_080
         <div className="cardCours">
           <p className="titreCours">{titre}</p>
           <div className="imgCours " id="imgCours">
-            <p>
+            <p style={{
+              wordBreak: 'break-all'
+            }}>
               {text}
             </p>
           </div>

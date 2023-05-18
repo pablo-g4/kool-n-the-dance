@@ -1,19 +1,19 @@
 import React from "react";
 import Footer from "../../Components/Footer/Footer";
-import Header_cours from "../../Components/Header_cours/Header_cours";
+import {HeaderCours} from "../../Components/HeaderCours/HeaderCours";
 import Footer_cours from "../../Components/Footer-cours/Footer_cours";
 
-import Carrousel_Activite from "../../Components/Carrousel_Activite/Carrousel";
-import Carrousel_Yellow from "../../Components/Carrousel_Activite/Carrousel_Yellow";
-import Carrousel_Red from "../../Components/Carrousel_Activite/Carrousel_Red";
+import { CarrouselActivite } from "../../Components/Carrousel_Activite/CarrouselActivite";
+import { CarrouselYellow } from "../../Components/Carrousel_Activite/CarrouselYellow";
+import { CarrouselRed } from "../../Components/Carrousel_Activite/CarrouselRed";
 
 const Cours = () => {
   return (
     <div>
-      <Header_cours />
-      <Carrousel_Activite></Carrousel_Activite>
-      <Carrousel_Yellow></Carrousel_Yellow>
-      <Carrousel_Red></Carrousel_Red>
+      <HeaderCours />
+      <CarrouselActivite></CarrouselActivite>
+      <CarrouselYellow></CarrouselYellow>
+      <CarrouselRed></CarrouselRed>
       <Footer_cours />
     </div>
   );

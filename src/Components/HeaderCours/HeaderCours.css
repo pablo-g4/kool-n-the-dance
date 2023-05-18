@@ -100,13 +100,12 @@
 
 .img__description {
   color: white;
-  font-size: 20px;
+  font-size: 26px;
+  font-weight: bold;
   position: absolute;
-  vertical-align: top;
-  top: 145px;
+  align-items: center;
   display: flex;
-  
-
+  justify-content: center;
 }
 
 .card-text {

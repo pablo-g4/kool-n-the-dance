@@ -1,31 +1,38 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import "./Home.css"
-import "./DAN_0568inv@2x.jpg"
-import logo_top from '../Assets/Images/Logo@2x.png'
-import rosas from '../images/Galerie/DAN_0568inv.png'
-import CardHomeActualite from '../Components/CardHomeActualite/CardHomeActualite'
+
+import "../../Assets/Images/DAN_0568inv@2x.jpg"
+
+import logo_top from '../../Assets/Images/Logo@2x.png'
+import rosas from '../../Assets/Images/DAN_0568inv.png'
+
+
+import CardHomeActualite from '../../Components/CardHomeActualite/CardHomeActualite'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
-import CardHomePlanning from "../Components/CardHomePlanning/CardHomePlanning"
-import CardHomeCours from "../Components/cardHomeCours/cardHomeCours"
+import CardHomePlanning from "../../Components/CardHomePlanning/CardHomePlanning"
+import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
 import { Carousel } from '@mantine/carousel'
-import CardTemoignage from '../Components/cardTemoignage/cardTemoignagne'
-import Trace from "../Assets/Images/Tracé 101.png"
-import Rosas from "../Assets/Images/Tracé 230.png"
+import CardTemoignage from '../../Components/cardTemoignage/cardTemoignagne'
+
+import Trace from "../../Assets/Images/Tracé 101.png"
+
+import Rosas from "../../Assets/Images/Tracé 230.png"
+
 import { Link } from "react-router-dom"
-import { Planning } from '../Models/Planning'
-import { getAllPlanning } from '../Controllers/planning'
-import { getAllNews } from '../Controllers/news'
+import { Planning } from '../../Models/Planning'
+import { getAllPlanning } from '../../Controllers/planning'
+import { getAllNews } from '../../Controllers/news'
 import _ from 'lodash'
-import { formatDateDDMMYY } from '../Utils/utils'
-import { News } from '../Models/News'
-import { Cours, COURSES_TYPES } from '../Models/Cours'
-import { getAllCours } from '../Controllers/cours'
-import { Forfait } from '../Models/Forfait'
-import { getAllForfaits } from '../Controllers/forfait'
+import { formatDateDDMMYY } from '../../Utils/utils'
+import { News } from '../../Models/News'
+import { Cours, COURSES_TYPES } from '../../Models/Cours'
+import { getAllCours } from '../../Controllers/cours'
+import { Forfait } from '../../Models/Forfait'
+import { getAllForfaits, getAllBasicForfait } from '../../Controllers/forfait'
 
 
-const Home = () => {
+export const HomePage = () => {
 
   const today = new Date()
 
@@ -33,6 +40,7 @@ const Home = () => {
   const [allNews, setAllNews] = useState<News[]>([])
   const [allCourses, setAllCours] = useState<Cours[]>([])
   const [allForfaits, setAllForfaits] = useState<Forfait[]>([])
+  const [currentTab, setCurrentTab] = useState('danse')
 
   function displayCardData(test: number) {
     if (test != null)
@@ -49,12 +57,21 @@ const Home = () => {
   }
   const isMobile = document.documentElement.clientWidth < 600;
 
-
-  useEffect(() => {
-    // Met à jour le titre du document via l’API du navigateur
-    document.getElementById('fitness')!.style.display = 'none';
-    document.getElementById('forfait')!.style.display = 'none';
-  })
+  const getCurrentTabElementsLenght = () => {
+    let isLenghtSuperior: boolean = true
+    switch(currentTab) {
+      case 'forfait':
+        isLenghtSuperior = allForfaits.length > 3 
+        break;
+      case 'danse':
+        isLenghtSuperior =  getDansesCours().length > 3 
+        break;
+      case 'fitness':
+        isLenghtSuperior =  getFitnessCours().length > 3 
+        break;
+    }
+    return isLenghtSuperior
+  }
 
   const fetchAndSetNews = async () => {
     let news = await getAllNews()
@@ -89,30 +106,13 @@ const Home = () => {
 
   const getFitnessCours = () =>  _.filter(allCourses, ['courseType', COURSES_TYPES.FITNESS])
 
-  function displayCard(test: string) {
-    switch (test) {
-      case 'forfait':
-        document.getElementById('fitness')!.style.display = 'none';
-        document.getElementById('forfait')!.style.display = 'block';
-        document.getElementById('danse')!.style.display = 'none';
-        break;
-      case 'danse':
-        document.getElementById('fitness')!.style.display = 'none';
-        document.getElementById('forfait')!.style.display = 'none';
-        document.getElementById('danse')!.style.display = 'block';
-        break;
-      case 'fitness':
-        document.getElementById('fitness')!.style.display = 'block';
-        document.getElementById('forfait')!.style.display = 'none';
-        document.getElementById('danse')!.style.display = 'none';
-        break;
-    }
-    changeButton(test)
-
+  const displayCard = (tab: string) => {
+    setCurrentTab(tab)
+    changeButton(tab)
   }
 
-  function changeButton(type: string) {
-    switch (type) {
+  const changeButton = (tab: string) => {
+    switch (tab) {
       case 'forfait':
 
         document.getElementById('btn-fitness')!.classList.remove('btn-selected');
@@ -140,6 +140,7 @@ const Home = () => {
         break;
     }
   }
+
 
   return (
     <>
@@ -185,72 +186,91 @@ const Home = () => {
       <div className='wave-container'>
         <img className="wave" src={Trace}></img>
       </div>
-      <div className="row mx-0">
+
+      <div className="row mx-0 justify-content-center">
         <div className="col-12 text-center">
-          <button id="btn-danse" className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-selected" onClick={() => displayCard('danse')}>Danse</button>
-          <button id="btn-fitness" className="bg-white col-lg-3 col-4 h-100 align-bottom txt-bouton btn-unselected" onClick={() => displayCard('fitness')}>Fitness et bien-être</button>
-          <button id="btn-forfait" className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-unselected" onClick={() => displayCard('forfait')}>Forfait</button>
+          <button
+            id="btn-danse"
+            className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-selected"
+            onClick={() => displayCard('danse')}>
+            Danse
+          </button>
+          <button
+            id="btn-fitness"
+            className="bg-white col-lg-3 col-4 h-100 align-bottom txt-bouton btn-unselected"
+            onClick={() => displayCard('fitness')}>
+            Fitness et bien-être
+          </button>
+          <button
+            id="btn-forfait"
+            className="bg-white col-lg-2 col-4 h-100 align-bottom txt-bouton btn-unselected"
+            onClick={() => displayCard('forfait')}>
+            Forfait
+          </button>
         </div>
-        <div className="col-12 h-100" id="danse">
-          <div className="col-10 border-cours  col-lg-8 col-md-11   mx-auto h-100">
-            <div className="row mt-4 mx-5w">
-              <Carousel mx="auto" withIndicators height={380} className="carousel-home " slidesToScroll={isMobile ? 3 : 1} slideSize={isMobile ? "100%" : "33.333333%"}
-                slideGap="md" loop
-                align="start">
-                  {
-                    getDansesCours().length && _.map(getDansesCours(), (coursDanse, index) => (
-                      <Carousel.Slide key={index} className="">
-                        <CardHomeCours text={coursDanse.description} titre={coursDanse.title} src={coursDanse.imageUrl} ></CardHomeCours>
-                      </Carousel.Slide>
-                    ))
-                  }
-              </Carousel>
-            </div>
-          </div>
+        <div className='d-flex justify-content-center' style={{
+          border: 'solid #644a82',
+          borderRadius: '20px',
+          width: isMobile ? '80%' : '60%'
+        }}>
+          <Carousel
+            style={{
+              width: '80%',
+              padding: '2rem',
+            }}
+            withControls={getCurrentTabElementsLenght()}
+            loop={getCurrentTabElementsLenght()}
+            height={350}
+            slidesToScroll={1}
+            slideSize={isMobile ? "100%" : "33.333333%"}
+            slideGap='xs'
+            align="start">
+            {
+              currentTab === 'danse' && (
+                getDansesCours().length ? _.map(getDansesCours(), (danse) => (
+                  <Carousel.Slide id='fitness'>
+                    <CardHomeCours text={danse.description} titre={danse.title}src='{coursFitness.imageUrl} '></CardHomeCours>
+                  </Carousel.Slide> 
+                )) : <p>Pas de cous actuellement</p>
+              )
+            }
+            {
+              currentTab === 'fitness' && (
+                getFitnessCours().length ? _.map(getFitnessCours(), (fitness) => (
+                  <Carousel.Slide id='fitness'>
+                    <CardHomeCours text={fitness.description} titre={fitness.title} src='{coursFitness.imageUrl} '></CardHomeCours>
+                  </Carousel.Slide>
+                ))
+                  :
+                  <p>Pas de cours de fitness actuellement</p>
+              )
+            }
+            {
+              currentTab === 'forfait' && (
+                allForfaits.length ? _.map(allForfaits, (forfait) => (
+                  <Carousel.Slide id='fitness'>
+                    <CardHomeCours text={forfait.description.toString()}  titre={forfait.title} src={forfait.imageUrl}></CardHomeCours>
+                  </Carousel.Slide>
+                ))
+                  :
+                  <div>Pas de cours de forfait actuellement</div>
+              )
+            }
+            
+          </Carousel>
         </div>
-        <div className="col-12 h-100 " id="fitness">
-          <div className="col-10 border-cours  col-lg-8 col-md-8   mx-auto h-100">
-            <div className="row mt-4 mx-5w">
-              <Carousel mx="auto" withIndicators height={380} className="carousel-home" slidesToScroll={isMobile ? 3 : 1} slideSize={isMobile ? "100%" : "33.333333%"}
-                slideGap="md" loop
-                align="start">
-                  {
-                    getFitnessCours().length && _.map(getFitnessCours(), (coursFitness, index) => (
-                      <Carousel.Slide key={index} className="">
-                        <CardHomeCours text={coursFitness.description} titre={coursFitness.title} src={coursFitness.imageUrl} ></CardHomeCours>
-                      </Carousel.Slide>
-                    ))
-                  }
-              </Carousel>
-            </div>
-          </div>
+        <div className='col-12  d-flex justify-content-end'>
+          <p className="my-2">
+            <Link to="/cours" className='none'>
+              <a href='' className="link-accueil">Voir tout les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+            </Link>
+          </p>
         </div>
-        <div className="col-12 h-100 " id="forfait">
-          <div className="col-10 border-cours  col-lg-8 col-md-8   mx-auto h-100">
-            <div className="row mt-4 mx-5w">
-              <Carousel mx="auto" withIndicators height={380} className="carousel-home" slidesToScroll={isMobile ? 3 : 1} slideSize={isMobile ? "100%" : "33.333333%"}
-                slideGap="md" loop
-                align="start">
-                      <Carousel.Slide className="">
-                        <CardHomeCours text="{coursFitness.description}" titre="{coursFitness.title}" src="{coursFitness.imageUrl}" ></CardHomeCours>
-                      </Carousel.Slide>
-                      <Carousel.Slide className="">
-                        <CardHomeCours text="{coursFitness.description}" titre="{coursFitness.title}" src="{coursFitness.imageUrl}" ></CardHomeCours>
-                      </Carousel.Slide>
-                      <Carousel.Slide className="">
-                        <CardHomeCours text="{coursFitness.description}" titre="{coursFitness.title}" src="{coursFitness.imageUrl}" ></CardHomeCours>
-                      </Carousel.Slide>
-              </Carousel>
-            </div>
-          </div>
-        </div>
+      </div>
+
+      <div className='d-flex justify-content-center'>
 
       </div>
-      <p className="  float-right my-2">
-        <Link to="/cours" className='none'>
-          <a href='' className="link-accueil ">Voir tout les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
-        </Link>
-      </p>
       <div>
         <img className="reverse-wave" src={Trace}></img>
       </div>
@@ -343,6 +363,4 @@ const Home = () => {
       </div>
     </>
   );
-};
-
-export default Home;
+}

@@ -1,16 +1,18 @@
 import React, { Component, useState } from "react";
-import "./Header_cours.css";
-import image from "./test.png";
-import vaguerose from "./VagueRose.png";
-import CardCours from "./CardCours";
+import "./HeaderCours.css"
+import FitnessImage from '../../Assets/Images/Cours/Fitness.jpeg'
+import ForfaitImage from '../../Assets/Images/Cours/Forfaits.jpeg'
+import Danse from "../../Assets/Images/Cours/Danses.jpg"
+import vaguerose from "./VagueRose.png"
+import CardCours from "./CardCours"
 
-const Header_cours = () => {
+export const HeaderCours = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const images = [
-    { imgSrc: image, description: 'Danses', className: '' },
-    { imgSrc: image, description: 'Fitness' },
-    { imgSrc: image, description: 'Forfait' },
+    { imgSrc: Danse, title: 'Danses' },
+    { imgSrc: FitnessImage, title: 'Fitness' },
+    { imgSrc: ForfaitImage, title: 'Forfait' },
   ]
   const handleMouseEnter = (e: any) => {
     setIsHovering(true);
@@ -24,12 +26,12 @@ const Header_cours = () => {
       <header>
         <div className="conteneur">
           <div className="text-center titlecours">
-            <h1><b>Cours</b></h1>
+            <h1>Cours</h1>
           </div>
           <div className="grow">
             {
               images.map((image, index) => (
-                <CardCours key={index} imgSrc={image.imgSrc} description={image.description} />
+                <CardCours key={index} imgSrc={image.imgSrc} title={image.title} />
               ))
             }
           </div>
@@ -40,7 +42,5 @@ const Header_cours = () => {
       </header>
     </>
   );
-
 }
 
-export default Header_cours;

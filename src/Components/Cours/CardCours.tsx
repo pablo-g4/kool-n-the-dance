@@ -1,6 +1,6 @@
 import React from 'react'
 import './CardCours.css'
-import backgroundImageUrl from "../../images/Galerie/DAN_0809inv@2x.png"
+import backgroundImageUrl from "../../Assets/Images/Galerie/DAN_0809inv@2x.png"
 import { Cours } from '../../Models/Cours'
 
 export const CardCours = ({ cours, children } : {cours ?: Cours, children: any}) => {

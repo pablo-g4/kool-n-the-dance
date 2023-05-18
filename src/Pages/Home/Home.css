@@ -14,49 +14,49 @@ html,body
 
 .div1 {
     grid-area: 5 / 1 / 6 / 2;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv.png");
     min-height: 10%;
 }
 
 .div2 {
     grid-area: 5 / 2 / 6 / 3;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     min-height: 10%;
 }
 
 .div3 {
     grid-area: 1 / 1 / 3 / 3;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     min-height: 10%;
 }
 
 .div4 {
     grid-area: 3 / 1 / 5 / 3;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     min-height: 10%;
 }
 
 .div5 {
     grid-area: 1 / 3 / 4 / 4;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     min-height: 10%;
 }
 
 .div6 {
     grid-area: 4 / 3 / 6 / 4;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     min-height: 10%;
 }
 
 .div7 {
     grid-area: 1 / 4 / 3 / 5;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     min-height: 10%;
 }
 
 .div8 {
     grid-area: 3 / 4 / 6 / 5;
-    background-image: url("../images/Galerie/DAN_0809inv.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     /*min-height: 10%;*/
 }
 
@@ -145,7 +145,7 @@ html,body
     background-size: cover;
     background-position: center;
     background-image:
-        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../Assets/Images/carousel/carousel3.jpeg");
+        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../../Assets/Images/carousel/carousel3.jpeg");
         
     
 }
@@ -162,7 +162,7 @@ html,body
 }
 
 .card_cours {
-    background-image: url("../images/Galerie/DAN_0809inv@2x.png");
+    background-image: url("../../Assets/Images/Galerie/DAN_0809inv@2x.png");
     height: 400px;
 }
 
@@ -174,8 +174,8 @@ html,body
 .photo_haut_de_page {
     background-size: cover;
     background-position: center;
-    background-image:
-        linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), url("../Assets/Images/carousel/carousel3.jpeg");
+    background-image: linear-gradient(to bottom, rgba(100, 74, 130, 1), rgba(100, 74, 130, 0), rgba(100, 74, 130, 1)), 
+                      url("../../Assets/Images/carousel/carousel3.jpeg");
 }
 
 
