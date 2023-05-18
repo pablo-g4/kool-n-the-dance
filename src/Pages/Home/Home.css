@@ -407,3 +407,11 @@ html,body
     font-size: 60px;
     font-weight: bold;
 }
+
+.check-gonzague{
+    width: 100%;
+}
+.nathounet-leadtech{
+    display: flex;
+    justify-content: end;
+}

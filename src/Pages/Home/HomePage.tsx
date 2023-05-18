@@ -59,15 +59,15 @@ export const HomePage = () => {
 
   const getCurrentTabElementsLenght = () => {
     let isLenghtSuperior: boolean = true
-    switch(currentTab) {
+    switch (currentTab) {
       case 'forfait':
-        isLenghtSuperior = allForfaits.length > 3 
+        isLenghtSuperior = allForfaits.length > 3
         break;
       case 'danse':
-        isLenghtSuperior =  getDansesCours().length > 3 
+        isLenghtSuperior = getDansesCours().length > 3
         break;
       case 'fitness':
-        isLenghtSuperior =  getFitnessCours().length > 3 
+        isLenghtSuperior = getFitnessCours().length > 3
         break;
     }
     return isLenghtSuperior
@@ -99,12 +99,12 @@ export const HomePage = () => {
     fetchAndSetPlanning()
     fetchAndSetCours()
     fetchAndSetForfaits()
-  },[])
+  }, [])
 
 
-  const getDansesCours = () =>  _.filter(allCourses, ['courseType', COURSES_TYPES.DANSES])
+  const getDansesCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.DANSES])
 
-  const getFitnessCours = () =>  _.filter(allCourses, ['courseType', COURSES_TYPES.FITNESS])
+  const getFitnessCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.FITNESS])
 
   const displayCard = (tab: string) => {
     setCurrentTab(tab)
@@ -155,28 +155,28 @@ export const HomePage = () => {
             <div className="col-sm-12 col-lg-7 mx-0">
               <div className="row pb-7 ">
                 <div className="rosas-container h-75">
-                  <img className='rosas' src={Rosas}/>
+                  <img className='rosas' src={Rosas} />
                   <div>
                     <p className="text_haut col-lg-9  col-sm-12  mx-auto d-block text-center">
                       J'ai une thérapie, elle s'appelle "Danse et Fitness !"
                     </p>
                     <p className="text_bas col-12 text-center">Je veux...</p>
                   </div>
-                    
-                    <button
-                      type="button"
-                      className="button_danser d-block mx-auto opacity-full col-12"
-                    >
-                      DANSER
-                    </button>
-                    <button
-                      type="button"
-                      className="button_fitness  d-block mx-auto opacity-full"
-                    >
-                      FAIRE DU FITNESS
-                    </button>
+
+                  <button
+                    type="button"
+                    className="button_danser d-block mx-auto opacity-full col-12"
+                  >
+                    DANSER
+                  </button>
+                  <button
+                    type="button"
+                    className="button_fitness  d-block mx-auto opacity-full"
+                  >
+                    FAIRE DU FITNESS
+                  </button>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -229,8 +229,8 @@ export const HomePage = () => {
               currentTab === 'danse' && (
                 getDansesCours().length ? _.map(getDansesCours(), (danse) => (
                   <Carousel.Slide id='fitness'>
-                    <CardHomeCours text={danse.description} titre={danse.title}src='{coursFitness.imageUrl} '></CardHomeCours>
-                  </Carousel.Slide> 
+                    <CardHomeCours text={danse.description} titre={danse.title} src='{coursFitness.imageUrl} '></CardHomeCours>
+                  </Carousel.Slide>
                 )) : <p>Pas de cous actuellement</p>
               )
             }
@@ -249,14 +249,14 @@ export const HomePage = () => {
               currentTab === 'forfait' && (
                 allForfaits.length ? _.map(allForfaits, (forfait) => (
                   <Carousel.Slide id='fitness'>
-                    <CardHomeCours text={forfait.description.toString()}  titre={forfait.title} src={forfait.imageUrl}></CardHomeCours>
+                    <CardHomeCours text={forfait.description.toString()} titre={forfait.title} src={forfait.imageUrl}></CardHomeCours>
                   </Carousel.Slide>
                 ))
                   :
                   <div>Pas de cours de forfait actuellement</div>
               )
             }
-            
+
           </Carousel>
         </div>
         <div className='col-12  d-flex justify-content-end'>
@@ -282,26 +282,26 @@ export const HomePage = () => {
         </div>
         {
           filteredPlanningForTheDay().length ?
-          filteredPlanningForTheDay().map((planning, index )=> (
-            <div key={index} className="col-lg-2 col-6 spacingCol">
-              <CardHomePlanning
-                horaire={`${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
-                titre={planning.title}
-                text="Pour enfants de 6-9 ans"
-                src=""
-                key={index}
-              ></CardHomePlanning>
-            </div>
-          )) : (
-            <div className='col-12 text-center my-4'>
-                <h3 className="text-white">Aucun planning disponible pour le { new Date().toLocaleDateString("fr-FR")}</h3>
-            </div>
-          )
+            filteredPlanningForTheDay().map((planning, index) => (
+              <div key={index} className="col-lg-2 col-6 spacingCol">
+                <CardHomePlanning
+                  horaire={`${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
+                  titre={planning.title}
+                  text="Pour enfants de 6-9 ans"
+                  src=""
+                  key={index}
+                ></CardHomePlanning>
+              </div>
+            )) : (
+              <div className='col-12 text-center my-4'>
+                <h3 className="text-white">Aucun planning disponible pour le {new Date().toLocaleDateString("fr-FR")}</h3>
+              </div>
+            )
         }
       </div>
 
 
-      <div>
+      <div className='check-gonzague my-5'>
         <div className="row justify-content-center mt-4 mb-4 ">
           <h1 className="title-home">Actualités</h1>
         </div>
@@ -309,37 +309,38 @@ export const HomePage = () => {
           {
             allNews.length && _.map(allNews, (news, index) => (
               <div key={index} className="col-md-4 col-sm-12">
-                <CardHomeActualite  news={news}></CardHomeActualite>
+                <CardHomeActualite news={news}></CardHomeActualite>
               </div>
             ))
           }
         </div>
-        <p className="  float-right my-2">
+      </div>
+      <div className='check-gonzague nathounet-leadtech'>
           <Link to="/news" className='none'>
             <a href='' className="link-accueil ">Voir toutes les actualités <FontAwesomeIcon icon={faArrowCircleRight} /></a>
           </Link>
-        </p>
       </div>
-      <br />
+
       <div className='my-5'>
         <h1 className=" text-center title-home">Témoignages</h1>
         <div className="m-auto d-block ">
           <div className='row'>
-            <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
+            <div className="col-md-6 col-sm-12 ">
+              <CardTemoignage img="" nom="Maria Mercier (élève)" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
             </div>
-            <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
+            <div className="col-md-6 col-sm-12 ">
+              <CardTemoignage img="" nom="Baumier Elise (élève)" text="Super prof! Dynamique, toujours de bonne humeur et soucieuse de ses élèves!"></CardTemoignage>
             </div>
-            <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
+            <div className="col-md-6 col-sm-12 ">
+              <CardTemoignage img="" nom="Merckling Pascalle (élève)" text="Dynamique, bienveillante et très  à l'écoute  de ses élèves.  Elle ne compte pas son temps pour assurer des cours de qualité.  Tout ça  dans une excellente ambiance. On en redemande. Cours d excellente qualité  à  la portée  de tous  avec des prix attractifs et un grand respect des règles  en vigueur par rapport au Covid."></CardTemoignage>
             </div>
-            <div className="col-md-5 col-sm-12 w-75">
-              <CardTemoignage img="" nom="Jean Pierre" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
+            <div className="col-md-6 col-sm-12 ">
+              <CardTemoignage img="" nom="Amielle" text="J'ai adoré dès le premier cours! Ambiance et prof géniale qui donne envie de venir en cours de sport! Je recommande +++!"></CardTemoignage>
             </div>
           </div>
         </div>
       </div>
+
       <div className='my-5 mx-2 pb-5'>
         <h1 className=" text-center title-home">Galerie</h1>
         <div className='row'>
