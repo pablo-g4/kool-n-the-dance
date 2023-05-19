@@ -28,8 +28,6 @@ export const CoursPage = () => {
                 if(cours.id === newCours.id) return newCours
                 else return cours
             })
-            console.log('updatedAllCours', updatedAllCours);
-            
             setAllCours(updatedAllCours)
         } else {
             newCours.id = await createCours(newCours)

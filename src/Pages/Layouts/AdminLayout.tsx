@@ -25,16 +25,19 @@ const AdminLayout = (props: any) => {
     }, [user, loading])
 
     return (
-        <>
-            <div className="d-flex flex-column- ">
+        <div className='container-fluid'>
+            <div className="row">
+                <div className='col-4'>
                     <AdminSidebar page={location.pathname} />
-                <main style={{
-                    width: '100%'
-                }}>
-                    {props.children ? props.children : <Outlet />}
-                </main>
+                </div>
+
+                <div className='col-8'>
+                    <main>
+                        {props.children ? props.children : <Outlet />}
+                    </main>
+                </div>
             </div>
-        </>
+        </div>
     )
 }
 

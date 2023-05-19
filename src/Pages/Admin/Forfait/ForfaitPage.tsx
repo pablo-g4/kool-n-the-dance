@@ -168,7 +168,7 @@ export const ForfaitPage = () => {
           onClick={() => setAddOrEditCustomForfaitModalIsOpen(true)}
           className="text-white"
         >
-          + Ajouter un forfait basique
+          + Ajouter un forfait personnalisé
         </button>
         {addOrEditCustomForfaitModalIsOpen && (
           <AddOrEditCustomForfaitModal
