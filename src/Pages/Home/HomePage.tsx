@@ -238,9 +238,7 @@ export const HomePage = () => {
             {
               currentTab === 'forfait' && (
                 allForfaits.length ? _.map(allForfaits, (forfait, index) => (
-                  <Carousel.Slide key={index}  id='fitness'>
-                    <CardHomeCours text={forfait.description.toString()}  titre={forfait.title} src={forfait.imageUrl} type="forfait"></CardHomeCours>
-                  </Carousel.Slide>
+                    <CardHomeCours cours={forfait}/>
                 )) : <div>Pas de forfait actuellement</div>
               )
             }

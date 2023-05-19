@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel } from "@mantine/carousel";
 
-function CarouselSlide({ cours }) {
+function CarouselSlideForfait({ cours }) {
     const [hover, setHover] = useState(false);
   
     return (
@@ -32,4 +32,4 @@ function CarouselSlide({ cours }) {
     );
   }
 
-  export default CarouselSlide
+  export default CarouselSlideForfait

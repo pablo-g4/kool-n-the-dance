@@ -133,6 +133,17 @@
     justify-content: space-between;
 }
 
+.cardCoursRedd {
+    color: white;
+    background-color: #fb3640;
+    border-radius: 20px;
+    height: 350px;
+    width: 100%;
+    /* max-width: 250px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .cardCoursRed .titreCours {
     text-align: left;
     font-size: 24px;
