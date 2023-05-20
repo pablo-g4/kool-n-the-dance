@@ -90,7 +90,7 @@ export const GalleryPage = () => {
                     <Dropzone
                         onDrop={(file) => onImageChange(file)}
                         onReject={(files) => console.log('rejected files', files)}
-                        maxSize={3 * 1024 ** 2}
+                        maxSize={5 * 1024 ** 2}
                         accept={IMAGE_MIME_TYPE}
                         className="dropzone-galerie-container"
                     >

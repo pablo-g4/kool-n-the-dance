@@ -1,12 +1,12 @@
-import {collection, query, orderBy, onSnapshot} from "firebase/firestore";
-import { doc, getDoc, getDocs, setDoc , updateDoc , addDoc, deleteDoc} from "firebase/firestore";
-import { db, storage } from "./firebase";
-import { errorResponse } from '../Utils/utils';
-import { COLLECTION } from "./collection";
-import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage";
-import _ from "lodash";
+import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
+import { doc, getDoc, getDocs, setDoc , updateDoc , addDoc, deleteDoc} from "firebase/firestore"
+import { db, storage } from "./firebase"
+import { errorResponse } from '../Utils/utils'
+import { COLLECTION } from "./collection"
+import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
+import _ from "lodash"
 
-export const getDataFromCollection = async (collectionName: string, dataId: string) => {
+export const getDataFromCollection = async (collectionName: COLLECTION, dataId: string) => {
     const docRef = doc(db, collectionName, dataId);
     const docSnap = await getDoc(docRef);
     
@@ -15,7 +15,7 @@ export const getDataFromCollection = async (collectionName: string, dataId: stri
     return { ...docSnap.data(), id: docSnap.id } 
 }
 
-export const getAllDataFromCollection = async (collectionName: string) => {
+export const getAllDataFromCollection = async (collectionName: COLLECTION) => {
     let allDataFromCollection: any = []
     const querySnapshot = await getDocs(collection(db, collectionName));
     
@@ -26,9 +26,9 @@ export const getAllDataFromCollection = async (collectionName: string) => {
     return _.filter(allDataFromCollection, 'is_active')
 }
 
-export const getAllDataFromCollectionEvenDisable = async (collectionName: string) => {
+export const getAllDataFromCollectionEvenDisable = async (collectionName: COLLECTION) => {
     let allDataFromCollection: any = []
-    const querySnapshot = await getDocs(collection(db, collectionName));
+    const querySnapshot = await getDocs(collection(db, collectionName))
     
     querySnapshot.forEach((doc) => {
       allDataFromCollection.push({ ...doc.data(), id: doc.id })
@@ -37,7 +37,7 @@ export const getAllDataFromCollectionEvenDisable = async (collectionName: string
     return allDataFromCollection
 }
 
-export const addDocumentToCollection = async (collectionName: string, dataToCollection: any): Promise<string> => {
+export const addDocumentToCollection = async (collectionName: COLLECTION, dataToCollection: any): Promise<string> => {
     dataToCollection.creation_date = Math.round(+new Date()/1000)
     dataToCollection.updated_date = Math.round(+new Date()/1000)
 

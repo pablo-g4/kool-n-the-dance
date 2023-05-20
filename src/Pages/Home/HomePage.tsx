@@ -15,7 +15,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons"
 import CardHomePlanning from "../../Components/CardHomePlanning/CardHomePlanning"
 import CardHomeCours from "../../Components/cardHomeCours/cardHomeCours"
-// import CardCours from '../../Components/cardHomeCours/cardHomeCours'
 import { Carousel } from '@mantine/carousel'
 import CardTemoignage from '../../Components/cardTemoignage/cardTemoignagne'
 
@@ -291,7 +290,7 @@ export const HomePage = () => {
         <div className="row justify-content-center mt-4 mb-4 ">
           <h1 className="title-home">Actualités</h1>
         </div>
-        <div className="row ">
+        <div className="row p-4">
           {
             allNews.length && _.map(allNews, (news, index) => (
               <div key={index} className="col-md-4 col-sm-12">
@@ -299,13 +298,14 @@ export const HomePage = () => {
               </div>
             ))
           }
+          <div className='check-gonzague nathounet-leadtech mx-4'>
+            <Link to="/news" className='none'>
+              <a href='' className="link-accueil ">Voir toutes les actualités <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+            </Link>
+          </div>
         </div>
       </div>
-      <div className='check-gonzague nathounet-leadtech'>
-          <Link to="/news" className='none'>
-            <a href='' className="link-accueil ">Voir toutes les actualités <FontAwesomeIcon icon={faArrowCircleRight} /></a>
-          </Link>
-      </div>
+
 
       <div className='my-5'>
         <h1 className=" text-center title-home">Témoignages</h1>

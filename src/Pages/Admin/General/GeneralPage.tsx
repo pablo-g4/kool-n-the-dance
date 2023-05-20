@@ -1,28 +1,63 @@
-import React, { useState } from "react";
-import DropZone from "../../../Components/DropZone/DropZone";
-import "./general.css";
-import { useForm, Resolver } from "react-hook-form";
-import AdminSidebar from "../../../Components/AdminSidebar/AdminSidebar";
+import "./general.css"
+import React, { useState, useEffect } from "react"
+import DropZone from "../../../Components/DropZone/DropZone"
+import { GeneralInformations, INFORMATION_TYPE } from "../../../Models/GeneralInformations"
+import { getAllGeneralInformations, createGeneralInformations, updateGeneralInformations } from "../../../Controllers/informations"
+import _ from "lodash"
 
 
 export const GeneralPage = () => {
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: 
-        { errors },
-      } = useForm();
-
-      const onSubmit = (data: any) => console.log(data);
-
       const [file, setFile] = useState(String)
+
+      const [generalInformationsForm, setGeneralInformationsForm] = useState({
+        id: '',
+        phoneNumber: '',
+        facebookLink: '',
+        headerImageUrl: ''
+      })
 
       const handleUpload = () => {
         const formData = new FormData();
         formData.append("myFile", file);
       }
+
+      const onSubmitGeneralInformations = async (event: any) => {
+        event.preventDefault()
+        const newGeneralInformations = new GeneralInformations()
+
+        if(generalInformationsForm.phoneNumber) newGeneralInformations.phoneNumber = generalInformationsForm.phoneNumber
+        if(generalInformationsForm.facebookLink) newGeneralInformations.facebookLink = generalInformationsForm.facebookLink
+        if(generalInformationsForm.headerImageUrl) newGeneralInformations.headerImageUrl = generalInformationsForm.headerImageUrl
+        if(generalInformationsForm.id) newGeneralInformations.id = generalInformationsForm.id
+
+        if (generalInformationsForm.id) await updateGeneralInformations(newGeneralInformations)
+        else newGeneralInformations.id = await createGeneralInformations(newGeneralInformations)
+      
+        setGeneralInformationsForm({ 
+          id: newGeneralInformations.id, 
+          phoneNumber: newGeneralInformations.phoneNumber, 
+          facebookLink: newGeneralInformations.facebookLink, 
+          headerImageUrl: newGeneralInformations.headerImageUrl  
+        })
+      }
+
+
+      const fetchAndSetGeneralInformations = async () => {
+        const generalInformations = await getAllGeneralInformations()
+        _.map(generalInformations, (generalInformation) => {
+          setGeneralInformationsForm({
+            id: generalInformation.id,
+            phoneNumber: generalInformation.phoneNumber,
+            facebookLink: generalInformation.facebookLink,
+            headerImageUrl: generalInformation.headerImageUrl 
+          })
+        })
+      }
+
+      useEffect(() => {
+        fetchAndSetGeneralInformations()
+      },[])
       
       return (
         <>
@@ -32,28 +67,15 @@ export const GeneralPage = () => {
                 <DropZone setFiles={setFile} />
               </div>
               <div className="separateur">
-                <h2 className=" text-deco-h2   ">Contact</h2>
+                <h2 className="text-deco-h2">Contact</h2>
                 <div className="d-flex justify-content-between mt-4">
                   <div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form method="" action=''  onSubmit={onSubmitGeneralInformations}>
                       <div className="d-flex  ">
                         <label className="bold">Telephone : </label>
-                        <p className="light"> +33 1234567890</p>
+                        <p className="light">{generalInformationsForm.phoneNumber == '' ? 'Ajouter un nouveau numéro': generalInformationsForm.phoneNumber}</p>
                       </div>
-                      <input className="input-size" name="tel" type="tel" />
-                      {errors.email && <span>Ce champs est requis</span>}
-                      <button className="btn btn-dark mx-2" type="submit">
-                        Modifier
-                      </button>
-                    </form>
-                  </div>
-                  <div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <div className="d-flex  ">
-                        <label className="bold"> Horaire :</label>
-                        <p className="light"> 9h-21h</p>
-                      </div>
-                      <input className="input-size" name="horaire" type="text" />
+                      <input value={generalInformationsForm.phoneNumber} onChange={(event) => setGeneralInformationsForm({...generalInformationsForm, phoneNumber: event.target.value })} className="input-size" type="tel" />
                       <button className="btn btn-dark mx-2" type="submit">
                         Modifier
                       </button>
@@ -61,42 +83,18 @@ export const GeneralPage = () => {
                   </div>
                 </div>
                 <div className="d-flex justify-content-between mt-4">
-                  <div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <div className="d-flex  ">
-                        <label className="bold">TickTock : </label>
-                        <p className="light"> lien ticktock</p>
-                      </div>
-                      <input className="input-size" name="tiktok" type="text" />
-                      <button className="btn btn-dark  mx-2 " type="submit">
-                        Modifier
-                      </button>
-                    </form>
-                  </div>
                   <div className="d-flex justify-content-around">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form method="" action='' onSubmit={onSubmitGeneralInformations}>
                       <div className="d-flex  ">
                         <label className="bold">Facebook : </label>
-                        <p className="light"> lien Facebook</p>
+                        <p className="light">{generalInformationsForm.facebookLink === '' ? 'Ajouter un nouveau lien' : generalInformationsForm.facebookLink}</p>
                       </div>
-                      <input className="input-size" name="facebook" type="text" />
+                      <input className="input-size" value={generalInformationsForm.facebookLink} onChange={(event) => setGeneralInformationsForm({...generalInformationsForm, facebookLink: event.target.value})} type="text" />
                       <button className="btn btn-dark mx-1" type="submit">
                         Modifier
                       </button>
                     </form>
                   </div>
-                </div>
-                <div className="d-flex  flex-row-reverse  mt-4 me-4">
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="d-flex  ">
-                      <label className="bold">Twitter : </label>
-                      <p className="light"> lien twitter</p>
-                    </div>
-                    <input className="input-size" name="twitter" type="text" />
-                    <button className="btn btn-dark mx-1" type="submit">
-                      Modifier
-                    </button>
-                  </form>
                 </div>
               </div>
             </div>
