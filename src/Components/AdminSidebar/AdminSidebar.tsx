@@ -7,12 +7,9 @@ const AdminSidebar = ({ page = "" }) => {
   const [currentPage, setCurrentPage] = useState("");
 
   return (
-    <div className="aSidebar" id="aSidebar">
-      <div className="sidebarContent">
+    <div className="aSidebar">
         <div className="aSidebar_logo">
-          <a href="/">
             <img className="LogoBlanc" src={LogoBlanc}></img>
-          </a>
         </div>
         <Link
           className={
@@ -51,7 +48,6 @@ const AdminSidebar = ({ page = "" }) => {
         } to="/admin/forfait">
           <p className="aSidebar_text">Gestion Forfait</p>
         </Link>
-      </div>
     </div>
   );
 };

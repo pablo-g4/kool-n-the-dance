@@ -1,9 +1,10 @@
-import React from 'react';
-import { Carousel } from '@mantine/carousel';
-import { SocialIcon } from 'react-social-icons';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import React, { useState, useEffect } from 'react'
+import { Carousel } from '@mantine/carousel'
+import { SocialIcon } from 'react-social-icons'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { GeneralInformations } from '../../Models/GeneralInformations'
 const Footer = () => {
+
     return (
         <div className='footer d-flex'>
             <div className='text-center col-lg-3 col-md-12 col-sm-12'>
