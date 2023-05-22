@@ -4,22 +4,33 @@ import moment from 'moment'
 import { Planning } from '../../Models/Planning'
 import { getAllPlanning } from '../../Controllers/planning'
 import _ from 'lodash'
+import { PlanningVM } from '../../viewModels/PlanningVM'
 
 import "react-big-calendar/lib/Week" 
 import "react-big-calendar/lib/TimeGrid"
 import 'moment/locale/fr'
+import { getAllCours } from '../../Controllers/cours'
+import { Cours } from '../../Models/Cours'
+
 const isMobile = document.documentElement.clientWidth < 600;
 
 export const PlanningPage = () => {
 
-    const [allPlanning, setAllPlanning] = useState<Planning[]>([])
+    const [allPlanning, setAllPlanning] = useState<PlanningVM[]>([])
+    const [allCours, setAllCours] = useState<Cours[]>([])
 
     const fetchAndSetPlanning = useCallback(async () => {
-        const planning = await getAllPlanning()
-        if(planning.length) {
-            setAllPlanning(planning)
+        let planningData = await getAllPlanning()
+        const planningVMData = planningData.map(planning => PlanningVM.fromPlanning(planning))
+        if(planningData.length) {
+            setAllPlanning(planningVMData)
         }
     },[])
+
+    const fetchAndSetCours = async () => {
+        const allCours = await getAllCours()
+        setAllCours(allCours)
+    }
 
     const formats = {
         timeGutterFormat: 'HH:mm',
@@ -37,11 +48,11 @@ export const PlanningPage = () => {
     const today = new Date()
 
     const convertPlanningToEvents = () => {
-        return _.map(allPlanning, (planning) => ({
-            id: planning.id,
-            start: new Date(planning.startDate),
-            end: new Date(planning.endDate)
-        }))
+        _.map(allPlanning, (planning) => {
+            const associatedCours = _.find(allCours, ['id', planning.coursId])
+            if(associatedCours) planning.setCours = associatedCours
+        })
+        return _.map(allPlanning, (planning) => (planning.convertToEvent))
     }
 
     const getDefaultViewDepedingOnDevice = () => {
@@ -50,6 +61,7 @@ export const PlanningPage = () => {
 
     useEffect(() => {
         fetchAndSetPlanning()
+        fetchAndSetCours()
       }, [])
     
 
@@ -81,7 +93,7 @@ export const PlanningPage = () => {
                     today.getFullYear(),
                     today.getMonth(),
                     today.getDate(),
-                    21
+                    22
                 )
             }
 
