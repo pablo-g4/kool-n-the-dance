@@ -70,4 +70,13 @@ export class PlanningVM extends Planning {
     get startAndEndHourAsString() {
         return `${this.start.getHours()}h` + '-' + `${this.end.getHours()}h`
     }
+
+    get convertToEvent() {
+        return {
+            end: this.end,
+            id: this.id,
+            start: this.start,
+            title: this.cours.title
+        }
+    }
 }
