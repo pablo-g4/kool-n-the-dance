@@ -1,14 +1,16 @@
-export class News {
-    public id: string = ""
+import { Database } from "./Database"
+
+export class News extends Database {
+
     public title: string = ""
     public description: string = ""
     public attachedFileUrl: string = ""
     public imageUrl: string = ""
-    public creationDate:number = Math.round(+new Date()/1000);
-    public updatedDate: number = Math.round(+new Date()/1000);
-    public isActive: boolean = true
 
-    constructor () {} 
+
+    constructor () {
+        super()
+    } 
     
     toDb():any {
         return {

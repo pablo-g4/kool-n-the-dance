@@ -1,11 +1,12 @@
-export class Files {
-    public id: string = ""
-    public fileUrl: string = ""
-    public isActive: boolean = true
-    public creationDate:number = 0
-    public updatedDate: number = 0
+import { Database } from "./Database"
 
-    constructor () {} 
+export class Files extends Database {
+
+    public fileUrl: string = ""
+
+    constructor () {
+        super()
+    } 
     
     toDb():any {
         return {

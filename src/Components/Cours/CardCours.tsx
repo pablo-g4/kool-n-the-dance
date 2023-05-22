@@ -10,7 +10,7 @@ export const CardCours = ({ cours, children } : {cours ?: Cours, children: any})
                 color: 'white',
                 backgroundColor: '#644A82',
                 borderRadius: '20px',
-                height: '400px',
+                height: '100%',
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',

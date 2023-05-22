@@ -1,4 +1,5 @@
 import _ from "lodash"
+import { Database } from "./Database"
 
 export enum COURSES_TYPES {
     DANSES = 'danses',
@@ -6,16 +7,14 @@ export enum COURSES_TYPES {
 }
 
 
-export class Cours {
+export class Cours extends Database {
     
-    public id: string = ""
+
     public title: string = ""
     public description: string = ""
     public imageUrl: string = ""
-    public creationDate:number = 0
-    public updatedDate: number = 0
     public courseType: COURSES_TYPES = COURSES_TYPES.DANSES
-    public isActive: boolean = true
+
 
     toDb():any {
         return {

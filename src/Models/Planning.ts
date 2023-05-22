@@ -1,30 +1,24 @@
-import { COURSES_TYPE } from "./Forfait"
+import { Database } from "./Database"
 
 export enum RECURENCE_TYPES {
     ALL_WEEKS = 'all_weeks',
     ONCE = 'once'
 }
 
-export class Planning {
+export class Planning extends Database {
 
-    public id: string = ""
+    public coursId: string = ""
     public startDate: number = 0
     public endDate: number = 0
-    public start?: Date 
-    public end?: Date 
-    public title: string = ""
     public recurrence: RECURENCE_TYPES = RECURENCE_TYPES.ONCE
-    public associatedCourses: COURSES_TYPE[] = []
-    public isActive: boolean = true
 
     toDb():any {
         return {
             start_date: this.startDate,
             end_date: this.endDate,
-            title: this.title,
             recurrence: this.recurrence,
             is_active: this.isActive,
-            associated_courses: this.associatedCourses
+            cours_id: this.coursId
         }
     }
 
@@ -34,15 +28,11 @@ export class Planning {
         planning.id = objDb.id 
         planning.startDate = objDb.start_date
         planning.endDate = objDb.end_date
-        planning.title = objDb.title
         planning.isActive = objDb.is_active
         planning.recurrence = objDb.recurrence
-        planning.associatedCourses = objDb.associated_courses
+        planning.coursId = objDb.cours_id
         
         return planning
     }
     
-    static toEvent(planning: Planning) {
-
-    }
 }

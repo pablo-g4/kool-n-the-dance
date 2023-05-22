@@ -1,3 +1,5 @@
+import { Database } from "./Database"
+
 export enum COURSES_TYPE {
     ZUMBA = 'Zumba',
     KUDURO_FIT = 'Kuduro Fit',
@@ -8,9 +10,8 @@ export enum COURSES_TYPE {
 }
 
 
-export class Forfait {
+export class Forfait extends Database {
     
-    public id: string = ""
     public title: string = ""
     public description: string[] = []
     public isBasic: boolean = true
@@ -19,11 +20,10 @@ export class Forfait {
     public category: string = ''
     public imageUrl: string = ''
     public associatedCourses: COURSES_TYPE[] = []
-    public creationDate:number = Math.round(+new Date()/1000)
-    public updatedDate: number = Math.round(+new Date()/1000)
-    public isActive: boolean = true
 
-    constructor () {} 
+    constructor () {
+        super()
+    } 
 
     toDb(): any {
         return {

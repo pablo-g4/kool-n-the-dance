@@ -26,9 +26,9 @@ const AdminLayout = (props: any) => {
 
     return (
         <div className='d-flex'>
-            <AdminSidebar page={location.pathname} />
 
-            <main>
+            <AdminSidebar page={location.pathname} />
+            <main className="col-10 flex-grow-1">
                 {props.children ? props.children : <Outlet />}
             </main>
         </div>

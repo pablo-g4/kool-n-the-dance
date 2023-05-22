@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useContext } from 'react'
 import { Calendar, momentLocalizer, dayjsLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import { Planning } from '../../Models/Planning'
@@ -8,12 +8,13 @@ import _ from 'lodash'
 import "react-big-calendar/lib/Week" 
 import "react-big-calendar/lib/TimeGrid"
 import 'moment/locale/fr'
+const isMobile = document.documentElement.clientWidth < 600;
 
 export const PlanningPage = () => {
 
     const [allPlanning, setAllPlanning] = useState<Planning[]>([])
 
-    const fetchPlanning = useCallback(async () => {
+    const fetchAndSetPlanning = useCallback(async () => {
         const planning = await getAllPlanning()
         if(planning.length) {
             setAllPlanning(planning)
@@ -38,14 +39,17 @@ export const PlanningPage = () => {
     const convertPlanningToEvents = () => {
         return _.map(allPlanning, (planning) => ({
             id: planning.id,
-            title: planning.title,
             start: new Date(planning.startDate),
             end: new Date(planning.endDate)
         }))
     }
 
+    const getDefaultViewDepedingOnDevice = () => {
+        return isMobile ? "day" : "week"
+    }
+
     useEffect(() => {
-        fetchPlanning()
+        fetchAndSetPlanning()
       }, [])
     
 
@@ -54,12 +58,11 @@ export const PlanningPage = () => {
       {
         allPlanning.length ? (
             <Calendar
-            views={["week"]}
+            views={["week", "day"]}
             culture='fr'
-            selectable
             localizer={localizer}
             defaultDate={new Date()}
-            defaultView="week"
+            defaultView={getDefaultViewDepedingOnDevice()}
             events={convertPlanningToEvents()}
             formats={formats}
             timeslots={1}
@@ -70,7 +73,7 @@ export const PlanningPage = () => {
                     today.getFullYear(),
                     today.getMonth(),
                     today.getDate(),
-                    8
+                    9
                 )
             }
             max={
@@ -78,7 +81,7 @@ export const PlanningPage = () => {
                     today.getFullYear(),
                     today.getMonth(),
                     today.getDate(),
-                    18
+                    21
                 )
             }
 
