@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import "./AdminSidebar.css"
 import LogoBlanc from "../../Assets/Images/LogoBlanc.png"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { GrLogout } from "react-icons/gr"
+import { logout } from "../../Authentification/authentication"
 
 const AdminSidebar = ({ page = "" }) => {
   const [currentPage, setCurrentPage] = useState("");
@@ -47,6 +49,16 @@ const AdminSidebar = ({ page = "" }) => {
           page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         } to="/admin/forfait">
           <p className="aSidebar_text">Gestion Forfait</p>
+        </Link>
+        <Link className={
+          page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+        } to="/admin/forfait">
+          <p className="aSidebar_text">Gestion Témoignages</p>
+        </Link>
+        <Link className={
+          page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+        } to="/admin/forfait" onClick={logout}>
+          <p className="aSidebar_text"><GrLogout color="white" /> Déconnexion</p>
         </Link>
     </div>
   );
