@@ -2,7 +2,7 @@
 import Image from '../../Assets/Images/lArticle_img.png'
 import "./CardHomeActualite.css"
 import { News } from '../../Models/News'
-import { formatDateDDMMYY } from '../../Utils/utils'
+import { utils } from '../../Utils/utils'
 
 const CardHomeActualite = ({ news } : { news : News}) => {
     return (
@@ -16,7 +16,7 @@ const CardHomeActualite = ({ news } : { news : News}) => {
                             news.description
                         }
                     </span>
-                    <h6 className="cardActu_date">{formatDateDDMMYY(news.creationDate * 1000)}</h6>
+                    <h6 className="cardActu_date">{utils.formatDateDDMMYY(news.creationDate * 1000)}</h6>
                 </div>
             </article>
         </>    

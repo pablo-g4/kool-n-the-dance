@@ -5,7 +5,9 @@ import { Cours, COURSES_TYPES } from '../../../Models/Cours'
 import CustomSwitch from '../../../Components/Switch/CustomSwitch'
 import { CardCours } from '../../../Components/Cours/CardCours'
 import { AddOrEditCours } from '../../../Components/Cours/AddOrEditCours'
-import { createCours, getAllCours, updateCours } from '../../../Controllers/cours'
+import { createCours, getAllCoursEvenDisabled, updateCours, deleteCours } from '../../../Controllers/cours'
+import { BsPlusLg } from 'react-icons/bs'
+import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 
 export const CoursPage = () => {
 
@@ -43,9 +45,14 @@ export const CoursPage = () => {
 
     const getFitnessCours = () => _.filter(getFilteredCours(), ['courseType', COURSES_TYPES.FITNESS])
 
-    const handleEdit = (coursId: string) => {
+    const handleEditCours = (coursId: string) => {
         setCoursToUpdateId(coursId)
         setAddOrEditCoursModalIsOpen(true)
+    }
+
+    const handleDeleteCours = async (coursId: string) => {
+        await deleteCours(coursId)
+        setAllCours(_.filter(allCours, (cours) => cours.id !== coursId))
     }
 
     const handleCloseModal = () => {
@@ -56,28 +63,21 @@ export const CoursPage = () => {
 
     useEffect(() => {
         const fetchAllCours = async () => {
-            const allCours = await getAllCours()
-            console.log(allCours)
-
-            setAllCours(allCours)
+            const allCours = await getAllCoursEvenDisabled()
+            if(allCours.length) setAllCours(allCours)
         }
         fetchAllCours()
     },[])
 
     return (
-        <div className='mx-4'>
+        <div className='w100'>
             <div className="mt-4 d-flex flex-row justify-content-between">
-            <h1>Gestion des cours</h1>
-            <button style={{
+                <h1>Gestion des cours</h1>
+                <button style={{
                     borderRadius: '10px',
                     backgroundColor: 'red',
                     border: 'none'
-                }} onClick={() => setAddOrEditCoursModalIsOpen(true)} className='text-white'>+ Ajouter un forfait basique</button>
-                {
-                    addOrEditCoursModalIsOpen && (
-                        <AddOrEditCours handleCloseModal={handleCloseModal} coursToUpdate={_.find(getFilteredCours(), ['id', coursToUpdateId])} isOpen={addOrEditCoursModalIsOpen} setIsOpen={setAddOrEditCoursModalIsOpen} submitForm={submitAddOrEditCours} />
-                    )
-                } 
+                }} onClick={() => setAddOrEditCoursModalIsOpen(true)} className='text-white' > <BsPlusLg size={20} /> Ajouter un cours</button>
             </div>
             <CustomSwitch
                 value={switchValue}
@@ -85,36 +85,47 @@ export const CoursPage = () => {
                 firstLabel='En ligne'
                 secondLabel='Archives'
             />
+            {
+                addOrEditCoursModalIsOpen && (
+                    <AddOrEditCours handleCloseModal={handleCloseModal} coursToUpdate={_.find(getFilteredCours(), ['id', coursToUpdateId])} isOpen={addOrEditCoursModalIsOpen} setIsOpen={setAddOrEditCoursModalIsOpen} submitForm={submitAddOrEditCours} />
+                )
+            }
+                
             <h2>Danses</h2>
-             <div className="row">
+            <div className="row m-1">
                 {
-                   getDanseCours().length ? _.map(getDanseCours(), (cours, index) => (
-                        <div className='col-3'>
-                           <CardCours key={cours.id} cours={cours}>
-                               <div className='d-flex justify-content-end'>
-                                   <span onClick={() => handleEdit(cours.id)}>Modifier</span>
-                                   <span className='px-2'>Supprimer</span>
-                               </div>
-                           </CardCours>
+                    getDanseCours().length ? _.map(getDanseCours(), (cours, index) => (
+                        <div key={index} style={{
+                            maxWidth: '350px',
+                            height: '400px'
+                        }} className='col-4 mb-4'>
+                            <CardCours cours={cours}>
+                                <div className='d-flex justify-content-end'>
+                                    <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)}>Modifier</AiFillEdit>
+                                    <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} >Supprimer</AiOutlineClose>
+                                </div>
+                            </CardCours>
                         </div>
-                    )) : 'Aucun cours en "Danse" pour le moment.'
+                    )) : <p>Créer votre premier cours de danse</p>
                 }
-             </div>
+            </div>
 
              <h2>Fitness et bien être</h2>
-
-            <div className="row">
+            <div className="row m-1">
             {
                    getFitnessCours().length ? _.map(getFitnessCours(), (cours, index) => (
-                        <div className='col-3'>
-                           <CardCours key={cours.id} cours={cours}>
+                        <div style={{
+                            maxWidth: '350px',
+                            height: '400px'
+                        }}  key={index} className='col-4 mb-4'>
+                           <CardCours cours={cours}>
                                <div className='d-flex justify-content-end'>
-                                   <span onClick={() => handleEdit(cours.id)}>Modifier</span>
-                                   <span className='px-2'>Supprimer</span>
+                                   <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)}>Modifier</AiFillEdit>
+                                   <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} >Supprimer</AiOutlineClose>
                                </div>
                            </CardCours>
                         </div>
-                    )) : 'Aucun cours en "fitness" pour le moment.'
+                    )) : <p>Créer votre premier cours de fitness</p>
                 }
             </div>
         </div>

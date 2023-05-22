@@ -1,3 +1,5 @@
+import { createContext } from 'react'
+
 import { Route, Routes } from 'react-router-dom'
 import { HomePage } from './Pages/Home/HomePage'
 import Layout from './Pages/Layouts/Layout'
@@ -23,7 +25,7 @@ const App = () => {
 
   return (
     <div className="App">
-        <Routes>
+      <Routes>
           <Route element={<Layout />}>
             <Route path="/" index element={<HomePage />} />
             <Route path="/planning/*" element={<PlanningPage />} />
@@ -32,16 +34,16 @@ const App = () => {
             <Route path="/login/*" element={<LoginPage />} />
             <Route path="/galerie/*" element={<GaleriePage />} />
           </Route>
-          <Route element={<AdminLayout />} >
-              <Route path="/admin/" element={<GeneralPage />} />
-              <Route path="/admin/reset-password" element={<AdminResetPasswordPage />} />
-              <Route path="/admin/news" element={<AdminNewsPage />} />
-              <Route path="/admin/planning" element={<AdminPlanningPage />} />
-              <Route path="/admin/cours/*" element={<AdminCoursPage />} />
-              <Route path="/admin/galerie" element={<AdminGalleryPage />} />
-              <Route path="/admin/forfait" element={<AdminForfaitPage />} />
-          </Route>
-        </Routes>
+        <Route element={<AdminLayout />} >
+          <Route path="/admin/" element={<GeneralPage />} />
+          <Route path="/admin/reset-password" element={<AdminResetPasswordPage />} />
+          <Route path="/admin/news" element={<AdminNewsPage />} />
+          <Route path="/admin/planning" element={<AdminPlanningPage />} />
+          <Route path="/admin/cours/*" element={<AdminCoursPage />} />
+          <Route path="/admin/galerie" element={<AdminGalleryPage />} />
+          <Route path="/admin/forfait" element={<AdminForfaitPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 };

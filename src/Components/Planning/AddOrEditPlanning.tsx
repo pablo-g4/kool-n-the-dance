@@ -1,30 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Modal, Select, Checkbox, Group } from '@mantine/core'
 import _ from 'lodash'
 import { RECURENCE_TYPES } from '../../Models/Planning'
-import { Planning } from '../../Models/Planning'
-import { COURSES_TYPE } from '../../Models/Forfait'
+import { TimeInput } from '@mantine/dates'
+import { Cours } from '../../Models/Cours'
+import { utils } from '../../Utils/utils'
+import { PlanningVM } from '../../viewModels/PlanningVM'
 
-const AddOrEditPlanning = ({ planningToUpdate, isOpen, setIsOpen, submitPlanning } : { planningToUpdate?: Planning, isOpen : boolean, setIsOpen : any, submitPlanning: any}) => {
 
-    const [form, setForm] = useState<any>({
-        id: '',
-        title: '',
-        recurrence : RECURENCE_TYPES.ONCE,
-        associatedCourses : []
-    })
+const AddOrEditPlanning = ({ 
+    planningToUpdate, 
+    isOpen, 
+    setIsOpen, 
+    submitPlanning, 
+    cours,
+    startDate = new Date()
+} : { 
+    planningToUpdate?: PlanningVM, 
+    isOpen : boolean, 
+    setIsOpen : any, 
+    submitPlanning: any, 
+    cours?: Cours[],
+    startDate?: Date 
+}) => {
 
-    const handleTitle = (event: any) => {
-        setForm({ 
-            ...form,
-            title: event.target.value
-         })
-    }
+    const [form, setForm] = useState<any>(
+        {
+            id: '',
+            title: '',
+            recurrence: RECURENCE_TYPES.ONCE,
+            coursId: '',
+            endHour: '',
+            startDate: startDate,
+            endDate: _.cloneDeep(startDate)
+        }
+    )
 
     const onChangeRecurrence = (currentRecurrence : string) => {
         setForm({
             ...form,
             recurrence: currentRecurrence
+        })
+    }
+
+    const onChangeCours = (cours : string) => {
+        setForm({
+            ...form,
+            coursId: cours
         })
     }
 
@@ -35,32 +57,59 @@ const AddOrEditPlanning = ({ planningToUpdate, isOpen, setIsOpen, submitPlanning
         ]
     }
 
+    const getCoursOptions = () => {
+        return _.map(cours, (cours) => ({
+            label: cours.title,
+            value: cours.id
+        }))
+    }
+
+    const handleEndHour = (event: any) => {
+        setForm({...form, endHour: event.target.value})
+    }
+
     const handleCloseModal = (): void => {
         setIsOpen(false)
     }
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
+        if(form.endHour) {
+            const endHourArray = form.endHour.split(':')
+            form.endDate = new Date(form.endDate.setHours(endHourArray[0], endHourArray[1]))           
+        } 
         submitPlanning(form)
     }
 
-    const loadData = () => {
+    const isEndHourGreater = (endHour: any) => {
+        let endDate = _.cloneDeep(form.startDate)
+        return utils.getUnixTimeStamp(new Date(endDate.setHours(endHour[0], endHour[1]))) > utils.getUnixTimeStamp(form.startDate)
+    }
+
+    const loadData = () => {   
+
         setForm({
             ...form, 
             id: planningToUpdate?.id,
-            title: planningToUpdate?.title,
             recurrence: planningToUpdate?.recurrence,
-            start: planningToUpdate?.startDate,
-            end: planningToUpdate?.endDate,
-            associatedCourses: planningToUpdate?.associatedCourses
+            start: planningToUpdate?.start,
+            end: planningToUpdate?.end,
+            coursId: planningToUpdate?.coursId,
+            endHour: planningToUpdate?.formattedEndHour,
+            startDate: planningToUpdate?.start,
+            endDate: planningToUpdate?.end
         })
     }
 
     useEffect(() => {
-        if(planningToUpdate) {
-            loadData()
-        }
+        if(planningToUpdate) loadData()
     }, [planningToUpdate])
+
+    const getStartHourToDisplay = () => {
+        let startDateMinutes = _.cloneDeep(form.startDate?.getMinutes()) ?? 0
+        return `${form.startDate?.getHours()}h${startDateMinutes > 10 ? startDateMinutes : '0' + startDateMinutes}`
+    }
+
     
   return (
       <>
@@ -68,8 +117,6 @@ const AddOrEditPlanning = ({ planningToUpdate, isOpen, setIsOpen, submitPlanning
               <h1 className='text-center'>Ajouter/modifier un horaire</h1>
               <form onSubmit={handleSubmit} method='' action=''>
                   <div className='d-flex flex-column'>
-                      <label className='form-label' htmlFor='titreArticle'>Titre du planning : </label>
-                      <input className='mt-2' onChange={handleTitle} value={form.title} id="titreArticle" type="text" name='title' placeholder="Titre Article" required />
                       <div className='mt-2'>
                           <label className='form-label' htmlFor="recurrence">Recurence :</label>
                           <Select
@@ -81,28 +128,31 @@ const AddOrEditPlanning = ({ planningToUpdate, isOpen, setIsOpen, submitPlanning
                           />
                       </div>
                       <div className='mt-2'>
-                          <label className='form-label' htmlFor="recurrence">Sélectionner les cours :</label>
-                          <Checkbox.Group
-                              onChange={(courses) => {
-                                setForm({ ...form, associatedCourses: courses })
-                                console.log({ ...form, associatedCourses: courses })
-                                
-                            }}
-                              value={form.associatedCourses}
-                          >
-                              <Group mt="xs" noWrap>
-                                  {
-                                      COURSES_TYPE && _.map(COURSES_TYPE, (COURSE, index) => (
-                                          <Checkbox key={index} value={COURSE} label={COURSE} />
-                                      ))
-                                  }
-                              </Group>
-                          </Checkbox.Group>
+                          <label className='form-label' htmlFor="recurrence">Cours associé :</label>
+                          <Select
+                              value={form.coursId}
+                              onChange={onChangeCours}
+                              allowDeselect={false}
+                              data={getCoursOptions()}
+                              withAsterisk
+                          />
+                      </div>
+                      <div className='mt-2'>
+                          <label className='form-label' htmlFor="recurrence">{
+                              `Choisir horaire de fin à partir de ${getStartHourToDisplay()}`
+                          }</label>
+                          <TimeInput
+                              required
+                              value={form.endHour}
+                              onChange={handleEndHour}
+                              withAsterisk
+                          />
                       </div>
                   </div>
+                  {form.endHour && !isEndHourGreater(form.endHour.split(':')) && "Merci de renseigner une heure de fin plus tard que l'heure de début"}
                   <div className='mt-4 d-flex justify-content-around'>
-                    <button type="submit" >Sauvegarder</button>
                     <button type="button" onClick={handleCloseModal}>Annuler</button>
+                    <button type="submit" disabled={form.endHour && !isEndHourGreater(form.endHour.split(':'))}>Sauvegarder</button>
                   </div>
               </form>
           </Modal>

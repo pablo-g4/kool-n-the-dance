@@ -1,11 +1,9 @@
 import { Database } from "./Database"
 
 export class Bookmark extends Database {
-    public id: string = ""
+
     public bookmarkdId = ""
-    public isActive: boolean = true
-    public creationDate:number = 0
-    public updatedDate: number = 0
+
 
     constructor(){
         super()

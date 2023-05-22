@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { useEffect, useState, useCallback } from 'react'
 import "./Home.css"
 
@@ -24,10 +25,9 @@ import Rosas from "../../Assets/Images/Tracé 230.png"
 
 import { Link } from "react-router-dom"
 import { Planning } from '../../Models/Planning'
+import { PlanningVM } from '../../viewModels/PlanningVM'
 import { getAllPlanning } from '../../Controllers/planning'
 import { getAllNews } from '../../Controllers/news'
-import _ from 'lodash'
-import { formatDateDDMMYY } from '../../Utils/utils'
 import { News } from '../../Models/News'
 import { Cours, COURSES_TYPES } from '../../Models/Cours'
 import { getAllCours } from '../../Controllers/cours'
@@ -41,14 +41,19 @@ export const HomePage = () => {
 
   const today = new Date()
 
-  const [planningForTheDay, setPlanningForTheDay] = useState<Planning[]>([])
+  const [planningForTheDay, setPlanningForTheDay] = useState<PlanningVM[]>([])
   const [allNews, setAllNews] = useState<News[]>([])
   const [allCourses, setAllCours] = useState<Cours[]>([])
   const [allForfaits, setAllForfaits] = useState<Forfait[]>([])
   const [currentTab, setCurrentTab] = useState('danse')
 
-  const filteredPlanningForTheDay = () => {
-    return _.filter(planningForTheDay, (planning) => today.getDay() === new Date(planning.startDate).getDay() && today.getMonth() === new Date(planning.startDate).getMonth() && today.getFullYear() === new Date(planning.startDate).getFullYear())
+  const getFilteredPlanningForTheDay = () => {
+    let filteredPlanningForTheDay = _.filter(planningForTheDay, (planning) => today.getDay() === planning.start.getDay() && today.getMonth() === planning.start.getMonth() && today.getFullYear() === planning.start.getFullYear())
+    _.map(filteredPlanningForTheDay, (planning) => {
+      const associatedCours = _.find(allCourses, ['id', planning.coursId])
+      if(associatedCours) planning.setCours = associatedCours
+    })
+    return _.orderBy(filteredPlanningForTheDay, 'startDate', 'asc')
   }
 
   const isMobile = document.documentElement.clientWidth < 600;
@@ -82,7 +87,7 @@ export const HomePage = () => {
 
   const fetchAndSetPlanning = async () => {
     let planning = await getAllPlanning()
-    setPlanningForTheDay(planning)
+    setPlanningForTheDay(planning.map(planning => PlanningVM.fromPlanning(planning)))
   }
 
   const fetchAndSetForfaits = async () => {
@@ -268,14 +273,14 @@ export const HomePage = () => {
           </p>
         </div>
         {
-          filteredPlanningForTheDay().length ?
-            filteredPlanningForTheDay().map((planning, index) => (
+          getFilteredPlanningForTheDay().length ?
+          getFilteredPlanningForTheDay().map((planning, index) => (
               <div key={index} className="col-lg-2 col-6 spacingCol">
                 <CardHomePlanning
-                  horaire={`${new Date(planning?.startDate).getHours()}h` + '-' + `${new Date(planning?.endDate).getHours()}h`}
-                  titre={planning.title}
-                  text="Pour enfants de 6-9 ans"
-                  src=""
+                  horaire={planning.startAndEndHourAsString}
+                  titre={planning.cours.title}
+                  text={planning.cours.description}
+                  src={planning.cours.imageUrl}
                   key={index}
                 ></CardHomePlanning>
               </div>

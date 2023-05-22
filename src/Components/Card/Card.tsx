@@ -2,7 +2,7 @@ import React from 'react';
 import "./Card.css";
 import { News } from '../../Models/News';
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
-import { formatDateDDMMYY } from '../../Utils/utils'
+import { utils } from '../../Utils/utils'
 import defaultPic from '../../Assets/Images/nofiles.jpg'
 
 
@@ -57,7 +57,7 @@ const Card = (
                             }
                         </div>
                         <div className='d-flex justify-content-end'>
-                            <p className="card-text-color">{formatDateDDMMYY(news.creationDate*1000)}</p>
+                            <p className="card-text-color">{utils.formatDateDDMMYY(news.creationDate*1000)}</p>
                         </div>
                     </div>
                 </div>

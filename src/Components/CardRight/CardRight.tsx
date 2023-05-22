@@ -1,7 +1,7 @@
 import Image from './../../image/lArticle_img.png'
 import { News } from '../../Models/News'
 import defaultPic from '../../Assets/Images/nofiles.jpg'
-import { formatDateDDMMYY } from '../../Utils/utils'
+import { utils } from '../../Utils/utils'
 
 const CardRight = ({ news } : { news: News}) => {
 
@@ -20,7 +20,7 @@ const CardRight = ({ news } : { news: News}) => {
                                         news?.description
                                     }
                                 </p>
-                                <h6 className="lArticle_date">{formatDateDDMMYY(news.creationDate*1000 ?? 0)}</h6>
+                                <h6 className="lArticle_date">{utils.formatDateDDMMYY(news.creationDate*1000 ?? 0)}</h6>
                             </div>
                         </article>
                     </div>

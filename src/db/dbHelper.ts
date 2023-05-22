@@ -1,7 +1,7 @@
 import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
 import { doc, getDoc, getDocs, setDoc , updateDoc , addDoc, deleteDoc} from "firebase/firestore"
 import { db, storage } from "./firebase"
-import { errorResponse } from '../Utils/utils'
+import { utils } from '../Utils/utils'
 import { COLLECTION } from "./collection"
 import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
 import _ from "lodash"
@@ -10,8 +10,7 @@ export const getDataFromCollection = async (collectionName: COLLECTION, dataId: 
     const docRef = doc(db, collectionName, dataId);
     const docSnap = await getDoc(docRef);
     
-    if(!docSnap.exists()) 
-        return errorResponse('Error on data')
+    if(!docSnap.exists()) return utils.errorResponse('Error on data')
     return { ...docSnap.data(), id: docSnap.id } 
 }
 

@@ -6,10 +6,15 @@ import AddOrEditPlanning from './AddOrEditPlanning'
 import { createPlanning, updatePlanning, deletePlanning, getAllPlanning } from '../../Controllers/planning'
 import { Planning } from '../../Models/Planning'
 import _ from 'lodash'
+import { getAllCours } from '../../Controllers/cours'
+import { Cours } from '../../Models/Cours'
+import { PlanningVM } from '../../viewModels/PlanningVM'
 
 import "react-big-calendar/lib/Week" 
-import "react-big-calendar/lib/TimeGrid"
 import 'moment/locale/fr'
+
+// @ts-ignore
+import * as TimeGrid from 'react-big-calendar/lib/TimeGrid'
 
 
 const AdminPlanning = () => {
@@ -17,8 +22,9 @@ const AdminPlanning = () => {
     const [isAddOrEditPlanningOpen, setIsAddOrEditPlanningOpen] = useState<boolean>(false)
     const [currentStartDate, setCurrentStartDate] = useState<Date>()
     const [currentEndDate, setCurrentEndDate] = useState<Date>()
-    const [allPlanning, setAllPlanning] = useState<Planning[]>([])
-    const [planningToUpdate, setPlanningToUpdate] = useState<Planning>()
+    const [allPlanningVM, setAllPlanningVM] = useState<PlanningVM[]>([])
+    const [planningToUpdate, setPlanningToUpdate] = useState<PlanningVM>()
+    const [allCours, setAllCours] = useState<Cours[]>()
 
     moment.locale('fr', {
         week: {
@@ -34,12 +40,15 @@ const AdminPlanning = () => {
         timeGutterFormat: 'HH:mm',
     }
 
-    const fetchPlanning = useCallback(async () => {
-        const planning = await getAllPlanning()
-        if(planning.length) {
-            setAllPlanning(planning)
-        }
-    },[])
+
+    const fetchAndSetAllData = async () => {
+
+        let planningData = await getAllPlanning()
+        let planningDataVM = planningData.map((planning) => PlanningVM.fromPlanning(planning))
+        if(planningDataVM.length) setAllPlanningVM(planningDataVM)
+        const allCours = await getAllCours()
+        if(allCours.length) setAllCours(allCours)
+    }
 
 
     const handleSelect = ({ start, end } : { start: Date, end: Date }) => {
@@ -49,50 +58,53 @@ const AdminPlanning = () => {
     }
 
     const handleClickOnSelectedPlanning = (planning: any) => {
-        let planningToUpdate = _.find(allPlanning, (planningItem) => planningItem.id === planning.id )
+        let planningToUpdate = _.find(allPlanningVM, (planningItem) => planningItem.id === planning.id )
         setPlanningToUpdate(planningToUpdate)
         setIsAddOrEditPlanningOpen(true)
     }
 
-    const setDates = async (form: any) => {
-                
-        let newPlanning = new Planning()
-        newPlanning.title = form.title
-        newPlanning.recurrence = form.recurrence
-        newPlanning.associatedCourses = form.associatedCourses
-        if(currentStartDate && currentEndDate) {
-            newPlanning.startDate = currentStartDate.getTime()
-            newPlanning.endDate = currentEndDate.getTime()
+    const addEventToPlanning = async (form: any) => {
+     
+        let newPlanningVM = new PlanningVM()
+        newPlanningVM.recurrence = form.recurrence
+        newPlanningVM.coursId = form.coursId
+               
+        if(form.startDate && form.endDate)  {
+            newPlanningVM.startDate = form.startDate.getTime() 
+            newPlanningVM.endDate = form.endDate.getTime()
+            newPlanningVM.setStart = form.startDate
+            newPlanningVM.setEnd = form.endDate
         }
 
-        if(form.start && form.end) {
-            newPlanning.startDate = form.start
-            newPlanning.endDate = form.end
-        }
+        if(form.id) newPlanningVM.id = form.id
 
-        if(form.id) newPlanning.id = form.id
-
-        if(newPlanning.id) {
-            await updatePlanning(newPlanning)
-            let allPlaning = _.map(allPlanning, (planningItem) => {
-                if(planningItem.id === newPlanning.id) return newPlanning
+        if(newPlanningVM.id) {
+            await updatePlanning(newPlanningVM.toPlanning())
+            
+            let allPlaning = _.map(allPlanningVM, (planningItem) => {
+                if(planningItem.id === newPlanningVM.id) return newPlanningVM
                 return planningItem
             })
-            setAllPlanning(allPlaning)
+
+            setAllPlanningVM(allPlaning)
             setPlanningToUpdate(undefined)
         } else {
-            newPlanning.id = await createPlanning(newPlanning)
-            setAllPlanning([
-                ...allPlanning,
-                newPlanning
+
+            newPlanningVM.id = await createPlanning(newPlanningVM.toPlanning())
+            
+            setAllPlanningVM([
+                ...allPlanningVM,
+                newPlanningVM
             ])
         }
 
-
         setCurrentStartDate(undefined)
         setCurrentEndDate(undefined)
-
         setIsAddOrEditPlanningOpen(false)
+    }
+
+    const getStartDateOrPlanningToUpdateCondition = () => {
+        return isAddOrEditPlanningOpen && (currentStartDate || planningToUpdate)
     }
 
     const handleCloseModal = () => {
@@ -101,18 +113,25 @@ const AdminPlanning = () => {
     }
 
     const convertPlanningToEvents = () => {
-        return _.map(allPlanning, (planning) => ({
+
+        _.map(allPlanningVM, (planningVM) => {
+            const associatedCours = _.find(allCours, ['id', planningVM.coursId ])
+            if(associatedCours) planningVM.setCours = associatedCours
+        })
+
+        return _.map(allPlanningVM, (planning) => ({
             id: planning.id,
-            title: planning.title,
-            start: new Date(planning.startDate),
-            end: new Date(planning.endDate)
+            start: planning.start,
+            end: planning.end,
+            title: planning.cours.title ?? 'Aucun cours selectionné'
         }))
+
     }
 
 
 
       useEffect(() => {
-        fetchPlanning()
+        fetchAndSetAllData()
       }, [])
 
 
@@ -120,12 +139,14 @@ const AdminPlanning = () => {
     return (
         <>
             {
-                isAddOrEditPlanningOpen &&
+                getStartDateOrPlanningToUpdateCondition() &&
                 <AddOrEditPlanning
                     planningToUpdate={planningToUpdate}
                     isOpen={isAddOrEditPlanningOpen}
                     setIsOpen={handleCloseModal}
-                    submitPlanning={setDates}
+                    submitPlanning={addEventToPlanning}
+                    cours={allCours}
+                    startDate={currentStartDate}
                 />
             }
             <Calendar
@@ -145,7 +166,7 @@ const AdminPlanning = () => {
                         today.getFullYear(),
                         today.getMonth(),
                         today.getDate(),
-                        8
+                        9
                     )
                 }
                 max={
@@ -153,7 +174,7 @@ const AdminPlanning = () => {
                       today.getFullYear(), 
                       today.getMonth(), 
                       today.getDate(), 
-                      18
+                      22
                     )
                   }
 
