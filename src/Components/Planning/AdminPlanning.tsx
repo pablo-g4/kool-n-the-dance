@@ -119,12 +119,7 @@ const AdminPlanning = () => {
             if(associatedCours) planningVM.setCours = associatedCours
         })
 
-        return _.map(allPlanningVM, (planning) => ({
-            id: planning.id,
-            start: planning.start,
-            end: planning.end,
-            title: planning.cours.title ?? 'Aucun cours selectionné'
-        }))
+        return _.map(allPlanningVM, (planning) => (planning.convertToEvent))
 
     }
 
