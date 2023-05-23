@@ -32,10 +32,11 @@ import { News } from '../../Models/News'
 import { Cours, COURSES_TYPES } from '../../Models/Cours'
 import { getAllCours } from '../../Controllers/cours'
 import { Forfait } from '../../Models/Forfait'
-import { getAllForfaits, getAllBasicForfait } from '../../Controllers/forfait'
+import { getAllForfaits } from '../../Controllers/forfait'
 import CarouselSlide from '../../Components/Carrousel_Activite/CarrouselSlideDanses'
 import CarouselSlideFitness from '../../Components/Carrousel_Activite/CarrouselSlideBienEtre'
-import { CarouselSlideForfait } from '../../Components/Carrousel_Activite/CarouselSlideForfait'
+import { getAllTemoignages } from '../../Controllers/temoignages'
+import { Temoignages } from '../../Models/Temoignages'
 
 export const HomePage = () => {
 
@@ -45,6 +46,7 @@ export const HomePage = () => {
   const [allNews, setAllNews] = useState<News[]>([])
   const [allCourses, setAllCours] = useState<Cours[]>([])
   const [allForfaits, setAllForfaits] = useState<Forfait[]>([])
+  const [allTemoignages, setAllTemoignages] = useState<Temoignages[]>([])
   const [currentTab, setCurrentTab] = useState('danse')
 
   const getFilteredPlanningForTheDay = () => {
@@ -85,6 +87,11 @@ export const HomePage = () => {
     setAllCours(cours)
   }
 
+  const fetchAndSetTemoignages = async () => {
+    const temoignages = await getAllTemoignages()
+    setAllTemoignages(temoignages)
+  }
+
   const fetchAndSetPlanning = async () => {
     let planning = await getAllPlanning()
     setPlanningForTheDay(planning.map(planning => PlanningVM.fromPlanning(planning)))
@@ -100,6 +107,7 @@ export const HomePage = () => {
     fetchAndSetPlanning()
     fetchAndSetCours()
     fetchAndSetForfaits()
+    fetchAndSetTemoignages()
   }, [])
 
   const getDansesCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.DANSES])
@@ -163,14 +171,15 @@ export const HomePage = () => {
                   </div>
 
                   <button
-                    type="button"
                     className="button_danser d-block mx-auto opacity-full col-12"
+                    onClick={() => displayCard('danse')}
                   >
                     DANSER
                   </button>
                   <button
                     type="button"
                     className="button_fitness  d-block mx-auto opacity-full"
+                    onClick={() => displayCard('fitness')}
                   >
                     FAIRE DU FITNESS
                   </button>
@@ -186,7 +195,7 @@ export const HomePage = () => {
         <img className="wave" src={Trace}></img>
       </div>
 
-      <div className="row mx-0 justify-content-center">
+      <div className="row mx-0 justify-content-center" data-spy="scroll">
         <div className="col-12 text-center">
           <button
             id="btn-danse"
@@ -284,7 +293,7 @@ export const HomePage = () => {
               </div>
             )) : (
               <div className='col-12 text-center my-4'>
-                <h3 className="text-white">Aucun planning disponible pour le {new Date().toLocaleDateString("fr-FR")}</h3>
+                <h3 className="text-white">Aucun planning disponible pour le { new Date().toLocaleDateString("fr-FR") }</h3>
               </div>
             )
         }
@@ -315,20 +324,18 @@ export const HomePage = () => {
       <div className='my-5'>
         <h1 className=" text-center title-home">Témoignages</h1>
         <div className="m-auto d-block ">
-          <div className='row'>
-            <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img={Fitness} nom="Maria Mercier (élève)" text="Camille est une coach sportive dynamique qui donne l'envie de nous surpasser. Elle est géniale, la musique sur laquelle on danse est super. A la fin du cours on a la pêche. Tout est là pour donner envie d'y aller et de se bouger, l'équipe est sympa. Je la conseille à 2000%"></CardTemoignage>
-            </div>
-            <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img={Forfait2} nom="Baumier Elise (élève)" text="Super prof! Dynamique, toujours de bonne humeur et soucieuse de ses élèves!"></CardTemoignage>
-            </div>
-            <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img={Danse} nom="Merckling Pascalle (élève)" text="Dynamique, bienveillante et très  à l'écoute  de ses élèves.  Elle ne compte pas son temps pour assurer des cours de qualité.  Tout ça  dans une excellente ambiance. On en redemande. Cours d excellente qualité  à  la portée  de tous  avec des prix attractifs et un grand respect des règles  en vigueur par rapport au Covid."></CardTemoignage>
-            </div>
-            <div className="col-md-6 col-sm-12 ">
-              <CardTemoignage img={Forfait2} nom="Amielle" text="J'ai adoré dès le premier cours! Ambiance et prof géniale qui donne envie de venir en cours de sport! Je recommande +++!"></CardTemoignage>
-            </div>
-          </div>
+          {
+            allTemoignages.length && (
+              <div className='row'>
+                {_.map(allTemoignages, (temoignage, index) => (
+                  <div key={index} className="col-md-6 col-sm-12 ">
+                    <CardTemoignage temoignage={temoignage}></CardTemoignage>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+
         </div>
       </div>
 

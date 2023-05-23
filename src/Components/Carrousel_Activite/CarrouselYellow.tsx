@@ -24,7 +24,7 @@ export const CarrouselYellow = ({ allCours }: { allCours?: Cours[] }) => {
         <div className="title-div">
           <img src={logo} className="img-div-logo" alt="Logo" />
           <div className="Carre_Yellow text-center">
-            <p className="mt-4 ">Fitness et Bien-Être</p>
+            <p className="mt-4">Fitness et Bien-Être</p>
           </div>
         </div>
       </div>

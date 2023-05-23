@@ -51,14 +51,14 @@ const AdminSidebar = ({ page = "" }) => {
           <p className="aSidebar_text">Gestion Forfait</p>
         </Link>
         <Link className={
-          page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
-        } to="/admin/forfait">
+          page === "/admin/temoignages" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+        } to="/admin/temoignages">
           <p className="aSidebar_text">Gestion Témoignages</p>
         </Link>
         <Link className={
-          page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
+          page === "/admin/logout" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         } to="/admin/forfait" onClick={logout}>
-          <p className="aSidebar_text"><GrLogout color="white" /> Déconnexion</p>
+          <p className="aSidebar_text"> <GrLogout size={25} color="white" /> Déconnexion</p>
         </Link>
     </div>
   );

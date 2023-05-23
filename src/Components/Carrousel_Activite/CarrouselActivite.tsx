@@ -23,7 +23,7 @@ export const CarrouselActivite = ({ allCours }: { allCours?: Cours[] }) => {
         <div className="title-div">
           <img src={logo} className="img-div-logo" alt="Logo" />
           <div className="Carre text-center">
-            <p className="mt-4 mb-4">Danses</p>
+            <p className="mt-4 mb-4" >Danses</p>
           </div>
         </div>
       </div>
