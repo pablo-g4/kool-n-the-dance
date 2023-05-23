@@ -101,8 +101,8 @@ export const CoursPage = () => {
                         }} className='col-4 mb-4'>
                             <CardCours cours={cours}>
                                 <div className='d-flex justify-content-end'>
-                                    <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)}>Modifier</AiFillEdit>
-                                    <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} >Supprimer</AiOutlineClose>
+                                    <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)} />
+                                    <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} />
                                 </div>
                             </CardCours>
                         </div>
@@ -120,8 +120,8 @@ export const CoursPage = () => {
                         }}  key={index} className='col-4 mb-4'>
                            <CardCours cours={cours}>
                                <div className='d-flex justify-content-end'>
-                                   <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)}>Modifier</AiFillEdit>
-                                   <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} >Supprimer</AiOutlineClose>
+                                   <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)} />
+                                   <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} />
                                </div>
                            </CardCours>
                         </div>

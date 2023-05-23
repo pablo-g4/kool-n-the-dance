@@ -20,6 +20,7 @@ import { GalleryPage as AdminGalleryPage} from './Pages/Admin/Gallery/GalleryPag
 import { ForfaitPage as AdminForfaitPage} from './Pages/Admin/Forfait/ForfaitPage'
 import { PlanningPage as AdminPlanningPage} from "./Pages/Admin/Planning/PlanningPage"
 import { CoursPage as AdminCoursPage } from './Pages/Admin/Cours/CoursPage'
+import { TemoignagesPage as AdminTemoignagesPage } from './Pages/Admin/Temoigagnes/TemoignagesPage'
 
 const App = () => {
 
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/admin/cours/*" element={<AdminCoursPage />} />
           <Route path="/admin/galerie" element={<AdminGalleryPage />} />
           <Route path="/admin/forfait" element={<AdminForfaitPage />} />
+          <Route path="/admin/temoignages" element={<AdminTemoignagesPage />} />
         </Route>
       </Routes>
     </div>

@@ -7,5 +7,6 @@ export enum COLLECTION {
     FORFAITS = 'forfaits',
     PLANNING = 'planning',
     GENERAL_INFORMATIONS= 'general_informations',
-    BOOKMARKS = 'bookmarks'
+    BOOKMARKS = 'bookmarks',
+    TEMOIGNAGES = 'temoignages'
 } 
