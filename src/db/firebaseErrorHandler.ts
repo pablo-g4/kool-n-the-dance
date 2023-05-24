@@ -1,10 +1,21 @@
-export const mapAuthCodeToMessage = (error: any) => {
-    switch (error.message) {
-      case "INVALID_PASSWORD":
-        return "Password provided is not corrected";
-      case "INVALID_EMAIL":
-        return "Email provided is invalid";
-      default:
-        return "";
-    }
+export const authCodeErrorToMessage = (error: any) => {
+
+  let errorMessage = ''
+
+  switch (error.code) {
+    case 'auth/invalid-email':
+        errorMessage = 'Email invalid'
+        break
+    case 'auth/user-not-found':
+        errorMessage = 'Email ou mot de passe incorrect'
+        break
+    case 'auth/wrong-password':
+        errorMessage = 'Email ou mot de passe incorrect'
+        break
+    default:
+        errorMessage = 'Email ou mot de passe incorrect'
+        break
+  }
+
+  return errorMessage
 }

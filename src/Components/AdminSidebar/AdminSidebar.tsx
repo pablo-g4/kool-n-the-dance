@@ -58,7 +58,7 @@ const AdminSidebar = ({ page = "" }) => {
         <Link className={
           page === "/admin/logout" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         } to="/admin/forfait" onClick={logout}>
-          <p className="aSidebar_text"> <GrLogout size={25} color="white" /> Déconnexion</p>
+          <p className="aSidebar_text"> Déconnexion</p>
         </Link>
     </div>
   );
