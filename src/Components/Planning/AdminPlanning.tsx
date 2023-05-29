@@ -4,7 +4,7 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import AddOrEditPlanning from './AddOrEditPlanning'
 import { createPlanning, updatePlanning, deletePlanning, getAllPlanning } from '../../Controllers/planning'
-import { Planning } from '../../Models/Planning'
+import { RECURENCE_TYPES } from '../../Models/Planning'
 import _ from 'lodash'
 import { getAllCours } from '../../Controllers/cours'
 import { Cours } from '../../Models/Cours'
@@ -81,26 +81,72 @@ const AdminPlanning = () => {
         if(newPlanningVM.id) {
             await updatePlanning(newPlanningVM.toPlanning())
             
-            let allPlaning = _.map(allPlanningVM, (planningItem) => {
+            setAllPlanningVM(_.map(allPlanningVM, (planningItem) => {
                 if(planningItem.id === newPlanningVM.id) return newPlanningVM
                 return planningItem
-            })
-
-            setAllPlanningVM(allPlaning)
+            }))
             setPlanningToUpdate(undefined)
         } else {
 
             newPlanningVM.id = await createPlanning(newPlanningVM.toPlanning())
             
-            setAllPlanningVM([
-                ...allPlanningVM,
-                newPlanningVM
-            ])
+
+
+            if (newPlanningVM.recurrence === RECURENCE_TYPES.ALL_WEEKS_DURING_ONE_YEAR) {
+
+                let planningListForOneYear = getPlanningListForOneYear(newPlanningVM)
+
+                for (const planningVM of planningListForOneYear) {
+                    planningVM.id = await createPlanning(planningVM.toPlanning())
+                }
+
+                planningListForOneYear = [...planningListForOneYear, newPlanningVM]
+
+                setAllPlanningVM([
+                    ...allPlanningVM,
+                    ...planningListForOneYear
+                ])
+
+            } else {
+                setAllPlanningVM([
+                    ...allPlanningVM,
+                    newPlanningVM
+                ])
+            }
+
         }
+
+
 
         setCurrentStartDate(undefined)
         setCurrentEndDate(undefined)
         setIsAddOrEditPlanningOpen(false)
+    }
+
+    const getPlanningListForOneYear = (planning: PlanningVM) => {
+
+        let planningForOneYear: PlanningVM[] = []
+
+        for ( let i = 1; i < 53; i++ ) {
+
+            let currentPlanning = new PlanningVM()
+            currentPlanning.recurrence = planning.recurrence
+            currentPlanning.coursId = planning.coursId
+
+            currentPlanning.setStart = planning.start
+            currentPlanning.setEnd = planning.end
+
+            currentPlanning.start.setDate(currentPlanning.start.getDate() + i * 7 )
+            currentPlanning.end.setDate(currentPlanning.end.getDate() + i * 7 )
+
+            currentPlanning.startDate = currentPlanning.start.getTime()
+            currentPlanning.endDate = currentPlanning.end.getTime()
+
+            planningForOneYear.push(currentPlanning)
+        }
+
+        return planningForOneYear
+
     }
 
     const getStartDateOrPlanningToUpdateCondition = () => {
@@ -116,11 +162,17 @@ const AdminPlanning = () => {
 
         _.map(allPlanningVM, (planningVM) => {
             const associatedCours = _.find(allCours, ['id', planningVM.coursId ])
-            if(associatedCours) planningVM.setCours = associatedCours
+            if(associatedCours) planningVM.setCoursVM = associatedCours
         })
 
         return _.map(allPlanningVM, (planning) => (planning.convertToEvent))
 
+    }
+
+    const handleDelete = async (planningId: string) => {
+        await deletePlanning(planningId)
+        setAllPlanningVM(_.filter(allPlanningVM, planningVM => planningVM.id !== planningId ))
+        setIsAddOrEditPlanningOpen(false)
     }
 
 
@@ -142,6 +194,7 @@ const AdminPlanning = () => {
                     submitPlanning={addEventToPlanning}
                     cours={allCours}
                     startDate={currentStartDate}
+                    handleDeletePlanning={handleDelete}
                 />
             }
             <Calendar

@@ -1,7 +1,7 @@
 import { Database } from "./Database"
 
 export enum RECURENCE_TYPES {
-    ALL_WEEKS = 'all_weeks',
+    ALL_WEEKS_DURING_ONE_YEAR = 'all_weeks_during_one_year',
     ONCE = 'once'
 }
 

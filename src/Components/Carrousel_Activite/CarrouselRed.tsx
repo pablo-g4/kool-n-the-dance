@@ -9,14 +9,14 @@ import 'swiper/swiper-bundle.css'
 import 'swiper/swiper.min.css'
 import logo from './Groupe 56.png'
 import { Carousel } from '@mantine/carousel'
-import { Forfait } from '../../Models/Forfait'
+import { ForfaitVM } from '../../viewModels/ForfaitVM'
 import _ from 'lodash'
 import 'swiper/css'
 import CarouselSlide from './CarrouselSlideForfait'
 const isMobile = document.documentElement.clientWidth < 600;
 
 
-export const CarrouselRed = ({ forfaits } : { forfaits?: Forfait[]}) => {
+export const CarrouselRed = ({ forfaitsVM } : { forfaitsVM?: ForfaitVM[]}) => {
 
   SwiperCore.use([Navigation]);
   return (
@@ -34,9 +34,9 @@ export const CarrouselRed = ({ forfaits } : { forfaits?: Forfait[]}) => {
             <Carousel mx="auto" withIndicators height={380} className="carousel-home"  slideSize={isMobile ? "100%" : "33.333333%"}
               slideGap="md" loop
               align="start">
-                {forfaits?.length &&
-              _.map(forfaits, (cours, index) => (
-                <CarouselSlide key={index} cours={cours} />
+                {forfaitsVM?.length &&
+              _.map(forfaitsVM, (forfait, index) => (
+                <CarouselSlide key={index} forfaitVM={forfait} />
               ))}
 
             </Carousel>

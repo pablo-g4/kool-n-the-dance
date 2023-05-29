@@ -1,17 +1,44 @@
-import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
+import {collection, query, orderBy, onSnapshot, where } from "firebase/firestore"
 import { doc, getDoc, getDocs, setDoc , updateDoc , addDoc, deleteDoc} from "firebase/firestore"
 import { db, storage } from "./firebase"
 import { utils } from '../Utils/utils'
 import { COLLECTION } from "./collection"
-import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
+import { getStorage, ref, listAll, uploadBytesResumable, getDownloadURL, deleteObject  } from "firebase/storage"
 import _ from "lodash"
 
 export const getDataFromCollection = async (collectionName: COLLECTION, dataId: string) => {
     const docRef = doc(db, collectionName, dataId);
     const docSnap = await getDoc(docRef);
-    
-    if(!docSnap.exists()) return utils.errorResponse('Error on data')
-    return { ...docSnap.data(), id: docSnap.id } 
+    return { ...docSnap.data(), id: docSnap.id }
+}
+
+export const getAllDataFromCollectionWithIds = async (collectionName: COLLECTION, listOfIds: string[]) => {
+
+    let listOfData: any = []
+
+    await Promise.all([
+        listOfIds.forEach(async (id) => {
+            const data = await getDataFromCollection(collectionName, id)
+            listOfData.push(data)
+        })]
+    )
+
+    return listOfData
+}
+
+export const getAllDataFromCollectionWithWhereArray = async (collectionName: COLLECTION, whereArray: any) => {
+
+    let arrayData: any = []
+
+    const q = query(collection(db,collectionName), where(whereArray.property, '==', whereArray.propertyValue))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+        arrayData.push({...doc.data(), id: doc.id})
+    })
+
+    console.log('arrayData -->', arrayData)
+
+    return arrayData
 }
 
 export const getAllDataFromCollection = async (collectionName: COLLECTION) => {
@@ -78,12 +105,13 @@ export const listFiles = async (foldername: string) => {
     return imagesUrl
 }
 
-export const uploadFileToStorage = async (file: any, folderName: string) => {
-    
-    if (!file) {
-        return
-    } 
-    const storageRef = ref(storage, `/${folderName}/${file.name}`);
-    await uploadBytesResumable(storageRef, file);
+export const uploadFileToStorage = async (file: any, folderName: string): Promise<string> => {
+    const storageRef = ref(storage, `/${folderName}/${file.name}`)
+    await uploadBytesResumable(storageRef, file)
     return await getDownloadURL(storageRef)
 }
+
+export const deleteFileFromStorage = async (folderName: string, fileName: string): Promise<void> => {
+    const storageRef = ref(storage, `/${folderName}/${fileName}`)
+    return await deleteObject(storageRef)
+} 

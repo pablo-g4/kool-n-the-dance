@@ -1,22 +1,22 @@
 
 import Image from '../../Assets/Images/lArticle_img.png'
 import "./CardHomeActualite.css"
-import { News } from '../../Models/News'
+import { NewsVM } from '../../viewModels/NewsVM'
 import { utils } from '../../Utils/utils'
 
-const CardHomeActualite = ({ news } : { news : News}) => {
+const CardHomeActualite = ({ newsVM } : { newsVM : NewsVM}) => {
     return (
         <>
             <article className='cardActu mx-auto'>
-                <img className="cardActu_img" src={news.imageUrl ?? Image} alt="Latest Article's image" />
+                <img className="cardActu_img" src={newsVM.imageFile.fileUrl ?? Image} alt="Latest Article's image" />
                 <div className="cardActu_txt">
-                    <strong className="cardActu_label">{news.title}</strong>
-                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" title={news.description} className="cardActu_content text-truncate">
+                    <strong className="cardActu_label">{newsVM.title}</strong>
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" title={newsVM.description} className="cardActu_content text-truncate">
                         {
-                            news.description
+                            newsVM.description
                         }
                     </span>
-                    <h6 className="cardActu_date">{utils.formatDateDDMMYY(news.creationDate * 1000)}</h6>
+                    <h6 className="cardActu_date">{utils.formatDateDDMMYY(newsVM.creationDate * 1000)}</h6>
                 </div>
             </article>
         </>    

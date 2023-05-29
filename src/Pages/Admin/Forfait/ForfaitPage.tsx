@@ -1,85 +1,137 @@
-import _ from "lodash";
-import React, { useState, useEffect, useCallback } from "react";
-import "../../../Components/Forfaits/addOrEditForfaits.css";
-import AddOrEditForfaitsForm from "../../../Components/Forfaits/AddOrEditForfaitsForm";
+import _ from "lodash"
+import React, { useState, useEffect, useCallback } from "react"
+import "../../../Components/Forfaits/addOrEditForfaits.css"
+import AddOrEditForfaitsForm from "../../../Components/Forfaits/AddOrEditForfaitsForm"
 import {
-  getAllForfaits,
+  getAllForfaitsEvenDisabled,
   deleteForfait,
   createForfait,
   updateForfait,
-} from "../../../Controllers/forfait";
-import { Forfait } from "../../../Models/Forfait";
-import { AiOutlineClose } from "react-icons/ai";
-import DeleteConfirmationModal from "../../../Components/Global/DeleteConfirmationModal";
-import AddOrEditCustomForfaitModal from "../../../Components/Forfaits/AddOrEditCustomForfaitModal";
-import "../../../Components/Carrousel_Activite/styleActivite.css";
-import CustomSwitch from "../../../Components/Switch/CustomSwitch";
+} from "../../../Controllers/forfait"
+import AddOrEditCustomForfaitModal from "../../../Components/Forfaits/AddOrEditCustomForfaitModal"
+import "../../../Components/Carrousel_Activite/styleActivite.css"
+import CustomSwitch from "../../../Components/Switch/CustomSwitch"
+import { ForfaitVM } from "../../../viewModels/ForfaitVM"
+import { getAllCours } from "../../../Controllers/cours"
+import { Cours } from "../../../Models/Cours"
+import { createFile, deleteFile, getAllFiles } from "../../../Controllers/files"
+import { COLLECTION } from "../../../db/collection"
+import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 
 export const ForfaitPage = () => {
-  const [hover, setHover] = useState(false);
-  const [allForfaits, setAllForfaits] = useState<Forfait[]>([]);
-  const [switchValue, setSwitchValue] = useState(true);
+  const [hover, setHover] = useState(false)
+  const [allForfaitsVM, setAllForfaitsVM] = useState<ForfaitVM[]>([])
+  const [switchValue, setSwitchValue] = useState(true)
   const [
     addOrEditCustomForfaitModalIsOpen,
     setAddOrEditCustomForfaitModalIsOpen,
   ] = useState<boolean>(false);
-  const [currentCustomForfait, setCurrentCustomForfait] = useState<
-    Forfait | undefined
-  >(undefined);
+  const [currentCustomForfait, setCurrentCustomForfait] = useState<ForfaitVM | undefined>(undefined)
+  const [allCours, setAllCours] = useState<Cours[]>()
 
-  const fetchData = useCallback(async () => {
-    const forfaits = await getAllForfaits();
-    if (forfaits.length) {
-      setAllForfaits(forfaits);
+  const fetchAndSetForfaits = useCallback(async () => {
+    const allForfaits = await getAllForfaitsEvenDisabled()
+    if (allForfaits.length) {
+      const fetchAssociatedFiles = await getAllFiles()
+      const getAllAssociatedCourses = await getAllCours()
+      setAllCours(getAllAssociatedCourses)
+      const allForfaitsVM = _.map(allForfaits, forfait => ForfaitVM.fromForfait(forfait))
+      _.map(allForfaitsVM, (forfaitVM) => {
+        if (!forfaitVM.isBasic) {
+          if (forfaitVM.associatedCoursesId.length) {
+            _.map(getAllAssociatedCourses, associatedCours => {
+              if (_.find(forfaitVM.associatedCoursesId , associatedCoursId => associatedCoursId === associatedCours.id )) forfaitVM.associatedCourses.push(associatedCours)
+            })
+          }
+        }
+        if (forfaitVM.imageFileId) {
+          const foundedFile = _.find(fetchAssociatedFiles, ['id', forfaitVM.imageFileId])
+          if(foundedFile) forfaitVM.imageFile = foundedFile
+        }
+      })
+      setAllForfaitsVM(allForfaitsVM)
     }
   }, []);
 
   const createForfaitBasic = () => {
-    const newForfait = new Forfait();
+    const newForfait = new ForfaitVM();
     newForfait.id = "new";
-    setAllForfaits([...allForfaits, newForfait]);
+    setAllForfaitsVM([...allForfaitsVM, newForfait]);
   };
 
-  const createCustomForfait = async (customForfait: Forfait) => {
-    if (customForfait.id) {
-      await updateForfait(customForfait);
-      const updatedListOfForfaits = allForfaits.map((customForfaitItem) => {
-        return customForfait.id === customForfaitItem.id
-          ? customForfait
-          : customForfaitItem;
-      });
-      setAllForfaits(updatedListOfForfaits);
+  const createCustomForfait = async (form: any) => {
+
+    const {
+      id,
+      title ,
+      description ,
+      price,
+      customerType,
+      category,
+      imageFile,
+      imageFileId,
+      associatedCoursesId,
+      isActive
+    } = form 
+
+    let newCustomForfait = new ForfaitVM()
+    newCustomForfait.title = title
+    newCustomForfait.description = description
+    newCustomForfait.isBasic = false
+    newCustomForfait.associatedCoursesId = associatedCoursesId
+    newCustomForfait.price = price
+    newCustomForfait.category = category
+    newCustomForfait.customerType = customerType
+    newCustomForfait.isActive = isActive
+
+    if (imageFile instanceof File && imageFileId) { 
+      await deleteFile(imageFileId)
+      newCustomForfait.imageFileId = await createFile(imageFile, COLLECTION.FORFAITS)
     } else {
-      customForfait.id = await createForfait(customForfait);
-      setAllForfaits([...allForfaits, customForfait]);
+      newCustomForfait.imageFileId = imageFileId
+      newCustomForfait.imageFile = imageFile
     }
-  };
 
-  const getBasicForfaits = () => {
-    return _.filter(allForfaits, "isBasic");
-  };
+    if (imageFile && !imageFileId) newCustomForfait.imageFileId = await createFile(imageFile, COLLECTION.FORFAITS)
 
-  const getCustomForfaits = () => {
-    return _.filter(allForfaits, ["isBasic", false]);
-  };
+    if (newCustomForfait.imageFileId && imageFile instanceof File ) newCustomForfait.imageFile.fileUrl = URL.createObjectURL(imageFile)
+
+    if(associatedCoursesId.length) { 
+      _.map(allCours, associatedCours => {
+        if(_.find(associatedCoursesId , associatedCoursId => associatedCoursId === associatedCours.id )) newCustomForfait.associatedCourses.push(associatedCours)
+      })
+    }
+
+    if (id) {
+      newCustomForfait.id = id
+      await updateForfait(newCustomForfait.toForfait())
+      setAllForfaitsVM(oldNewsVMState => _.map(oldNewsVMState, customForfaitItem => customForfaitItem.id === newCustomForfait.id ? newCustomForfait : customForfaitItem))
+    } else {
+      newCustomForfait.id = await createForfait(newCustomForfait.toForfait())
+      setAllForfaitsVM([...allForfaitsVM, newCustomForfait])
+    }
+    setCurrentCustomForfait(undefined)
+    setAddOrEditCustomForfaitModalIsOpen(false)
+  }
+
+  const getBasicForfaits = () =>  _.filter(allForfaitsVM, "isBasic")
+
+  const getCustomForfaits = () => _.filter(allForfaitsVM, ["isBasic", false])
 
   const getActiveCustomForfait = (isCustomForfaitActive: boolean = false) => {
-    const customForfaits = getCustomForfaits();
-    return _.filter(customForfaits, ["isActive", isCustomForfaitActive]);
+    const customForfaits = getCustomForfaits()
+    return _.filter(customForfaits, ["isActive", isCustomForfaitActive])
+  }
+
+  const openEditCustomModal = (customForfait: ForfaitVM) => {
+    setCurrentCustomForfait(customForfait)
+    setAddOrEditCustomForfaitModalIsOpen(true)
   };
 
-  const openEditCustomModal = (customForfait: Forfait) => {
-    setCurrentCustomForfait(customForfait);
-    setAddOrEditCustomForfaitModalIsOpen(true);
-  };
-
-  const deleteCustomForfait = async (customForfait: Forfait) => {
-    await deleteForfait(customForfait.id);
-    const updatedListOfForfaits = _.filter(
-      allForfaits,
-      (forfaitItem) => forfaitItem.id !== customForfait.id
-    );
-    setAllForfaits(updatedListOfForfaits);
+  const deleteCustomForfait = async (customForfait: ForfaitVM) => {
+    if(customForfait.imageFileId) await deleteFile(customForfait.imageFileId)
+    await deleteForfait(customForfait.id)
+    setAllForfaitsVM(_.filter( allForfaitsVM, forfaitItem => forfaitItem.id !== customForfait.id))
   };
 
   const closeAddOrEditCustomForfaitModal = () => {
@@ -87,16 +139,14 @@ export const ForfaitPage = () => {
     setAddOrEditCustomForfaitModalIsOpen(false);
   };
 
-  const updateListOfForfaits = (forfaitToBeUpdated: Forfait) => {
-    const newListOfForfaits = allForfaits.map((forfaitItem) => {
+  const updateListOfForfaits = (forfaitToBeUpdated: ForfaitVM) => {
+    const newListOfForfaits = allForfaitsVM.map((forfaitItem) => {
       if (forfaitItem.id === "new") {
-        console.log("forfait being updated", forfaitToBeUpdated);
-
         return forfaitToBeUpdated;
       }
       return forfaitItem;
     });
-    setAllForfaits(newListOfForfaits);
+    setAllForfaitsVM(newListOfForfaits);
   };
 
   const handleSwitch = () => {
@@ -110,13 +160,13 @@ export const ForfaitPage = () => {
     if (forfaitToDeleteId && forfaitToDeleteId !== "new") {
       await deleteForfait(forfaitToDeleteId);
     }
-    setAllForfaits(
-      _.filter(allForfaits, (forfait) => forfait.id !== forfaitToDeleteId)
-    );
-  };
+    setAllForfaitsVM(
+      _.filter(allForfaitsVM, (forfait) => forfait.id !== forfaitToDeleteId)
+    )
+  }
 
   useEffect(() => {
-    fetchData();
+    fetchAndSetForfaits()
   }, []);
 
   return (
@@ -133,7 +183,7 @@ export const ForfaitPage = () => {
           onClick={createForfaitBasic}
           type="button"
           className="text-white"
-          disabled={!!_.filter(allForfaits, ["id", "new"]).length}
+          disabled={!!_.filter(allForfaitsVM, ["id", "new"]).length}
         >
           + Ajouter un forfait basique
         </button>
@@ -177,16 +227,22 @@ export const ForfaitPage = () => {
             setIsOpen={setAddOrEditCustomForfaitModalIsOpen}
             submitForm={createCustomForfait}
             currentCustomForfait={currentCustomForfait}
+            allCours={allCours}
           />
         )}
       </div>
       <div className="d-flex flex-column">
-        <CustomSwitch
-          value={switchValue}
-          setValue={handleSwitch}
-          firstLabel="En ligne"
-          secondLabel="Archives"
-        />
+        {
+          (
+            <CustomSwitch
+              value={switchValue}
+              setValue={handleSwitch}
+              firstLabel="En ligne"
+              secondLabel="Archives"
+            />
+          )
+        }
+
         <div
           className="row"
           style={{
@@ -196,7 +252,7 @@ export const ForfaitPage = () => {
           }}
         >
           {getActiveCustomForfait(switchValue) &&
-            getActiveCustomForfait(switchValue).map((customForfait, index) => (
+            _.map(getActiveCustomForfait(switchValue), (customForfait, index) => (
               <div
                 key={index}
                 className="col-lg-3 cardCoursRed2"
@@ -206,11 +262,11 @@ export const ForfaitPage = () => {
                 style={
                   !hover
                     ? {
-                        backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.2), rgba(251, 54, 64, 1)),url(${customForfait.imageUrl})`,
+                        backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.2), rgba(251, 54, 64, 1)),url(${customForfait.imageFile.fileUrl})`,
                         backgroundSize: "cover",
                       }
                     : {
-                        backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.75), rgba(251, 54, 64, 1)),url(${customForfait.imageUrl})`,
+                        backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.75), rgba(251, 54, 64, 1)),url(${customForfait.imageFile.fileUrl})`,
                         backgroundSize: "cover",
                       }
                 }
@@ -219,31 +275,24 @@ export const ForfaitPage = () => {
                   <span className="mr-auto p-2 titreCours">
                     {customForfait.title}
                   </span>
-                  <span
-                    onClick={() => openEditCustomModal(customForfait)}
-                    className="p-2"
-                  >
-                    Modifier
-                  </span>
-                  <span
-                    onClick={() => deleteCustomForfait(customForfait)}
-                    className="p-2"
-                  >
-                    X
-                  </span>
+                  <div>
+                    <AiFillEdit className="icon" size={25} onClick={() => openEditCustomModal(customForfait)} />
+                    <AiOutlineClose className="icon" size={25} onClick={() => deleteCustomForfait(customForfait)} />
+                  </div>
                 </div>
                 <div className="imgCours2" id="imgCours">
                   <p className="text-white d-flex flex-column text-center justify-content-center">
-                    {customForfait.associatedCourses &&
-                      customForfait.associatedCourses.map(
-                        (course, coursesIndex) => (
-                          <span key={coursesIndex}>{course}</span>
-                        )
-                      )}
+                    { customForfait.associatedCourses && _.map(customForfait.associatedCourses, (cours, coursesIndex) => (<span key={coursesIndex}>{cours.title}</span>) )}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-white">
+                  Tarif TTC par séance : {customForfait.price}€ 
                   </p>
                 </div>
               </div>
-            ))}
+            )) 
+            }
         </div>
       </div>
     </div>

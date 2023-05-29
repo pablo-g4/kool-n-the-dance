@@ -3,48 +3,54 @@ import Card from '../../Components/Card/Card'
 import CardRight from '../../Components/CardRight/CardRight'
 import { getAllNews } from '../../Controllers/news'
 import { useCallback, useEffect } from 'react'
-import AddOrEditNewsModal from '../../Components/News/AddOrEditNewsModal'
 import { News } from '../../Models/News'
-import {  Group, Button } from '@mantine/core'
-import DeleteConfirmationModal from '../../Components/Global/DeleteConfirmationModal'
-import { deleteNews } from '../../Controllers/news'
+import { NewsVM } from '../../viewModels/NewsVM'
+import { getAllFiles } from '../../Controllers/files'
 import _ from 'lodash'
 
 export const NewsPage = () => {
 
-  const [allNews, setAllNews] = useState<News[]>([])
-  const [currentNews, setCurrentNews] = useState<News | undefined>(undefined)
-  const [isAddOrEditModalOpen, setIsAddOrEditModalOpen] = useState(false);
-  const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] = useState(false);
+  const [allNewsVM, setAllNewsVM] = useState<NewsVM[]>([])
 
-  const fetchData = useCallback(async () => {
-    let news = await getAllNews()
-    if(news.length){
-      news = _.orderBy(news, 'creationDate', 'desc')
-      setAllNews(news)
+  const fetchAndSetAllNews = useCallback(async () => {
+
+    const allNews = await getAllNews()
+    const allCurrentNewsVM = _.map(allNews, news => NewsVM.fromNews(news))
+
+    if (allCurrentNewsVM.length) {
+      const allFiles = await getAllFiles()
+      _.map(allCurrentNewsVM, (currentNewsVM) => {
+        const foundAttachedFile = _.find(allFiles, (file) => file.id === currentNewsVM.attachedFileId)
+        const foundImageFile = _.find(allFiles, file => file.id === currentNewsVM.imageFileId)
+        if (foundAttachedFile) currentNewsVM.attachedFile = foundAttachedFile
+        if (foundImageFile) currentNewsVM.imageFile = foundImageFile
+      })
+      setAllNewsVM(_.orderBy(allCurrentNewsVM, 'creationDate', 'desc'))
     }
   }, [])
-  
+
   useEffect(() => {
-    fetchData()
+    fetchAndSetAllNews()
   }, [])
 
   return (
     <div className='actualite-page'>
       <a className='titre-news text-center my-7'> Actualités </a>
       <div className='row-v2'>
-        <div className='col-md-7 col-xs-11'>
-          {
-            allNews.map((news, index) => <Card news={news} setCurrentNews={setCurrentNews} key={index} />)
-          }
-        </div>
-        <div className='col-5 d-none d-md-block'>
-          {
-            allNews && (
-              <CardRight news={allNews[0]}  />
-            )
-          }
-        </div>
+        {
+          allNewsVM.length ? (
+            <>
+              <div className='col-md-7 col-xs-11'>
+                {
+                  _.map(allNewsVM, (news, index) => <Card newsVM={news} key={index} />)
+                }
+              </div>
+              <div className='col-5 d-none d-md-block'>
+                <CardRight newsVM={allNewsVM[0]} />
+              </div>
+            </>
+          ) : <h3>Aucune actualité actuellement</h3>
+        }
       </div>
     </div>
   )

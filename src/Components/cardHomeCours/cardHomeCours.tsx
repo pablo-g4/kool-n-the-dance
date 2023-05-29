@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./cardHomeCours.css"
 import '../../Assets/Images/Cours/Fitness.jpeg'
-import { Carousel } from "@mantine/carousel";
+import { Carousel } from "@mantine/carousel"
+import _ from "lodash"
 const CardCours = ({ cours }: { cours: any }) => {
-  const [hover, setHover] = useState(false);
-  console.log(cours)
+  const [hover, setHover] = useState(false)
   return (
     <Carousel.Slide >
 
@@ -15,18 +15,20 @@ const CardCours = ({ cours }: { cours: any }) => {
         style={
           !hover
             ? {
-              backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.2), rgba(251, 54, 64, 1)),url(${cours.imageUrl})`, backgroundSize: "cover"
+              backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.2), rgba(251, 54, 64, 1)),url(${cours.imageFile.fileUrl})`, backgroundSize: "cover"
             }
             : {
-              backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.75), rgba(251, 54, 64, 1)),url(${cours.imageUrl})`, backgroundSize: "cover"
+              backgroundImage: `linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.75), rgba(251, 54, 64, 1)),url(${cours.imageFile.fileUrl})`, backgroundSize: "cover"
             }
         }
 
       >
-        <p className="titreCours">{cours.title}</p>
+        <p className="titreCours text-white">{cours.title}</p>
         {
           hover?
-          <p className="imgCours2" >{cours.description}</p>
+          <p className="text-white d-flex flex-column text-center justify-content-center">
+          { cours.associatedCourses && _.map(cours.associatedCourses, (cours, coursesIndex) => (<span key={coursesIndex}>{cours.title}</span>) )}
+          </p>
           :
           null
         }

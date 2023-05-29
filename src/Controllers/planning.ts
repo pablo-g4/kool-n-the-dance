@@ -14,16 +14,23 @@ export const getAllPlanningEvenDisabled = async (): Promise<Planning[]> => {
     return _.map(allPlanningHours, (planningHour) => (Planning.fromDb(planningHour)))
 }
 
+export const deleteAllPlanningWithCoursId = async (coursId: string):Promise<void> => {
+    const allPlanning = await getAllPlanningEvenDisabled()
+    let allPlanningAssociatedWithCoursId = _.filter(allPlanning, ['coursId', coursId])
+    if(allPlanningAssociatedWithCoursId.length) {
+        for (const planningItem of allPlanningAssociatedWithCoursId) {
+            await deletePlanning(planningItem.id)
+        }
+    }
+    
+}
+
 
 export const createPlanning = async(planning: Planning) => {
     const newPlanningHour = await addDocumentToCollection(COLLECTION.PLANNING, planning.toDb())
     return newPlanningHour
 }
 
-export const deletePlanning = async(planningId: string): Promise<void> => {
-    await deleteDocumentFromCollection(COLLECTION.PLANNING, planningId)
-}
+export const deletePlanning = async(planningId: string): Promise<void> =>  await deleteDocumentFromCollection(COLLECTION.PLANNING, planningId)
 
-export const updatePlanning = async(planning: Planning): Promise<void> => {
-    return await updateDocumentToCollection(COLLECTION.PLANNING, planning.id, planning.toDb())
-}
+export const updatePlanning = async(planning: Planning): Promise<void> => await updateDocumentToCollection(COLLECTION.PLANNING, planning.id, planning.toDb())

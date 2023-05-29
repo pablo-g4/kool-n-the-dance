@@ -14,14 +14,16 @@ const AddOrEditPlanning = ({
     setIsOpen, 
     submitPlanning, 
     cours,
-    startDate = new Date()
+    startDate = new Date(),
+    handleDeletePlanning,
 } : { 
     planningToUpdate?: PlanningVM, 
     isOpen : boolean, 
     setIsOpen : any, 
     submitPlanning: any, 
     cours?: Cours[],
-    startDate?: Date 
+    startDate?: Date,
+    handleDeletePlanning: any
 }) => {
 
     const [form, setForm] = useState<any>(
@@ -53,7 +55,7 @@ const AddOrEditPlanning = ({
     const getRecurrenceOptions = () => {
         return [
             { label: 'Une fois', value: RECURENCE_TYPES.ONCE },
-            { label: 'Toutes les semaines', value: RECURENCE_TYPES.ALL_WEEKS }
+            { label: 'Toutes les semaines pendant un an', value: RECURENCE_TYPES.ALL_WEEKS_DURING_ONE_YEAR }
         ]
     }
 
@@ -86,8 +88,7 @@ const AddOrEditPlanning = ({
         return utils.getUnixTimeStamp(new Date(endDate.setHours(endHour[0], endHour[1]))) > utils.getUnixTimeStamp(form.startDate)
     }
 
-    const loadData = () => {   
-
+    const loadData = () => {  
         setForm({
             ...form, 
             id: planningToUpdate?.id,
@@ -114,7 +115,7 @@ const AddOrEditPlanning = ({
   return (
       <>
           <Modal opened={isOpen} withCloseButton={false} onClose={setIsOpen} size='full' centered>
-              <h1 className='text-center'>Ajouter/modifier un horaire</h1>
+              <h1 className='text-center'>{form.id ? 'Modifier' : 'Ajouter'} un horaire</h1>
               <form onSubmit={handleSubmit} method='' action=''>
                   <div className='d-flex flex-column'>
                       <div className='mt-2'>
@@ -122,6 +123,7 @@ const AddOrEditPlanning = ({
                           <Select
                               value={form.recurrence}
                               allowDeselect={false}
+                              disabled={form.id}
                               data={getRecurrenceOptions()}
                               withAsterisk
                               onChange={onChangeRecurrence}
@@ -152,6 +154,9 @@ const AddOrEditPlanning = ({
                   {form.endHour && !isEndHourGreater(form.endHour.split(':')) && "Merci de renseigner une heure de fin plus tard que l'heure de début"}
                   <div className='mt-4 d-flex justify-content-around'>
                     <button type="button" onClick={handleCloseModal}>Annuler</button>
+                    {
+                        form.id && <button className="btn btn-danger" type="button" onClick={() => handleDeletePlanning(form.id)}>Delete</button>
+                    }
                     <button type="submit" disabled={form.endHour && !isEndHourGreater(form.endHour.split(':'))}>Sauvegarder</button>
                   </div>
               </form>

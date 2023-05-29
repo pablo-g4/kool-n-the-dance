@@ -9,8 +9,8 @@ const Footer_cours = ({ forfaits } : { forfaits?: Forfait[]}) => {
       <div className="red-bg p-4">
         <div className="row">
           {
-            forfaits?.length && _.map(forfaits,(forfait) => (
-              <div className="col-4 col-xs-12 text-white">
+            forfaits?.length && _.map(forfaits,(forfait, index) => (
+              <div key={index} className="col-4 col-xs-12 text-white">
                 <p className="p-cours-titre">{forfait.title}</p>
                 <div>
                   <p

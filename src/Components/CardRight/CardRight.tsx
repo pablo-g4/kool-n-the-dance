@@ -1,26 +1,25 @@
-import Image from './../../image/lArticle_img.png'
-import { News } from '../../Models/News'
 import defaultPic from '../../Assets/Images/nofiles.jpg'
 import { utils } from '../../Utils/utils'
+import { NewsVM } from '../../viewModels/NewsVM'
 
-const CardRight = ({ news } : { news: News}) => {
+const CardRight = ({ newsVM } : { newsVM: NewsVM}) => {
 
     return (
         <>
             {
-                news && (
+                newsVM && (
                     <div>
                         <p className='lArticle_title text-center'>Dernier Article</p>
                         <article className='lArticle mx-auto'>
-                            <img className="lArticle_img" src={news?.imageUrl || defaultPic} alt="Latest Article's image" />
+                            <img className="lArticle_img" src={newsVM.imageFile.fileUrl || defaultPic} alt="Latest Article's image" />
                             <div className="lArticle_txt">
-                                <strong className="lArticle_label">{news?.title}</strong>
+                                <strong className="lArticle_label">{newsVM.title}</strong>
                                 <p className="lArticle_content">
                                     {
-                                        news?.description
+                                        newsVM.description
                                     }
                                 </p>
-                                <h6 className="lArticle_date">{utils.formatDateDDMMYY(news.creationDate*1000 ?? 0)}</h6>
+                                <h6 className="lArticle_date">{utils.formatDateDDMMYY(newsVM.creationDate*1000 ?? 0)}</h6>
                             </div>
                         </article>
                     </div>
