@@ -50,7 +50,7 @@ export const PlanningPage = () => {
     const convertPlanningToEvents = () => {
         _.map(allPlanning, (planning) => {
             const associatedCours = _.find(allCours, ['id', planning.coursId])
-            if(associatedCours) planning.setCours = associatedCours
+            if(associatedCours) planning.setCoursVM = associatedCours
         })
         return _.map(allPlanning, (planning) => (planning.convertToEvent))
     }

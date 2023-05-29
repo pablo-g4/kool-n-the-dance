@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Group, Switch, Select, Checkbox, Text , Image} from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
-import { uploadFile } from '../../Controllers/file'
 import { GrUploadOption } from 'react-icons/gr'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Forfait } from '../../Models/Forfait'
+import { ForfaitVM } from '../../viewModels/ForfaitVM'
 import _ from 'lodash'
-import { COURSES_TYPE } from '../../Models/Forfait'
+import { Cours } from '../../Models/Cours'
 
-const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCustomForfait, closeAddOrEditCustomForfaitModal } : { isOpen : boolean , setIsOpen: React.Dispatch<React.SetStateAction<boolean>> , submitForm: any, currentCustomForfait ?: Forfait, closeAddOrEditCustomForfaitModal?: any}) => {
+const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCustomForfait, closeAddOrEditCustomForfaitModal, allCours } : { isOpen : boolean , setIsOpen: React.Dispatch<React.SetStateAction<boolean>> , submitForm: any, currentCustomForfait ?: ForfaitVM, closeAddOrEditCustomForfaitModal?: any, allCours?: Cours[]}) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -19,37 +18,21 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
     price: 0,
     customerType: '',
     category: '',
-    imageUrl: '',
-    associatedCourses: [],
-    isBasic: false,
-    isActive: true,
+    imageFile: '',
+    imageFileId: '',
+    associatedCoursesId: [],
+    isActive: true
   })
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-
-    const newCustomForfait = new Forfait()
-    newCustomForfait.title = form.title
-    newCustomForfait.price = form.price
-    newCustomForfait.customerType = form.customerType
-    newCustomForfait.category = form.category
-    newCustomForfait.imageUrl = form.imageUrl
-    newCustomForfait.isBasic = form.isBasic
-    newCustomForfait.associatedCourses = form.associatedCourses
-
-    if(form.id) {
-      newCustomForfait.id = form.id
-      newCustomForfait.isActive = form.isActive
-    } 
-
-    submitForm(newCustomForfait)
+    submitForm(form)
     handleCloseModal()
   }
 
-  const onImageChange = async (files: any) => {
-    const uploadedImageUrl = await uploadFile(files[0], "images");
-    setForm({ ...form, imageUrl: uploadedImageUrl })
-  }
+  const getCoursOptions = () => _.map(allCours, (cours) => { return { value: cours.id, label: cours.title } })
+
+  const onImageChange = (files: any) => setForm({ ...form, imageFile: files[0] })
 
   const handleCloseModal = (): void => {
     setIsOpen(false)
@@ -58,7 +41,18 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
   useEffect(() => {
     setIsLoading(true)
     if(currentCustomForfait?.id) {
-      setForm(currentCustomForfait)
+      setForm({
+        id: currentCustomForfait.id,
+        title: currentCustomForfait.title,
+        description: currentCustomForfait.description,
+        price: currentCustomForfait.price,
+        customerType: currentCustomForfait.customerType,
+        category: currentCustomForfait.category,
+        imageFile: currentCustomForfait.imageFile,
+        imageFileId: currentCustomForfait.imageFileId,
+        associatedCoursesId: currentCustomForfait.associatedCoursesId,
+        isActive: currentCustomForfait.isActive
+      })
     } 
     setIsLoading(false)
   }, [currentCustomForfait])
@@ -69,7 +63,7 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
         !isLoading ? (
           <Modal opened={isOpen} withCloseButton={false} onClose={closeAddOrEditCustomForfaitModal} size='full' centered>
             <div>
-              <h1>Ajouter un forfait personalisés</h1>
+              <h1>{ form.id ?'Modifier le forfait personnalisé' : 'Ajouter un forfait personnalisé' }</h1>
               <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className='col-lg-7 d-flex flex-column'>
@@ -78,7 +72,7 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                       <input className='mt-2' onChange={(titleItem) => setForm({ ...form, title: titleItem.target.value })} value={form.title} name='nomDuForfait' type="text" placeholder="Nom du forfait" required />
                     </div>
                     <div className='d-flex flex-column mt-2'>
-                      <label htmlFor="price">Tarif : </label>
+                      <label htmlFor="price">Tarif TTC par séance : </label>
                       <input className='mt-2' onChange={(priceItem) => setForm({ ...form, price: priceItem.target.value })} value={form.price} name='price' type="number" placeholder="Prix du forfait" required />
                     </div>
                     <div className='d-flex flex-row mt-2' style={{
@@ -105,7 +99,7 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                     <Dropzone
                       onDrop={(file) => onImageChange(file)}
                       onReject={(files) => console.log('rejected files', files)}
-                      maxSize={3 * 1024 ** 2}
+                      maxSize={5 * 1024 ** 5}
                       accept={IMAGE_MIME_TYPE}
                     >
                       <Group position="center" spacing="xl" style={{ pointerEvents: 'none' }} className="dropzone">
@@ -133,9 +127,9 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                         </Dropzone.Idle>
                       </Group>
                       {
-                        form.imageUrl && (
+                        form.imageFile && (
                           <div className='justify-content-center'>
-                            <Image maw={240} mx="auto" radius="md" src={form.imageUrl} alt="Random image" />
+                            <Image maw={240} mx="auto" radius="md" src={form.imageFile.fileUrl ?? URL.createObjectURL(form.imageFile)} alt="Random image" />
                           </div>
                         )
                       }
@@ -148,25 +142,24 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                     gap: '20px'
                   }}>
                     <Checkbox.Group
-                      onChange={(courses) => setForm({ ...form, associatedCourses: courses })}
-                      value={form.associatedCourses}
+                      onChange={(courses) => setForm({ ...form, associatedCoursesId: courses })}
+                      value={form.associatedCoursesId}
                     >
                       <Group mt="xs" noWrap>
                         {
-                          COURSES_TYPE && _.map(COURSES_TYPE, (COURSE) => (
-                            <Checkbox value={COURSE} label={COURSE} />
-                          ))
+                          getCoursOptions() && _.map(getCoursOptions(), (cours, index) => (<Checkbox value={cours.value} key={index} label={cours.label} /> )) 
                         }
                       </Group>
                     </Checkbox.Group>
                   </div>
                 </div>
                 <div className='mt-4 d-flex justify-content-center'>
+                  {form.isActive}
                   {
-                    currentCustomForfait &&
+                    form.id &&
                     <>
                       <Switch
-                        onChange={() => setForm((prev: any) => ({ ...prev, isActive: !form.isActive }))}
+                        onChange={() => setForm({...form, isActive: !form.isActive}) }
                         checked={!form.isActive}
                         label="Archiver forfait ?"
                         size="md"

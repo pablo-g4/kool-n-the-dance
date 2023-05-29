@@ -1,15 +1,5 @@
 import { Database } from "./Database"
 
-export enum COURSES_TYPE {
-    ZUMBA = 'Zumba',
-    KUDURO_FIT = 'Kuduro Fit',
-    STRONG_NATION = 'Strong Nation',
-    HIIT = 'Hiit',
-    PORT_DE_BRAS = 'Port de bras',
-    RENFORCEMENT = 'Renforcement'
-}
-
-
 export class Forfait extends Database {
     
     public title: string = ""
@@ -18,8 +8,8 @@ export class Forfait extends Database {
     public price: number = 0
     public customerType: string = ''
     public category: string = ''
-    public imageUrl: string = ''
-    public associatedCourses: COURSES_TYPE[] = []
+    public associatedCoursesId: string[] = []
+    public imageFileId: string = ""
 
     constructor () {
         super()
@@ -33,8 +23,8 @@ export class Forfait extends Database {
             price: this.price,
             customer_type: this.customerType,
             category: this.category,
-            image_url: this.imageUrl,
-            associated_courses: this.associatedCourses,
+            image_file_id: this.imageFileId,
+            associated_courses_id: this.associatedCoursesId,
             is_active: this.isActive,
         }
     }
@@ -49,11 +39,11 @@ export class Forfait extends Database {
         forfait.creationDate = objDb.creation_date
         forfait.updatedDate = objDb.updated_date
         forfait.isActive = objDb.is_active
-        forfait.price = objDb.price ?? 0
+        forfait.price = objDb.price
         forfait.customerType = objDb.customer_type
         forfait.category = objDb.category
-        forfait.imageUrl = objDb.image_url
-        forfait.associatedCourses = objDb.associated_courses
+        forfait.imageFileId = objDb.image_file_id
+        forfait.associatedCoursesId = objDb.associated_courses_id
         
         return forfait
     }

@@ -1,10 +1,11 @@
 import { Cours } from "../Models/Cours"
 import { Planning } from "../Models/Planning"
 import { utils } from "../Utils/utils"
+import { CoursVM } from "./CoursVM"
 
 export class PlanningVM extends Planning {
 
-    public cours: Cours = new Cours()
+    public coursVM: CoursVM = new CoursVM()
     public start: Date = new Date()
     public end: Date = new Date()
 
@@ -14,7 +15,7 @@ export class PlanningVM extends Planning {
         let newPlanningVM = new PlanningVM()
         newPlanningVM.id = planning.id 
         newPlanningVM.coursId = planning.coursId 
-        newPlanningVM.cours.id = planning.coursId 
+        newPlanningVM.coursVM.id = planning.coursId 
         newPlanningVM.isActive = planning.isActive
         newPlanningVM.coursId = planning.coursId
         newPlanningVM.startDate = planning.startDate
@@ -23,6 +24,8 @@ export class PlanningVM extends Planning {
         newPlanningVM.end = new Date(planning.endDate)
         newPlanningVM.updatedDate = planning.updatedDate
         newPlanningVM.creationDate = planning.creationDate
+        newPlanningVM.recurrence = planning.recurrence
+        
         return newPlanningVM
     }
 
@@ -51,8 +54,8 @@ export class PlanningVM extends Planning {
         return utils.formatDateDDMMYY(this.endDate)
     }
 
-    set setCours(cours: Cours) {
-        this.cours = cours
+    set setCoursVM(cours: Cours) {
+        this.coursVM =  CoursVM.fromCours(cours)
     }
 
     set setStart(startDate: Date) {
@@ -76,7 +79,7 @@ export class PlanningVM extends Planning {
             end: this.end,
             id: this.id,
             start: this.start,
-            title: this.cours.title
+            title: this.coursVM.title
         }
     }
 }

@@ -4,8 +4,8 @@ export class News extends Database {
 
     public title: string = ""
     public description: string = ""
-    public attachedFileUrl: string = ""
-    public imageUrl: string = ""
+    public attachedFileId: string = ""
+    public imageFileId: string = ""
 
 
     constructor () {
@@ -16,8 +16,8 @@ export class News extends Database {
         return {
             title: this.title,
             description: this.description,
-            attached_file_url: this.attachedFileUrl || "", 
-            image_url: this.imageUrl || "",
+            attached_file_id: this.attachedFileId, 
+            image_file_id: this.imageFileId,
             is_active: this.isActive,
         }
     }
@@ -29,8 +29,8 @@ export class News extends Database {
         news.id = objDb.id
         news.title = objDb.title
         news.description = objDb.description
-        news.attachedFileUrl = objDb.attached_file_url
-        news.imageUrl = objDb.image_url
+        news.attachedFileId = objDb.attached_file_id
+        news.imageFileId = objDb.image_file_id
         news.isActive = objDb.is_active
         news.updatedDate = objDb.updated_date
         news.creationDate = objDb.creation_date

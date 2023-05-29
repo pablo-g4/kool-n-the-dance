@@ -8,65 +8,103 @@ import { AddOrEditCours } from '../../../Components/Cours/AddOrEditCours'
 import { createCours, getAllCoursEvenDisabled, updateCours, deleteCours } from '../../../Controllers/cours'
 import { BsPlusLg } from 'react-icons/bs'
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
+import { CoursVM } from '../../../viewModels/CoursVM'
+import { createFile, deleteFile, getAllFiles } from '../../../Controllers/files'
+import { COLLECTION } from '../../../db/collection'
+import { deleteAllPlanningWithCoursId } from '../../../Controllers/planning'
+import { deleteCustomForfaitWithCoursId } from '../../../Controllers/forfait'
 
 export const CoursPage = () => {
 
     const [switchValue, setSwitchValue] = useState(true)
-    const [allCours, setAllCours] = useState<Cours[]>([])
-    const [coursToUpdateId, setCoursToUpdateId] = useState<string>()
+    const [allCoursVM, setAllCoursVM] = useState<CoursVM[]>([])
+    const [currentCours, setCurrentCours] = useState<CoursVM>()
     const [addOrEditCoursModalIsOpen, setAddOrEditCoursModalIsOpen] = useState(false)
 
     const submitAddOrEditCours = async (form: any) => {
-        let newCours = new Cours()
-        newCours.title = form.title
-        newCours.description = form.description
-        newCours.imageUrl = form.imageUrl
-        newCours.courseType = form.courseType
-        if(form.id) {
-            newCours.id = form.id
-            newCours.isActive = form.isActive
-            await updateCours(newCours)
-            let updatedAllCours = allCours.map((cours) => {
-                if(cours.id === newCours.id) return newCours
-                else return cours
-            })
-            setAllCours(updatedAllCours)
+
+        const {
+            id,
+            title,
+            description,
+            imageFile,
+            imageFileId,
+            courseType,
+            isActive
+        } = form
+
+
+        let newCours = new CoursVM()
+        newCours.title = title
+        newCours.description = description
+        newCours.courseType = courseType
+        newCours.isActive = isActive
+
+        if(imageFile instanceof File && imageFileId) {
+            await deleteFile(imageFileId)
+            newCours.imageFileId = await createFile(imageFile, COLLECTION.COURS)
         } else {
-            newCours.id = await createCours(newCours)
-            setAllCours([...allCours, newCours])
+            newCours.imageFileId = imageFileId
+            newCours.imageFile = imageFile
         }
 
-        setCoursToUpdateId('')
+        if (imageFile && !imageFileId) newCours.imageFileId = await createFile(imageFile, COLLECTION.COURS)
+
+        if (newCours.imageFileId && imageFile instanceof File ) newCours.imageFile.fileUrl = URL.createObjectURL(imageFile)
+
+        if(id) {
+            newCours.id = id
+            await updateCours(newCours.toCours())
+            setAllCoursVM(oldNewsVMState => _.map(oldNewsVMState, coursVMItem => coursVMItem.id === newCours.id ? newCours : coursVMItem))
+        } else {
+            newCours.id = await createCours(newCours.toCours())
+            setAllCoursVM([...allCoursVM, newCours])
+        }
+
+        setCurrentCours(undefined)
     }
 
-    const getFilteredCours = () => _.filter(allCours,['isActive', switchValue])
+    const getFilteredCours = () => _.filter(allCoursVM,['isActive', switchValue])
 
     const getDanseCours = () => _.filter(getFilteredCours(), ['courseType', COURSES_TYPES.DANSES])
 
     const getFitnessCours = () => _.filter(getFilteredCours(), ['courseType', COURSES_TYPES.FITNESS])
 
-    const handleEditCours = (coursId: string) => {
-        setCoursToUpdateId(coursId)
+    const handleEditCours = (coursVM: CoursVM) => {
+        setCurrentCours(coursVM)
         setAddOrEditCoursModalIsOpen(true)
     }
 
-    const handleDeleteCours = async (coursId: string) => {
-        await deleteCours(coursId)
-        setAllCours(_.filter(allCours, (cours) => cours.id !== coursId))
+    const handleDeleteCours = async (coursVM: CoursVM) => {
+        if (coursVM.imageFileId) await deleteFile(coursVM.imageFileId)
+        await deleteAllPlanningWithCoursId(coursVM.id)
+        await deleteCustomForfaitWithCoursId(coursVM.id)
+        await deleteCours(coursVM.id)
+        setAllCoursVM(_.filter(allCoursVM, (cours) => cours.id !== coursVM.id))
     }
 
     const handleCloseModal = () => {
-        setCoursToUpdateId('')
+        setCurrentCours(undefined)
         setAddOrEditCoursModalIsOpen(false)
     }
 
 
     useEffect(() => {
-        const fetchAllCours = async () => {
+        const fetchAndSetAllCours = async () => {
+            const allFiles = await getAllFiles()
             const allCours = await getAllCoursEvenDisabled()
-            if(allCours.length) setAllCours(allCours)
+            const allCurrentCoursVM = _.map(allCours, cours => CoursVM.fromCours(cours))
+            if (allCurrentCoursVM.length) {
+                _.map(allCurrentCoursVM, coursVM => {
+                    if (coursVM.imageFileId) {
+                        const foundImage = _.find(allFiles, ['id', coursVM.imageFileId])
+                        if (foundImage) coursVM.imageFile = foundImage
+                    }
+                })
+                setAllCoursVM(allCurrentCoursVM)
+            } 
         }
-        fetchAllCours()
+        fetchAndSetAllCours()
     },[])
 
     return (
@@ -87,22 +125,22 @@ export const CoursPage = () => {
             />
             {
                 addOrEditCoursModalIsOpen && (
-                    <AddOrEditCours handleCloseModal={handleCloseModal} coursToUpdate={_.find(getFilteredCours(), ['id', coursToUpdateId])} isOpen={addOrEditCoursModalIsOpen} setIsOpen={setAddOrEditCoursModalIsOpen} submitForm={submitAddOrEditCours} />
+                    <AddOrEditCours handleCloseModal={handleCloseModal} coursToUpdate={currentCours} isOpen={addOrEditCoursModalIsOpen} setIsOpen={setAddOrEditCoursModalIsOpen} submitForm={submitAddOrEditCours} />
                 )
             }
                 
             <h2>Danses</h2>
             <div className="row m-1">
                 {
-                    getDanseCours().length ? _.map(getDanseCours(), (cours, index) => (
+                    getDanseCours().length ? _.map(getDanseCours(), (coursVM, index) => (
                         <div key={index} style={{
                             maxWidth: '350px',
                             height: '400px'
                         }} className='col-4 mb-4'>
-                            <CardCours cours={cours}>
+                            <CardCours coursVM={coursVM}>
                                 <div className='d-flex justify-content-end'>
-                                    <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)} />
-                                    <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} />
+                                    <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(coursVM)} />
+                                    <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(coursVM)} />
                                 </div>
                             </CardCours>
                         </div>
@@ -113,15 +151,15 @@ export const CoursPage = () => {
              <h2>Fitness et bien être</h2>
             <div className="row m-1">
             {
-                   getFitnessCours().length ? _.map(getFitnessCours(), (cours, index) => (
+                   getFitnessCours().length ? _.map(getFitnessCours(), (coursVM, index) => (
                         <div style={{
                             maxWidth: '350px',
                             height: '400px'
                         }}  key={index} className='col-4 mb-4'>
-                           <CardCours cours={cours}>
+                           <CardCours coursVM={coursVM}>
                                <div className='d-flex justify-content-end'>
-                                   <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(cours.id)} />
-                                   <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(cours.id)} />
+                                   <AiFillEdit size={25} className="icon" onClick={() => handleEditCours(coursVM)} />
+                                   <AiOutlineClose size={25} className="icon" onClick={() => handleDeleteCours(coursVM)} />
                                </div>
                            </CardCours>
                         </div>

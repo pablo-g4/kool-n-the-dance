@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { Modal, Group, Text, Select, Switch } from '@mantine/core'
-import { COURSES_TYPES , Cours } from '../../Models/Cours'
 import _ from 'lodash'
+import React, { useState, useEffect } from 'react'
+import { Modal, Group, Text, Select, Switch, Image } from '@mantine/core'
+import { COURSES_TYPES  } from '../../Models/Cours'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
-import { uploadFile } from '../../Controllers/file'
 import { GrUploadOption } from 'react-icons/gr'
 import { AiOutlineClose } from 'react-icons/ai'
+import { CoursVM } from '../../viewModels/CoursVM'
 
-export const AddOrEditCours = ({ isOpen , setIsOpen, submitForm, coursToUpdate, handleCloseModal } : { isOpen: boolean, setIsOpen: any, submitForm: any, coursToUpdate?: Cours, handleCloseModal: any }) => {
+export const AddOrEditCours = ({ isOpen , setIsOpen, submitForm, coursToUpdate, handleCloseModal } : { isOpen: boolean, setIsOpen: any, submitForm: any, coursToUpdate?: CoursVM, handleCloseModal: any }) => {
 
   const [isUpload, setIsUpload] = useState(false)
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<any>({
     id: '',
     title: '',
     description: '',
-    imageUrl: '',
+    imageFile: '',
+    imageFileId: '',
     courseType: COURSES_TYPES.DANSES,
     isActive: true
   })
 
   const handleForm = (event: any) => setForm({...form, [event.target.name] : event.target.value })
 
-  const onImageChange = async (files: any) => {
-    const uploadedImageUrl = await uploadFile(files[0], "images")
-    if(uploadedImageUrl) setForm({...form, imageUrl: uploadedImageUrl})
-    setIsUpload(true)
-}
+  const onImageChange = async (files: any) =>  setForm({...form, imageFile: files[0]})
 
 const onSubmit = (event: any) => {
   event.preventDefault()
@@ -49,7 +46,8 @@ const handleCourseType = (currentCourseType: any) => setForm({...form, courseTyp
         id: coursToUpdate?.id,
         title: coursToUpdate?.title,
         description: coursToUpdate.description,
-        imageUrl: coursToUpdate.imageUrl,
+        imageFile: coursToUpdate.imageFile,
+        imageFileId: coursToUpdate.imageFileId,
         courseType: coursToUpdate.courseType,
         isActive: coursToUpdate.isActive
       })
@@ -86,7 +84,7 @@ const handleCourseType = (currentCourseType: any) => setForm({...form, courseTyp
                 <Dropzone
                   onDrop={(file) => onImageChange(file)}
                   onReject={(files) => console.log('rejected files', files)}
-                  maxSize={3 * 1024 ** 2}
+                  maxSize={5 * 1024 ** 5}
                   accept={IMAGE_MIME_TYPE}
                 >
                   <Group position="center" spacing="xl" style={{ pointerEvents: 'none' }} className="dropzone">
@@ -113,23 +111,14 @@ const handleCourseType = (currentCourseType: any) => setForm({...form, courseTyp
                       />
                     </Dropzone.Idle>
                   </Group>
+                  {
+                        form.imageFile && (
+                          <div className='justify-content-center'>
+                            <Image maw={240} mx="auto" radius="md" src={form.imageFile.fileUrl ?? URL.createObjectURL(form.imageFile)} alt="Random image" />
+                          </div>
+                        )
+                      }
                 </Dropzone>
-              }
-              {form.imageUrl &&
-                <img
-                  className='img-preview'
-                  style={{
-                    marginLeft: "2rem",
-                    objectFit: "contain",
-                    maxHeight: "150px",
-                    maxWidth: "300px"
-                  }}
-                  src={form.imageUrl}
-                  onClick={() => {
-                    setIsUpload(false)
-                  }}
-                >
-                </img>
               }
             </div>
             <div className='mt-4 d-flex justify-content-center'>

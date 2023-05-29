@@ -1,81 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Group, Text } from '@mantine/core'
-import { News } from '../../Models/News'
-import { createNews, updateNews } from '../../Controllers/news'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 import { GrUploadOption } from 'react-icons/gr'
 import { AiOutlineClose } from 'react-icons/ai'
 import './news.css'
 import attachmentIcon from './attach-16.png'
-import { uploadFile } from '../../Controllers/file'
+import { NewsVM } from '../../viewModels/NewsVM'
 
 const AddOrEditNewsModal = (
     {
         currentNews,
-        setAllNews,
-        isOpen,
-        setIsOpen,
-        setCurrentNews,
+        submitForm,
+        handleCloseModal
     }:
         {
-            currentNews?: News,
-            setAllNews: React.Dispatch<React.SetStateAction<News[]>>,
-            isOpen: boolean,
-            setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-            setCurrentNews?: React.Dispatch<React.SetStateAction<News | undefined>>,
+            currentNews?: NewsVM | undefined,
+            submitForm?: any,
+            handleCloseModal:any
         }) => {
 
     const [form, setForm] = useState<any>({
+        id:'',
         title: '',
         description: '',
-        attachedFileUrl: '',
+        attachedFile: '',
+        attachedFileId: '',
+        imageFileId: '',
+        imageFile: '',
         isActive: true,
     })
 
-    const [isUpload, setIsUploading] = useState(false);
-
-    const [uploadFileForm, setUploadFileForm] = useState();
-
-    const [uploadImageForm, setUploadImageForm] = useState<any>();
-
-    const [isUploadAttachedFile, setIsUploadAttachedFile] = useState(false);
-
     const handleSubmit = async (event: any) => {
-        event.preventDefault();
-
-        const {
-            title,
-            description,
-            attachedFile,
-            isActive,
-        } = form
-
-
-        let newNews = new News()
-        newNews.title = title
-        newNews.description = description
-        newNews.attachedFileUrl = attachedFile
-        newNews.isActive = isActive
-
-        if (uploadFileForm) {
-            const downloadUrl = await uploadFile(uploadFileForm, "files")
-            if (downloadUrl) newNews.attachedFileUrl = downloadUrl
-        }
-
-        if (uploadImageForm) {
-            newNews.imageUrl = uploadImageForm
-        }
-
-        if (!currentNews) {
-            await addNews(newNews)
-        }
-        else {
-            await updateCurrentNews(newNews)
-        }
-        if (currentNews && setCurrentNews) setCurrentNews(undefined)
-        setIsOpen(false);
-    };
-
+        event.preventDefault()
+        submitForm(form)
+    }
     const handleInput = (event: any) => {
         const key = event.target.name
         const value = event.target.value
@@ -83,72 +41,54 @@ const AddOrEditNewsModal = (
     }
 
 
-    const addNews = async (news: News): Promise<void> => {
-        const createdNewsId = await createNews(news)
-        news.id = createdNewsId
-        setAllNews(oldNews => [news, ...oldNews]);
-    }
+    const onImageChange = (imageFile: any) => setForm({...form, imageFile: imageFile[0] })
 
-    const updateCurrentNews = async (news: News): Promise<void> => {
-        if (currentNews && currentNews.id) {
-            news.id = currentNews?.id
-            await updateNews(news)
-            setAllNews((oldNewsState) => oldNewsState.map(newsItem => { return newsItem.id === news.id ? news : newsItem }))
-        }
-    }
-
-    const onImageChange = async (files: any) => {
-        const uploadedImageUrl = await uploadFile(files[0], "images");
-        setUploadImageForm(uploadedImageUrl);
-        setIsUploading(true);
-    }
-
-    const onFileChange = (e: any) => {
-        e.preventDefault();
-        setUploadFileForm((previousFormValues: any) => (e.target.files[0]))
-        setIsUploadAttachedFile(true);
-    }
-
-    const handleCloseModal = (): void => {
-        setIsOpen(false);
-    }
+    const onFileChange = (e: any) => setForm({...form, attachedFile: e.target.files[0]})
 
     useEffect(() => {
         if (currentNews) {
-            setForm(currentNews)
+            setForm({
+                id: currentNews.id,
+                title: currentNews.title,
+                description: currentNews.description,
+                attachedFile: currentNews.attachedFile,
+                attachedFileId: currentNews.attachedFileId,
+                imageFileId: currentNews.imageFileId,
+                imageFile: currentNews.imageFile,
+                isActive: true
+            })
         }
     }, [currentNews])
 
     return (
         <>
-            <Modal opened={isOpen} withCloseButton={false} onClose={() => setIsOpen(false)} size='full' centered>
-                <h1 className='title-modal'> Ajouter/modifier un article </h1>
+            <Modal opened={true} withCloseButton={false} onClose={handleCloseModal} size='full' centered>
+                <h1 className='title-modal'> { form.id ? 'Modifier' : 'Ajouter'} un article </h1>
                 <div>
                     <div className="row">
                         <form onSubmit={handleSubmit} action='' method=''>
                             <div className="header-div row mb-2">
-                                <div className='col mb-3 d-flex flex-column'>
+                                <div className='col-6 mb-3 d-flex flex-column'>
                                     <label className='form-label' htmlFor='titreArticle'>Titre Article : </label>
                                     <input className='mt-2' onChange={handleInput} value={form.title} id="titreArticle" type="text" name='title' placeholder="Titre Article" required />
-                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFileUrl">
+                                    <label className='btnAjout d-flex flex-column' htmlFor="attachedFile">
                                         <div>
                                             <img src={attachmentIcon} style={{ marginRight: "2%" }} />
                                             <span>
                                                 Ajouter une pièce jointe
                                             </span>
                                         </div>
-                                        {
-                                            form.attachedFile && (<abbr>{form.attachedFileUrl}</abbr>)
-                                        }
-                                        <input className='mt-2' hidden onChange={onFileChange} type="file" id='attachedFileUrl' name='attachedFileUrl' />
+                                        <input className='mt-2' hidden onChange={onFileChange} type="file" id='attachedFile' name='attachedFile' />
                                     </label>
+                                    {
+                                        form.attachedFile && (<a href={form.attachedFile.fileUrl ?? form.attachedFile.name} target="_blank" >Voir fichier</a>)
+                                    }
                                 </div>
-                                <div className='col'>
-                                    {!isUpload &&
+                                <div className='col-6'>
                                         <Dropzone
                                             onDrop={(file) => onImageChange(file)}
                                             onReject={(files) => console.log('rejected files', files)}
-                                            maxSize={3 * 1024 ** 2}
+                                            maxSize={5 * 1024 ** 4}
                                             accept={IMAGE_MIME_TYPE}
                                         >
                                             <Group position="center" spacing="xl" style={{ pointerEvents: 'none' }} className="dropzone">
@@ -173,27 +113,22 @@ const AddOrEditNewsModal = (
                                                         size="3.2rem"
                                                         className='upload-icon'
                                                     />
-                                                </Dropzone.Idle>
-                                            </Group>
-                                        </Dropzone>
-                                    }
-                                    {uploadImageForm &&
-                                        <img 
-                                            className='img-preview'
-                                            style={{ 
-                                                marginLeft: "2rem", 
-                                                objectFit: "contain", 
-                                                maxHeight: "150px", 
-                                                maxWidth: "300px" 
-                                            }} 
-                                            src={uploadImageForm}
-                                            onClick={() => {
-                                                setIsUploading(false);
-                                                setUploadImageForm("");
-                                            }}
-                                        >
-                                        </img>
-                                    }
+                                            </Dropzone.Idle>
+                                        </Group>
+                                        {form.imageFile &&
+                                            <img
+                                                className='img-preview'
+                                                style={{
+                                                    marginLeft: "2rem",
+                                                    objectFit: "contain",
+                                                    maxHeight: "150px",
+                                                    maxWidth: "300px"
+                                                }}
+                                                src={ form.imageFile.fileUrl ?? URL.createObjectURL(form.imageFile)}
+                                            >
+                                            </img>
+                                        }
+                                    </Dropzone>
                                 </div>
                             </div>
                             <div className='mb-2 d-flex flex-column'>

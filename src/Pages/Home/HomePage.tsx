@@ -24,7 +24,6 @@ import Trace from "../../Assets/Images/Tracé 101.png"
 import Rosas from "../../Assets/Images/Tracé 230.png"
 
 import { Link } from "react-router-dom"
-import { Planning } from '../../Models/Planning'
 import { PlanningVM } from '../../viewModels/PlanningVM'
 import { getAllPlanning } from '../../Controllers/planning'
 import { getAllNews } from '../../Controllers/news'
@@ -37,24 +36,24 @@ import CarouselSlide from '../../Components/Carrousel_Activite/CarrouselSlideDan
 import CarouselSlideFitness from '../../Components/Carrousel_Activite/CarrouselSlideBienEtre'
 import { getAllTemoignages } from '../../Controllers/temoignages'
 import { Temoignages } from '../../Models/Temoignages'
+import { NewsVM } from '../../viewModels/NewsVM'
+import { ForfaitVM } from '../../viewModels/ForfaitVM'
+import { getAllFiles } from '../../Controllers/files'
+import { CoursVM } from '../../viewModels/CoursVM'
 
 export const HomePage = () => {
 
   const today = new Date()
 
   const [planningForTheDay, setPlanningForTheDay] = useState<PlanningVM[]>([])
-  const [allNews, setAllNews] = useState<News[]>([])
-  const [allCourses, setAllCours] = useState<Cours[]>([])
-  const [allForfaits, setAllForfaits] = useState<Forfait[]>([])
+  const [allNews, setAllNews] = useState<NewsVM[]>([])
+  const [allCoursVM, setAllCoursVM] = useState<CoursVM[]>([])
+  const [allForfaits, setAllForfaits] = useState<ForfaitVM[]>([])
   const [allTemoignages, setAllTemoignages] = useState<Temoignages[]>([])
   const [currentTab, setCurrentTab] = useState('danse')
 
   const getFilteredPlanningForTheDay = () => {
     let filteredPlanningForTheDay = _.filter(planningForTheDay, (planning) => today.getDay() === planning.start.getDay() && today.getMonth() === planning.start.getMonth() && today.getFullYear() === planning.start.getFullYear())
-    _.map(filteredPlanningForTheDay, (planning) => {
-      const associatedCours = _.find(allCourses, ['id', planning.coursId])
-      if(associatedCours) planning.setCours = associatedCours
-    })
     return _.orderBy(filteredPlanningForTheDay, 'startDate', 'asc')
   }
 
@@ -77,42 +76,92 @@ export const HomePage = () => {
   }
 
   const fetchAndSetNews = async () => {
-    let news = await getAllNews()
-    news = _.orderBy(news, 'creationDate', 'desc')
-    setAllNews([..._.take(news, 3)])
+    let allCurrentNews = await getAllNews()
+    let allNewsVM = _.map(allCurrentNews, news => NewsVM.fromNews(news) )
+    allNewsVM = _.orderBy(allNewsVM, 'creationDate', 'desc')
+    setAllNews([..._.take(allNewsVM, 3)])
   }
 
-  const fetchAndSetCours = async () => {
-    let cours = await getAllCours()
-    setAllCours(cours)
-  }
 
   const fetchAndSetTemoignages = async () => {
     const temoignages = await getAllTemoignages()
     setAllTemoignages(temoignages)
   }
 
-  const fetchAndSetPlanning = async () => {
-    let planning = await getAllPlanning()
-    setPlanningForTheDay(planning.map(planning => PlanningVM.fromPlanning(planning)))
-  }
 
-  const fetchAndSetForfaits = async () => {
+  const fetchAndSetData = async () => {
+    const files = await getAllFiles()
+
+    const allCours = await getAllCours()
+    const allCurrentCoursVM = _.map(allCours, cours => CoursVM.fromCours(cours))
+
+    if(allCurrentCoursVM.length) {
+      _.map(allCurrentCoursVM, coursVM => {
+        if(coursVM.imageFileId) {
+          const foundImage = _.find(files, file => file.id === coursVM.imageFileId)
+          if(foundImage) coursVM.imageFile = foundImage
+        }
+      })
+    }
+
     const forfaits = await getAllForfaits()
-    setAllForfaits(forfaits)
+    const allForfaitsVM = _.map(forfaits, forfaitVM => ForfaitVM.fromForfait(forfaitVM))
+
+    if(allForfaitsVM.length) {
+      _.map(allForfaitsVM, forfaitVM => {
+        if(!forfaitVM.isBasic) {
+          if(forfaitVM.imageFileId) {
+            const foundImage = _.find(files, file => file.id === forfaitVM.imageFileId)
+            if(foundImage) forfaitVM.imageFile = foundImage
+          }
+          if(forfaitVM.associatedCoursesId.length) {
+            _.map(forfaitVM.associatedCoursesId, associatedCoursId => {
+              const foundedCourse = _.find(allCurrentCoursVM, cours => cours.id === associatedCoursId)
+              if(foundedCourse) forfaitVM.associatedCourses.push(foundedCourse)
+            })
+          }
+        }
+      })
+    }
+
+    const allPlanning = await getAllPlanning()
+    const allPlanningVM = _.map(allPlanning, planning => PlanningVM.fromPlanning(planning))
+    _.map(allPlanningVM, planningVM => {
+      if(planningVM.coursId) {
+        const foundedCours = _.find(allCurrentCoursVM, currentCoursVM => currentCoursVM.id ===  planningVM.coursId)
+        if(foundedCours) planningVM.coursVM = foundedCours
+      }
+    })
+
+    let allCurrentNews = await getAllNews()
+    let allNewsVM = _.map(allCurrentNews, news => NewsVM.fromNews(news) )
+    allNewsVM = _.orderBy(allNewsVM, 'creationDate', 'desc')
+    _.map(allNewsVM, newsVM => {
+      if(newsVM.attachedFileId) {
+        const foundAttachedFile = _.find(files, file => file.id === newsVM.attachedFileId)
+        if (foundAttachedFile) newsVM.attachedFile = foundAttachedFile
+      }
+      if(newsVM.imageFileId) {
+        const foundImage = _.find(files, file => file.id === newsVM.imageFileId)
+        if (foundImage)  newsVM.imageFile = foundImage
+      }
+    })
+    setAllNews([..._.take(allNewsVM, 3)])
+
+    setPlanningForTheDay(allPlanningVM)
+    setAllCoursVM(allCurrentCoursVM)
+    setAllForfaits(allForfaitsVM)
   }
 
   useEffect(() => {
-    fetchAndSetNews()
-    fetchAndSetPlanning()
-    fetchAndSetCours()
-    fetchAndSetForfaits()
+    // fetchAndSetNews()
+    fetchAndSetData()
     fetchAndSetTemoignages()
   }, [])
 
-  const getDansesCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.DANSES])
+  const getDansesCours = () => _.filter(allCoursVM, ['courseType', COURSES_TYPES.DANSES])
 
-  const getFitnessCours = () => _.filter(allCourses, ['courseType', COURSES_TYPES.FITNESS])
+  const getFitnessCours = () => _.filter(allCoursVM, ['courseType', COURSES_TYPES.FITNESS])
 
   const displayCard = (tab: string) => {
     setCurrentTab(tab)
@@ -238,7 +287,7 @@ export const HomePage = () => {
               currentTab === 'danse' && (
                 getDansesCours().length ? _.map(getDansesCours(), (danse, index) => (
                   <CarouselSlide key={index} cours={danse} />
-                )) : <p>Pas de cous actuellement</p>
+                )) : <p>Pas de cours de danse actuellement</p>
               )
             }
             {
@@ -250,8 +299,8 @@ export const HomePage = () => {
             }
             {
               currentTab === 'forfait' && (
-                allForfaits.length ? _.map(allForfaits, (forfait, index) => (
-                    <CardHomeCours cours={forfait}/>
+                allForfaits.length ? _.map(_.filter(allForfaits, ['isBasic', false]), (forfait, index) => (
+                    <CardHomeCours key={index} cours={forfait}/>
                 )) : <div>Pas de forfait actuellement</div>
               )
             }
@@ -285,9 +334,9 @@ export const HomePage = () => {
               <div key={index} className="col-lg-2 col-6 spacingCol">
                 <CardHomePlanning
                   horaire={planning.startAndEndHourAsString}
-                  titre={planning.cours.title}
-                  text={planning.cours.description}
-                  src={planning.cours.imageUrl}
+                  titre={planning.coursVM.title}
+                  text={planning.coursVM.description}
+                  src={planning.coursVM.imageUrl}
                   key={index}
                 ></CardHomePlanning>
               </div>
@@ -308,7 +357,7 @@ export const HomePage = () => {
           {
             allNews.length && _.map(allNews, (news, index) => (
               <div key={index} className="col-md-4 col-sm-12">
-                <CardHomeActualite news={news}></CardHomeActualite>
+                <CardHomeActualite newsVM={news}></CardHomeActualite>
               </div>
             ))
           }

@@ -4,9 +4,13 @@ import { Group } from '@mantine/core'
 import { AiOutlineClose } from 'react-icons/ai'
 import { GrUploadOption } from 'react-icons/gr'
 import CustomSwitch from '../../../Components/Switch/CustomSwitch'
-import { getAllFiles } from '../../../Controllers/files'
+import { getAllFilesEvenDisabled } from '../../../Controllers/files'
 import { createFile, updateFile } from '../../../Controllers/files'
 import ImageViewer from '../../../Components/ImageViewer/ImageViewer'
+import { COLLECTION } from '../../../db/collection'
+
+import { Files } from '../../../Models/Files'
+import _ from 'lodash'
 import "./Gallery.css"
 
 
@@ -16,13 +20,13 @@ export const GalleryPage = () => {
     const [images, setImages] = useState<any>([])
     const [archiveFiles, setArchiveFiles] = useState<any>([])
 
-    const handleSwitch = () => {
-        setSwitchValue(!switchValue)
-    }
+    const handleSwitch = () => {  setSwitchValue(!switchValue) }
 
     const onImageChange = async (files: any) => {
-        const file = await createFile(files[0], "gallery");
-        setImages((oldArray:any) => [...oldArray, file])
+        const file = await createFile(files[0], COLLECTION.GALLERY)
+        const newFile = new Files()
+        newFile.fileUrl = URL.createObjectURL(files[0])
+        setImages([...images, newFile])
     }
 
     const getArchivedFiles = () => {
@@ -38,11 +42,11 @@ export const GalleryPage = () => {
             newFiles.push(file)
             return file
         }))
-        console.log(archiveFiles)
+
         await Promise.all([archiveFiles.forEach(async (file: any) => {
             await updateFile(file);    
         })])
-        newFiles.map((newFile:any) => {
+        _.map(newFiles, (newFile:any) => {
             images.forEach((image:any) => {
                 if (newFile.id === image.id) {
                     return newFile;
@@ -50,13 +54,13 @@ export const GalleryPage = () => {
                 return image;
             })
         })
-        setArchiveFiles([]);
-        console.log(newFiles)
+        setArchiveFiles([])
     }
 
     useEffect(() => {
         const fetchData = async () => {
-            const allFiles = await getAllFiles()
+            const files = await getAllFilesEvenDisabled()
+            let allFiles = _.filter(files, ['associatedCollection', COLLECTION.GALLERY])
             setImages(allFiles);
         }
         fetchData()
@@ -90,7 +94,7 @@ export const GalleryPage = () => {
                     <Dropzone
                         onDrop={(file) => onImageChange(file)}
                         onReject={(files) => console.log('rejected files', files)}
-                        maxSize={5 * 1024 ** 2}
+                        maxSize={5 * 1024 ** 5}
                         accept={IMAGE_MIME_TYPE}
                         className="dropzone-galerie-container"
                     >
@@ -128,11 +132,10 @@ export const GalleryPage = () => {
                 }
             </div>
             <div className='d-flex row images-container'>
-                {images && switchValue ? images.map((image:any, index: number) =>
+                {images && switchValue ? _.map(images, (image:any, index: number) =>
                     image.isActive && image.fileUrl && (
-                        <div className='col-md-3 col-xs-12 img-fluid'>
+                        <div key={index} className='col-md-3 col-xs-12 img-fluid'>
                             <ImageViewer
-                                key={index}
                                 file={image}
                                 archiveFiles={archiveFiles}
                                 setArchiveFiles={setArchiveFiles}
@@ -141,9 +144,8 @@ export const GalleryPage = () => {
                     ))
                 : getArchivedFiles().map((image: any, index: number) =>
                 !image.isActive && image.fileUrl && (
-                    <div className='col-md-3 col-xs-12 img-fluid'>
+                    <div key={index} className='col-md-3 col-xs-12 img-fluid'>
                         <ImageViewer
-                            key={index}
                             file={image}
                             archiveFiles={archiveFiles}
                             setArchiveFiles={setArchiveFiles}

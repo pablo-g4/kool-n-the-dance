@@ -1,8 +1,6 @@
-import { Button } from '@mantine/core';
-import React, { useState } from 'react';
-import { News } from '../../Models/News'
-import { createNews } from '../../Controllers/news';
-import { logInWithEmailAndPassword } from '../../Authentification/authentication';
+import React from 'react'
+import { createNews } from '../../Controllers/news'
+import { NewsVM } from '../../viewModels/NewsVM'
 
 const AddNews = () => {
 
@@ -14,14 +12,14 @@ const AddNews = () => {
     const attachedFile = event.target.elements.attachedFile.value;
     const isActive = event.target.elements.isActive.value;
 
-    let newNews = new News()
+    let newNewsVM = new NewsVM()
 
-    newNews.title = title
-    newNews.description = description
-    newNews.attachedFileUrl = attachedFile
-    newNews.isActive = isActive
+    newNewsVM.title = title
+    newNewsVM.description = description
+    newNewsVM.attachedFile = attachedFile
+    newNewsVM.isActive = isActive
 
-    const createdNews = await createNews(newNews)
+    const createdNews = await createNews(newNewsVM.toNews())
     console.log('createdNews', createdNews);
 
 

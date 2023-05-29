@@ -6,20 +6,52 @@ import { CarrouselActivite } from "../../Components/Carrousel_Activite/Carrousel
 import { CarrouselYellow } from "../../Components/Carrousel_Activite/CarrouselYellow"
 import { CarrouselRed } from "../../Components/Carrousel_Activite/CarrouselRed"
 import { getAllForfaits } from "../../Controllers/forfait"
-import { Forfait } from "../../Models/Forfait"
-import { Cours, COURSES_TYPES } from "../../Models/Cours"
+import { COURSES_TYPES } from "../../Models/Cours"
 import { getAllCours } from "../../Controllers/cours"
+import { ForfaitVM } from "../../viewModels/ForfaitVM"
+import { getAllFiles } from "../../Controllers/files"
+import { CoursVM } from "../../viewModels/CoursVM"
 
 export const CoursPage = () => {
 
-  const [forfaits, setForfaits] = useState<Forfait[]>()
-  const [cours, setCours] = useState<Cours[]>()
+  const [forfaits, setForfaits] = useState<ForfaitVM[]>()
+  const [cours, setCours] = useState<CoursVM[]>()
 
   const fetchData = async () => {
     const allForfaits = await getAllForfaits()
+    const allForfaitsVM = _.map(allForfaits, forfait => ForfaitVM.fromForfait(forfait))
     const allCours = await getAllCours()
-    setForfaits(allForfaits)
-    setCours(allCours)
+    const allCoursVM = _.map(allCours, cours => CoursVM.fromCours(cours))
+    const files = await getAllFiles()
+
+    if (allForfaitsVM.length) {
+      _.map(allForfaitsVM, (forfaitVM) => {
+        if(!forfaitVM.isBasic) {
+          if(forfaitVM.imageFileId) {
+            const foundImage = _.find(files, file => file.id === forfaitVM.imageFileId)
+            if(foundImage) forfaitVM.imageFile = foundImage
+          }
+          if(forfaitVM.associatedCoursesId.length) {
+            _.map(forfaitVM.associatedCoursesId, associatedCoursId => {
+              const foundedCourse = _.find(allCours, cours => cours.id === associatedCoursId)
+              if (foundedCourse) forfaitVM.associatedCourses.push(foundedCourse)
+            })
+          }
+        }
+      })
+      setForfaits(allForfaitsVM)
+    }
+
+    if(allCoursVM.length) {
+      _.map(allCoursVM, (coursVM) => {
+        if (coursVM.imageFileId) {
+          const foundImage = _.find(files, file => file.id === coursVM.imageFileId)
+          if (foundImage) coursVM.imageFile = foundImage
+        }
+      })
+    }
+    
+    setCours(allCoursVM)
   }
 
   const getCoursDanse = () => _.filter(cours, ['courseType', COURSES_TYPES.DANSES])
@@ -48,7 +80,7 @@ export const CoursPage = () => {
 
       {
         getCustomForfaits().length && (
-          <CarrouselRed forfaits={getCustomForfaits()}/> 
+          <CarrouselRed forfaitsVM={getCustomForfaits()}/> 
         )
       }
 
