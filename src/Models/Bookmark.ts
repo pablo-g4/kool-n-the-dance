@@ -1,8 +1,13 @@
 import { Database } from "./Database"
 
+export enum ASSOCIATED_SECTION {
+    ACCUEIL = "accueil",
+}
+
 export class Bookmark extends Database {
 
-    public bookmarkdId = ""
+    public bookmarkdId: string = ""
+    public associatedSection: ASSOCIATED_SECTION = ASSOCIATED_SECTION.ACCUEIL
 
 
     constructor(){

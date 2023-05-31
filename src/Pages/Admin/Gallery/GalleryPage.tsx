@@ -8,7 +8,7 @@ import { getAllFilesEvenDisabled } from '../../../Controllers/files'
 import { createFile, updateFile } from '../../../Controllers/files'
 import ImageViewer from '../../../Components/ImageViewer/ImageViewer'
 import { COLLECTION } from '../../../db/collection'
-
+import { FilesVM } from '../../../viewModels/FilesVM'
 import { Files } from '../../../Models/Files'
 import _ from 'lodash'
 import "./Gallery.css"
@@ -19,8 +19,10 @@ export const GalleryPage = () => {
     const [switchValue, setSwitchValue] = useState(true)
     const [images, setImages] = useState<any>([])
     const [archiveFiles, setArchiveFiles] = useState<any>([])
+    const [bookmarks, setBookmarks] = useState<FilesVM[]>([])
 
-    const handleSwitch = () => {  setSwitchValue(!switchValue) }
+
+    const handleSwitch = () => setSwitchValue(!switchValue) 
 
     const onImageChange = async (files: any) => {
         const file = await createFile(files[0], COLLECTION.GALLERY)
@@ -131,6 +133,30 @@ export const GalleryPage = () => {
                     </Dropzone>
                 }
             </div>
+            {
+                bookmarks.length > 0 &&
+                (
+                    <div className='mt-2'>
+                        <h2>Mettre en avant Image/Vidéo</h2>
+                        <h4>Sur la galerie d'accueil : {bookmarks.length} sur 10 max </h4>
+                        <div className="d-flex">
+                            {
+                                _.map(bookmarks, (bookmark, index) =>
+                                (
+                                    <div className="col-2" key={index}>
+                                        <img src={bookmark.fileUrl} alt="" />
+                                    </div>
+                                )
+                                )
+                            }
+                        </div>
+                        <div className='buttons-div mb-3 text-center d-flex flex-row justify-content-around'>
+                            <input type="button" value='Annuler' className='btnNoir'/>
+                            <input type="submit" value='Valider' className='btnRouge' />
+                        </div>
+                    </div>
+                )
+            }
             <div className='d-flex row images-container'>
                 {images && switchValue ? _.map(images, (image:any, index: number) =>
                     image.isActive && image.fileUrl && (
@@ -139,10 +165,11 @@ export const GalleryPage = () => {
                                 file={image}
                                 archiveFiles={archiveFiles}
                                 setArchiveFiles={setArchiveFiles}
+                                setBookmarks={setBookmarks}
                             />
                         </div>
                     ))
-                : getArchivedFiles().map((image: any, index: number) =>
+                : _.map(getArchivedFiles(), (image: any, index: number) =>
                 !image.isActive && image.fileUrl && (
                     <div key={index} className='col-md-3 col-xs-12 img-fluid'>
                         <ImageViewer
