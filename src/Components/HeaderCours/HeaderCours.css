@@ -34,7 +34,14 @@
   transition: .5s;
   width: 100%; /* Increase the width of the cards */
 }
-
+@media (max-width:800px) {
+  .grow > div {
+    flex-basis: 31%; /* Increase the width of the cards */
+    flex-shrink: 1;
+    transition: .5s;
+    width: 100%; /* Increase the width of the cards */
+  }
+}
 .grow > div:hover {
   flex-basis: 25%; /* Increase the width of the cards on hover */
   max-width: 100%;

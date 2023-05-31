@@ -30,7 +30,7 @@ function CarouselSlideForfait({ forfaitVM }) {
             { forfaitVM.associatedCourses && _.map(forfaitVM.associatedCourses, (cours, coursesIndex) => (<span key={coursesIndex}>{cours.title}</span>) )}
             </p>
             <div className='btn-inscriptiondiv'>
-              <Link to="../files/formulaireinscription.docx" target="_blank" download>
+              <Link to="../files/formulaireinscription.pdf" target="_blank" download>
                 <button className='btn-inscr'>S'inscrire</button>
               </Link>
             </div>
