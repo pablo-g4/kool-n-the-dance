@@ -30,7 +30,7 @@ function CarouselSlide({ cours }) {
           <p>Lieu : {cours.place}</p>
 
           <div className='btn-inscriptiondiv'>
-            <Link to="../files/formulaireinscription.docx" target="_blank" download>
+            <Link to="../files/formulaireinscription.pdf" target="_blank" download>
               <button className='btn-inscr'>S'inscrire</button>
             </Link>
           </div>
