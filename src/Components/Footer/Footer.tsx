@@ -22,7 +22,7 @@ const Footer = () => {
                     <a href='/galerie' className='text-white'>Galerie</a>
                 </span>
                 <span className='text'>
-                    <a href='/actualite' className='text-white'>Actualté</a>
+                    <a href='/actualite' className='text-white'>Actualités</a>
                 </span>
             </div>
             <div className='col-lg-3 text-center col-md-12 col-sm-12'>
