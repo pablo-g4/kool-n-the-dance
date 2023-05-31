@@ -22,13 +22,13 @@ const Footer = () => {
                     <a href='/galerie' className='text-white'>Galerie</a>
                 </span>
                 <span className='text'>
-                    <a href='/actualite' className='text-white'>Actualté</a>
+                    <a href='/actualite' className='text-white'>Actualités</a>
                 </span>
             </div>
             <div className='col-lg-3 text-center col-md-12 col-sm-12'>
                 <h1 className='footerH1'>Contact</h1>
                 <a href="mailto:koolnthedance@gmail.com" className='text-white'>koolnthedance@gmail.com</a>
-                <p className='text'>9H-21</p>
+                <p className='text'>9h-21h</p>
                 <a href='https://www.facebook.com/people/Kool-N-the-dance/100063903799414/' target='blank' className='socialIcon'>
                     <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ marginRight: '2%' }} />
                 </a>

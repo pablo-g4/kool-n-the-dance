@@ -14,6 +14,8 @@ export class Cours extends Database {
     public description: string = ""
     public imageFileId: string = ""
     public courseType: COURSES_TYPES = COURSES_TYPES.DANSES
+    public price: number = 0
+    public place: string = ""
 
 
     toDb():any {
@@ -24,6 +26,8 @@ export class Cours extends Database {
             creation_date: this.creationDate,
             updated_date: this.updatedDate,
             course_type: this.courseType,
+            price: this.price,
+            place: this.place,
             is_active: this.isActive
         }
     }
@@ -37,6 +41,8 @@ export class Cours extends Database {
         cours.creationDate = objDb.creation_date
         cours.updatedDate = objDb.updated_date
         cours.courseType = objDb.course_type
+        cours.price = objDb.price
+        cours.place = objDb.place
         cours.isActive = objDb.is_active
         return cours
     }
