@@ -18,6 +18,8 @@ export const AddOrEditCours = ({ isOpen , setIsOpen, submitForm, coursToUpdate, 
     imageFile: '',
     imageFileId: '',
     courseType: COURSES_TYPES.DANSES,
+    price: 0,
+    place: '',
     isActive: true
   })
 
@@ -49,7 +51,9 @@ const handleCourseType = (currentCourseType: any) => setForm({...form, courseTyp
         imageFile: coursToUpdate.imageFile,
         imageFileId: coursToUpdate.imageFileId,
         courseType: coursToUpdate.courseType,
-        isActive: coursToUpdate.isActive
+        isActive: coursToUpdate.isActive,
+        price: coursToUpdate.price,
+        place: coursToUpdate.place
       })
     }
   }, [])
@@ -62,12 +66,20 @@ const handleCourseType = (currentCourseType: any) => setForm({...form, courseTyp
         <div>
           <form onSubmit={onSubmit}>
             <div className='d-flex flex-column'>
-              <label className='form-label' htmlFor='titreArticle'>Titre du cours : </label>
-              <input className='mt-2' onChange={handleForm} name="title" type="text" value={form.title} placeholder="Titre du cours" required />
+              <label className='form-label' htmlFor='title'>Titre du cours : </label>
+              <input  onChange={handleForm} name="title" type="text" value={form.title} placeholder="Titre du cours" required />
             </div>
             <div className='d-flex flex-column mt-2'>
-              <label className='form-label' htmlFor='titreArticle'>Description du cours : </label>
-              <textarea className='mt-2' onChange={handleForm} name="description" value={form.description} placeholder="Description du cours" required />
+              <label className='form-label' htmlFor='place'>Lieu de cours : </label>
+              <input  onChange={handleForm} name="place" type="text" value={form.place} placeholder="Lieu de cours" required />
+            </div>
+            <div className='d-flex flex-column mt-2'>
+              <label className='form-label' htmlFor='price'>Prix du cours : </label>
+              <input onChange={handleForm} name="price" type="number" value={form.price} placeholder="Prix du cours" required />
+            </div>
+            <div className='d-flex flex-column mt-2'>
+              <label className='form-label' htmlFor='description'>Description du cours : </label>
+              <textarea  onChange={handleForm} name="description" value={form.description} placeholder="Description du cours" required />
             </div>
             <div className='mt-2'>
               <label className='form-label' htmlFor="recurrence">Type de cours :</label>

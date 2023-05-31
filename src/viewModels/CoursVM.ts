@@ -17,6 +17,8 @@ export class CoursVM extends Cours {
         coursVM.isActive = cours.isActive
         coursVM.title = cours.title
         coursVM.updatedDate = cours.updatedDate
+        coursVM.price = cours.price
+        coursVM.place = cours.place
         return coursVM
     }
 
@@ -30,6 +32,8 @@ export class CoursVM extends Cours {
         cours.isActive = this.isActive
         cours.title = this.title
         cours.updatedDate = this.updatedDate
+        cours.price = this.price
+        cours.place = this.place
         return cours
     }
 
