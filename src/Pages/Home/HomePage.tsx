@@ -346,7 +346,7 @@ export const HomePage = () => {
       </div>
       <div className='col-12  d-flex justify-content-end'>
         <p className="m-2">
-          <Link to="/cours" className='none'>
+          <Link to="/planning" className='none'>
             <a href='' className="link-accueil">Voir tout le planning  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
           </Link>
         </p>
