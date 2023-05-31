@@ -7,12 +7,10 @@ export enum ASSOCIATED_SECTION {
 export class Bookmark extends Database {
 
     public bookmarkdId: string = ""
-    public associatedSection: ASSOCIATED_SECTION = ASSOCIATED_SECTION.ACCUEIL
+    public order: string = '1'
 
 
-    constructor(){
-        super()
-    }
+    constructor(){ super() }
 
     static fromDb(objDb: any):Bookmark {
         let bookmark = new Bookmark()
@@ -21,13 +19,15 @@ export class Bookmark extends Database {
         bookmark.creationDate = objDb.creation_date
         bookmark.updatedDate = objDb.updated_date
         bookmark.isActive = objDb.is_active
+        bookmark.order = objDb.order
         return bookmark
     }
 
     toDb(): any {
         return {
             bookmark_id: this.bookmarkdId,
-            is_active: this.isActive
+            is_active: this.isActive,
+            order: this.order
         }
     }
 }

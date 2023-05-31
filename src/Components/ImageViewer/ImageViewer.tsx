@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { AiOutlineStar } from 'react-icons/ai'
-import { AiFillStar } from 'react-icons/ai'
-import { BsSquare } from 'react-icons/bs'
-import { BsCheckSquareFill } from 'react-icons/bs'
+import React, { useEffect, useState } from 'react'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
+import { BsCheckSquareFill, BsSquare } from 'react-icons/bs'
 import "./ImageViewer.css"
 import { Files } from '../../Models/Files'
 import _ from 'lodash'
+import { FilesVM } from '../../viewModels/FilesVM'
 
 
 const ImageViewer = ({
@@ -14,9 +13,9 @@ const ImageViewer = ({
     setArchiveFiles,
     setBookmarks,
 }: {
-    file: Files;
-    archiveFiles: Files[];
-    setArchiveFiles:React.Dispatch<React.SetStateAction<Files[]>>;
+    file: FilesVM;
+    archiveFiles: FilesVM[];
+    setArchiveFiles:React.Dispatch<React.SetStateAction<FilesVM[]>>;
     setBookmarks?: any
 }) => {
 
@@ -35,11 +34,19 @@ const ImageViewer = ({
 
     const handleBookmark = () => {
         setIsBookmarked(!isBookmarked)
-        if (!isBookmarked) setBookmarks((previousBookmarks: any) => [...previousBookmarks, file])
+        if (!isBookmarked) {
+            file.bookmark.bookmarkdId = file.id
+            setBookmarks((previousBookmarks: any) => [...previousBookmarks, file])
+        } 
         else setBookmarks((previousBookmarks: any) => {
             return  _.filter(previousBookmarks, previousBookmark =>  previousBookmark.id !== file.id )
         })
     }
+
+    useEffect(() => {
+        if(file.bookmark.id) setIsBookmarked(true)
+    }, [])
+    
 
     return (
         <div className='col-md-12 col-xs-12 '>
@@ -80,7 +87,7 @@ const ImageViewer = ({
                 }
             </div>
             <img
-                className='img-fluid img-viewer-gallery '
+                className='img-fluid img-viewer-gallery'
                 src={file.fileUrl}
             />
         </div>
