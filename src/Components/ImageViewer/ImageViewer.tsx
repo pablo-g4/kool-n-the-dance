@@ -86,10 +86,18 @@ const ImageViewer = ({
                     />
                 }
             </div>
-            <img
-                className='img-fluid img-viewer-gallery'
-                src={file.fileUrl}
-            />
+            {
+                file.isVideo ? (
+                    <video className='img-fluid img-viewer-gallery' controls>
+                        <source src={file.fileUrl} type="video/mp4" />
+                    </video>
+                ) : (
+                    <img
+                        className='img-fluid img-viewer-gallery'
+                        src={file.fileUrl}
+                    />
+                )
+            }
         </div>
     )
 }

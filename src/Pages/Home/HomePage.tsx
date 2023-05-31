@@ -416,7 +416,16 @@ export const HomePage = () => {
           {
             allGalerieFiles.length && (_.map(allGalerieFiles, (galerieFile) => (
               <div className='col-lg-4 col-12 my-2'>
-                <img src={galerieFile.fileUrl} width={"100%"} height={"100%"} />
+                {
+                  galerieFile.isVideo ? (
+                    <video width={'100%'} height={'100%'} controls>
+                    <source src={galerieFile.fileUrl} type="video/mp4" />
+                </video>
+                  ) :(
+                    <img src={galerieFile.fileUrl} width={"100%"} height={"100%"} />
+                  )
+                }
+
               </div>
             ))
             )

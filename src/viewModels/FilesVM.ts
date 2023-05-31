@@ -1,5 +1,6 @@
 import { Bookmark } from "../Models/Bookmark"
 import { Files } from "../Models/Files"
+import _ from "lodash"
 
 export class FilesVM extends Files {
 
@@ -27,5 +28,10 @@ export class FilesVM extends Files {
         file.isActive = this.isActive
         file.updatedDate = this.updatedDate
         return file
+    }
+
+    get isVideo() {
+        let fileExtension = this.fileName.substring(this.fileName.length-4)
+        return fileExtension === '.mp4'
     }
 } 

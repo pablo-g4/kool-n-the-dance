@@ -187,7 +187,7 @@ export const GalleryPage = () => {
             </div>
             <div className='d-flex row images-container'>
                 {images && switchValue ? _.map(images, (image, index) =>
-                    image.isActive && image.fileUrl && (
+                    image.isActive && image.fileUrl && 
                         <div key={index} className='col-md-3 col-xs-12 img-fluid'>
                             <ImageViewer
                                 file={image}
@@ -196,7 +196,7 @@ export const GalleryPage = () => {
                                 setBookmarks={setFilesToBookmark}
                             />
                         </div>
-                    ))
+                    )
                 : _.map(getArchivedFiles(), (image, index) =>
                 !image.isActive && image.fileUrl && (
                     <div key={index} className='col-md-3 col-xs-12 img-fluid'>
@@ -213,8 +213,8 @@ export const GalleryPage = () => {
                 filesToBookmark.length > 0 &&
                 (
                     <div className='mt-2'>
-                        <h2>Mettre en avant Image/Vidéo</h2>
-                        <h4>Sur la galerie d'accueil : {filesToBookmark.length} sur 10 max </h4>
+                        <h2>Mettre en avant Image/Vidéo sur la page d'accueil</h2>
+                        <h4>{filesToBookmark.length} sur 10 images max </h4>
                         <div className="row">
                             {
                                 _.map(getBookmarksFilesInOrder(), (file, index) =>
@@ -222,15 +222,24 @@ export const GalleryPage = () => {
                                     <div className="col-lg-4 col-md-12 mb-4 mb-lg-0" key={index}>
                                         <div style={{
                                             position: 'relative'
-                                        }}>
-                                            <img style={{
-                                                display: 'block'
-                                            }} className='w-100 shadow-1-strong mb-4' src={file.fileUrl} alt={file.fileName} />
+                                        }}> 
+                                            {
+                                                file.isVideo ? (
+                                                    <video className='img-fluid img-viewer-gallery' controls>
+                                                        <source src={file.fileUrl} type="video/mp4" />
+                                                    </video>
+                                                ) : (
+                                                    <img style={{
+                                                        display: 'block'
+                                                    }} className='w-100 shadow-1-strong mb-4' src={file.fileUrl} alt={file.fileName} />
+                                                )
+                                            }
+
                                             <Select 
                                                 style={{
                                                     position: 'absolute', 
-                                                    bottom:0, 
-                                                    left:0,
+                                                    top:0, 
+                                                    right:0,
                                                 }}
                                                 value={file.bookmark.order}
                                                 onChange={(val) => setFilesToBookmark(_.map(filesToBookmark, (bookmarkItem) => {
