@@ -1,8 +1,6 @@
 import { Database } from "./Database"
+import _ from "lodash"
 
-export enum ASSOCIATED_SECTION {
-    ACCUEIL = "accueil",
-}
 
 export class Bookmark extends Database {
 
@@ -29,5 +27,9 @@ export class Bookmark extends Database {
             is_active: this.isActive,
             order: this.order
         }
+    }
+
+    get orderByAsNumber(): number {
+        return _.toNumber(this.order)
     }
 }
