@@ -89,10 +89,6 @@ export const GalleryPage = () => {
         return orders.length !== uniqOrders.length
     }
 
-    const getBookmarksFilesInOrder = () => {
-        return _.orderBy(filesToBookmark, 'bookmark.order','asc')
-    }
-
     useEffect(() => {
         const fetchData = async () => {
             const allCurrentBookmarks = await getAllBookmarks()
@@ -145,7 +141,7 @@ export const GalleryPage = () => {
                     <Dropzone
                         onDrop={(file) => onImageChange(file)}
                         onReject={(files) => console.log('rejected files', files)}
-                        maxSize={5 * 1024 ** 5}
+                        maxSize={10 * 1024 ** 5}
                         accept={{
                             'image/*': [],
                             'video/mp4': []
@@ -214,10 +210,10 @@ export const GalleryPage = () => {
                 (
                     <div className='mt-2'>
                         <h2>Mettre en avant Image/Vidéo sur la page d'accueil</h2>
-                        <h4>{filesToBookmark.length} sur 10 images max </h4>
+                        <h4>{filesToBookmark.length} sur 10 images</h4>
                         <div className="row">
                             {
-                                _.map(getBookmarksFilesInOrder(), (file, index) =>
+                                _.map(filesToBookmark, (file, index) =>
                                 (
                                     <div className="col-lg-4 col-md-12 mb-4 mb-lg-0" key={index}>
                                         <div style={{
@@ -225,9 +221,11 @@ export const GalleryPage = () => {
                                         }}> 
                                             {
                                                 file.isVideo ? (
-                                                    <video className='img-fluid img-viewer-gallery' controls>
-                                                        <source src={file.fileUrl} type="video/mp4" />
-                                                    </video>
+                                                    <div>
+                                                        <video className='img-fluid img-viewer-gallery' id={file.fileName} controls>
+                                                            <source src={file.fileUrl} type="video/mp4" />
+                                                        </video>
+                                                    </div>
                                                 ) : (
                                                     <img style={{
                                                         display: 'block'

@@ -108,7 +108,7 @@ export const HomePage = () => {
           if (fileVMItem.bookmark.id) filesBookmarked.push(fileVMItem) 
       })
 
-      if(filesBookmarked) setAllGalerieFiles(_.orderBy(filesBookmarked, 'bookmark.order','asc'))
+      if(filesBookmarked) setAllGalerieFiles(_.orderBy(filesBookmarked, 'bookmark.orderByAsNumber','asc'))
     }
     const allCours = await getAllCours()
     const allCurrentCoursVM = _.map(allCours, cours => CoursVM.fromCours(cours))
@@ -117,7 +117,7 @@ export const HomePage = () => {
       _.map(allCurrentCoursVM, coursVM => {
         if(coursVM.imageFileId) {
           const foundImage = _.find(files, file => file.id === coursVM.imageFileId)
-          if(foundImage) coursVM.imageFile = foundImage
+          if (foundImage) coursVM.imageFile = foundImage
         }
       })
     }
@@ -172,7 +172,6 @@ export const HomePage = () => {
   }
 
   useEffect(() => {
-    // fetchAndSetNews()
     fetchAndSetData()
     fetchAndSetTemoignages()
   }, [])
@@ -418,9 +417,11 @@ export const HomePage = () => {
               <div className='col-lg-4 col-12 my-2'>
                 {
                   galerieFile.isVideo ? (
-                    <video width={'100%'} height={'100%'} controls>
-                    <source src={galerieFile.fileUrl} type="video/mp4" />
-                </video>
+                    <div>
+                      <video width={'100%'} id={galerieFile.id} height={'100%'} controls>
+                        <source src={galerieFile.fileUrl} type="video/mp4" />
+                      </video>
+                    </div>
                   ) :(
                     <img src={galerieFile.fileUrl} width={"100%"} height={"100%"} />
                   )
