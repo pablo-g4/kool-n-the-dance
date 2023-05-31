@@ -69,10 +69,6 @@ export const GalleryPage = () => {
         }))
     }
 
-    const getBookmarksFilesInOrder = () => {
-        return _.orderBy(filesToBookmark, 'bookmark.orderAsNumber','asc')
-    }
-
     const saveBookmarks = async () => {
         const bookmarks = _.map(filesToBookmark, (fileVM) => (fileVM.bookmark))
         for (const bookmark of bookmarks) {
