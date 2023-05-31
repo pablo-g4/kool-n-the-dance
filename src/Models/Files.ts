@@ -7,18 +7,24 @@ export class Files extends Database {
     public fileUrl: string = ""
     public associatedCollection: COLLECTION = COLLECTION.FILES
     public fileName: string = ""
+    public fileType?: string = ""
 
     constructor () {
         super()
     } 
     
     toDb():any {
-        return {
+        
+        let objToDb: any = {
             file_url: this.fileUrl,
             is_active: this.isActive,
             associated_collection: this.associatedCollection,
             filename: this.fileName
         }
+
+        if(this.fileType) objToDb.file_type = this.fileType
+
+        return objToDb
     }
 
     static fromDb(objDb: any):Files {
@@ -32,6 +38,8 @@ export class Files extends Database {
         files.associatedCollection = objDb.associated_collection
         files.updatedDate = objDb.updated_date
         files.fileName = objDb.filename
+
+        if(objDb.file_type) files.fileType = objDb.file_type
         
         return files
     }
