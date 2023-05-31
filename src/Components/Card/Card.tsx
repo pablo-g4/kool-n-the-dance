@@ -25,7 +25,7 @@ const Card = (
                     <div className="col-8">
                         <h5 className="fs-7 card-text-color">{newsVM.title}</h5>
                         <p className="card-text-description">"{newsVM.description}"</p>
-                        {newsVM.attachedFile &&
+                        {newsVM.attachedFile.fileUrl &&
                             <a href={newsVM.attachedFile.fileUrl} target="_blank" download={newsVM.attachedFile.fileName}>
                                 <p className='piece-jointe'> Télécharger la pièce jointe </p>
                             </a>

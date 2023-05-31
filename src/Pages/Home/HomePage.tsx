@@ -287,38 +287,35 @@ export const HomePage = () => {
               currentTab === 'danse' && (
                 getDansesCours().length ? _.map(getDansesCours(), (danse, index) => (
                   <CarouselSlide key={index} cours={danse} />
-                )) : <p>Pas de cours de danse actuellement</p>
+                )) : <p>Pas de cours de danse disponible actuellement</p>
               )
             }
             {
               currentTab === 'fitness' && (
                 getFitnessCours().length ? _.map(getFitnessCours(), (fitness,index) => (
                   <CarouselSlideFitness cours={fitness} key={index} />
-                )) : <p>Pas de cours de Fitness actuellement</p>
+                )) : <p>Pas de cours de Fitness disponible actuellement</p>
               )
             }
             {
               currentTab === 'forfait' && (
                 allForfaits.length ? _.map(_.filter(allForfaits, ['isBasic', false]), (forfait, index) => (
                     <CardHomeCours key={index} cours={forfait}/>
-                )) : <div>Pas de forfait actuellement</div>
+                )) : <div>Pas de forfait disponible actuellement</div>
               )
             }
 
           </Carousel>
         </div>
         <div className='col-12  d-flex justify-content-end'>
-          <p className="my-2">
+          <p className="m-2">
             <Link to="/cours" className='none'>
-              <a href='' className="link-accueil">Voir tout les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+              <a href='' className="link-accueil">Voir tous les cours  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
             </Link>
           </p>
         </div>
       </div>
 
-      <div className='d-flex justify-content-center'>
-
-      </div>
       <div>
         <img className="reverse-wave" src={Trace}></img>
       </div>
@@ -330,7 +327,7 @@ export const HomePage = () => {
         </div>
         {
           getFilteredPlanningForTheDay().length ?
-          getFilteredPlanningForTheDay().map((planning, index) => (
+            getFilteredPlanningForTheDay().map((planning, index) => (
               <div key={index} className="col-lg-2 col-6 spacingCol">
                 <CardHomePlanning
                   horaire={planning.startAndEndHourAsString}
@@ -342,10 +339,17 @@ export const HomePage = () => {
               </div>
             )) : (
               <div className='col-12 text-center my-4'>
-                <h3 className="text-white">Aucun planning disponible pour le { new Date().toLocaleDateString("fr-FR") }</h3>
+                <h3 className="text-white">Aucun cours n'est disponible pour le {new Date().toLocaleDateString("fr-FR")}</h3>
               </div>
             )
         }
+      </div>
+      <div className='col-12  d-flex justify-content-end'>
+        <p className="m-2">
+          <Link to="/cours" className='none'>
+            <a href='' className="link-accueil">Voir tout le planning  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+          </Link>
+        </p>
       </div>
 
 
@@ -384,11 +388,10 @@ export const HomePage = () => {
               </div>
             )
           }
-
         </div>
       </div>
 
-      <div className='my-5 mx-2 pb-5'>
+      <div className='m-2 mx-2 pb-2'>
         <h1 className=" text-center title-home">Galerie</h1>
         <div className='row'>
           {/* Prendre une div ci dessous et boucler la div sur les images recup en bdd ( 3 si possible ) */}
@@ -402,11 +405,10 @@ export const HomePage = () => {
             <img src={Forfait2} width={"100%"} height={"100%"} />
           </div>
         </div>
-        <p className="  float-right my-2">
+        <p className="d-flex justify-content-end mx-2">
           <Link to="/galerie" className='none'>
-            <a href='' className="link-accueil ">Voir la galerie  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
+            <a href='' className="link-accueil">Voir la galerie  <FontAwesomeIcon icon={faArrowCircleRight} /></a>
           </Link>
-
         </p>
       </div>
     </>
