@@ -63,9 +63,6 @@ export const GeneralPage = () => {
         <>
           <div className="d-flex flex-column- ">
             <div className=" m-5 box-body ">
-              <div>
-                <DropZone setFiles={setFile} />
-              </div>
               <div className="separateur">
                 <h2 className="text-deco-h2">Contact</h2>
                 <div className="d-flex justify-content-between mt-4">
