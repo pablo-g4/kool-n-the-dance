@@ -30,7 +30,9 @@ export const CoursPage = () => {
             imageFile,
             imageFileId,
             courseType,
-            isActive
+            isActive,
+            place,
+            price
         } = form
 
 
@@ -39,6 +41,8 @@ export const CoursPage = () => {
         newCours.description = description
         newCours.courseType = courseType
         newCours.isActive = isActive
+        newCours.place = place
+        newCours.price = price
 
         if(imageFile instanceof File && imageFileId) {
             await deleteFile(imageFileId)
