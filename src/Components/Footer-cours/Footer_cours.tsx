@@ -25,9 +25,9 @@ const Footer_cours = ({ forfaits } : { forfaits?: Forfait[]}) => {
           }
         </div>
         <div className="d-grid text-center gap-2 col-6 mx-auto">
-          <button className="footer-button-cours" type="button">
+          <a href="mailto:koolnthedance@gmail.com" className="footer-button-cours" type="button">
             <p className="margin-btt">AUTRES FORFAITS SUR DEMANDE</p>
-          </button>
+          </a>
         </div>
       </div>
     </>
