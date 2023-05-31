@@ -40,6 +40,9 @@ import { NewsVM } from '../../viewModels/NewsVM'
 import { ForfaitVM } from '../../viewModels/ForfaitVM'
 import { getAllFiles } from '../../Controllers/files'
 import { CoursVM } from '../../viewModels/CoursVM'
+import { COLLECTION } from '../../db/collection'
+import { FilesVM } from '../../viewModels/FilesVM'
+import { getAllBookmarks } from '../../Controllers/bookmark'
 
 export const HomePage = () => {
 
@@ -50,6 +53,7 @@ export const HomePage = () => {
   const [allCoursVM, setAllCoursVM] = useState<CoursVM[]>([])
   const [allForfaits, setAllForfaits] = useState<ForfaitVM[]>([])
   const [allTemoignages, setAllTemoignages] = useState<Temoignages[]>([])
+  const [allGalerieFiles, setAllGalerieFiles] = useState<FilesVM[]>([])
   const [currentTab, setCurrentTab] = useState('danse')
 
   const getFilteredPlanningForTheDay = () => {
@@ -91,7 +95,21 @@ export const HomePage = () => {
 
   const fetchAndSetData = async () => {
     const files = await getAllFiles()
+    const allBookmarks = await getAllBookmarks()
+    let galerieFiles = _.filter(files, ['associatedCollection', COLLECTION.GALLERY])
+    if (galerieFiles.length){
+       let allGaleriesFilesVM = _.map(galerieFiles, galerieFile => FilesVM.fromFiles(galerieFile))
+      _.map(allGaleriesFilesVM, (galerieFileVM) => {
+        const foundedBookmark = _.find(allBookmarks, bookmark => bookmark.bookmarkdId === galerieFileVM.id)
+        if (foundedBookmark) galerieFileVM.bookmark = foundedBookmark
+      })
+      let filesBookmarked: FilesVM[] = [] 
+      _.filter(allGaleriesFilesVM, fileVMItem =>  {
+          if (fileVMItem.bookmark.id) filesBookmarked.push(fileVMItem) 
+      })
 
+      if(filesBookmarked) setAllGalerieFiles(_.orderBy(filesBookmarked, 'bookmark.order','asc'))
+    }
     const allCours = await getAllCours()
     const allCurrentCoursVM = _.map(allCours, cours => CoursVM.fromCours(cours))
 
@@ -395,15 +413,14 @@ export const HomePage = () => {
         <h1 className=" text-center title-home">Galerie</h1>
         <div className='row'>
           {/* Prendre une div ci dessous et boucler la div sur les images recup en bdd ( 3 si possible ) */}
-          <div className='col-lg-4 col-12 my-2'>
-            <img src={Danse} width={"100%"} height={"100%"}/>
-          </div>
-          <div className='col-lg-4 col-12 my-2' >
-            <img src={Fitness} width={"100%"} height={"100%"} />
-          </div>
-          <div className='col-lg-4 col-12 my-2'>
-            <img src={Forfait2} width={"100%"} height={"100%"} />
-          </div>
+          {
+            allGalerieFiles.length && (_.map(allGalerieFiles, (galerieFile) => (
+              <div className='col-lg-4 col-12 my-2'>
+                <img src={galerieFile.fileUrl} width={"100%"} height={"100%"} />
+              </div>
+            ))
+            )
+          }
         </div>
         <p className="d-flex justify-content-end mx-2">
           <Link to="/galerie" className='none'>

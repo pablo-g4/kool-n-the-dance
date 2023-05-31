@@ -17,15 +17,15 @@ export class FilesVM extends Files {
         return filesVM
     }
 
-    toFiles(filesVM: FilesVM): Files {
+    toFiles(): Files {
         let file = new Files()
-        file.associatedCollection = filesVM.associatedCollection
-        file.creationDate = filesVM.creationDate
-        file.fileName = filesVM.fileName
-        file.fileUrl = filesVM.fileUrl
-        file.id = filesVM.id
-        file.isActive = filesVM.isActive
-        file.updatedDate = filesVM.updatedDate
+        file.associatedCollection = this.associatedCollection
+        file.creationDate = this.creationDate
+        file.fileName = this.fileName
+        file.fileUrl = this.fileUrl
+        file.id = this.id
+        file.isActive = this.isActive
+        file.updatedDate = this.updatedDate
         return file
     }
 } 

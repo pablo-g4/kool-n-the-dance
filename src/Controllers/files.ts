@@ -27,7 +27,6 @@ export const deleteFile = async (fileId: string): Promise<void> => {
     const deletedFile = Files.fromDb(file)
     await deleteFileFromStorage(deletedFile.associatedCollection, deletedFile.fileName)
     await deleteDocumentFromCollection(COLLECTION.FILES, fileId)
-
 }
 
 
@@ -51,4 +50,9 @@ export const getAllFilesWithListOfIds = async (folderName: COLLECTION, arrayFile
 export const getAllFilesEvenDisabled = async (): Promise<Files[]> => {
     const allFiles = await getAllDataFromCollectionEvenDisable(COLLECTION.FILES)
     return _.map(allFiles, file =>  Files.fromDb(file))
+}
+
+export const getAllFilesFromFolder = async (folderName: COLLECTION) => {
+    const allFilesFromCollection = await getAllDataFromCollection(COLLECTION.FILES)
+    return _.filter(allFilesFromCollection, ['associatedCollection', folderName])
 }
