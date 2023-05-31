@@ -147,5 +147,24 @@
   background-position: 150px -30px;
   height: 515px;
   background-repeat: no-repeat;
+}
 
+.conteneur {
+  background-color: #F2D7EE;
+  background-image: url("fond.svg");
+  background-size: 80%;
+  background-position: 150px -30px;
+  height: 515px;
+  background-repeat: no-repeat;
+}
+
+@media (max-width:800px) {
+  .conteneur {
+    background-color: #F2D7EE;
+    background-image: url("fond.svg");
+    background-size: 80%;
+    background-position: 50px -30px;
+    height: 515px;
+    background-repeat: no-repeat;
+  }
 }
