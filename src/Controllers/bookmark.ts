@@ -8,7 +8,7 @@ export const getAllBookmarks = async ():Promise<Bookmark[]> => {
     return _.map(bookmarks, bookmark => Bookmark.fromDb(bookmark))
 }
 
-export const createBookmark = async (bookmark: Bookmark):Promise<string> =>  await addDocumentToCollection(COLLECTION.BOOKMARKS, bookmark.toDb())
+export const createBookmark = async (bookmark: Bookmark):Promise<string> => await addDocumentToCollection(COLLECTION.BOOKMARKS, bookmark.toDb())
 
 export const deleteBookmark = async (bookmarkId: string):Promise<void> => await deleteDocumentFromCollection(COLLECTION.BOOKMARKS, bookmarkId)
 
