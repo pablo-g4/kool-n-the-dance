@@ -1,3 +1,12 @@
+.btn-inscr{
+    color: white;
+    background-color: #fb3640;
+    border-radius: 20px;
+    border: #fb3640;
+    width: 120px;
+    height: 40px;
+}
+
 .cardCours {
     color: white;
     background-color: #644A82;
@@ -25,15 +34,40 @@
     border-radius: 20px;
 }
 
+.cardCours2 .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    width: 100%!important;
+    opacity: 0;
+}
+.cardCours2:hover .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    opacity: 1;
+}
+.cardCours .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    width: 100%!important;
+    opacity: 0;
+}
+.cardCours:hover .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    opacity: 1;
+}
 .imgCours p {
     font-family: Alice;
     font-size: 14px;
     opacity: 0;
-    padding: 15px;
-
+    margin: 5px 10px;
 }
 
-.cardCours:hover .imgCours p {
+.cardCours:hover .imgCours  {
     opacity: 1;
     font-size: 14px;
 }
@@ -102,7 +136,19 @@
     margin-bottom: 0;
     font-weight: bold;
 }
-
+.cardCoursYellow .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    width: 100%!important;
+    opacity: 0;
+}
+.cardCoursYellow:hover .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    opacity: 1;
+}
 .cardCoursYellow .imgCours {
     background-image:
         linear-gradient(to bottom, rgba(247, 184, 1, 1), rgba(247, 184, 1, 0.2), rgba(247, 184, 1, 1)),
@@ -150,7 +196,19 @@
     margin-bottom: 0;
     font-weight: bold;
 }
-
+.cardCoursRed .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    width: 100%!important;
+    opacity: 0;
+}
+.cardCoursRed:hover .imgCours .btn-inscriptiondiv{
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+    opacity: 1;
+}
 .cardCoursRed .imgCours {
     background-image:
         linear-gradient(to bottom, rgba(251, 54, 64, 1), rgba(251, 54, 64, 0.2), rgba(251, 54, 64, 1)),

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel } from "@mantine/carousel";
 import _ from 'lodash';
-
+import { Link } from 'react-router-dom';
 function CarouselSlideForfait({ forfaitVM }) {
     const [hover, setHover] = useState(false);
   
@@ -29,6 +29,11 @@ function CarouselSlideForfait({ forfaitVM }) {
             <p className="text-white d-flex flex-column text-center justify-content-center">
             { forfaitVM.associatedCourses && _.map(forfaitVM.associatedCourses, (cours, coursesIndex) => (<span key={coursesIndex}>{cours.title}</span>) )}
             </p>
+            <div className='btn-inscriptiondiv'>
+              <Link to="../files/formulaireinscription.docx" target="_blank" download>
+                <button className='btn-inscr'>S'inscrire</button>
+              </Link>
+            </div>
           </div>
         </div>
       </Carousel.Slide>

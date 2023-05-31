@@ -49,7 +49,7 @@ export const NewsPage = () => {
                 <CardRight newsVM={allNewsVM[0]} />
               </div>
             </>
-          ) : <h3>Aucune actualité actuellement</h3>
+          ) : <h3>Aucune actualité disponible actuellement</h3>
         }
       </div>
     </div>
