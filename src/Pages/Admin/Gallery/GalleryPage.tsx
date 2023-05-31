@@ -210,7 +210,7 @@ export const GalleryPage = () => {
                 (
                     <div className='mt-2'>
                         <h2>Mettre en avant Image/Vidéo sur la page d'accueil</h2>
-                        <h4>{filesToBookmark.length} sur 10 images max </h4>
+                        <h4>{filesToBookmark.length} sur 10 images</h4>
                         <div className="row">
                             {
                                 _.map(filesToBookmark, (file, index) =>
