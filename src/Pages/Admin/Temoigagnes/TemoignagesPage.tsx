@@ -73,7 +73,17 @@ export const TemoignagesPage = () => {
     <>
       <div className='d-flex flex-row justify-content-between p-2'>
         <h1>Gestion des témoignages</h1>
-        <Button className='button-add' onClick={() => setIsOpenAddOrEditTemoignagesModal(true)}>
+        <Button style={{
+          backgroundColor: '#fb3741',
+          borderRadius: '40px',
+          display: 'flex',
+          fontFamily: 'Alice',
+          fontSize: '30px',
+          height: '50px',
+          marginBottom: '2.5rem',
+          textAlign: 'center',
+          width:' 300px'
+        }} onClick={() => setIsOpenAddOrEditTemoignagesModal(true)}>
           <BsPlusLg size={18} /> 
           <span style={{
             fontSize: '18px'
