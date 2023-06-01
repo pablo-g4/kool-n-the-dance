@@ -345,11 +345,10 @@ export const HomePage = () => {
         {
           getFilteredPlanningForTheDay().length ?
             getFilteredPlanningForTheDay().map((planning, index) => (
-              <div key={index} className="col-lg-2 col-6 spacingCol">
+              <div key={index} className="col-lg-3 col-6 spacingCol">
                 <CardHomePlanning
                   horaire={planning.startAndEndHourAsString}
                   titre={planning.coursVM.title}
-                  text={planning.coursVM.description}
                   src={planning.coursVM.imageUrl}
                   key={index}
                 ></CardHomePlanning>
