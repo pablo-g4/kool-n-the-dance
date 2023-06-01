@@ -31,6 +31,7 @@ export const GalleryPage = () => {
         let newFileVM = new FilesVM()
         newFileVM.id = await createFile(files[0], COLLECTION.GALLERY)
         newFileVM.fileUrl = URL.createObjectURL(files[0])
+        newFileVM.fileName = files[0].name
         setImages([...images, newFileVM])
     }
 

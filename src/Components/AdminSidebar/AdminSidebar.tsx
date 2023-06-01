@@ -43,12 +43,12 @@ const AdminSidebar = ({ page = "" }) => {
         <Link
           className={page === "/admin/news" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"}
           to="/admin/news">
-          <p className="aSidebar_text">Gestion Actualité</p>
+          <p className="aSidebar_text">Gestion Actualités</p>
         </Link>
         <Link className={
           page === "/admin/forfait" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
         } to="/admin/forfait">
-          <p className="aSidebar_text">Gestion Forfait</p>
+          <p className="aSidebar_text">Gestion Forfaits</p>
         </Link>
         <Link className={
           page === "/admin/temoignages" ? "currentPage aSidebar_onglet" : "aSidebar_onglet"
