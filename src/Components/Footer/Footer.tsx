@@ -2,8 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { Carousel } from '@mantine/carousel'
 import { SocialIcon } from 'react-social-icons'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { getAllGeneralInformations } from '../../Controllers/informations'
 import { GeneralInformations } from '../../Models/GeneralInformations'
 const Footer = () => {
+
+    const [generalInformation, setGeneralInformation] = useState<GeneralInformations>()
+
+    const fetchData = async () => {
+        const allInfos = await getAllGeneralInformations()
+        if(allInfos.length) setGeneralInformation(allInfos[0])
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+    
 
     return (
         <div className='footer d-flex'>
@@ -29,7 +42,8 @@ const Footer = () => {
                 <h1 className='footerH1'>Contact</h1>
                 <a href="mailto:koolnthedance@gmail.com" className='text-white'>koolnthedance@gmail.com</a>
                 <p className='text'>9h-21h</p>
-                <a href='https://www.facebook.com/people/Kool-N-the-dance/100063903799414/' target='blank' className='socialIcon'>
+                <p className='text'>{generalInformation?.phoneNumber}</p>
+                <a href={generalInformation?.facebookLink} target='blank' className='socialIcon'>
                     <SocialIcon network="facebook" bgColor="#FFFFFF" style={{ marginRight: '2%' }} />
                 </a>
             </div>
