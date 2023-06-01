@@ -72,7 +72,7 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                       <input className='mt-2' onChange={(titleItem) => setForm({ ...form, title: titleItem.target.value })} value={form.title} name='nomDuForfait' type="text" placeholder="Nom du forfait" required />
                     </div>
                     <div className='d-flex flex-column mt-2'>
-                      <label htmlFor="price">Tarif TTC par séance : </label>
+                      <label htmlFor="price">Tarif TTC : </label>
                       <input className='mt-2' onChange={(priceItem) => setForm({ ...form, price: priceItem.target.value })} value={form.price} name='price' type="number" placeholder="Prix du forfait" required />
                     </div>
                     <div className='d-flex flex-row mt-2' style={{
