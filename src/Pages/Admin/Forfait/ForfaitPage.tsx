@@ -8,6 +8,7 @@ import {
   createForfait,
   updateForfait,
 } from "../../../Controllers/forfait"
+import { BsPlusLg } from 'react-icons/bs'
 import AddOrEditCustomForfaitModal from "../../../Components/Forfaits/AddOrEditCustomForfaitModal"
 import "../../../Components/Carrousel_Activite/styleActivite.css"
 import CustomSwitch from "../../../Components/Switch/CustomSwitch"
@@ -17,6 +18,7 @@ import { Cours } from "../../../Models/Cours"
 import { createFile, deleteFile, getAllFiles } from "../../../Controllers/files"
 import { COLLECTION } from "../../../db/collection"
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
+import { Button } from '@mantine/core'
 
 export const ForfaitPage = () => {
   const [hover, setHover] = useState(false)
@@ -174,19 +176,16 @@ export const ForfaitPage = () => {
       <h1>Gestion des forfaits</h1>
       <div className="d-flex flex-row justify-content-between">
         <h2>Forfaits basiques</h2>
-        <button
-          style={{
-            borderRadius: "10px",
-            backgroundColor: "red",
-            border: "none",
-          }}
+        <Button
+          className='button-add'
           onClick={createForfaitBasic}
-          type="button"
-          className="text-white"
           disabled={!!_.filter(allForfaitsVM, ["id", "new"]).length}
         >
-          + Ajouter un forfait basique
-        </button>
+          <BsPlusLg /> 
+          <span style={{
+            fontSize: '24px'
+          }} className='label-button'>Forfait simple</span>
+        </Button>
       </div>
 
       <div className="row g-4">
@@ -209,17 +208,16 @@ export const ForfaitPage = () => {
 
       <div className="mt-4 d-flex flex-row justify-content-between">
         <h2>Forfaits personnalisés</h2>
-        <button
-          style={{
-            borderRadius: "10px",
-            backgroundColor: "red",
-            border: "none",
-          }}
+        <Button
           onClick={() => setAddOrEditCustomForfaitModalIsOpen(true)}
-          className="text-white"
+          className='button-add'
         >
-          + Ajouter un forfait personnalisé
-        </button>
+          <BsPlusLg /> 
+          <span style={{
+            fontSize: '24px'
+          }}>Forfait personnalisé</span>
+
+        </Button>
         {addOrEditCustomForfaitModalIsOpen && (
           <AddOrEditCustomForfaitModal
             isOpen={addOrEditCustomForfaitModalIsOpen}
@@ -287,7 +285,7 @@ export const ForfaitPage = () => {
                 </div>
                 <div>
                   <p className="text-white">
-                  Tarif TTC par séance : {customForfait.price}€ 
+                  Tarif TTC : {customForfait.price}€ 
                   </p>
                 </div>
               </div>

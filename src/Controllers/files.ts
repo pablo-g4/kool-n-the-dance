@@ -53,6 +53,6 @@ export const getAllFilesEvenDisabled = async (): Promise<Files[]> => {
 }
 
 export const getAllFilesFromFolder = async (folderName: COLLECTION) => {
-    const allFilesFromCollection = await getAllDataFromCollection(COLLECTION.FILES)
+    const allFilesFromCollection = await getAllFiles()
     return _.filter(allFilesFromCollection, ['associatedCollection', folderName])
 }

@@ -21,6 +21,7 @@ export const GalleryPage = () => {
     const [switchValue, setSwitchValue] = useState(true)
     const [images, setImages] = useState<FilesVM[]>([])
     const [archiveFiles, setArchiveFiles] = useState<FilesVM[]>([])
+    const [unArchiveFiles, setUnArchiveFiles] = useState<FilesVM[]>([])
     const [filesToBookmark, setFilesToBookmark] = useState<FilesVM[]>([])
     const [allBookmarks, setAllBookmarks] = useState<Bookmark[]>([])
 
@@ -60,6 +61,24 @@ export const GalleryPage = () => {
         })
 
         setArchiveFiles([])
+    }
+
+    const handleDesarchiving = async () => {
+        let newFilesVM: FilesVM[] = []
+
+        setUnArchiveFiles(_.forEach(unArchiveFiles, (file) => {
+            file.isActive = true
+            newFilesVM.push(file)
+            return file
+        }))
+
+        for (const fileVM of unArchiveFiles) {
+            await updateFile(fileVM.toFiles())   
+        }
+
+        setImages([...images, ...unArchiveFiles])
+
+        setUnArchiveFiles([])
     }
 
     const getBookmarkOrdersOptions = () => {
@@ -126,14 +145,28 @@ export const GalleryPage = () => {
                     />
                 </div>
                 <div className='d-flex align-items-center' >
-                    <a 
-                        className='button-add-galerie'
-                        onClick={() => {
-                            handleArchiving(archiveFiles)
-                        }}
-                    >
-                        Archiver la sélection
-                    </a>
+                    {
+                        switchValue ? (
+                            <a
+                                className='button-add-galerie'
+                                onClick={() => {
+                                    handleArchiving(archiveFiles)
+                                }}
+                            >
+                                Archiver la sélection
+                            </a>
+                        ) : (
+                            <a
+                                className='button-add-galerie'
+                                onClick={() => {
+                                    handleDesarchiving()
+                                }}
+                            >
+                                Désarchiver la sélection
+                            </a>
+                        )
+                    }
+
                 </div>
             </div>
             <div>
@@ -183,7 +216,7 @@ export const GalleryPage = () => {
             </div>
             <div className='d-flex row images-container'>
                 {images && switchValue ? _.map(images, (image, index) =>
-                    image.isActive && image.fileUrl && 
+                    image.isActive && image.fileUrl && (
                         <div key={index} className='col-md-3 col-xs-12 img-fluid'>
                             <ImageViewer
                                 file={image}
@@ -193,6 +226,8 @@ export const GalleryPage = () => {
                             />
                         </div>
                     )
+
+                )
                 : _.map(getArchivedFiles(), (image, index) =>
                 !image.isActive && image.fileUrl && (
                     <div key={index} className='col-md-3 col-xs-12 img-fluid'>
@@ -200,6 +235,7 @@ export const GalleryPage = () => {
                             file={image}
                             archiveFiles={archiveFiles}
                             setArchiveFiles={setArchiveFiles}
+                            setUnArchiveFiles={setUnArchiveFiles}
                         />
                     </div>
                 ))
@@ -210,7 +246,7 @@ export const GalleryPage = () => {
                 (
                     <div className='mt-2'>
                         <h2>Mettre en avant Image/Vidéo sur la page d'accueil</h2>
-                        <h4>{filesToBookmark.length} sur 10 images</h4>
+                        <h4>{filesToBookmark.length} image(s)/vidéo(s) sélectionnée(s)</h4>
                         <div className="row">
                             {
                                 _.map(filesToBookmark, (file, index) =>
@@ -258,7 +294,7 @@ export const GalleryPage = () => {
                         </div>
                         {
                             hasUniqueOrders() && (
-                                <p className='text-red'>Deux ou plusieurs images ont le même ordre*</p>
+                                <p>Deux ou plusieurs images ont le même ordre*</p>
                             )
                         }
                         <div className='buttons-div mb-3 text-center d-flex flex-row justify-content-around'>

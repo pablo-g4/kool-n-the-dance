@@ -12,11 +12,13 @@ const ImageViewer = ({
     archiveFiles,
     setArchiveFiles,
     setBookmarks,
+    setUnArchiveFiles
 }: {
     file: FilesVM;
     archiveFiles: FilesVM[];
     setArchiveFiles:React.Dispatch<React.SetStateAction<FilesVM[]>>;
-    setBookmarks?: any
+    setBookmarks?: any,
+    setUnArchiveFiles?: any
 }) => {
 
     const [isArchivedCheck, setIsArchivedCheck] = useState(false)
@@ -24,12 +26,14 @@ const ImageViewer = ({
 
     const handleCheck = () => {
         setIsArchivedCheck(true)
-        setArchiveFiles(oldArray => [...oldArray, file])  
+        if (file.isActive) setArchiveFiles(oldArray => [...oldArray, file])  
+        else setUnArchiveFiles((oldArray: FilesVM[]) => [...oldArray, file])
     }
 
     const handleUncheck = () => {
         setIsArchivedCheck(false)
-        setArchiveFiles(_.filter(archiveFiles, archiveFile =>  archiveFile.id !== file.id ))
+        if (file.isActive) setArchiveFiles(_.filter(archiveFiles, archiveFile =>  archiveFile.id !== file.id ))
+        else setUnArchiveFiles((oldArray: FilesVM[]) =>  _.filter(oldArray, archiveFile =>  archiveFile.id !== file.id ))
     }
 
     const handleBookmark = () => {

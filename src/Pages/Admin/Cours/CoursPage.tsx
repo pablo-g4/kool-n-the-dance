@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import _ from 'lodash'
 import { Cours, COURSES_TYPES } from '../../../Models/Cours'
+import { Button } from '@mantine/core'
 import CustomSwitch from '../../../Components/Switch/CustomSwitch'
 import { CardCours } from '../../../Components/Cours/CardCours'
 import { AddOrEditCours } from '../../../Components/Cours/AddOrEditCours'
@@ -115,11 +116,7 @@ export const CoursPage = () => {
         <div className='w100'>
             <div className="mt-4 d-flex flex-row justify-content-between">
                 <h1>Gestion des cours</h1>
-                <button style={{
-                    borderRadius: '10px',
-                    backgroundColor: 'red',
-                    border: 'none'
-                }} onClick={() => setAddOrEditCoursModalIsOpen(true)} className='text-white' > <BsPlusLg size={20} /> Ajouter un cours</button>
+                <Button className='button-add' onClick={() => setAddOrEditCoursModalIsOpen(true)} > <BsPlusLg /> <span className='label-button'> Ajouter un cours</span></Button>
             </div>
             <CustomSwitch
                 value={switchValue}
