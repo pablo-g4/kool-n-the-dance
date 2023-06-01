@@ -5,6 +5,8 @@ import { AddOrEditTemoignagesModal } from '../../../Components/Temoignages/AddOr
 import { createTemoignagne, deleteTemoignage, getAllTemoignagesEvenDisabled, updateTemoignage } from '../../../Controllers/temoignages'
 import { Temoignages } from '../../../Models/Temoignages'
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
+import { Button } from '@mantine/core'
+import { BsPlusLg } from 'react-icons/bs'
 
 export const TemoignagesPage = () => {
 
@@ -69,11 +71,14 @@ export const TemoignagesPage = () => {
 
   return (
     <>
-      <div className='d-flex flex-row justify-content-between'>
+      <div className='d-flex flex-row justify-content-between p-2'>
         <h1>Gestion des témoignages</h1>
-        <button onClick={() => setIsOpenAddOrEditTemoignagesModal(true)}>
-          + Ajouter un nouveau témoignage
-        </button>
+        <Button className='button-add' onClick={() => setIsOpenAddOrEditTemoignagesModal(true)}>
+          <BsPlusLg size={18} /> 
+          <span style={{
+            fontSize: '18px'
+          }} >Ajouter un nouveau témoignage</span> 
+        </Button>
       </div>
       {
         isOpenAddOrEditTemoignagesModal && (

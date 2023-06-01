@@ -145,9 +145,9 @@ const AddOrEditCustomForfaitModal = ({ isOpen, setIsOpen, submitForm, currentCus
                       onChange={(courses) => setForm({ ...form, associatedCoursesId: courses })}
                       value={form.associatedCoursesId}
                     >
-                      <Group mt="xs" noWrap>
+                      <Group mt="xs" noWrap className='row'>
                         {
-                          getCoursOptions() && _.map(getCoursOptions(), (cours, index) => (<Checkbox value={cours.value} key={index} label={cours.label} /> )) 
+                          getCoursOptions() && _.map(getCoursOptions(), (cours, index) => (<Checkbox className='col-2' value={cours.value} key={index} label={cours.label} /> )) 
                         }
                       </Group>
                     </Checkbox.Group>
