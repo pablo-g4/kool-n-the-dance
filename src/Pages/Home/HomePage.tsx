@@ -336,7 +336,7 @@ export const HomePage = () => {
       <div>
         <img className="reverse-wave" src={Trace}></img>
       </div>
-      <div className="row bg-violet mt-">
+      <div className="row bg-violet p-4">
         <div className="col-12 ">
           <p className="text-white text-center titre-planning">
             Planning du jour
